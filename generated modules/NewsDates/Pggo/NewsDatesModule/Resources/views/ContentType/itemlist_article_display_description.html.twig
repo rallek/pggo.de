@@ -1,0 +1,13 @@
+{# Purpose of this template: Display articles within an external context #}
+<dl>
+    {% for article in items %}
+        <dt>{{ article.getTitleFromDisplayPattern() }}</dt>
+        {% if article.teaser %}
+            <dd>{{ article.teaser|striptags|truncate(200, true, '&hellip;') }}</dd>
+        {% endif %}
+        <dd><a href="{{ path('pggonewsdatesmodule_article_display', { 'id': article.id, 'slug': article.slug }) }}">{{ __('Read more') }}</a>
+        </dd>
+    {% else %}
+        <dt>{{ __('No entries found.') }}</dt>
+    {% endfor %}
+</dl>

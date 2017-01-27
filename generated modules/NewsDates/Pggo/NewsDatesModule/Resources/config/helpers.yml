@@ -1,0 +1,112 @@
+services:
+    # Helper classes
+    pggo_newsdates_module.archive_helper:
+        class: Pggo\NewsDatesModule\Helper\ArchiveHelper
+        arguments:
+            - "@translator.default"
+            - "@session"
+            - "@logger"
+            - "@zikula_permissions_module.api.permission"
+            - "@pggo_newsdates_module.entity_factory"
+            - "@pggo_newsdates_module.workflow_helper"
+            - "@pggo_newsdates_module.hook_helper"
+    
+    pggo_newsdates_module.category_helper:
+        class: Pggo\NewsDatesModule\Helper\CategoryHelper
+        arguments:
+            - "@translator.default"
+            - "@session"
+            - "@request_stack"
+            - "@logger"
+            - "@zikula_users_module.current_user"
+            - "@zikula_categories_module.api.category_registry"
+            - "@zikula_categories_module.api.category_permission"
+    
+    pggo_newsdates_module.controller_helper:
+        class: Pggo\NewsDatesModule\Helper\ControllerHelper
+        arguments:
+            - "@translator.default"
+            - "@request_stack"
+            - "@session"
+            - "@logger"
+            - "@form.factory"
+            - "@zikula_extensions_module.api.variable"
+            - "@pggo_newsdates_module.entity_factory"
+            - "@pggo_newsdates_module.model_helper"
+            - "@pggo_newsdates_module.selection_helper"
+            - "@pggo_newsdates_module.image_helper"
+            - "@pggo_newsdates_module.feature_activation_helper"
+    
+    pggo_newsdates_module.feature_activation_helper:
+        class: Pggo\NewsDatesModule\Helper\FeatureActivationHelper
+    
+    pggo_newsdates_module.hook_helper:
+        class: Pggo\NewsDatesModule\Helper\HookHelper
+        arguments:
+            - "@hook_dispatcher"
+    
+    pggo_newsdates_module.image_helper:
+        class: Pggo\NewsDatesModule\Helper\ImageHelper
+        arguments:
+            - "@translator.default"
+            - "@session"
+            - "@zikula_extensions_module.api.variable"
+    
+    pggo_newsdates_module.listentries_helper:
+        class: Pggo\NewsDatesModule\Helper\ListEntriesHelper
+        arguments:
+            - "@translator.default"
+    
+    pggo_newsdates_module.model_helper:
+        class: Pggo\NewsDatesModule\Helper\ModelHelper
+        arguments:
+            - "@pggo_newsdates_module.entity_factory"
+    
+    pggo_newsdates_module.notification_helper:
+        class: Pggo\NewsDatesModule\Helper\NotificationHelper
+        arguments:
+            - "@kernel"
+            - "@translator.default"
+            - "@session"
+            - "@router"
+            - "@request_stack"
+            - "@zikula_extensions_module.api.variable"
+            - "@twig"
+            - "@zikula_mailer_module.api.mailer"
+            - "@zikula_groups_module.group_repository"
+            - "@zikula_users_module.user_repository"
+            - "@pggo_newsdates_module.workflow_helper"
+    
+    pggo_newsdates_module.selection_helper:
+        class: Pggo\NewsDatesModule\Helper\SelectionHelper
+        arguments:
+            - "@translator.default"
+            - "@pggo_newsdates_module.entity_factory"
+    
+    pggo_newsdates_module.upload_helper:
+        class: Pggo\NewsDatesModule\Helper\UploadHelper
+        arguments:
+            - "@translator.default"
+            - "@session"
+            - "@logger"
+            - "@zikula_users_module.current_user"
+            - "@zikula_extensions_module.api.variable"
+            - "%datadir%"
+    
+    pggo_newsdates_module.view_helper:
+        class: Pggo\NewsDatesModule\Helper\ViewHelper
+        arguments:
+            - "@templating"
+            - "@request_stack"
+            - "@zikula_permissions_module.api.permission"
+            - "@zikula_extensions_module.api.variable"
+            - "@pggo_newsdates_module.controller_helper"
+    
+    pggo_newsdates_module.workflow_helper:
+        class: Pggo\NewsDatesModule\Helper\WorkflowHelper
+        arguments:
+            - "@translator.default"
+            - "@logger"
+            - "@zikula_permissions_module.api.permission"
+            - "@pggo_newsdates_module.entity_factory"
+            - "@pggo_newsdates_module.listentries_helper"

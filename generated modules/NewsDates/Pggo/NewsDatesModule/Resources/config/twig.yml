@@ -1,0 +1,12 @@
+services:
+    # Twig extension
+    pggo_newsdates_module.twig_extension:
+        class: Pggo\NewsDatesModule\Twig\TwigExtension
+        arguments:
+            - "@translator.default"
+            - "@zikula_extensions_module.api.variable"
+            - "@pggo_newsdates_module.workflow_helper"
+            - "@pggo_newsdates_module.listentries_helper"
+        public: false
+        tags:
+            - { name: twig.extension }

@@ -1,0 +1,208 @@
+{# purpose of this template: articles list view #}
+{% extends routeArea == 'admin' ? 'PggoNewsDatesModule::adminBase.html.twig' : 'PggoNewsDatesModule::base.html.twig' %}
+{% block title own ? __('My articles') : __('Article list') %}
+{% block admin_page_icon 'list-alt' %}
+{% block content %}
+<div class="pggonewsdatesmodule-article pggonewsdatesmodule-view">
+
+    {{ block('page_nav_links') }}
+
+    {{ include('@PggoNewsDatesModule/Article/viewQuickNav.html.twig') }}{# see template file for available options #}
+
+    {% if routeArea == 'admin' %}
+    <form action="{{ path('pggonewsdatesmodule_article_' ~ routeArea ~ 'handleselectedentries') }}" method="post" id="articlesViewForm" class="form-horizontal" role="form">
+        <div>
+    {% endif %}
+        <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover table-condensed">
+            <colgroup>
+                {% if routeArea == 'admin' %}
+                    <col id="cSelect" />
+                {% endif %}
+                {% if routeArea == 'admin' %}
+                <col id="cWorkflowState" />
+                {% endif %}
+                <col id="cTitle" />
+                <col id="cImage" />
+                <col id="cNotes" />
+                <col id="cDisplayOnIndex" />
+                <col id="cStartDate" />
+                <col id="cEndDatetime" />
+                <col id="cViews" />
+                <col id="cEvent" />
+                <col id="cItemActions" />
+            </colgroup>
+            <thead>
+            <tr>
+                {% if routeArea == 'admin' %}
+                    <th id="hSelect" scope="col" class="text-center">
+                        <input type="checkbox" class="pggonewsdates-mass-toggle" />
+                    </th>
+                {% endif %}
+                {% if routeArea == 'admin' %}
+                <th id="hWorkflowState" scope="col" class="text-left">
+                    <a href="{{ sort.workflowState.url }}" title="{{ __f('Sort by %s', {'%s': 'state'}) }}" class="{{ sort.workflowState.class }}">{{ __('State') }}</a>
+                </th>
+                {% endif %}
+                <th id="hTitle" scope="col" class="text-left">
+                    <a href="{{ sort.title.url }}" title="{{ __f('Sort by %s', {'%s': 'title'}) }}" class="{{ sort.title.class }}">{{ __('Title') }}</a>
+                </th>
+                <th id="hImage" scope="col" class="text-left z-order-unsorted">
+                    {{ __('Image') }}
+                </th>
+                <th id="hNotes" scope="col" class="text-left z-order-unsorted">
+                    {{ __('Notes') }}
+                </th>
+                <th id="hDisplayOnIndex" scope="col" class="text-center">
+                    <a href="{{ sort.displayOnIndex.url }}" title="{{ __f('Sort by %s', {'%s': 'display on index'}) }}" class="{{ sort.displayOnIndex.class }}">{{ __('Display on index') }}</a>
+                </th>
+                <th id="hStartDate" scope="col" class="text-left">
+                    <a href="{{ sort.startDate.url }}" title="{{ __f('Sort by %s', {'%s': 'start date'}) }}" class="{{ sort.startDate.class }}">{{ __('Start date') }}</a>
+                </th>
+                <th id="hEndDatetime" scope="col" class="text-left">
+                    <a href="{{ sort.endDatetime.url }}" title="{{ __f('Sort by %s', {'%s': 'end datetime'}) }}" class="{{ sort.endDatetime.class }}">{{ __('End datetime') }}</a>
+                </th>
+                <th id="hViews" scope="col" class="text-right">
+                    <a href="{{ sort.views.url }}" title="{{ __f('Sort by %s', {'%s': 'views'}) }}" class="{{ sort.views.class }}">{{ __('Views') }}</a>
+                </th>
+                <th id="hEvent" scope="col" class="text-left">
+                    <a href="{{ sort.event.url }}" title="{{ __f('Sort by %s', {'%s': 'event'}) }}" class="{{ sort.event.class }}">{{ __('Event') }}</a>
+                </th>
+                <th id="hItemActions" scope="col" class="text-right z-order-unsorted">{{ __('Actions') }}</th>
+            </tr>
+            </thead>
+            <tbody>
+        
+        {% for article in items %}
+            <tr>
+                {% if routeArea == 'admin' %}
+                    <td headers="hSelect" class="text-center">
+                        <input type="checkbox" name="items[]" value="{{ article.id }}" class="pggonewsdates-toggle-checkbox" />
+                    </td>
+                {% endif %}
+                {% if routeArea == 'admin' %}<td headers="hWorkflowState" class="text-left nowrap">
+                    {{ article.workflowState|pggonewsdatesmodule_objectState }}
+                </td>
+                {% endif %}<td headers="hTitle" class="text-left">
+                    <a href="{{ path('pggonewsdatesmodule_article_' ~ routeArea ~ 'display', { 'id': article.id, 'slug': article.slug }) }}" title="{{ __('View detail page')|e('html_attr') }}">{{ article.title|notifyFilters('pggonewsdatesmodule.filterhook.articles') }}</a>
+                </td>
+                <td headers="hImage" class="text-left">
+                    {% if article.image is not empty and article.imageMeta|default %}
+                                <a href="{{ article.imageUrl }}" title="{{ article.getTitleFromDisplayPattern()|e('html_attr') }}"{% if article.imageMeta.isImage %} class="lightbox"{% endif %}>
+                    {% if article.imageMeta.isImage %}
+                        {% set thumbOptions = attribute(thumbRuntimeOptions, 'articleImage') %}
+                        <img src="{{ article.image.getPathname()|imagine_filter('zkroot', thumbOptions) }}" alt="{{ article.getTitleFromDisplayPattern()|e('html_attr') }}" width="{{ thumbOptions.thumbnail.size[0] }}" height="{{ thumbOptions.thumbnail.size[1] }}" class="img-thumbnail" />
+                    {% else %}
+                        {{ __('Download') }} ({{ article.imageMeta.size|pggonewsdatesmodule_fileSize(article.image.getPathname(), false, false) }})
+                    {% endif %}
+                    </a>
+                    {% else %}&nbsp;{% endif %}
+                </td>
+                <td headers="hNotes" class="text-left">
+                    {{ article.notes|safeHtml }}
+                </td>
+                <td headers="hDisplayOnIndex" class="text-center">
+                    {% set itemid = article.createCompositeIdentifier() %}
+                    <a id="toggleDisplayOnIndex{{ itemid }}" href="javascript:void(0);" class="pggonewsdates-ajax-toggle hidden" data-object-type="article" data-field-name="displayOnIndex" data-item-id="{{ itemid }}">
+                        <i class="fa fa-check{% if not article.displayOnIndex %} hidden{% endif %}" id="yesDisplayOnIndex{{ itemid }}" title="{{ __('This setting is enabled. Click here to disable it.') }}"></i>
+                        <i class="fa fa-times{% if article.displayOnIndex %} hidden{% endif %}" id="noDisplayOnIndex{{ itemid }}" title="{{ __('This setting is disabled. Click here to enable it.') }}"></i>
+                    </a>
+                    <noscript><div id="noscriptDisplayOnIndex{{ itemid }}">
+                        {% if article.displayOnIndex %}
+                            <i class="fa fa-check" title="{{ __('Yes') }}"></i>
+                        {% else %}
+                            <i class="fa fa-times" title="{{ __('No') }}"></i>
+                        {% endif %}
+                    </div></noscript>
+                </td>
+                <td headers="hStartDate" class="text-left">
+                    {{ article.startDate|localizeddate('medium', 'short') }}
+                </td>
+                <td headers="hEndDatetime" class="text-left">
+                    {{ article.endDatetime|localizeddate('medium', 'short') }}
+                </td>
+                <td headers="hViews" class="text-right">
+                    {{ article.views }}
+                </td>
+                <td headers="hEvent" class="text-left">
+                    {% if article.event|default %}
+                        <a href="{{ path('pggonewsdatesmodule_event_' ~ routeArea ~ 'display', { 'id': article.event.id, 'slug': article.event.slug }) }}">{% spaceless %}
+                          {{ article.event.getTitleFromDisplayPattern() }}
+                        {% endspaceless %}</a>
+                        <a id="eventItem{{ article.id }}_rel_{{ article.event.id }}Display" href="{{ path('pggonewsdatesmodule_event_' ~ routeArea ~ 'display', {'id': article.event.id, 'slug': article.event.slug, 'raw': 1 }) }}" title="{{ __('Open quick view window')|e('html_attr') }}" class="pggonewsdates-inline-window hidden" data-modal-title="{{ article.event.getTitleFromDisplayPattern()|e('html_attr') }}"><span class="fa fa-id-card-o"></span></a>
+                    {% else %}
+                        {{ __('Not set.') }}
+                    {% endif %}
+                </td>
+                <td id="itemActions{{ article.id }}" headers="hItemActions" class="actions text-right nowrap z-w02">
+                    {% set itemActions = knp_menu_get('PggoNewsDatesModule:ItemActionsMenu:menu', [], { entity: article, area: routeArea, context: 'view' }) %}
+                    <div class="dropdown">
+                        <a id="itemActions{{ article.id }}DropDownToggle" role="button" data-toggle="dropdown" data-target="#" href="javascript:void(0);" class="hidden dropdown-toggle"><i class="fa fa-tasks"></i> <span class="caret"></span></a>
+                        {{ knp_menu_render(itemActions, { template: 'ZikulaMenuModule:Override:actions.html.twig' }) }}
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr class="z-{{ routeArea == 'admin' ? 'admin' : 'data' }}tableempty">
+                <td class="text-left" colspan="{% if routeArea == 'admin' %}11{% else %}10{% endif %}">
+            {{ __('No articles found.') }}
+              </td>
+            </tr>
+        {% endfor %}
+        
+            </tbody>
+        </table>
+        </div>
+        
+        {% if showAllEntries != 1 and pager|default %}
+            {{ pager({ rowcount: pager.amountOfItems, limit: pager.itemsPerPage, display: 'page', route: 'pggonewsdatesmodule_article_' ~ routeArea ~ 'view'}) }}
+        {% endif %}
+    {% if routeArea == 'admin' %}
+            <fieldset>
+                <label for="pggoNewsDatesModuleAction" class="col-sm-3 control-label">{{ __('With selected articles') }}</label>
+                <div class="col-sm-6">
+                    <select id="pggoNewsDatesModuleAction" name="action" class="form-control input-sm">
+                        <option value="">{{ __('Choose action') }}</option>
+                    <option value="approve" title="{{ __('Update content and approve for immediate publishing.') }}">{{ __('Approve') }}</option>
+                    <option value="unpublish" title="{{ __('Hide content temporarily.') }}">{{ __('Unpublish') }}</option>
+                    <option value="publish" title="{{ __('Make content available again.') }}">{{ __('Publish') }}</option>
+                    <option value="archive" title="{{ __('Move content into the archive.') }}">{{ __('Archive') }}</option>
+                        <option value="delete" title="{{ __('Delete content permanently.') }}">{{ __('Delete') }}</option>
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                    <input type="submit" value="{{ __('Submit') }}" class="btn btn-default btn-sm" />
+                </div>
+            </fieldset>
+        </div>
+    </form>
+    {% endif %}
+
+    {{ block('display_hooks') }}
+</div>
+{% endblock %}
+{% block page_nav_links %}
+    {% if canBeCreated %}
+        {% if hasPermission('PggoNewsDatesModule:Article:', '::', 'ACCESS_COMMENT') %}
+            {% set createTitle = __('Create article') %}
+            <a href="{{ path('pggonewsdatesmodule_article_' ~ routeArea ~ 'edit') }}" title="{{ createTitle|e('html_attr') }}" class="fa fa-plus">{{ createTitle }}</a>
+        {% endif %}
+    {% endif %}
+    {% if showAllEntries == 1 %}
+        {% set linkTitle = __('Back to paginated view') %}
+        <a href="{{ path('pggonewsdatesmodule_article_' ~ routeArea ~ 'view') }}" title="{{ linkTitle|e('html_attr') }}" class="fa fa-table">{{ linkTitle }}</a>
+    {% else %}
+        {% set linkTitle = __('Show all entries') %}
+        <a href="{{ path('pggonewsdatesmodule_article_' ~ routeArea ~ 'view', { all: 1 }) }}" title="{{ linkTitle|e('html_attr') }}" class="fa fa-table">{{ linkTitle }}</a>
+    {% endif %}
+{% endblock %}
+{% block display_hooks %}
+    
+    {# here you can activate calling display hooks for the view page if you need it #}
+    {# % if routeArea != 'admin' %}
+        {% set hooks = notifyDisplayHooks(eventName='pggonewsdatesmodule.ui_hooks.articles.display_view', urlObject=currentUrlObject) %}
+        {% for providerArea, hook in hooks %}
+            {{ hook }}
+        {% endfor %}
+    {% endif % #}
+{% endblock %}

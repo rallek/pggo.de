@@ -1,0 +1,24 @@
+services:
+    # Form field types
+    
+    pggo_newsdates_module.form.type.field.datetime:
+        class: Pggo\NewsDatesModule\Form\Type\Field\DateTimeType
+        tags:
+            - { name: form.type }
+    
+    pggo_newsdates_module.form.type.field.upload:
+        class: Pggo\NewsDatesModule\Form\Type\Field\UploadType
+        arguments:
+            - "@translator.default"
+            - "@request_stack"
+            - "@pggo_newsdates_module.image_helper"
+            - "@pggo_newsdates_module.upload_helper"
+        tags:
+            - { name: form.type }
+    
+    pggo_newsdates_module.form.type.field.user:
+        class: Pggo\NewsDatesModule\Form\Type\Field\UserType
+        arguments:
+            - "@zikula_users_module.user_repository"
+        tags:
+            - { name: form.type }

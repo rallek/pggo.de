@@ -1,0 +1,10 @@
+{# purpose of this template: inclusion template for display of related pictures #}
+{% set hasAdminPermission = hasPermission('PggoNewsDatesModule:Picture:', '::', 'ACCESS_EDIT') %}
+<h4>
+    {{ item.getTitleFromDisplayPattern() }}
+</h4>
+{% if item.image is not empty and item.imageMeta.isImage %}
+    <p>
+        <img src="{{ item.image.getPathname()|imagine_filter('zkroot', relationThumbRuntimeOptions) }}" alt="{{ item.getTitleFromDisplayPattern()|e('html_attr') }}" width="{{ relationThumbRuntimeOptions.thumbnail.size[0] }}" height="{{ relationThumbRuntimeOptions.thumbnail.size[1] }}" class="img-rounded" />
+    </p>
+{% endif %}

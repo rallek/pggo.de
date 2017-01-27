@@ -1,0 +1,6 @@
+services:
+    # Entity factory class
+    pggo_newsdates_module.entity_factory:
+        class: Pggo\NewsDatesModule\Entity\Factory\NewsDatesFactory
+        arguments:
+            - "@doctrine.orm.default_entity_manager"

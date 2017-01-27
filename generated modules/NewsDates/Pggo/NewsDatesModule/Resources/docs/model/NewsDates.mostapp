@@ -1,0 +1,179 @@
+application "NewsDates" {
+    vendor "Pggo"
+    author "Ralf Koester"
+    email "webmaster@pggo.de"
+    url "http://pggo.de"
+    version "0.5.0"
+    prefix "newsdate"
+    generatorSettings {
+        settingsContainer "Settings"
+    generateSearchApi false
+        generateMailzApi false
+        generateNewsletterPlugin false
+        generateMultiHookNeedles false
+        generateRssTemplates false
+        generateAtomTemplates false
+        generateCsvTemplates false
+        generateXmlTemplates false
+        generateJsonTemplates false
+        generateKmlTemplates false
+        generateIcsTemplates false
+        versionAllGeneratedFiles false
+        generateTests false
+    }
+    entities {
+        entity "article" leading categorisable categorisableMultiSelection {
+            nameMultiple "articles"
+            displayPattern "#title#"
+            slugUnique false
+            workflow STANDARD
+            hasArchive true
+            hasTray true
+            fields {
+                string "title"  {
+                    defaultValue ""
+                    sluggablePosition 1
+                },
+                text "teaser"  {
+                    defaultValue ""
+                    mandatory false
+                    displayType DISPLAY
+                    length 10000
+                },
+                text "bodyText"  {
+                    defaultValue ""
+                    mandatory false
+                    displayType DISPLAY
+                    length 20000
+                },
+                upload "image" {
+                    mandatory false
+                    displayType VIEW_DISPLAY
+                },
+                string  "copyright" {
+                    documentation "copyright of the image"
+                    displayType DISPLAY
+                },
+                text "notes"  {
+                    documentation "notes are not visible for the Users. It is only for the admins."
+                    defaultValue ""
+                    mandatory false
+                displayType VIEW
+                },
+                boolean "displayOnIndex" ajaxTogglability {
+                    defaultValue "true"
+                    mandatory false
+                },
+                datetime "startDate" startDate {
+                    defaultValue ""
+                    mandatory false
+                },
+                datetime "endDatetime" endDate {
+                    defaultValue ""
+                    mandatory false
+                },
+                integer "views" {
+                    defaultValue "0"
+                }
+            }
+            actions {
+                mainAction "Index",
+                viewAction "View",
+                displayAction "Display",
+                editAction "Edit",
+                deleteAction "Delete"
+            }
+        },
+        entity "picture" {
+            nameMultiple "pictures"
+            displayPattern "#title#"
+            standardFields false
+            skipHookSubscribers true
+            fields {
+                string "title"  {
+                    defaultValue ""
+                },
+                upload "image" {
+                    defaultValue ""
+                displayType VIEW_DISPLAY
+                },
+                string "copyright" {
+                    documentation "copyright of the image"
+                    displayType DISPLAY
+                },
+                
+            text "description"  {
+                    defaultValue ""
+                    mandatory false
+                displayType VIEW_DISPLAY
+                }
+            }
+            actions {
+                viewAction "View",
+                editAction "Edit"
+            ,
+                deleteAction "Delete",
+                mainAction "Index"
+            }
+        },
+        entity "event" categorisable categorisableMultiSelection {
+            nameMultiple "events"
+            displayPattern "#title# #startDate# #location#"
+            slugUnique false
+            fields {
+                string "title" {
+                    defaultValue ""
+                    sluggablePosition 1
+                },
+                datetime "startDate" {
+                    defaultValue ""
+                    mandatory false
+                },
+                string "duration"  {
+                    defaultValue ""
+                    mandatory false
+                displayType VIEW_DISPLAY
+                },
+                string "location"  {
+                    defaultValue ""
+                mandatory false
+                },
+                text "description"  {
+                    defaultValue ""
+                    mandatory false
+                displayType DISPLAY
+                },
+                url "eventUrl" {
+                    defaultValue ""
+                    mandatory false
+                }
+            }
+            actions {
+                mainAction "Index",
+                viewAction "View",
+                displayAction "Display",
+                editAction "Edit",
+                deleteAction "Delete"
+            }
+        }
+    }
+    relations {
+        one2many bidirectional {
+            source "article"
+            sourceAlias "article"
+            target "picture"
+            targetAlias "pictures"
+            editType ACTIVE_NONE_PASSIVE_CHOOSE
+            cascade ALL
+            orderBy "sortNumber"
+        },
+        one2many bidirectional {
+            source "event"
+            sourceAlias "event"
+            target "article"
+            targetAlias "articles"
+            cascade ALL
+            orderBy "weight"
+        }
+    }
+    }

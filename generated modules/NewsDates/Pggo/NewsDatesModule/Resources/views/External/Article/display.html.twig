@@ -1,0 +1,56 @@
+{# Purpose of this template: Display one certain article within an external context #}
+<div id="article{$article.id}" class="pggonewsdatesmodule-external-article">
+{% if displayMode == 'link' %}
+    <p class="pggonewsdatesmodule-external-link">
+    <a href="{{ path('pggonewsdatesmodule_article_display', { 'id': article.id, 'slug': article.slug }) }}" title="{{ article.getTitleFromDisplayPattern()|e('html_attr') }}">
+    {{ article.getTitleFromDisplayPattern()|notifyFilters('newsdates.filter_hooks.articles.filter') }}
+    </a>
+    </p>
+{% endif %}
+{% if hasPermission('PggoNewsDatesModule::', '::', 'ACCESS_EDIT') %}
+    {# for normal users without edit permission show only the actual file per default #}
+    {% if displayMode == 'embed' %}
+        <p class="pggonewsdatesmodule-external-title">
+            <strong>{{ article.getTitleFromDisplayPattern()|notifyFilters('newsdates.filter_hooks.articles.filter') }}</strong>
+        </p>
+    {% endif %}
+{% endif %}
+
+{% if displayMode == 'link' %}
+{% elseif displayMode == 'embed' %}
+    <div class="pggonewsdatesmodule-external-snippet">
+        {% if article.image is not empty and article.imageMeta|default %}
+                    <a href="{{ article.imageUrl }}" title="{{ article.getTitleFromDisplayPattern()|e('html_attr') }}"{% if article.imageMeta.isImage %} class="lightbox"{% endif %}>
+        {% if article.imageMeta.isImage %}
+            {% set thumbOptions = attribute(thumbRuntimeOptions, 'articleImage') %}
+            <img src="{{ article.image.getPathname()|imagine_filter('zkroot', thumbOptions) }}" alt="{{ article.getTitleFromDisplayPattern()|e('html_attr') }}" width="{{ thumbOptions.thumbnail.size[0] }}" height="{{ thumbOptions.thumbnail.size[1] }}" class="img-thumbnail" />
+        {% else %}
+            {{ __('Download') }} ({{ article.imageMeta.size|pggonewsdatesmodule_fileSize(article.image.getPathname(), false, false) }})
+        {% endif %}
+        </a>
+        {% else %}&nbsp;{% endif %}
+    </div>
+
+    {# you can distinguish the context like this: #}
+    {# % if source == 'contentType' %}
+        ...
+    {% elseif source == 'scribite' %}
+        ...
+    {% endif % #}
+
+    {# you can enable more details about the item: #}
+    {#
+        <p class="pggonewsdatesmodule-external-description">
+            {% if article.teaser is not empty %}{{ article.teaser }}<br />{% endif %}
+            {% if featureActivationHelper.isEnabled(constant('Pggo\\NewsDatesModule\\Helper\\FeatureActivationHelper::CATEGORIES'), 'article') %}
+                <dl class="category-list">
+                {% for propName, catMapping in article.categories %}
+                    <dt>{{ propName }}</dt>
+                    <dd>{{ catMapping.category.display_name[lang] }}</dd>
+                {% endfor %}
+                </dl>
+            {% endif %}
+        </p>
+    #}
+{% endif %}
+</div>

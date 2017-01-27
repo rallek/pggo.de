@@ -1,0 +1,91 @@
+services:
+    # Event subscriber and listener classes
+    pggo_newsdates_module.entity_lifecycle_listener:
+        class: Pggo\NewsDatesModule\Listener\EntityLifecycleListener
+        arguments:
+            - "@service_container"
+        tags:
+            - { name: doctrine.event_subscriber }
+    
+    pggo_newsdates_module.core_listener:
+        class: Pggo\NewsDatesModule\Listener\CoreListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_newsdates_module.kernel_listener:
+        class: Pggo\NewsDatesModule\Listener\KernelListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_newsdates_module.installer_listener:
+        class: Pggo\NewsDatesModule\Listener\InstallerListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_newsdates_module.moduledispatch_listener:
+        class: Pggo\NewsDatesModule\Listener\ModuleDispatchListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_newsdates_module.mailer_listener:
+        class: Pggo\NewsDatesModule\Listener\MailerListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_newsdates_module.page_listener:
+        class: Pggo\NewsDatesModule\Listener\PageListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_newsdates_module.theme_listener:
+        class: Pggo\NewsDatesModule\Listener\ThemeListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_newsdates_module.view_listener:
+        class: Pggo\NewsDatesModule\Listener\ViewListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_newsdates_module.userlogin_listener:
+        class: Pggo\NewsDatesModule\Listener\UserLoginListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_newsdates_module.userlogout_listener:
+        class: Pggo\NewsDatesModule\Listener\UserLogoutListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_newsdates_module.user_listener:
+        class: Pggo\NewsDatesModule\Listener\UserListener
+        arguments:
+            - "@translator.default"
+            - "@pggo_newsdates_module.entity_factory"
+            - "@zikula_users_module.current_user"
+            - "@logger"
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_newsdates_module.userregistration_listener:
+        class: Pggo\NewsDatesModule\Listener\UserRegistrationListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_newsdates_module.users_listener:
+        class: Pggo\NewsDatesModule\Listener\UsersListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_newsdates_module.group_listener:
+        class: Pggo\NewsDatesModule\Listener\GroupListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_newsdates_module.thirdparty_listener:
+        class: Pggo\NewsDatesModule\Listener\ThirdPartyListener
+        arguments:
+            - "@pggo_newsdates_module.workflow_helper"
+        tags:
+            - { name: kernel.event_subscriber }
+    

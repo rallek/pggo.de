@@ -1,0 +1,106 @@
+{# Purpose of this template: Display a popup selector of articles for scribite integration #}
+{% set useFinder = true %}
+{% extends 'PggoNewsDatesModule::raw.html.twig' %}
+{% block title __('Search and select article') %}
+{% block content %}
+    <div class="container">
+        <ul class="nav nav-tabs">
+        <li{{ objectType == 'article' ? ' class="active"' : '' }}><a href="{{ path('pggonewsdatesmodule_external_finder', {'objectType': 'article', 'editor': editorName}) }}" title="{{ __('Search and select article') }}">{{ __('Articles') }}</a></li>
+        <li{{ objectType == 'event' ? ' class="active"' : '' }}><a href="{{ path('pggonewsdatesmodule_external_finder', {'objectType': 'event', 'editor': editorName}) }}" title="{{ __('Search and select event') }}">{{ __('Events') }}</a></li>
+        </ul>
+        {% form_theme finderForm with [
+            '@PggoNewsDatesModule/Form/bootstrap_3.html.twig',
+            'ZikulaFormExtensionBundle:Form:form_div_layout.html.twig'
+        ] %}
+        {{ form_start(finderForm, {attr: { id: 'pggoNewsDatesModuleSelectorForm' }}) }}
+        {{ form_errors(finderForm) }}
+        <fieldset>
+            <legend>{{ __('Search and select article') }}</legend>
+            {% if featureActivationHelper.isEnabled(constant('Pggo\\NewsDatesModule\\Helper\\FeatureActivationHelper::CATEGORIES'), 'article') %}
+                {{ form_row(finderForm.categories) }}
+            {% endif %}
+            {{ form_row(finderForm.onlyImages) }}
+            <div id="imageFieldRow">
+                {{ form_row(finderForm.imageField) }}
+            </div>
+            {{ form_row(finderForm.pasteAs) }}
+            <br />
+            <div class="form-group">
+                <label class="col-sm-3 control-label">{{ __('Article') }}:</label>
+                <div class="col-sm-9">
+                    <div id="pggonewsdatesmoduleItemContainer">
+                        {% if not onlyImages %}
+                            <ul>
+                        {% endif %}
+                            {% for article in items %}
+                                {% if not onlyImages or (attribute(article, imageField) is not empty and attribute(article, imageField ~ 'Meta').isImage) %}
+                                {% if not onlyImages %}
+                                    <li>
+                                {% endif %}
+                                    {% set itemId = article.createCompositeIdentifier() %}
+                                    <a href="#" data-itemid="{{ itemId }}">
+                                        {% if onlyImages %}
+                                            {% set thumbOptions = attribute(thumbRuntimeOptions, 'article' ~ imageField[:1]|upper ~ imageField[1:]) %}
+                                            <img src="{{ attribute(article, imageField).getPathname()|imagine_filter('zkroot', thumbOptions) }}" alt="{{ article.getTitleFromDisplayPattern()|e('html_attr') }}" width="{{ thumbOptions.thumbnail.size[0] }}" height="{{ thumbOptions.thumbnail.size[1] }}" class="img-rounded" />
+                                        {% else %}
+                                            {{ article.getTitleFromDisplayPattern() }}
+                                        {% endif %}
+                                    </a>
+                                    <input type="hidden" id="url{{ itemId }}" value="{{ url('pggonewsdatesmodule_article_display', { 'id': article.id, 'slug': article.slug }) }}" />
+                                    <input type="hidden" id="title{{ itemId }}" value="{{ article.getTitleFromDisplayPattern()|e('html_attr') }}" />
+                                    <input type="hidden" id="desc{{ itemId }}" value="{% set description %}{% if article.teaser is not empty %}{{ article.teaser }}{% endif %}
+                                    {% endset %}{{ description|striptags|e('html_attr') }}" />
+                                    {% if onlyImages %}
+                                        <input type="hidden" id="imageUrl{{ itemId }}" value="/{{ attribute(article, imageField).getPathname() }}" />
+                                    {% endif %}
+                                {% if not onlyImages %}
+                                    </li>
+                                {% endif %}
+                                {% endif %}
+                            {% else %}
+                                {% if not onlyImages %}<li>{% endif %}{{ __('No articles found.') }}{% if not onlyImages %}</li>{% endif %}
+                            {% endfor %}
+                        {% if not onlyImages %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            {{ form_row(finderForm.sort) }}
+            {{ form_row(finderForm.sortdir) }}
+            {{ form_row(finderForm.num) }}
+            <div id="searchTermRow">
+                {{ form_row(finderForm.q) }}
+            </div>
+            <div>
+                {{ pager({ display: 'page', rowcount: pager.numitems, limit: pager.itemsperpage, posvar: 'pos', maxpages: 10, route: 'pggonewsdatesmodule_external_finder'}) }}
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-9">
+                    {{ form_widget(finderForm.update) }}
+                    {{ form_widget(finderForm.cancel) }}
+                </div>
+            </div>
+        </fieldset>
+        {{ form_end(finderForm) }}
+    </div>
+
+    {#
+    <div class="pggonewsdatesmodule-finderform">
+        <fieldset>
+            {{ render(controller('PggoNewsDatesModule:Article:edit')) }}
+        </fieldset>
+    </div>
+    #}
+
+    <script type="text/javascript">
+    /* <![CDATA[ */
+        ( function($) {
+            $(document).ready(function() {
+                pggoNewsDatesModule.finder.onLoad();
+            });
+        })(jQuery);
+    /* ]]> */
+    </script>
+{% endblock %}

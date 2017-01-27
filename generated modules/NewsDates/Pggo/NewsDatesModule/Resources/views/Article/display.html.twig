@@ -1,0 +1,146 @@
+{# purpose of this template: articles display view #}
+{% set baseTemplate = app.request.query.getBoolean('raw', false) ? 'raw' : (routeArea == 'admin' ? 'adminBase' : 'base') %}
+{% extends 'PggoNewsDatesModule::' ~ baseTemplate ~ '.html.twig' %}
+{% block pageTitle %}{{ article.getTitleFromDisplayPattern()|default(__('Article')) }}{% endblock %}
+{% block title %}
+    {% set templateTitle = article.getTitleFromDisplayPattern()|default(__('Article')) %}
+    {{ templateTitle|notifyFilters('pggonewsdatesmodule.filter_hooks.articles.filter') }}{% if routeArea == 'admin' %} <small>({{ article.workflowState|pggonewsdatesmodule_objectState(false)|lower }})</small>{% endif %}
+    {% set itemActions = knp_menu_get('PggoNewsDatesModule:ItemActionsMenu:menu', [], { entity: article, area: routeArea, context: 'display' }) %}
+    <div class="dropdown">
+        <a id="itemActions{{ article.id }}DropDownToggle" role="button" data-toggle="dropdown" data-target="#" href="javascript:void(0);" class="hidden dropdown-toggle"><i class="fa fa-tasks"></i> {{ __('Actions') }} <span class="caret"></span></a>
+        {{ knp_menu_render(itemActions, { template: 'ZikulaMenuModule:Override:actions.html.twig' }) }}
+    </div>
+{% endblock %}
+{% block admin_page_icon 'eye' %}
+{% block content %}
+    {% set isQuickView = app.request.query.getBoolean('raw', false) %}
+    <div class="pggonewsdatesmodule-article pggonewsdatesmodule-display">
+
+    {% if not isQuickView %}
+        <div class="row">
+            <div class="col-sm-9">
+    {% endif %}
+
+    <dl>
+        {% if article.workflowState is not empty and routeArea == 'admin' %}
+            <dt>{{ __('State') }}</dt>
+            <dd>{{ article.workflowState|pggonewsdatesmodule_listEntry('article', 'workflowState') }}</dd>
+        {% endif %}
+        {% if article.title is not empty %}
+            <dt>{{ __('Title') }}</dt>
+            <dd>{{ article.title }}</dd>
+        {% endif %}
+        {% if article.teaser is not empty %}
+            <dt>{{ __('Teaser') }}</dt>
+            <dd>{{ article.teaser|safeHtml }}</dd>
+        {% endif %}
+        {% if article.bodyText is not empty %}
+            <dt>{{ __('Body text') }}</dt>
+            <dd>{{ article.bodyText|safeHtml }}</dd>
+        {% endif %}
+        {% if article.image is not empty %}
+            <dt>{{ __('Image') }}</dt>
+            <dd>{% if article.image is not empty and article.imageMeta|default %}
+                        <a href="{{ article.imageUrl }}" title="{{ article.getTitleFromDisplayPattern()|e('html_attr') }}"{% if article.imageMeta.isImage %} class="lightbox"{% endif %}>
+            {% if article.imageMeta.isImage %}
+                {% set thumbOptions = attribute(thumbRuntimeOptions, 'articleImage') %}
+                <img src="{{ article.image.getPathname()|imagine_filter('zkroot', thumbOptions) }}" alt="{{ article.getTitleFromDisplayPattern()|e('html_attr') }}" width="{{ thumbOptions.thumbnail.size[0] }}" height="{{ thumbOptions.thumbnail.size[1] }}" class="img-thumbnail" />
+            {% else %}
+                {{ __('Download') }} ({{ article.imageMeta.size|pggonewsdatesmodule_fileSize(article.image.getPathname(), false, false) }})
+            {% endif %}
+            </a>
+            {% else %}&nbsp;{% endif %}
+            </dd>
+        {% endif %}
+        {% if article.copyright is not empty %}
+            <dt>{{ __('Copyright') }}</dt>
+            <dd>{{ article.copyright }}</dd>
+        {% endif %}
+        {% if article.displayOnIndex is not empty %}
+            <dt>{{ __('Display on index') }}</dt>
+            <dd>{% set itemid = article.createCompositeIdentifier() %}
+            <a id="toggleDisplayOnIndex{{ itemid }}" href="javascript:void(0);" class="pggonewsdates-ajax-toggle hidden" data-object-type="article" data-field-name="displayOnIndex" data-item-id="{{ itemid }}">
+                <i class="fa fa-check{% if not article.displayOnIndex %} hidden{% endif %}" id="yesDisplayOnIndex{{ itemid }}" title="{{ __('This setting is enabled. Click here to disable it.') }}"></i>
+                <i class="fa fa-times{% if article.displayOnIndex %} hidden{% endif %}" id="noDisplayOnIndex{{ itemid }}" title="{{ __('This setting is disabled. Click here to enable it.') }}"></i>
+            </a>
+            <noscript><div id="noscriptDisplayOnIndex{{ itemid }}">
+                {% if article.displayOnIndex %}
+                    <i class="fa fa-check" title="{{ __('Yes') }}"></i>
+                {% else %}
+                    <i class="fa fa-times" title="{{ __('No') }}"></i>
+                {% endif %}
+            </div></noscript>
+            </dd>
+        {% endif %}
+        {% if article.startDate is not empty %}
+            <dt>{{ __('Start date') }}</dt>
+            <dd>{{ article.startDate|localizeddate('medium', 'short') }}</dd>
+        {% endif %}
+        {% if article.endDatetime is not empty %}
+            <dt>{{ __('End datetime') }}</dt>
+            <dd>{{ article.endDatetime|localizeddate('medium', 'short') }}</dd>
+        {% endif %}
+        {% if article.views is not empty %}
+            <dt>{{ __('Views') }}</dt>
+            <dd>{{ article.views }}</dd>
+        {% endif %}
+        {% if article.event|default %}
+            <dt>{{ __('Event') }}</dt>
+            <dd>
+              {% if not isQuickView %}
+                  <a href="{{ path('pggonewsdatesmodule_event_' ~ routeArea ~ 'display', { 'id': article.event.id, 'slug': article.event.slug }) }}">{% spaceless %}
+                    {{ article.event.getTitleFromDisplayPattern() }}
+                  {% endspaceless %}</a>
+                  <a id="eventItem{{ article.event.id }}Display" href="{{ path('pggonewsdatesmodule_event_' ~ routeArea ~ 'display', { 'id': article.event.id, 'slug': article.event.slug, 'raw': 1 }) }}" title="{{ __('Open quick view window')|e('html_attr') }}" class="pggonewsdates-inline-window hidden" data-modal-title="{{ article.event.getTitleFromDisplayPattern()|e('html_attr') }}"><span class="fa fa-id-card-o"></span></a>
+              {% else %}
+                  {{ article.event.getTitleFromDisplayPattern() }}
+              {% endif %}
+            </dd>
+        {% endif %}
+        
+    </dl>
+    {% if featureActivationHelper.isEnabled(constant('Pggo\\NewsDatesModule\\Helper\\FeatureActivationHelper::CATEGORIES'), 'article') %}
+        {{ include('@PggoNewsDatesModule/Helper/includeCategoriesDisplay.html.twig', { obj: article }) }}
+    {% endif %}
+    {{ include('@PggoNewsDatesModule/Helper/includeStandardFieldsDisplay.html.twig', { obj: article }) }}
+
+    {% if not isQuickView %}
+        {# include display hooks #}
+        {{ block('display_hooks') }}
+            </div>
+            <div class="col-sm-3">
+                {{ block('related_items') }}
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+{% block related_items %}
+    {% if routeArea == 'admin' %}
+        <h4>{{ __('Pictures') }}</h4>
+    {% else %}
+        <h3>{{ __('Pictures') }}</h3>
+    {% endif %}
+    
+    {% if article.pictures|default %}
+        {{ include(
+            '@PggoNewsDatesModule/Picture/includeDisplayItemListMany.html.twig',
+            { items: article.pictures }
+        ) }}
+    {% endif %}
+    
+    {% set permLevel = routeArea == 'admin' ? 'ACCESS_ADMIN' : 'ACCESS_COMMENT' %}
+    {% set mayManage = hasPermission('PggoNewsDatesModule:Article:', article.id ~ '::', permLevel) %}
+    {% if mayManage %}
+        <p class="managelink">
+            {% set createTitle = __('Create picture') %}
+            <a href="{{ path('pggonewsdatesmodule_picture_' ~ routeArea ~ 'edit', { article: article.id }) }}" title="{{ createTitle|e('html_attr') }}" class="fa fa-plus">{{ createTitle }}</a>
+        </p>
+    {% endif %}
+{% endblock %}
+{% block display_hooks %}
+    {% set hooks = notifyDisplayHooks(eventName='pggonewsdatesmodule.ui_hooks.articles.display_view', id=article.id, urlObject=currentUrlObject) %}
+    {% for providerArea, hook in hooks if providerArea != 'provider.scribite.ui_hooks.editor' %}
+        {{ hook }}
+    {% endfor %}
+{% endblock %}
