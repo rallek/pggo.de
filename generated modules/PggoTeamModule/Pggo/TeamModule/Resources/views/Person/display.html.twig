@@ -1,0 +1,92 @@
+{# purpose of this template: persons display view #}
+{% set baseTemplate = app.request.query.getBoolean('raw', false) ? 'raw' : (routeArea == 'admin' ? 'adminBase' : 'base') %}
+{% extends 'PggoTeamModule::' ~ baseTemplate ~ '.html.twig' %}
+{% block pageTitle %}{{ person.getTitleFromDisplayPattern()|default(__('Person')) }}{% endblock %}
+{% block title %}
+    {% set templateTitle = person.getTitleFromDisplayPattern()|default(__('Person')) %}
+    {{ templateTitle|notifyFilters('pggoteammodule.filter_hooks.persons.filter') }}
+    {% set itemActions = knp_menu_get('PggoTeamModule:ItemActionsMenu:menu', [], { entity: person, area: routeArea, context: 'display' }) %}
+    <div class="dropdown">
+        <a id="itemActions{{ person.id }}DropDownToggle" role="button" data-toggle="dropdown" data-target="#" href="javascript:void(0);" class="hidden dropdown-toggle"><i class="fa fa-tasks"></i> {{ __('Actions') }} <span class="caret"></span></a>
+        {{ knp_menu_render(itemActions, { template: 'ZikulaMenuModule:Override:actions.html.twig' }) }}
+    </div>
+{% endblock %}
+{% block admin_page_icon 'eye' %}
+{% block content %}
+    {% set isQuickView = app.request.query.getBoolean('raw', false) %}
+    <div class="pggoteammodule-person pggoteammodule-display">
+
+
+    <dl>
+        {% if person.lastName is not empty %}
+            <dt>{{ __('Last name') }}</dt>
+            <dd>{{ person.lastName }}</dd>
+        {% endif %}
+        {% if person.firstName is not empty %}
+            <dt>{{ __('First name') }}</dt>
+            <dd>{{ person.firstName }}</dd>
+        {% endif %}
+        {% if person.image is not empty %}
+            <dt>{{ __('Image') }}</dt>
+            <dd>{% if person.image is not empty and person.imageMeta|default %}
+                        <a href="{{ person.imageUrl }}" title="{{ person.getTitleFromDisplayPattern()|e('html_attr') }}"{% if person.imageMeta.isImage %} class="lightbox"{% endif %}>
+            {% if person.imageMeta.isImage %}
+                {% set thumbOptions = attribute(thumbRuntimeOptions, 'personImage') %}
+                <img src="{{ person.image.getPathname()|imagine_filter('zkroot', thumbOptions) }}" alt="{{ person.getTitleFromDisplayPattern()|e('html_attr') }}" width="{{ thumbOptions.thumbnail.size[0] }}" height="{{ thumbOptions.thumbnail.size[1] }}" class="img-thumbnail" />
+            {% else %}
+                {{ __('Download') }} ({{ person.imageMeta.size|pggoteammodule_fileSize(person.image.getPathname(), false, false) }})
+            {% endif %}
+            </a>
+            {% else %}&nbsp;{% endif %}
+            </dd>
+        {% endif %}
+        {% if person.copyright is not empty %}
+            <dt>{{ __('Copyright') }}</dt>
+            <dd>{{ person.copyright }}</dd>
+        {% endif %}
+        {% if person.shortDescription is not empty %}
+            <dt>{{ __('Short description') }}</dt>
+            <dd>{{ person.shortDescription|safeHtml }}</dd>
+        {% endif %}
+        {% if person.description is not empty %}
+            <dt>{{ __('Description') }}</dt>
+            <dd>{{ person.description|safeHtml }}</dd>
+        {% endif %}
+        {% if person.functionRole is not empty %}
+            <dt>{{ __('Function role') }}</dt>
+            <dd>{{ person.functionRole }}</dd>
+        {% endif %}
+        {% if person.emailAddress is not empty %}
+            <dt>{{ __('Email address') }}</dt>
+            <dd>{% if person.emailAddress is not empty %}
+            {% if not isQuickView %}
+            <a href="mailto:{{ person.emailAddress|protectMail }}" title="{{ __('Send an email') }}" class="fa fa-envelope"></a>
+            {% else %}
+                {{ person.emailAddress|protectMail }}
+            {% endif %}
+            {% else %}&nbsp;{% endif %}
+            </dd>
+        {% endif %}
+        {% if person.contact is not empty %}
+            <dt>{{ __('Contact') }}</dt>
+            <dd>{{ person.contact|safeHtml }}</dd>
+        {% endif %}
+        
+    </dl>
+    {% if featureActivationHelper.isEnabled(constant('Pggo\\TeamModule\\Helper\\FeatureActivationHelper::CATEGORIES'), 'person') %}
+        {{ include('@PggoTeamModule/Helper/includeCategoriesDisplay.html.twig', { obj: person }) }}
+    {% endif %}
+    {{ include('@PggoTeamModule/Helper/includeStandardFieldsDisplay.html.twig', { obj: person }) }}
+
+    {% if not isQuickView %}
+        {# include display hooks #}
+        {{ block('display_hooks') }}
+    {% endif %}
+</div>
+{% endblock %}
+{% block display_hooks %}
+    {% set hooks = notifyDisplayHooks(eventName='pggoteammodule.ui_hooks.persons.display_view', id=person.id, urlObject=currentUrlObject) %}
+    {% for providerArea, hook in hooks if providerArea != 'provider.scribite.ui_hooks.editor' %}
+        {{ hook }}
+    {% endfor %}
+{% endblock %}

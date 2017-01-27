@@ -1,0 +1,83 @@
+services:
+    # Helper classes
+    pggo_team_module.category_helper:
+        class: Pggo\TeamModule\Helper\CategoryHelper
+        arguments:
+            - "@translator.default"
+            - "@session"
+            - "@request_stack"
+            - "@logger"
+            - "@zikula_users_module.current_user"
+            - "@zikula_categories_module.api.category_registry"
+            - "@zikula_categories_module.api.category_permission"
+    
+    pggo_team_module.controller_helper:
+        class: Pggo\TeamModule\Helper\ControllerHelper
+        arguments:
+            - "@translator.default"
+            - "@request_stack"
+            - "@session"
+            - "@logger"
+            - "@form.factory"
+            - "@zikula_extensions_module.api.variable"
+            - "@pggo_team_module.entity_factory"
+            - "@pggo_team_module.model_helper"
+            - "@pggo_team_module.selection_helper"
+            - "@pggo_team_module.image_helper"
+            - "@pggo_team_module.feature_activation_helper"
+    
+    pggo_team_module.feature_activation_helper:
+        class: Pggo\TeamModule\Helper\FeatureActivationHelper
+    
+    pggo_team_module.hook_helper:
+        class: Pggo\TeamModule\Helper\HookHelper
+        arguments:
+            - "@hook_dispatcher"
+    
+    pggo_team_module.image_helper:
+        class: Pggo\TeamModule\Helper\ImageHelper
+        arguments:
+            - "@translator.default"
+            - "@session"
+            - "@zikula_extensions_module.api.variable"
+    
+    pggo_team_module.listentries_helper:
+        class: Pggo\TeamModule\Helper\ListEntriesHelper
+        arguments:
+            - "@translator.default"
+    
+    pggo_team_module.model_helper:
+        class: Pggo\TeamModule\Helper\ModelHelper
+        arguments:
+            - "@pggo_team_module.entity_factory"
+    
+    pggo_team_module.selection_helper:
+        class: Pggo\TeamModule\Helper\SelectionHelper
+        arguments:
+            - "@translator.default"
+            - "@pggo_team_module.entity_factory"
+    
+    pggo_team_module.upload_helper:
+        class: Pggo\TeamModule\Helper\UploadHelper
+        arguments:
+            - "@translator.default"
+            - "@session"
+            - "@logger"
+            - "@zikula_users_module.current_user"
+            - "@zikula_extensions_module.api.variable"
+            - "%datadir%"
+    
+    pggo_team_module.view_helper:
+        class: Pggo\TeamModule\Helper\ViewHelper
+        arguments:
+            - "@templating"
+            - "@request_stack"
+            - "@zikula_permissions_module.api.permission"
+            - "@zikula_extensions_module.api.variable"
+            - "@pggo_team_module.controller_helper"
+    
+    pggo_team_module.workflow_helper:
+        class: Pggo\TeamModule\Helper\WorkflowHelper
+        arguments:
+            - "@translator.default"
+            - "@pggo_team_module.listentries_helper"

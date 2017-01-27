@@ -1,0 +1,5 @@
+pggoteammodule:
+    # define routing support for these controllers
+    resource: "@PggoTeamModule/Controller"
+    # enable support for defining routes by annotations
+    type: annotation

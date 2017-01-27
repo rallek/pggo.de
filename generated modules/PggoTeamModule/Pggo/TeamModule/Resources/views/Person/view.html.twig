@@ -1,0 +1,170 @@
+{# purpose of this template: persons list view #}
+{% extends routeArea == 'admin' ? 'PggoTeamModule::adminBase.html.twig' : 'PggoTeamModule::base.html.twig' %}
+{% block title own ? __('My persons') : __('Person list') %}
+{% block admin_page_icon 'list-alt' %}
+{% block content %}
+<div class="pggoteammodule-person pggoteammodule-view">
+
+    {{ block('page_nav_links') }}
+
+    {{ include('@PggoTeamModule/Person/viewQuickNav.html.twig', { workflowStateFilter: false }) }}{# see template file for available options #}
+
+    {% if routeArea == 'admin' %}
+    <form action="{{ path('pggoteammodule_person_' ~ routeArea ~ 'handleselectedentries') }}" method="post" id="personsViewForm" class="form-horizontal" role="form">
+        <div>
+    {% endif %}
+        <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover table-condensed">
+            <colgroup>
+                {% if routeArea == 'admin' %}
+                    <col id="cSelect" />
+                {% endif %}
+                <col id="cLastName" />
+                <col id="cFirstName" />
+                <col id="cImage" />
+                <col id="cCopyright" />
+                <col id="cShortDescription" />
+                <col id="cFunctionRole" />
+                <col id="cEmailAddress" />
+                <col id="cItemActions" />
+            </colgroup>
+            <thead>
+            <tr>
+                {% if routeArea == 'admin' %}
+                    <th id="hSelect" scope="col" class="text-center">
+                        <input type="checkbox" class="pggoteam-mass-toggle" />
+                    </th>
+                {% endif %}
+                <th id="hLastName" scope="col" class="text-left">
+                    <a href="{{ sort.lastName.url }}" title="{{ __f('Sort by %s', {'%s': 'last name'}) }}" class="{{ sort.lastName.class }}">{{ __('Last name') }}</a>
+                </th>
+                <th id="hFirstName" scope="col" class="text-left">
+                    <a href="{{ sort.firstName.url }}" title="{{ __f('Sort by %s', {'%s': 'first name'}) }}" class="{{ sort.firstName.class }}">{{ __('First name') }}</a>
+                </th>
+                <th id="hImage" scope="col" class="text-left z-order-unsorted">
+                    {{ __('Image') }}
+                </th>
+                <th id="hCopyright" scope="col" class="text-left z-order-unsorted">
+                    {{ __('Copyright') }}
+                </th>
+                <th id="hShortDescription" scope="col" class="text-left z-order-unsorted">
+                    {{ __('Short description') }}
+                </th>
+                <th id="hFunctionRole" scope="col" class="text-left">
+                    <a href="{{ sort.functionRole.url }}" title="{{ __f('Sort by %s', {'%s': 'function role'}) }}" class="{{ sort.functionRole.class }}">{{ __('Function role') }}</a>
+                </th>
+                <th id="hEmailAddress" scope="col" class="text-center">
+                    <a href="{{ sort.emailAddress.url }}" title="{{ __f('Sort by %s', {'%s': 'email address'}) }}" class="{{ sort.emailAddress.class }}">{{ __('Email address') }}</a>
+                </th>
+                <th id="hItemActions" scope="col" class="text-right z-order-unsorted">{{ __('Actions') }}</th>
+            </tr>
+            </thead>
+            <tbody>
+        
+        {% for person in items %}
+            <tr>
+                {% if routeArea == 'admin' %}
+                    <td headers="hSelect" class="text-center">
+                        <input type="checkbox" name="items[]" value="{{ person.id }}" class="pggoteam-toggle-checkbox" />
+                    </td>
+                {% endif %}
+                <td headers="hLastName" class="text-left">
+                    {{ person.lastName }}
+                </td>
+                <td headers="hFirstName" class="text-left">
+                    {{ person.firstName }}
+                </td>
+                <td headers="hImage" class="text-left">
+                    {% if person.image is not empty and person.imageMeta|default %}
+                                <a href="{{ person.imageUrl }}" title="{{ person.getTitleFromDisplayPattern()|e('html_attr') }}"{% if person.imageMeta.isImage %} class="lightbox"{% endif %}>
+                    {% if person.imageMeta.isImage %}
+                        {% set thumbOptions = attribute(thumbRuntimeOptions, 'personImage') %}
+                        <img src="{{ person.image.getPathname()|imagine_filter('zkroot', thumbOptions) }}" alt="{{ person.getTitleFromDisplayPattern()|e('html_attr') }}" width="{{ thumbOptions.thumbnail.size[0] }}" height="{{ thumbOptions.thumbnail.size[1] }}" class="img-thumbnail" />
+                    {% else %}
+                        {{ __('Download') }} ({{ person.imageMeta.size|pggoteammodule_fileSize(person.image.getPathname(), false, false) }})
+                    {% endif %}
+                    </a>
+                    {% else %}&nbsp;{% endif %}
+                </td>
+                <td headers="hCopyright" class="text-left">
+                    {{ person.copyright }}
+                </td>
+                <td headers="hShortDescription" class="text-left">
+                    {{ person.shortDescription|safeHtml }}
+                </td>
+                <td headers="hFunctionRole" class="text-left">
+                    {{ person.functionRole }}
+                </td>
+                <td headers="hEmailAddress" class="text-center">
+                    {% if person.emailAddress is not empty %}
+                    <a href="mailto:{{ person.emailAddress|protectMail }}" title="{{ __('Send an email') }}" class="fa fa-envelope"></a>
+                    {% else %}&nbsp;{% endif %}
+                </td>
+                <td id="itemActions{{ person.id }}" headers="hItemActions" class="actions text-right nowrap z-w02">
+                    {% set itemActions = knp_menu_get('PggoTeamModule:ItemActionsMenu:menu', [], { entity: person, area: routeArea, context: 'view' }) %}
+                    <div class="dropdown">
+                        <a id="itemActions{{ person.id }}DropDownToggle" role="button" data-toggle="dropdown" data-target="#" href="javascript:void(0);" class="hidden dropdown-toggle"><i class="fa fa-tasks"></i> <span class="caret"></span></a>
+                        {{ knp_menu_render(itemActions, { template: 'ZikulaMenuModule:Override:actions.html.twig' }) }}
+                    </div>
+                </td>
+            </tr>
+        {% else %}
+            <tr class="z-{{ routeArea == 'admin' ? 'admin' : 'data' }}tableempty">
+                <td class="text-left" colspan="{% if routeArea == 'admin' %}9{% else %}8{% endif %}">
+            {{ __('No persons found.') }}
+              </td>
+            </tr>
+        {% endfor %}
+        
+            </tbody>
+        </table>
+        </div>
+        
+        {% if showAllEntries != 1 and pager|default %}
+            {{ pager({ rowcount: pager.amountOfItems, limit: pager.itemsPerPage, display: 'page', route: 'pggoteammodule_person_' ~ routeArea ~ 'view'}) }}
+        {% endif %}
+    {% if routeArea == 'admin' %}
+            <fieldset>
+                <label for="pggoTeamModuleAction" class="col-sm-3 control-label">{{ __('With selected persons') }}</label>
+                <div class="col-sm-6">
+                    <select id="pggoTeamModuleAction" name="action" class="form-control input-sm">
+                        <option value="">{{ __('Choose action') }}</option>
+                        <option value="delete" title="{{ __('Delete content permanently.') }}">{{ __('Delete') }}</option>
+                    </select>
+                </div>
+                <div class="col-sm-3">
+                    <input type="submit" value="{{ __('Submit') }}" class="btn btn-default btn-sm" />
+                </div>
+            </fieldset>
+        </div>
+    </form>
+    {% endif %}
+
+    {{ block('display_hooks') }}
+</div>
+{% endblock %}
+{% block page_nav_links %}
+    {% if canBeCreated %}
+        {% if hasPermission('PggoTeamModule:Person:', '::', 'ACCESS_EDIT') %}
+            {% set createTitle = __('Create person') %}
+            <a href="{{ path('pggoteammodule_person_' ~ routeArea ~ 'edit') }}" title="{{ createTitle|e('html_attr') }}" class="fa fa-plus">{{ createTitle }}</a>
+        {% endif %}
+    {% endif %}
+    {% if showAllEntries == 1 %}
+        {% set linkTitle = __('Back to paginated view') %}
+        <a href="{{ path('pggoteammodule_person_' ~ routeArea ~ 'view') }}" title="{{ linkTitle|e('html_attr') }}" class="fa fa-table">{{ linkTitle }}</a>
+    {% else %}
+        {% set linkTitle = __('Show all entries') %}
+        <a href="{{ path('pggoteammodule_person_' ~ routeArea ~ 'view', { all: 1 }) }}" title="{{ linkTitle|e('html_attr') }}" class="fa fa-table">{{ linkTitle }}</a>
+    {% endif %}
+{% endblock %}
+{% block display_hooks %}
+    
+    {# here you can activate calling display hooks for the view page if you need it #}
+    {# % if routeArea != 'admin' %}
+        {% set hooks = notifyDisplayHooks(eventName='pggoteammodule.ui_hooks.persons.display_view', urlObject=currentUrlObject) %}
+        {% for providerArea, hook in hooks %}
+            {{ hook }}
+        {% endfor %}
+    {% endif % #}
+{% endblock %}
