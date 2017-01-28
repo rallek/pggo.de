@@ -159,7 +159,7 @@ class EventController extends AbstractEventController
      * {@inheritdoc}
      *
      * @Route("/admin/event/delete/{slug}.{id}.{_format}",
-     *        requirements = {"slug" = "[^/.]+""id" = "\d+", "_format" = "html"},
+     *        requirements = {"slug" = "[^/.]+", "id" = "\d+", "_format" = "html"},
      *        defaults = {"_format" = "html"},
      *        methods = {"GET", "POST"}
      * )
@@ -183,7 +183,7 @@ class EventController extends AbstractEventController
      * {@inheritdoc}
      *
      * @Route("/event/delete/{slug}.{id}.{_format}",
-     *        requirements = {"slug" = "[^/.]+""id" = "\d+", "_format" = "html"},
+     *        requirements = {"slug" = "[^/.]+", "id" = "\d+", "_format" = "html"},
      *        defaults = {"_format" = "html"},
      *        methods = {"GET", "POST"}
      * )
@@ -205,7 +205,7 @@ class EventController extends AbstractEventController
      * {@inheritdoc}
      *
      * @Route("/admin/event/{slug}.{id}.{_format}",
-     *        requirements = {"slug" = "[^/.]+""id" = "\d+", "_format" = "html"},
+     *        requirements = {"slug" = "[^/.]+", "id" = "\d+", "_format" = "html"},
      *        defaults = {"_format" = "html"},
      *        methods = {"GET"}
      * )
@@ -228,7 +228,7 @@ class EventController extends AbstractEventController
      * {@inheritdoc}
      *
      * @Route("/event/{slug}.{id}.{_format}",
-     *        requirements = {"slug" = "[^/.]+""id" = "\d+", "_format" = "html"},
+     *        requirements = {"slug" = "[^/.]+", "id" = "\d+", "_format" = "html"},
      *        defaults = {"_format" = "html"},
      *        methods = {"GET"}
      * )

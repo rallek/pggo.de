@@ -159,7 +159,7 @@ class ArticleController extends AbstractArticleController
      * {@inheritdoc}
      *
      * @Route("/admin/article/delete/{slug}.{id}.{_format}",
-     *        requirements = {"slug" = "[^/.]+""id" = "\d+", "_format" = "html"},
+     *        requirements = {"slug" = "[^/.]+", "id" = "\d+", "_format" = "html"},
      *        defaults = {"_format" = "html"},
      *        methods = {"GET", "POST"}
      * )
@@ -183,7 +183,7 @@ class ArticleController extends AbstractArticleController
      * {@inheritdoc}
      *
      * @Route("/article/delete/{slug}.{id}.{_format}",
-     *        requirements = {"slug" = "[^/.]+""id" = "\d+", "_format" = "html"},
+     *        requirements = {"slug" = "[^/.]+", "id" = "\d+", "_format" = "html"},
      *        defaults = {"_format" = "html"},
      *        methods = {"GET", "POST"}
      * )
@@ -205,7 +205,7 @@ class ArticleController extends AbstractArticleController
      * {@inheritdoc}
      *
      * @Route("/admin/article/{slug}.{id}.{_format}",
-     *        requirements = {"slug" = "[^/.]+""id" = "\d+", "_format" = "html"},
+     *        requirements = {"slug" = "[^/.]+", "id" = "\d+", "_format" = "html"},
      *        defaults = {"_format" = "html"},
      *        methods = {"GET"}
      * )
@@ -228,7 +228,7 @@ class ArticleController extends AbstractArticleController
      * {@inheritdoc}
      *
      * @Route("/article/{slug}.{id}.{_format}",
-     *        requirements = {"slug" = "[^/.]+""id" = "\d+", "_format" = "html"},
+     *        requirements = {"slug" = "[^/.]+", "id" = "\d+", "_format" = "html"},
      *        defaults = {"_format" = "html"},
      *        methods = {"GET"}
      * )
