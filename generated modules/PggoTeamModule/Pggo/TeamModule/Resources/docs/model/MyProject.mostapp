@@ -7,7 +7,6 @@ application "Team" {
     prefix "team"
     generatorSettings {
         settingsContainer "Settings"
-        targetCoreVersion ZK14DEV
         generateMailzApi false
         generateModerationBlock false
         generateNewsletterPlugin false

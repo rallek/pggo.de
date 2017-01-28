@@ -19,11 +19,11 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Zikula\Common\Translator\TranslatorInterface;
 use Zikula\Common\Translator\TranslatorTrait;
-use Zikula\Bundle\CoreBundle\HttpKernel\ZikulaHttpKernelInterface;
 use Zikula\Core\Doctrine\EntityAccess;
 use Zikula\Core\RouteUrl;
 use Zikula\PageLockModule\Api\LockingApi;
@@ -130,7 +130,7 @@ abstract class AbstractEditHandler
     protected $hasPageLockSupport = false;
 
     /**
-     * @var ZikulaHttpKernelInterface
+     * @var KernelInterface
      */
     protected $kernel;
 
@@ -227,7 +227,7 @@ abstract class AbstractEditHandler
     /**
      * EditHandler constructor.
      *
-     * @param ZikulaHttpKernelInterface $kernel      Kernel service instance
+     * @param KernelInterface      $kernel           Kernel service instance
      * @param TranslatorInterface  $translator       Translator service instance
      * @param FormFactoryInterface $formFactory      FormFactory service instance
      * @param RequestStack         $requestStack     RequestStack service instance
@@ -244,7 +244,7 @@ abstract class AbstractEditHandler
      * @param FeatureActivationHelper $featureActivationHelper FeatureActivationHelper service instance
      */
     public function __construct(
-        ZikulaHttpKernelInterface $kernel,
+        KernelInterface $kernel,
         TranslatorInterface $translator,
         FormFactoryInterface $formFactory,
         RequestStack $requestStack,
