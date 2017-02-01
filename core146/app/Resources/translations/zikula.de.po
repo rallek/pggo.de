@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Zikula Core 1.4.X\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-02-01 19:42+0100\n"
+"PO-Revision-Date: 2017-02-01 21:51+0100\n"
 "Last-Translator: Ralf Köster <ralf@familie-koester.de>\n"
 "Language-Team: team@zikula.de <team@zikula.de>\n"
 "Language: de\n"
@@ -96,7 +96,6 @@ msgstr ""
 msgid "%modulename%"
 msgstr "%modulename%"
 
-#, fuzzy
 msgid "%n Pending applications"
 msgstr "%n ausstehende Anwendungen"
 
@@ -228,23 +227,18 @@ msgstr "--Neuer Link--"
 msgid "/10000"
 msgstr "/10000"
 
-#, fuzzy
 msgid "10"
 msgstr "10"
 
-#, fuzzy
 msgid "100"
 msgstr "100"
 
-#, fuzzy
 msgid "15"
 msgstr "15"
 
-#, fuzzy
 msgid "20"
 msgstr "20"
 
-#, fuzzy
 msgid "30"
 msgstr "30"
 
@@ -252,7 +246,6 @@ msgstr "30"
 msgid "5"
 msgstr "5"
 
-#, fuzzy
 msgid "50"
 msgstr "50"
 
@@ -2869,7 +2862,6 @@ msgstr "Exportiere Gruppen Mitgliedschaften"
 msgid "Export last login date"
 msgstr "Letztes Login Datum exportieren"
 
-#, fuzzy
 msgid "Export options"
 msgstr "Export-Optionen"
 
@@ -2897,7 +2889,6 @@ msgstr ""
 "Löschen der Erweiterung fehlgeschlagen! (Notiz: Blöcke und Abhängigkeiten "
 "könnten gelöscht worden sein)"
 
-#, fuzzy
 msgid "Extension settings"
 msgstr "Erweiterungseinstellungen"
 
@@ -2937,7 +2928,6 @@ msgstr "Datei mit einbeziehen"
 msgid "File Path"
 msgstr "Datei Pfad"
 
-#, fuzzy
 msgid "File options"
 msgstr "Datei-Optionen"
 
@@ -2968,15 +2958,15 @@ msgstr "Filter Statements"
 msgid "Filter syntax explained"
 msgstr "Filtersyntax erklärt"
 
-#, fuzzy
 msgid ""
 "Filtering of allowed HTML occurs when a template string or variable is "
 "modified with the 'safeHtml' filter, or when a module asks for similar "
 "processing from within its functions."
 msgstr ""
-"Filterung der erlaubten HTML tritt auf, wenn eine Vorlagenzeichenfolge oder "
-"eine Variable mit dem Filter \"SafeHtml\" geändert wird, oder wenn ein Modul "
-"für ähnliche Verarbeitung von innerhalb seiner Funktionen fragt."
+"Filterung der erlaubten HTML findet Anwendung, wenn eine "
+"Templatezeichenfolge oder eine Variable mit dem Filter \"SafeHtml\" geändert "
+"wird, oder wenn ein Modul für ähnliche Anwendung innerhalb seiner Funktionen "
+"nutzt."
 
 msgid "Filters"
 msgstr "Filter"
@@ -3732,13 +3722,12 @@ msgstr "Ungültigen Wert erhalten"
 msgid "It contains %s direct sub-categories."
 msgstr "Diese Kategorie enthält %s direkte Unterkategorien."
 
-#, fuzzy
 msgid ""
 "It is now moved here because it is also used with core-1.4.x routing. This "
 "feature is deprecated."
 msgstr ""
-"Es ist jetzt hierher gezogen, da sie auch mit Kern-1.4.x routing verwendet "
-"wird. Diese Funktion ist veraltet."
+"Es ist jetzt hierher verschoben, da sie auch mit Core-1.4.x Routing "
+"verwendet wird. Diese Funktion ist veraltet."
 
 #, fuzzy
 msgid ""
@@ -3861,7 +3850,6 @@ msgstr "Ersetzen durch"
 msgid "List to search for"
 msgstr "Suchen nach"
 
-#, fuzzy
 msgid "List views"
 msgstr "Listenansichten"
 
@@ -3877,7 +3865,6 @@ msgstr "Generische Admin-Berechtigung fixieren"
 msgid "Lock/Unlock editing"
 msgstr "Bearbeitung sperren/entsperren"
 
-#, fuzzy
 msgid "Locked"
 msgstr "Gesperrt"
 
@@ -3890,7 +3877,6 @@ msgstr "Anmelden"
 msgid "Log in or register"
 msgstr "Anmelden oder registrieren"
 
-#, fuzzy
 msgid "Log in page"
 msgstr "Anmelden"
 
@@ -3921,13 +3907,11 @@ msgstr "Hooks für Login-Formular und -Block"
 msgid "Login method"
 msgstr "Login Methode"
 
-#, fuzzy
 msgid "Login with"
 msgstr "Einloggen mit"
 
-#, fuzzy
 msgid "Login with ..."
-msgstr "Einloggen mit"
+msgstr "Einloggen mit ..."
 
 msgid "Low (user stays logged-in until he logs-out)"
 msgstr ""
@@ -3998,7 +3982,6 @@ msgstr ""
 msgid "Manage settings for this application"
 msgstr "Einstellungen für dieses Modul"
 
-#, fuzzy
 msgid "Manage user"
 msgstr "Benutzer verwalten"
 
@@ -4626,15 +4609,14 @@ msgstr ""
 msgid "Notice: Theme switching is currently disabled."
 msgstr "Hinweis: Das Wechseln von Themes ist momentan deaktiviert."
 
-#, fuzzy
 msgid ""
 "Notice: This feature is deprecated in favor of Symfony routing. This site "
 "may have a mixture of modules of both types; those capable of using the old "
 "functionality, and those using routing."
 msgstr ""
-"Hinweis: Dieses Feature ist veraltet, zu Gunsten der Symfony-routing. Diese "
-"Website kann eine Mischung aus Modulen der beiden Arten haben; diejenigen in "
-"der Lage, die alte Funktionalität zu verwenden, und diejenigen mit routing."
+"Hinweis: Dieses Feature ist veraltet, zu Gunsten des Symfony-Routings. Diese "
+"Website könnte eine Mischung aus alten und neuen Modulen haben; die alten "
+"Module, die Routing noch nicht verwenden und diejenigen mit Routing."
 
 msgid ""
 "Notice: This overrides the 'Verify e-mail address during registration' "
@@ -5822,7 +5804,7 @@ msgid "Site description"
 msgstr "Seitenbeschreibung"
 
 msgid "Site entry point (front controller)"
-msgstr "Seiteneinstiegspunkt (Fron Controller)"
+msgstr "Seiteneinstiegspunkt (Front Controller)"
 
 msgid "Site name"
 msgstr "Seitenname"
@@ -6037,12 +6019,12 @@ msgstr "Stabiler Zikula-Core verfügbar"
 msgid "Start Controller"
 msgstr "Start Controller"
 
-#, fuzzy
 msgid ""
 "Start Controller will take precedence over module/type/function settings "
 "below."
 msgstr ""
-"Start-Controller wird folgenden Modul/Typ/Funktion Einstellungen Vorrang vor."
+"Der Start-Controller wird die folgenden Modul/Typ/Funktion Einstellungen "
+"überschreiben."
 
 msgid "Start function (required if module is set)"
 msgstr "Start Funktion (benötigt falls Modul ausgewählt ist)"
@@ -6050,12 +6032,11 @@ msgstr "Start Funktion (benötigt falls Modul ausgewählt ist)"
 msgid "Start function arguments"
 msgstr "Weitere Argumente für Startfunktion (optional)"
 
-#, fuzzy
 msgid ""
 "Start function arguments (below) can also be combined with this setting."
 msgstr ""
-"-Start-Funktion, die Argumente (siehe unten) auch mit dieser Einstellung "
-"kombiniert werden können."
+"Die Start-Controller Argumente (siehe unten) können auch mit dieser "
+"Einstellung kombiniert werden."
 
 msgid "Start function type (required if module is set)"
 msgstr "Start Funktions Typ (benötigt falls Modul ausgewählt ist)"
@@ -6075,9 +6056,8 @@ msgstr "Status"
 msgid "Statement displayed if registration disabled"
 msgstr "(Falls 'Nein' können im folgenden Feld die Gründe angegeben werden)"
 
-#, fuzzy
 msgid "States"
-msgstr "United States Minor Outlying Islands"
+msgstr "Status"
 
 msgid "Status"
 msgstr "Status"
@@ -6114,7 +6094,7 @@ msgid "Store sessions"
 msgstr "Session-Speicherung"
 
 msgid "Strip entry point (front controller) from URLs"
-msgstr "entferne Einstiegspunkt (Fron Controller) von URLs"
+msgstr "entferne Einstiegspunkt (Front Controller) von den URLs"
 
 msgid "Subject"
 msgstr "Betreff"
@@ -6473,13 +6453,12 @@ msgstr "Die Mindestversion des Kerns, die dieses Modul unterstützt ist %s"
 msgid "The module '%s' is not available."
 msgstr "Das Modul '%s' ist nicht verfügbar."
 
-#, fuzzy
 msgid ""
 "The module/type/func method of setting the start page is deprecated and will "
 "be removed at Core-2.0."
 msgstr ""
-"Das Modul/Typ/Func-Verfahren zur Festsetzung der Startseite ist veraltet und "
-"wird im Kern-2.0 entfernt werden."
+"Das Modul/Typ/Func-Einstellung zur Festlegung der Startseite ist veraltet "
+"und wird im Core-2.0 entfernt werden."
 
 #, fuzzy
 msgid "The operator defines the condition type (equal, lower than, etc.)."
@@ -6988,18 +6967,16 @@ msgstr ""
 "Anfrage zum Rücksetzen des Kennwortes, die auf Bestätigung wartet, abläuft. "
 "Null (0) eingeben für unendliche Laufzeit (keine automatische Löschung)."
 
-#, fuzzy
 msgid ""
 "This setting only works with Core-1.4.x/2.0 compatible modules (with routes)."
 msgstr ""
-"Diese Einstellung funktioniert nur mit kompatiblen Module Core-1.4.x/2.0 "
-"(mit Strecken)."
+"Diese Einstellung funktioniert nur mit kompatiblen Core-1.4.x/2.0 Modulen "
+"(mit Routing)."
 
-#, fuzzy
 msgid ""
 "This setting was part of the 'shorturl configuration in the past (below)."
 msgstr ""
-"Diese Einstellung war Bestandteil der \"Shorturl-Konfiguration in der "
+"Diese Einstellung war Bestandteil der Shorturl-Konfiguration in der "
 "Vergangenheit (siehe unten)."
 
 msgid "This site is powered by Zikula!"
@@ -7514,13 +7491,12 @@ msgstr ""
 "Warnung: Block Template Ablageort geändert, Unter Umständen müssen die "
 "Template Overrides angepasst werden, falls welche existieren."
 
-#, fuzzy
 msgid ""
 "Warning: This feature is deprecated and it is not recommended to change from "
 "index.php."
 msgstr ""
-"Achtung: Dieses Feature ist veraltet und es wird nicht empfohlen, von index."
-"php ändern."
+"Achtung: Dieses Feature ist veraltet und es wird nicht empfohlen, index.php "
+"zu ändern."
 
 msgid "Warning: could not install selected dependency %s"
 msgstr "Warnung: Konnte ausgewählte Abhängigkeit %s nicht installieren"
