@@ -26,27 +26,6 @@ msgstr "voller/Pfad/zur/Datei.txt"
 msgid "1"
 msgstr "1"
 
-msgid "10"
-msgstr "10"
-
-msgid "100"
-msgstr "100"
-
-msgid "15"
-msgstr "15"
-
-msgid "20"
-msgstr "20"
-
-msgid "30"
-msgstr "30"
-
-msgid "5"
-msgstr "5"
-
-msgid "50"
-msgstr "50"
-
 msgid "7bit"
 msgstr "7bit"
 
@@ -175,3 +154,24 @@ msgstr "quoted-printable"
 
 msgid "tab"
 msgstr "tab"
+
+#~ msgid "10"
+#~ msgstr "10"
+
+#~ msgid "100"
+#~ msgstr "100"
+
+#~ msgid "15"
+#~ msgstr "15"
+
+#~ msgid "20"
+#~ msgstr "20"
+
+#~ msgid "30"
+#~ msgstr "30"
+
+#~ msgid "5"
+#~ msgstr "5"
+
+#~ msgid "50"
+#~ msgstr "50"

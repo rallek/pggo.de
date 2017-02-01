@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Zikula Core 1.4.X\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-01-28 19:32+0100\n"
+"PO-Revision-Date: 2017-02-01 19:42+0100\n"
 "Last-Translator: Ralf Köster <ralf@familie-koester.de>\n"
 "Language-Team: team@zikula.de <team@zikula.de>\n"
 "Language: de\n"
@@ -227,6 +227,34 @@ msgstr "--Neuer Link--"
 
 msgid "/10000"
 msgstr "/10000"
+
+#, fuzzy
+msgid "10"
+msgstr "10"
+
+#, fuzzy
+msgid "100"
+msgstr "100"
+
+#, fuzzy
+msgid "15"
+msgstr "15"
+
+#, fuzzy
+msgid "20"
+msgstr "20"
+
+#, fuzzy
+msgid "30"
+msgstr "30"
+
+#, fuzzy
+msgid "5"
+msgstr "5"
+
+#, fuzzy
+msgid "50"
+msgstr "50"
 
 msgid ""
 "<p><a href=\"http://zikula.org/\">Zikula</a> is a content management system "
@@ -601,9 +629,10 @@ msgstr "Während der Ausführung von PHPIDS ist ein Fehler aufgetreten: %s"
 msgid "An error occurred while creating HTML Purifier cache directory at %path"
 msgstr "Ein Fehler beim Erstellen von HTML Purifier-Cache-Verzeichnis im %path"
 
+#, fuzzy
 msgid ""
-"An error was encountered while removing stored object workflows for the %s "
-"extension."
+"An error was encountered while removing stored object workflows for the "
+"%extension% extension."
 msgstr ""
 "Während des Entfernens gespeicherter Objekt Arbeitsabläufe für das Modul %s "
 "ist ein Fehler aufgetreten."
@@ -1043,9 +1072,6 @@ msgstr "Leere gerade die Caches"
 #, fuzzy
 msgid "Click here to visit your homepage"
 msgstr "Klicken Sie hier, um Ihre Homepage zu besuchen"
-
-msgid "Click the user's name to view his/her complete profile."
-msgstr "Auf den Benutzernamen klicken, um das vollständige Profil anzuzeigen."
 
 msgid "Click to activate block"
 msgstr "Klicken Sie zum Aktivieren des Blockes"
@@ -2189,6 +2215,10 @@ msgstr "Verschlüsselung"
 msgid "Ensure the database is in UTF-8 format."
 msgstr "Stellen Sie sicher, dass die Datenbank im UTF-8-Format ist."
 
+#, fuzzy
+msgid "Enter a part of the user name to search"
+msgstr "Zum Suchen geben Sie einen Teil des Benutzernamens ein"
+
 msgid ""
 "Enter a whole number for the number of modules to be displayed on each line "
 "of the Administration panel."
@@ -2262,11 +2292,12 @@ msgid "Enter the replaced route name of the route"
 msgstr "Gib den ersetzenden Namen der Route ein"
 
 #, fuzzy
-msgid "Enter the route entries per page. Only digits are allowed."
-msgstr "Gib den Wert der Route ein. Nur Zahlen sind erlaubt."
+msgid "Enter the route entries per page."
+msgstr "Module pro Seite"
 
-msgid "Enter the sort of the route. Only digits are allowed."
-msgstr "Gib den Wert der Route ein. Nur Zahlen sind erlaubt."
+#, fuzzy
+msgid "Enter the sort of the route."
+msgstr "Gib den Host eine Route ein"
 
 msgid "Enter the translation prefix of the route"
 msgstr "Gib den Übersetzungs-Präfix der Route ein"
@@ -2954,7 +2985,7 @@ msgid "Finalize parameters"
 msgstr "Fertigstellen der Parameter"
 
 msgid "Finalizing parameters"
-msgstr "Dabei die Parameter fertig zu stellen"
+msgstr "Parameter fertig stellen"
 
 msgid "Find users"
 msgstr "Benutzer suchen"
@@ -3202,6 +3233,15 @@ msgstr ""
 
 msgid "Help"
 msgstr "Hilfe"
+
+#, fuzzy
+msgid "Here you can choose a custom creation date"
+msgstr "Hier kann ein benutzerdefiniertes Erstellungsdatum gewählt werden"
+
+#, fuzzy
+msgid "Here you can choose a user which will be set as creator"
+msgstr ""
+"Hier können Sie einen Benutzer wählen, die als Ersteller festgelegt wird"
 
 #, fuzzy
 msgid "Here you can configure parameters for list views."
@@ -3561,7 +3601,7 @@ msgid "Installation aborted"
 msgstr "Installation abgebrochen"
 
 msgid "Installation guide"
-msgstr "Anleitung"
+msgstr "Installationsanleitung"
 
 msgid "Installed dependency %s."
 msgstr "Abhängigkeit %s installiert."
@@ -3821,8 +3861,9 @@ msgstr "Ersetzen durch"
 msgid "List to search for"
 msgstr "Suchen nach"
 
-msgid "Listviews"
-msgstr "Listenansicht"
+#, fuzzy
+msgid "List views"
+msgstr "Listenansichten"
 
 msgid "Localisation settings"
 msgstr "Mehrsprachigkeit"
@@ -3958,6 +3999,10 @@ msgid "Manage settings for this application"
 msgstr "Einstellungen für dieses Modul"
 
 #, fuzzy
+msgid "Manage user"
+msgstr "Benutzer verwalten"
+
+#, fuzzy
 msgid "Marked for deletion"
 msgstr "Inaktiv, zum Löschen markiert"
 
@@ -4073,6 +4118,10 @@ msgstr "Modus"
 
 msgid "Moderate access"
 msgstr "Moderieren"
+
+#, fuzzy
+msgid "Moderation"
+msgstr "Ersteller und Erstellungsdatum ändern"
 
 #, fuzzy
 msgid "Modify block"
@@ -4241,6 +4290,10 @@ msgid "My account"
 msgstr "Benutzerkonto"
 
 #, fuzzy
+msgid "My routes"
+msgstr "Routen"
+
+#, fuzzy
 msgid "MyModuleName:Controller:method"
 msgstr "MyModuleName:Controller:method"
 
@@ -4393,6 +4446,10 @@ msgstr "Kein Servicegeberbereich übergeben."
 msgid "No records found."
 msgstr "keine Einträge gefunden"
 
+#, fuzzy
+msgid "No results found!"
+msgstr "Keine Ergebnisse gefunden!"
+
 msgid "No routes found."
 msgstr "Keine Routen gefunden."
 
@@ -4408,8 +4465,9 @@ msgstr "Kein Startmodul (statische Startseite)"
 msgid "No subscriber area passed."
 msgstr "Kein Servicenehmerbereich übergeben."
 
-msgid "No such item."
-msgstr "Kein solches Element"
+#, fuzzy
+msgid "No such item found."
+msgstr "Der entsprechende Eintrag konnte leider nicht gefunden werden."
 
 msgid "No users found."
 msgstr "Keine Benutzer gefunden."
@@ -4703,6 +4761,10 @@ msgstr "Einmalige Nutzung"
 msgid "Online"
 msgstr "Online"
 
+#, fuzzy
+msgid "Only digits are allowed."
+msgstr "Gib die maximale Dateigröße ein. Nur Ziffern sind erlaubt."
+
 msgid "Only for non-default languages"
 msgstr "Nicht bei der Standardsprache"
 
@@ -4941,9 +5003,8 @@ msgstr "Speichere Symfony Bundles"
 msgid "Plain-text message"
 msgstr "Einfache Textnachricht"
 
-#, fuzzy
 msgid "Please Login with Admin credentials"
-msgstr "Melden Sie sich mit Administrator-Anmeldeinformationen"
+msgstr "Melden Sie sich mit Administratorrechten an"
 
 msgid "Please also choose what to do with this category's sub-categories:"
 msgstr "Bitte auswählen, was mit den Unterkategorien passieren soll?"
@@ -4995,9 +5056,8 @@ msgstr ""
 msgid "Please follow the instructions to install Zikula %version%."
 msgstr "Bitte den Instruktionen folgen um Zikula %version% zu installieren."
 
-#, fuzzy
 msgid "Please refer to the %s during the process."
-msgstr "Entnehmen Sie bitte der %s während des Prozesses."
+msgstr "Bitte beachten Sie %s während des Prozesses."
 
 msgid "Please select one of the following:"
 msgstr "Bitte eine der folgenden Möglichkeiten auswählen:"
@@ -5207,7 +5267,7 @@ msgid "Regenerate session ID during log-in and log-out"
 msgstr "Session ID bei An-/Abmeldung neu erzeugen"
 
 msgid "Regenerate themes"
-msgstr "Thems neu laden"
+msgstr "Themes neu laden"
 
 msgid "Regenerating themes"
 msgstr "Themes neu generieren"
@@ -5515,6 +5575,10 @@ msgstr "Suchergebnisse"
 msgid "Search settings"
 msgstr "Suche Einstellungen"
 
+#, fuzzy
+msgid "Search user"
+msgstr "Benutzer suchen"
+
 msgid "Secure host name"
 msgstr "Secure Hostname"
 
@@ -5596,6 +5660,10 @@ msgstr "Sende Passwort zurück setz Code an %sub%"
 
 msgid "Send password via email"
 msgstr "Passwort per Mail senden"
+
+#, fuzzy
+msgid "Send private message to %userName%"
+msgstr "Sende eine Willkommens-Nachricht an diesen Benutzer"
 
 msgid "Send test email"
 msgstr "Verschicke Test Email"
@@ -5900,16 +5968,18 @@ msgid "Sorry!, You cannot apply to join the requested group"
 msgstr "Für diese Gruppe kann keine Mitgliedschaft beantragt werden."
 
 #, fuzzy
+msgid "Sorry, but an error occured during the %action% action."
+msgstr ""
+"Sorry, aber ein unbekannter Fehler bei der Aktion %s aufgetreten. Bitte "
+"diese Änderungen erneut anwenden!"
+
+#, fuzzy
 msgid ""
 "Sorry, but an error occured during the %action% action. Please apply the "
 "changes again!"
 msgstr ""
 "Sorry, aber ein unbekannter Fehler bei der Aktion %s aufgetreten. Bitte "
 "diese Änderungen erneut anwenden!"
-
-#, fuzzy
-msgid "Sorry, but an error occured during the %s action."
-msgstr "Tut mir leid, aber während der %s Aktion ist ein Fehler aufgetreten."
 
 msgid ""
 "Sorry, but you can not create the route yet as other items are required "
@@ -6007,7 +6077,7 @@ msgstr "(Falls 'Nein' können im folgenden Feld die Gründe angegeben werden)"
 
 #, fuzzy
 msgid "States"
-msgstr "States"
+msgstr "United States Minor Outlying Islands"
 
 msgid "Status"
 msgstr "Status"
@@ -6071,6 +6141,10 @@ msgstr "Wechsel zum Administrationsbereich."
 #, fuzzy
 msgid "Switch to user area."
 msgstr "Wechsel zum Nutzerbereich."
+
+#, fuzzy
+msgid "Switch to users administration"
+msgstr "Wechseln Sie in die Benutzerverwaltung."
 
 msgid "Symfony Bundles"
 msgstr "Symfony Bundles"
@@ -6767,23 +6841,9 @@ msgstr "Es gab einen Fehler beim erneuten generieren der Themes"
 msgid "There was an error upgrading the modules"
 msgstr "Es gab einen Fehler beim aktualisieren der Module"
 
-msgid "There was an error upgrading to Core 1.4.1"
+#, fuzzy
+msgid "There was an error upgrading to Core %version%"
 msgstr "Es gab einen Fehler bei der Aktualisierung auf Core 1.4.1"
-
-msgid "There was an error upgrading to Core 1.4.2"
-msgstr "Es gab einen Fehler bei der Aktualisieren auf Core 1.4.2"
-
-msgid "There was an error upgrading to Core 1.4.3"
-msgstr "Es gab einen Fehler bei der Aktualisierung auf Core 1.4.3"
-
-msgid "There was an error upgrading to Core 1.4.4"
-msgstr "Fehler beim Upgrade auf Core 1.4.4"
-
-msgid "There was an error upgrading to Core 1.4.5"
-msgstr "Fehler beim Upgrade auf Core 1.4.5"
-
-msgid "There was an error upgrading to Core 1.4.6"
-msgstr "Fehler beim Upgrade auf Core 1.4.6"
 
 #, fuzzy
 msgid ""
@@ -6807,8 +6867,12 @@ msgid ""
 "This e-mail address ('%email') has been used to register an account on "
 "'%site' (%url)."
 msgstr ""
-"Diese e-Mail-Adresse (\"% e-Mail\") wurde verwendet, um ein Konto auf \"% "
-"Website\" registrieren (% Url)."
+"Hallo! Diese e-Mail-Adresse (\"%email\") wurde verwendet, um ein Konto auf "
+"'%site' (%url) zu registrieren."
+
+#, fuzzy
+msgid "This function requires JavaScript activated!"
+msgstr "Diese Funktion verlangt aktiviertes Javascript!"
 
 #, fuzzy
 msgid ""
@@ -6978,9 +7042,8 @@ msgstr ""
 "Zum Sub % herstellen eines der Module aus der untenstehenden Liste, klicken "
 "Sie auf die checkbox(es) neben den entsprechenden Bereich."
 
-#, fuzzy
 msgid "To version"
-msgstr "Version"
+msgstr "auf Version"
 
 msgid "Toggle Dropdown"
 msgstr "Toggle Dropdown"
@@ -7067,7 +7130,6 @@ msgstr "Update checker"
 msgid "Update checker is enabled"
 msgstr "Update Checker ist aktiviert"
 
-#, fuzzy
 msgid "Update configuration"
 msgstr "Update-Konfiguration"
 
@@ -7077,17 +7139,17 @@ msgstr "Aktualisiere Inhalt."
 msgid "Update date"
 msgstr "Aktualisierungsdatum"
 
-#, fuzzy
 msgid "Updated by %user"
 msgstr "Aktualisiert von %user"
 
-#, fuzzy
 msgid "Updated by %user on %date"
 msgstr "Aktualisiert von %user am %date"
 
-#, fuzzy
 msgid "Updated on %date"
 msgstr "Aktualisiert am %date"
+
+msgid "Updater"
+msgstr "Aktualisieren"
 
 msgid "Upgrade"
 msgstr "Upgrade"
@@ -7095,55 +7157,23 @@ msgstr "Upgrade"
 msgid "Upgrade %s"
 msgstr "Upgrade %s"
 
-#, fuzzy
 msgid "Upgrade Zikula!"
-msgstr "Zikula zu aktualisieren!"
+msgstr "Zikula aktualisieren!"
 
-msgid "Upgrade from Core 1.4.0 to Core 1.4.1"
-msgstr "Aktualisierung von Core 1.4.0 auf Core 1.4.1"
-
-msgid "Upgrade from Core 1.4.1 to Core 1.4.2"
-msgstr "Aktualisierung von Core 1.4.1 auf Core 1.4.2"
-
-msgid "Upgrade from Core 1.4.2 to Core 1.4.3"
-msgstr "Aktualisierung von Core 1.4.2 auf Core 1.4.3"
-
-msgid "Upgrade from Core 1.4.3 to Core 1.4.4"
-msgstr "Upgrade von Core 1.4.3 auf Core 1.4.4"
-
-msgid "Upgrade from Core 1.4.4 to Core 1.4.5"
-msgstr "Upgrade von Core 1.4.4 auf Core 1.4.5"
-
-msgid "Upgrade from Core 1.4.5 to Core 1.4.6"
-msgstr "Upgrade von Core 1.4.5 auf Core 1.4.6"
+msgid "Upgrade from Core %oldVersion% to Core %newVersion%"
+msgstr "Aktualisierung von Core %oldVersion% auf Core %newVersion%"
 
 msgid "Upgrade modules"
 msgstr "Aktualisiere Module"
 
-msgid "Upgraded to Core 1.4.1"
-msgstr "Aktualisierung auf Core 1.4.1"
-
-msgid "Upgraded to Core 1.4.2"
-msgstr "Aktualisiert auf Core 1.4.2"
-
-msgid "Upgraded to Core 1.4.3"
-msgstr "Aktualisiert auf Core 1.4.3"
-
-msgid "Upgraded to Core 1.4.4"
-msgstr "Upgrade auf Core 1.4.4"
-
-msgid "Upgraded to Core 1.4.5"
-msgstr "Upgrade auf Core 1.4.5"
-
-msgid "Upgraded to Core 1.4.6"
-msgstr "Upgrade auf Core 1.4.6"
+msgid "Upgraded to Core %version%"
+msgstr "Aktualisierung auf Core %version%"
 
 msgid "Upgrader script"
 msgstr "Zikula Upgrade Script"
 
-#, fuzzy
 msgid "Upgrading Modules and Helpers"
-msgstr "Upgrade-Module und Helfer"
+msgstr "Aktualisierung der Module und Helfer"
 
 msgid "Upgrading Zikula in %env% environment."
 msgstr "Aktualisierung von Zikula in der %env% Umgebung."
@@ -7151,26 +7181,8 @@ msgstr "Aktualisierung von Zikula in der %env% Umgebung."
 msgid "Upgrading modules"
 msgstr "Aktualisiere gerade die Module"
 
-msgid "Upgrading to Core 1.4.1"
-msgstr "Aktualisierung auf Core 1.4.1"
-
-msgid "Upgrading to Core 1.4.2"
-msgstr "Aktualisierung auf Core 1.4.2"
-
-msgid "Upgrading to Core 1.4.3"
-msgstr "Aktualisierung auf Core 1.4.3"
-
-#, fuzzy
-msgid "Upgrading to Core 1.4.4"
-msgstr "Upgrade auf Kern 1.4.4"
-
-#, fuzzy
-msgid "Upgrading to Core 1.4.5"
-msgstr "Aktualisierung auf Core 1.4.1"
-
-#, fuzzy
-msgid "Upgrading to Core 1.4.6"
-msgstr "Aktualisierung auf Core 1.4.1"
+msgid "Upgrading to Core %version%"
+msgstr "Aktualisierung auf Core %version%"
 
 msgid "Upload"
 msgstr "Upload"
@@ -7185,18 +7197,15 @@ msgid "Use default value (if checked) or override value"
 msgstr ""
 "Standardwert benutzen (wenn Checkbox aktiviert) oder Wert überschreiben"
 
-#, fuzzy
 msgid "Use different keywords."
 msgstr "Verwenden Sie andere Schlüsselwörter."
 
-#, fuzzy
 msgid "Use fewer words."
 msgstr "Verwenden Sie weniger Wörter."
 
 msgid "Use internal output filter only"
 msgstr "Nur internen Ausgabefilter benutzen"
 
-#, fuzzy
 msgid "Use keywords that are more general."
 msgstr "Verwenden Sie Schlüsselwörter, die allgemeiner sind."
 
@@ -7206,28 +7215,24 @@ msgstr "Theme der Website nutzen"
 msgid "Useful resources"
 msgstr "Hilfreiche Informationen"
 
-#, fuzzy
 msgid "User Credential Settings"
 msgstr "Benutzeranmeldeinformationen"
 
 msgid "User ID"
 msgstr "Benutzer-ID"
 
-#, fuzzy
 msgid "User Login Settings"
 msgstr "Anmeldeeinstellungen"
 
 msgid "User Name"
 msgstr "Benutzername"
 
-#, fuzzy
 msgid "User deleted!|%n users deleted!"
-msgstr "Benutzer gelöscht! | %n Benutzer gelöscht!"
+msgstr "Benutzer gelöscht!|%n Benutzer gelöscht!"
 
 msgid "User log-in"
 msgstr "Anmeldung"
 
-#, fuzzy
 msgid "User login"
 msgstr "Benutzer Login"
 
@@ -7246,9 +7251,8 @@ msgstr "Benutzername oder Email"
 msgid "User name:"
 msgstr "Benutzername:"
 
-#, fuzzy
 msgid "User name: %sub%"
-msgstr "Benutzername: Sub %"
+msgstr "Benutzername: %sub%"
 
 msgid ""
 "User names can contain letters, numbers, underscores, periods, spaces and/or "
@@ -7272,7 +7276,6 @@ msgstr "Zugriffregel für Benutzer überprüfen"
 msgid "User registration is moderated"
 msgstr "Benutzerregistrierung moderieren"
 
-#, fuzzy
 msgid "User settings"
 msgstr "Benutzereinstellungen"
 
@@ -7305,7 +7308,6 @@ msgstr ""
 "Benutzer die von einem Adminstrator angelegt wurden sind automatisch als "
 "verifiziert eingestuft."
 
-#, fuzzy
 msgid "Users groups"
 msgstr "Benutzergruppen"
 
@@ -7354,12 +7356,11 @@ msgstr "IDS Logfile anzeigen"
 msgid "View membership of \":name\" group"
 msgstr "Mitgliedschaft \":name\" Gruppe anzeigen"
 
-#, fuzzy
 msgid ""
 "WARNING: The \"%name%\" block position is not available in the current "
 "default theme."
 msgstr ""
-"WARNUNG: Die Blockposition \"% Name%\" ist nicht verfügbar in das aktuelle "
+"WARNUNG: Die Blockposition \"%name%\"\" ist nicht verfügbar in das aktuelle "
 "Standard-Theme."
 
 msgid ""
@@ -7536,9 +7537,8 @@ msgstr "Willkommen auf %1$s, %2$s!"
 msgid "Welcome to %s!"
 msgstr "Willkommen auf %s!"
 
-#, fuzzy
 msgid "Welcome to %sub%!"
-msgstr "Willkommen Sie bei Sub %!"
+msgstr "Willkommen bei %sub%!"
 
 #, fuzzy
 msgid "Welcome to the route section of the Routes application."
@@ -7605,9 +7605,8 @@ msgstr ""
 msgid "With description"
 msgstr "Mit Beschreibung"
 
-#, fuzzy
 msgid "With selected routes"
-msgstr "Mit ausgewählten Strecken"
+msgstr "Mit ausgewählten Routen"
 
 msgid "With the current setup the block is disabled."
 msgstr "Mit den aktuellen Einstellungen ist der Block deaktiviert."
@@ -7646,16 +7645,14 @@ msgstr ""
 msgid "You are an anonymous guest."
 msgstr "Noch nicht registriert oder angemeldet."
 
-#, fuzzy
 msgid "You are currently using an unreleased version of the Zikula Core."
 msgstr "Sie verwenden derzeit eine unveröffentlichte Version von Zikula Core."
 
 msgid "You are in:"
 msgstr "Aktuelle Position:"
 
-#, fuzzy
 msgid "You are logged-in as <strong>%sub%</strong>."
-msgstr "Sie sind eingeloggt als <strong>Sub %</strong>."
+msgstr "Sie sind eingeloggt als <strong>%sub%</strong>."
 
 msgid "You are not allowed to alter your own active state."
 msgstr "Du bist nicht berechtigt deinen aktiven Status zu ändern."
@@ -7673,7 +7670,6 @@ msgstr ""
 "Du bist nicht berechtigt dich selbst von der primären Administrator Gruppe "
 "zu entfernen."
 
-#, fuzzy
 msgid ""
 "You are seeing this message because Zikula is not yet installed. You can "
 "install Zikula by clicking\n"
@@ -7681,20 +7677,20 @@ msgid ""
 "the %inst%. Further information can be found in the %docs%."
 msgstr ""
 "Sie sehen diese Meldung, da Zikula noch nicht installiert ist. Sie können "
-"durch Klicken auf die Schaltfläche \"installieren\", aber bevor Sie dies tun "
-"Zikula installieren lesen Sie bitte die %-inst. Weitere Informationen finden "
-"in der %-Docs."
+"die Installationdurch Klicken auf die Schaltfläche \"installieren\" starten, "
+"aber bevor Sie Zikula installieren lesen Sie bitte die %inst%. Weitere "
+"Informationen finden in der %docs%."
 
-#, fuzzy
 msgid ""
 "You are seeing this message because Zikula requires upgrade. You can upgrade "
 "Zikula by clicking\n"
 "                    on the upgrade button, but before doing so please read "
 "the %inst%. Further information can be found in the %docs%."
 msgstr ""
-"Sie sehen diese Meldung, weil Zikula-Upgrade erfordert. Sie können durch "
-"Klicken auf die Schaltfläche \"Upgrade\", aber bevor Sie dies tun Zikula "
-"aktualisieren Bitte lesen inst %. Weitere Informationen finden in der %-Docs."
+"Sie sehen diese Meldung, weil Zikula ein Upgrade erfordert. Das Upgrade "
+"startet durch Klicken auf die Schaltfläche \"Upgrade\", aber bevor Sie "
+"Zikula aktualisieren lesen sie bitte %inst%. Weitere Informationen finden in "
+"der %docs%."
 
 msgid ""
 "You are the only recipient of this message, and your user name has not been "
@@ -7703,13 +7699,11 @@ msgstr ""
 "Diese E-Mail wird nur an einen Empfänger versendet, der Benutzername wurde "
 "nicht an irgend welche anderen E-Mail-Adressen geschickt."
 
-#, fuzzy
 msgid "You are using the latest stable version of the Zikula core."
 msgstr "Sie verwenden die neueste stabile Version von Zikula Core."
 
-#, fuzzy
 msgid "You can <a href=%sub%>register here</a>."
-msgstr "Hier können Sie sich registrieren."
+msgstr "Hier können Sie sich <a href=%sub%>registrieren</a>."
 
 #, fuzzy
 msgid ""
@@ -8062,9 +8056,8 @@ msgstr "Zikula Core ist bereits installiert!"
 msgid "Zikula Core is not installed!"
 msgstr "Zikula ist noch nicht installiert!"
 
-#, fuzzy
 msgid "Zikula Core requires upgrade!"
-msgstr "Zikula Core erforderlich Upgrade!"
+msgstr "Zikula Core Upgrade erforderlich !"
 
 msgid "Zikula Extension Module"
 msgstr "Zikula Erweiterungen Modul"
@@ -8089,7 +8082,7 @@ msgstr "Zikula Mailer Modul erfolgreich installiert"
 
 #, fuzzy
 msgid "Zikula Menu Module"
-msgstr "Zikula Menü-Modul"
+msgstr "Zikula Menü-Modul installieren"
 
 #, fuzzy
 msgid "Zikula Menu Module installed"
@@ -8136,7 +8129,7 @@ msgid "Zikula Themes Repository"
 msgstr "Zikula Themes Repository"
 
 msgid "Zikula Upgrader Script"
-msgstr "Zikula Upgrade Script"
+msgstr "Zikula Altualisierungs Skript"
 
 msgid "Zikula Users Module"
 msgstr "Zikula Benutzer Modul"
@@ -8172,13 +8165,11 @@ msgstr "Zikula ist die Installation!"
 msgid "Zikula is not installed!"
 msgstr "Zikula ist nicht installiert!"
 
-#, fuzzy
 msgid "Zikula is not upgraded!"
 msgstr "Zikula ist nicht aktualisiert!"
 
-#, fuzzy
 msgid "Zikula is upgrading!"
-msgstr "Zikula ist ein Upgrade!"
+msgstr "Zikula wird aktualisiert!"
 
 msgid "active"
 msgstr "aktiv"
@@ -8192,9 +8183,8 @@ msgstr "axel,12sicher09,axel@example.org"
 msgid "albert,12secure09,albert@example.org,1,1,2"
 msgstr "axel,12sicher09,axel@example.org,1,1,2"
 
-#, fuzzy
 msgid "be patient!"
-msgstr "Haben Sie Geduld."
+msgstr "Haben Sie Geduld!"
 
 msgid ""
 "date.timezone is currently not set.  It needs to be set to a valid timezone "
@@ -8231,9 +8221,8 @@ msgstr "Gruppe"
 msgid "inactive"
 msgstr "inaktiv"
 
-#, fuzzy
 msgid "installation guide"
-msgstr "Anleitung"
+msgstr "Installationsanleitung"
 
 #, fuzzy
 msgid "installation instructions"
@@ -8323,11 +8312,9 @@ msgstr "Unbekannter Benutzer."
 msgid "unregistered user"
 msgstr "Unregistrierter Benutzer"
 
-#, fuzzy
 msgid "upgrade guide"
 msgstr "Upgrade-Anleitung"
 
-#, fuzzy
 msgid "upgrade instructions"
 msgstr "Upgrade-Anweisungen"
 
@@ -8360,6 +8347,80 @@ msgid ""
 msgstr ""
 "À,Á,Â,Ã,Å,à,á,â,ã,å,Ò,Ó,Ô,Õ,Ø,ò,ó,ô,õ,ø,È,É,Ê,Ë,è,é,ê,ë,Ç,ç,Ì,Í,Î,Ï,ì,í,î,ï,"
 "Ù,Ú,Û,ù,ú,û,ÿ,Ñ,ñ,ß,ä,Ä,ö,Ö,ü,Ü"
+
+#~ msgid "Click the user's name to view his/her complete profile."
+#~ msgstr ""
+#~ "Auf den Benutzernamen klicken, um das vollständige Profil anzuzeigen."
+
+#, fuzzy
+#~ msgid "Enter the route entries per page. Only digits are allowed."
+#~ msgstr "Gib den Wert der Route ein. Nur Zahlen sind erlaubt."
+
+#~ msgid "No such item."
+#~ msgstr "Kein solches Element"
+
+#~ msgid "There was an error upgrading to Core 1.4.2"
+#~ msgstr "Es gab einen Fehler bei der Aktualisieren auf Core 1.4.2"
+
+#~ msgid "There was an error upgrading to Core 1.4.3"
+#~ msgstr "Es gab einen Fehler bei der Aktualisierung auf Core 1.4.3"
+
+#~ msgid "There was an error upgrading to Core 1.4.4"
+#~ msgstr "Fehler beim Upgrade auf Core 1.4.4"
+
+#~ msgid "There was an error upgrading to Core 1.4.5"
+#~ msgstr "Fehler beim Upgrade auf Core 1.4.5"
+
+#~ msgid "There was an error upgrading to Core 1.4.6"
+#~ msgstr "Fehler beim Upgrade auf Core 1.4.6"
+
+#~ msgid "Upgrade from Core 1.4.1 to Core 1.4.2"
+#~ msgstr "Aktualisierung von Core 1.4.1 auf Core 1.4.2"
+
+#~ msgid "Upgrade from Core 1.4.2 to Core 1.4.3"
+#~ msgstr "Aktualisierung von Core 1.4.2 auf Core 1.4.3"
+
+#~ msgid "Upgrade from Core 1.4.3 to Core 1.4.4"
+#~ msgstr "Upgrade von Core 1.4.3 auf Core 1.4.4"
+
+#~ msgid "Upgrade from Core 1.4.4 to Core 1.4.5"
+#~ msgstr "Upgrade von Core 1.4.4 auf Core 1.4.5"
+
+#~ msgid "Upgrade from Core 1.4.5 to Core 1.4.6"
+#~ msgstr "Upgrade von Core 1.4.5 auf Core 1.4.6"
+
+#~ msgid "Upgraded to Core 1.4.2"
+#~ msgstr "Aktualisiert auf Core 1.4.2"
+
+#~ msgid "Upgraded to Core 1.4.3"
+#~ msgstr "Aktualisiert auf Core 1.4.3"
+
+#~ msgid "Upgraded to Core 1.4.4"
+#~ msgstr "Upgrade auf Core 1.4.4"
+
+#~ msgid "Upgraded to Core 1.4.5"
+#~ msgstr "Upgrade auf Core 1.4.5"
+
+#~ msgid "Upgraded to Core 1.4.6"
+#~ msgstr "Upgrade auf Core 1.4.6"
+
+#~ msgid "Upgrading to Core 1.4.2"
+#~ msgstr "Aktualisierung auf Core 1.4.2"
+
+#~ msgid "Upgrading to Core 1.4.3"
+#~ msgstr "Aktualisierung auf Core 1.4.3"
+
+#, fuzzy
+#~ msgid "Upgrading to Core 1.4.4"
+#~ msgstr "Upgrade auf Kern 1.4.4"
+
+#, fuzzy
+#~ msgid "Upgrading to Core 1.4.5"
+#~ msgstr "Aktualisierung auf Core 1.4.1"
+
+#, fuzzy
+#~ msgid "Upgrading to Core 1.4.6"
+#~ msgstr "Aktualisierung auf Core 1.4.1"
 
 #~ msgid "Choose a language"
 #~ msgstr "Sprache auswählen"
