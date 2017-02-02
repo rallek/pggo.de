@@ -5,8 +5,6 @@
         {% if picture.description %}
             <dd>{{ picture.description|striptags|truncate(200, true, '&hellip;') }}</dd>
         {% endif %}
-        <dd><a href="{{ path('pggonewsdatesmodule_picture_display', { 'id': picture.id }) }}">{{ __('Read more') }}</a>
-        </dd>
     {% else %}
         <dt>{{ __('No entries found.') }}</dt>
     {% endfor %}

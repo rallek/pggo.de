@@ -107,7 +107,7 @@ abstract class AbstractNewsDatesModuleInstaller extends AbstractExtensionInstall
             $entityManager->persist($registry);
             $entityManager->flush();
         } catch (\Exception $e) {
-            $this->addFlash('error', $this->__f('Error! Could not create a category registry for the %s entity.', ['%s' => 'article']));
+            $this->addFlash('error', $this->__f('Error! Could not create a category registry for the %entity% entity.', ['%entity%' => 'article']));
             $logger->error('{app}: User {user} could not create a category registry for {entities} during installation. Error details: {errorMessage}.', ['app' => 'PggoNewsDatesModule', 'user' => $userName, 'entities' => 'articles', 'errorMessage' => $e->getMessage()]);
         }
         $categoryRegistryIdsPerEntity['article'] = $registry->getId();
@@ -123,7 +123,7 @@ abstract class AbstractNewsDatesModuleInstaller extends AbstractExtensionInstall
             $entityManager->persist($registry);
             $entityManager->flush();
         } catch (\Exception $e) {
-            $this->addFlash('error', $this->__f('Error! Could not create a category registry for the %s entity.', ['%s' => 'event']));
+            $this->addFlash('error', $this->__f('Error! Could not create a category registry for the %entity% entity.', ['%entity%' => 'event']));
             $logger->error('{app}: User {user} could not create a category registry for {entities} during installation. Error details: {errorMessage}.', ['app' => 'PggoNewsDatesModule', 'user' => $userName, 'entities' => 'events', 'errorMessage' => $e->getMessage()]);
         }
         $categoryRegistryIdsPerEntity['event'] = $registry->getId();
@@ -415,7 +415,7 @@ abstract class AbstractNewsDatesModuleInstaller extends AbstractExtensionInstall
         // delete stored object workflows
         $result = Zikula_Workflow_Util::deleteWorkflowsForModule('PggoNewsDatesModule');
         if (false === $result) {
-            $this->addFlash('error', $this->__f('An error was encountered while removing stored object workflows for the %s extension.', ['%s' => 'PggoNewsDatesModule']));
+            $this->addFlash('error', $this->__f('An error was encountered while removing stored object workflows for the %extension% extension.', ['%extension%' => 'PggoNewsDatesModule']));
             $logger->error('{app}: Could not remove stored object workflows during uninstallation.', ['app' => 'PggoNewsDatesModule']);
     
             return false;
@@ -450,7 +450,7 @@ abstract class AbstractNewsDatesModuleInstaller extends AbstractExtensionInstall
     
         // remind user about upload folders not being deleted
         $uploadPath = $this->container->getParameter('datadir') . '/PggoNewsDatesModule/';
-        $this->addFlash('status', $this->__f('The upload directories at [%s] can be removed manually.', ['%s' => $uploadPath]));
+        $this->addFlash('status', $this->__f('The upload directories at "%path%" can be removed manually.', ['%path%' => $uploadPath]));
     
         // uninstallation successful
         return true;

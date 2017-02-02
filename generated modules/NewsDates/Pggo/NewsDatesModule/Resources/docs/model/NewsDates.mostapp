@@ -165,7 +165,7 @@ application "NewsDates" {
             targetAlias "pictures"
             editType ACTIVE_NONE_PASSIVE_CHOOSE
             cascade ALL
-            orderBy "sortNumber"
+            orderBy ""
         },
         one2many bidirectional {
             source "event"
@@ -173,7 +173,7 @@ application "NewsDates" {
             target "article"
             targetAlias "articles"
             cascade ALL
-            orderBy "weight"
+            orderBy ""
         }
     }
     }

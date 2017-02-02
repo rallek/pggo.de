@@ -124,7 +124,6 @@ abstract class AbstractArticleEntity extends EntityAccess
      * Full image path as url.
      *
      * @Assert\Type(type="string")
-     * @Assert\Url()
      * @var string $imageUrl
      */
     protected $imageUrl = '';
@@ -214,7 +213,6 @@ abstract class AbstractArticleEntity extends EntityAccess
      *
      * @ORM\OneToMany(targetEntity="Pggo\NewsDatesModule\Entity\PictureEntity", mappedBy="article", cascade={"all"})
      * @ORM\JoinTable(name="pggo_newsdate_articlepictures")
-     * @ORM\OrderBy({"sortNumber" = "ASC"})
      * @var \Pggo\NewsDatesModule\Entity\PictureEntity[] $pictures
      */
     protected $pictures = null;

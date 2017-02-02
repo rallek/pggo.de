@@ -48,18 +48,15 @@
 </p>
 <p>
     <label for="{$baseID}Sort"{$leftSide}>{gt text='Sort by'}:</label>
-    <select id="{$baseID}Sort" name="sort"{$rightSide}>
-        <option value="id"{if $sort eq 'id'} selected="selected"{/if}>{gt text='Id'}</option>
-        <option value="workflowState"{if $sort eq 'workflowState'} selected="selected"{/if}>{gt text='Workflow state'}</option>
+    <select id="{$baseID}Sort" name="sort" class="form-control"{$rightSide}>
         <option value="title"{if $sort eq 'title'} selected="selected"{/if}>{gt text='Title'}</option>
         <option value="startDate"{if $sort eq 'startDate'} selected="selected"{/if}>{gt text='Start date'}</option>
-        <option value="duration"{if $sort eq 'duration'} selected="selected"{/if}>{gt text='Duration'}</option>
         <option value="location"{if $sort eq 'location'} selected="selected"{/if}>{gt text='Location'}</option>
-        <option value="description"{if $sort eq 'description'} selected="selected"{/if}>{gt text='Description'}</option>
         <option value="eventUrl"{if $sort eq 'eventUrl'} selected="selected"{/if}>{gt text='Event url'}</option>
         <option value="createdDate"{if $sort eq 'createdDate'} selected="selected"{/if}>{gt text='Creation date'}</option>
         <option value="createdBy"{if $sort eq 'createdBy'} selected="selected"{/if}>{gt text='Creator'}</option>
         <option value="updatedDate"{if $sort eq 'updatedDate'} selected="selected"{/if}>{gt text='Update date'}</option>
+        <option value="updatedBy"{if $sort eq 'updatedBy'} selected="selected"{/if}>{gt text='Updater'}</option>
     </select>
     <select id="{$baseID}SortDir" name="sortdir" class="form-control">
         <option value="asc"{if $sortdir eq 'asc'} selected="selected"{/if}>{gt text='ascending'}</option>

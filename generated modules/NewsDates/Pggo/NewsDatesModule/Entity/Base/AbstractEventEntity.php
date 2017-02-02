@@ -146,7 +146,6 @@ abstract class AbstractEventEntity extends EntityAccess
      *
      * @ORM\OneToMany(targetEntity="Pggo\NewsDatesModule\Entity\ArticleEntity", mappedBy="event", cascade={"all"})
      * @ORM\JoinTable(name="pggo_newsdate_eventarticles")
-     * @ORM\OrderBy({"weight" = "ASC"})
      * @var \Pggo\NewsDatesModule\Entity\ArticleEntity[] $articles
      */
     protected $articles = null;

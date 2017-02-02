@@ -4,12 +4,12 @@
     {formlabel for='pggoNewsDatesModuleObjectType' text=$objectTypeSelectorLabel cssClass='col-sm-3 control-label'}
     <div class="col-sm-9">
         {pggonewsdatesmoduleObjectTypeSelector assign='allObjectTypes'}
-        {formdropdownlist id='pggoNewsDatesModuleOjectType' dataField='objectType' group='data' mandatory=true items=$allObjectTypes cssClass='form-control'}
+        {formdropdownlist id='pggoNewsDatesModuleObjectType' dataField='objectType' group='data' mandatory=true items=$allObjectTypes cssClass='form-control'}
         <span class="help-block">{gt text='If you change this please save the element once to reload the parameters below.' domain='pggonewsdatesmodule'}</span>
     </div>
 </div>
 
-{if $featureActivationHelper->isEnabled(const('Pggo\\NewsDatesModule\\Helper\\FeatureActivationHelper::CATEGORIES', $objectType))}
+{if $featureActivationHelper->isEnabled(constant('Pggo\\NewsDatesModule\\Helper\\FeatureActivationHelper::CATEGORIES', $objectType))}
 {formvolatile}
 {if $properties ne null && is_array($properties)}
     {nocache}
@@ -60,7 +60,7 @@
     {gt text='Amount' domain='pggonewsdatesmodule' assign='amountLabel'}
     {formlabel for='pggoNewsDatesModuleAmount' text=$amountLabel cssClass='col-sm-3 control-label'}
     <div class="col-sm-9">
-        {formintinput id='pggoNewsDatesModuleAmount' dataField='amount' group='data' mandatory=true maxLength=2}
+        {formintinput id='pggoNewsDatesModuleAmount' dataField='amount' group='data' mandatory=true maxLength=2 cssClass='form-control'}
     </div>
 </div>
 
@@ -73,12 +73,12 @@
     </div>
 </div>
 
-<div id="customTemplateArea" class="form-group" data-switch="pggoNewsDatesModuleTemplate" data-switch-value="custom">
+<div id="customTemplateArea" class="form-group"{* data-switch="pggoNewsDatesModuleTemplate" data-switch-value="custom"*}>
     {gt text='Custom template' domain='pggonewsdatesmodule' assign='customTemplateLabel'}
     {formlabel for='pggoNewsDatesModuleCustomTemplate' text=$customTemplateLabel cssClass='col-sm-3 control-label'}
     <div class="col-sm-9">
         {formtextinput id='pggoNewsDatesModuleCustomTemplate' dataField='customTemplate' group='data' mandatory=false maxLength=80 cssClass='form-control'}
-        <span class="help-block">{gt text='Example' domain='pggonewsdatesmodule'}: <em>itemlist_[objectType]_display.tpl</em></span>
+        <span class="help-block">{gt text='Example' domain='pggonewsdatesmodule'}: <em>itemlist_[objectType]_display.html.twig</em></span>
     </div>
 </div>
 
@@ -95,6 +95,10 @@
 
 {*include file='include_filterSyntaxDialog.tpl'*}
 
-{pageaddvar name='stylesheet' value='web/bootstrap/css/bootstrap.min.css'}
-{pageaddvar name='stylesheet' value='web/bootstrap/css/bootstrap-theme.min.css'}
-{pageaddvar name='javascript' value='web/bootstrap/js/bootstrap.min.js'}
+<script type="text/javascript">
+    (function($) {
+    	$('#pggoNewsDatesModuleTemplate').change(function() {
+    	    $('#customTemplateArea').toggleClass('hidden', $(this).val() != 'custom');
+	    }).trigger('change');
+    })(jQuery)
+</script>

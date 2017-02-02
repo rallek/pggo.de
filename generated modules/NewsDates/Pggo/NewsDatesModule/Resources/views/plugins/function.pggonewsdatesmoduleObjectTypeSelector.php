@@ -23,11 +23,12 @@
  */
 function smarty_function_pggonewsdatesmoduleObjectTypeSelector($params, $view)
 {
+    $dom = ZLanguage::getModuleDomain('PggoNewsDatesModule');
     $result = [];
 
-    $result[] = ['text' => $this->__('Articles'), 'value' => 'article'];
-    $result[] = ['text' => $this->__('Pictures'), 'value' => 'picture'];
-    $result[] = ['text' => $this->__('Events'), 'value' => 'event'];
+    $result[] = ['text' => __('Articles', $dom), 'value' => 'article'];
+    $result[] = ['text' => __('Pictures', $dom), 'value' => 'picture'];
+    $result[] = ['text' => __('Events', $dom), 'value' => 'event'];
 
     if (array_key_exists('assign', $params)) {
         $view->assign($params['assign'], $result);

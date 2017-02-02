@@ -356,7 +356,7 @@ abstract class AbstractWorkflowHelper
                     'amount' => $amount,
                     'objectType' => $objectType,
                     'state' => $state,
-                    'message' => $this->translator->_fn('One article is waiting for approval.', '%s articles are waiting for approval.', $amount, ['%s' => $amount])
+                    'message' => $this->translator->_fn('One article is waiting for approval.', '%amount% articles are waiting for approval.', $amount, ['%amount%' => $amount])
                 ];
         
                 $this->logger->info('{app}: There are {amount} {entities} waiting for approval.', ['app' => 'PggoNewsDatesModule', 'amount' => $amount, 'entities' => 'articles']);

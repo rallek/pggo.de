@@ -222,10 +222,14 @@ abstract class AbstractNotificationHelper
         $this->recipients = [];
     
         if ($this->recipientType == 'moderator' || $this->recipientType == 'superModerator') {
-            $objectType = $this->entity['_objectType'];
-            $moderatorGroupId = $this->variableApi->get('PggoNewsDatesModule', 'moderationGroupFor' . $objectType, 2);
+            $modVarSuffixes = [
+                'article' => 'Articles'
+            ];
+            $modVarSuffix = $modVarSuffixes[$this->entity['_objectType']];
+    
+            $moderatorGroupId = $this->variableApi->get('PggoNewsDatesModule', 'moderationGroupFor' . $modVarSuffix, 2);
             if ($this->recipientType == 'superModerator') {
-                $moderatorGroupId = $this->variableApi->get('PggoNewsDatesModule', 'superModerationGroupFor' . $objectType, 2);
+                $moderatorGroupId = $this->variableApi->get('PggoNewsDatesModule', 'superModerationGroupFor' . $modVarSuffix, 2);
             }
     
             $moderatorGroup = $this->groupRepository->find($moderatorGroupId);
