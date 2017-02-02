@@ -16,9 +16,9 @@ use Swift_Message;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Twig_Environment;
+use Zikula\Bundle\CoreBundle\HttpKernel\ZikulaHttpKernelInterface;
 use Zikula\Common\Translator\TranslatorInterface;
 use Zikula\Common\Translator\TranslatorTrait;
 use Zikula\Core\Doctrine\EntityAccess;
@@ -46,7 +46,7 @@ abstract class AbstractNotificationHelper
     protected $router;
     
     /**
-     * @var KernelInterface
+     * @var ZikulaHttpKernelInterface
      */
     protected $kernel;
     
@@ -123,7 +123,7 @@ abstract class AbstractNotificationHelper
     /**
      * NotificationHelper constructor.
      *
-     * @param KernelInterface          $kernel          Kernel service instance
+     * @param ZikulaHttpKernelInterface $kernel         Kernel service instance
      * @param TranslatorInterface      $translator      Translator service instance
      * @param SessionInterface         $session         Session service instance
      * @param Routerinterface          $router          Router service instance
@@ -136,7 +136,7 @@ abstract class AbstractNotificationHelper
      * @param WorkflowHelper           $workflowHelper  WorkflowHelper service instance
      */
     public function __construct(
-        KernelInterface $kernel,
+        ZikulaHttpKernelInterface $kernel,
         TranslatorInterface $translator,
         SessionInterface $session,
         RouterInterface $router,

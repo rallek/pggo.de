@@ -173,7 +173,7 @@ abstract class AbstractPictureController extends AbstractController
     }
     /**
      * This action provides a handling of simple delete requests in the admin area.
-     * @ParamConverter("picture", class="PggoNewsDatesModule:PictureEntity", options={"id" = "id", "repository_method" = "selectById"})
+     * @ParamConverter("picture", class="PggoNewsDatesModule:PictureEntity", options = {"id" = "id", "repository_method" = "selectById"})
      * @Cache(expires="+12 hours", public=false)
      *
      * @param Request $request Current request instance
@@ -192,7 +192,7 @@ abstract class AbstractPictureController extends AbstractController
     
     /**
      * This action provides a handling of simple delete requests.
-     * @ParamConverter("picture", class="PggoNewsDatesModule:PictureEntity", options={"id" = "id", "repository_method" = "selectById"})
+     * @ParamConverter("picture", class="PggoNewsDatesModule:PictureEntity", options = {"id" = "id", "repository_method" = "selectById"})
      * @Cache(expires="+12 hours", public=false)
      *
      * @param Request $request Current request instance

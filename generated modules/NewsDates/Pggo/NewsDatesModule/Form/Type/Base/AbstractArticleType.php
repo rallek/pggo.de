@@ -133,7 +133,7 @@ abstract class AbstractArticleType extends AbstractType
                 'maxlength' => 10000,
                 'class' => '',
                 'title' => $this->__('Enter the teaser of the article')
-            ],'required' => false
+            ],'required' => true
         ]);
         
         $builder->add('bodyText', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', [
@@ -169,7 +169,7 @@ abstract class AbstractArticleType extends AbstractType
                 'maxlength' => 255,
                 'class' => '',
                 'title' => $this->__('Enter the copyright of the article')
-            ],'required' => true,
+            ],'required' => false,
         ]);
         
         $builder->add('notes', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', [

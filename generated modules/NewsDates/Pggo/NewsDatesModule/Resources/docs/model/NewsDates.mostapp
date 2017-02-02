@@ -1,4 +1,5 @@
 application "NewsDates" {
+    documentation "A module to create News with images and dates"
     vendor "Pggo"
     author "Ralf Koester"
     email "webmaster@pggo.de"
@@ -7,7 +8,8 @@ application "NewsDates" {
     prefix "newsdate"
     generatorSettings {
         settingsContainer "Settings"
-    generateSearchApi false
+    targetCoreVersion ZK14DEV
+        generateSearchApi false
         generateMailzApi false
         generateNewsletterPlugin false
         generateMultiHookNeedles false
@@ -36,7 +38,7 @@ application "NewsDates" {
                 },
                 text "teaser"  {
                     defaultValue ""
-                    mandatory false
+                    mandatory true
                     displayType DISPLAY
                     length 10000
                 },
@@ -52,6 +54,7 @@ application "NewsDates" {
                 },
                 string  "copyright" {
                     documentation "copyright of the image"
+                    mandatory false
                     displayType DISPLAY
                 },
                 text "notes"  {
@@ -172,6 +175,7 @@ application "NewsDates" {
             sourceAlias "event"
             target "article"
             targetAlias "articles"
+            editType ACTIVE_NONE_PASSIVE_CHOOSE
             cascade ALL
             orderBy ""
         }

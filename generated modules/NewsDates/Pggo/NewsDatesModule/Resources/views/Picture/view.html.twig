@@ -61,7 +61,7 @@
                 </td>
                 <td headers="hImage" class="text-left">
                     {% if picture.imageMeta|default %}
-                    <a href="{{ picture.imageUrl }}" title="{{ picture.getTitleFromDisplayPattern()|e('html_attr') }}"{% if picture.imageMeta.isImage %} class="lightbox"{% endif %}>
+                    <a href="{{ picture.imageUrl }}" title="{{ picture.getTitleFromDisplayPattern()|e('html_attr') }}"{% if picture.imageMeta.isImage %} class="image-link"{% endif %}>
                     {% if picture.imageMeta.isImage %}
                         {% set thumbOptions = attribute(thumbRuntimeOptions, 'pictureImage') %}
                         <img src="{{ picture.image.getPathname()|imagine_filter('zkroot', thumbOptions) }}" alt="{{ picture.getTitleFromDisplayPattern()|e('html_attr') }}" width="{{ thumbOptions.thumbnail.size[0] }}" height="{{ thumbOptions.thumbnail.size[1] }}" class="img-thumbnail" />

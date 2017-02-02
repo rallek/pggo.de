@@ -6,7 +6,7 @@ To create a new translation follow the steps below:
 2. Open a console and navigate to the Zikula root directory.
 3. Execute this command replacing `en` by your desired locale code:
 
-`php app/console translation:extract en --bundle=PggoNewsDatesModule --enable-extractor=jms_i18n_routing --output-format=po`
+`php app/console translation:extract en --bundle=PggoNewsDatesModule --enable-extractor=jms_i18n_routing --output-format=po --exclude-dir=TaggedObjectMeta`
 
 You can also use multiple locales at once, for example `de fr es`.
 

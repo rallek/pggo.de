@@ -85,7 +85,7 @@ abstract class AbstractArticleEntity extends EntityAccess
     
     /**
      * @ORM\Column(type="text", length=10000)
-     * @Assert\NotNull()
+     * @Assert\NotBlank()
      * @Assert\Length(min="0", max="10000")
      * @var text $teaser
      */
@@ -131,7 +131,7 @@ abstract class AbstractArticleEntity extends EntityAccess
     /**
      * copyright of the image
      * @ORM\Column(length=255)
-     * @Assert\NotBlank()
+     * @Assert\NotNull()
      * @Assert\Length(min="0", max="255")
      * @var string $copyright
      */
@@ -184,7 +184,6 @@ abstract class AbstractArticleEntity extends EntityAccess
     /**
      * @Gedmo\Slug(fields={"title"}, updatable=true, unique=false, separator="-", style="lower")
      * @ORM\Column(type="string", length=255, unique=false)
-     * @Assert\NotBlank()
      * @Assert\Length(min="1", max="255")
      * @var string $slug
      */

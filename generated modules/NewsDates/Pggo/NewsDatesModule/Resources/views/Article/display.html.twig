@@ -41,7 +41,7 @@
         {% if article.image is not empty %}
             <dt>{{ __('Image') }}</dt>
             <dd>{% if article.image is not empty and article.imageMeta|default %}
-                        <a href="{{ article.imageUrl }}" title="{{ article.getTitleFromDisplayPattern()|e('html_attr') }}"{% if article.imageMeta.isImage %} class="lightbox"{% endif %}>
+                        <a href="{{ article.imageUrl }}" title="{{ article.getTitleFromDisplayPattern()|e('html_attr') }}"{% if article.imageMeta.isImage %} class="image-link"{% endif %}>
             {% if article.imageMeta.isImage %}
                 {% set thumbOptions = attribute(thumbRuntimeOptions, 'articleImage') %}
                 <img src="{{ article.image.getPathname()|imagine_filter('zkroot', thumbOptions) }}" alt="{{ article.getTitleFromDisplayPattern()|e('html_attr') }}" width="{{ thumbOptions.thumbnail.size[0] }}" height="{{ thumbOptions.thumbnail.size[1] }}" class="img-thumbnail" />

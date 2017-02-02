@@ -127,7 +127,6 @@ abstract class AbstractEventEntity extends EntityAccess
     /**
      * @Gedmo\Slug(fields={"title"}, updatable=true, unique=false, separator="-", style="lower")
      * @ORM\Column(type="string", length=255, unique=false)
-     * @Assert\NotBlank()
      * @Assert\Length(min="1", max="255")
      * @var string $slug
      */

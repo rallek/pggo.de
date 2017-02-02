@@ -218,7 +218,20 @@ jQuery(document).ready(function() {
     isViewPage = jQuery('.pggonewsdatesmodule-view').length > 0;
     isDisplayPage = jQuery('.pggonewsdatesmodule-display').length > 0;
 
-    jQuery('a.lightbox').lightbox();
+    jQuery('a.image-link').magnificPopup({
+        type: 'image',
+        disableOn: 400,
+        closeOnContentClick: true,
+        image: {
+            titleSrc: 'title',
+            verticalFit: true
+        },
+        zoom: {
+            enabled: true,
+            duration: 300,
+            easing: 'ease-in-out'
+        }
+    });
 
     if (isViewPage) {
         pggoNewsDatesInitQuickNavigation();

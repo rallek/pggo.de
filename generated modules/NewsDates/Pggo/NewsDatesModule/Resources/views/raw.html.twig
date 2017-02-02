@@ -10,7 +10,7 @@
     {% if useFinder|default == true %}
         <link rel="stylesheet" type="text/css" href="{{ zasset('@PggoNewsDatesModule:css/finder.css') }}" />
     {% else %}
-        <link rel="stylesheet" type="text/css" href="{{ asset('bootstrap-media-lightbox/bootstrap-media-lightbox.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('magnific-popup/magnific-popup.css') }}" />
     {% endif %}
     <script type="text/javascript">
         /* <![CDATA[ */
@@ -23,7 +23,7 @@
     {% if useFinder|default == true %}
         <script type="text/javascript" src="{{ zasset('@PggoNewsDatesModule:js/PggoNewsDatesModule.Finder.js') }}"></script>
     {% else %}
-        <script type="text/javascript" src="{{ asset('bootstrap-media-lightbox/bootstrap-media-lightbox.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('magnific-popup/jquery.magnific-popup.min.js') }}"></script>
         <script type="text/javascript" src="{{ zasset('@PggoNewsDatesModule:js/PggoNewsDatesModule.js') }}"></script>
     {% endif %}
 </head>

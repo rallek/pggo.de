@@ -6,7 +6,7 @@
     {{ parent() }}
     {{ pageAddAsset('javascript', zasset('@PggoNewsDatesModule:js/PggoNewsDatesModule.Validation.js', 98)) }}
     {{ pageAddAsset('javascript', zasset('@PggoNewsDatesModule:js/PggoNewsDatesModule.EditFunctions.js', 99)) }}
-    {{ pageAddAsset('javascript', app.request.basePath ~ '/vendor/twitter/typeahead.js/dist/typeahead.bundle.min.js') }}
+    {{ pageAddAsset('javascript', asset('typeahead/typeahead.bundle.min.js')) }}
 {% endblock %}
 
 {% block title mode == 'create' ? __('Create article') : __('Edit article') %}
