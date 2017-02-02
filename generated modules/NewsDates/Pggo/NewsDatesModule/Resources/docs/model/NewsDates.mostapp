@@ -69,7 +69,7 @@ application "NewsDates" {
                     mandatory false
                 },
                 datetime "endDatetime" endDate {
-                    defaultValue ""
+                    defaultValue "2099-12-31 00:00:00"
                     mandatory false
                 },
                 integer "views" {

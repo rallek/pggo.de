@@ -231,7 +231,7 @@ abstract class AbstractArticleEntity extends EntityAccess
     {
         $this->views = 1;
         $this->startDate = \DateTime::createFromFormat('Y-m-d H:i:s', date('Y-m-d H:i:s'));
-        $this->endDatetime = \DateTime::createFromFormat('Y-m-d H:i:s', date('Y-m-d H:i:s'));
+        $this->endDatetime = \DateTime::createFromFormat('Y-m-d H:i:s', '2099-12-31 00:00:00');
         $this->initWorkflow();
         $this->pictures = new ArrayCollection();
         $this->categories = new ArrayCollection();
