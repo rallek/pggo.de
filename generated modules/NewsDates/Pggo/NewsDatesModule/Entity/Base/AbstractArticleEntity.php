@@ -207,9 +207,9 @@ abstract class AbstractArticleEntity extends EntityAccess
     protected $pictures = null;
     
     /**
-     * Bidirectional - One article [article] has many events [events] (INVERSE SIDE).
+     * Unidirectional - One article [article] has many events [events] (INVERSE SIDE).
      *
-     * @ORM\OneToMany(targetEntity="Pggo\NewsDatesModule\Entity\EventEntity", mappedBy="article")
+     * @ORM\ManyToMany(targetEntity="Pggo\NewsDatesModule\Entity\EventEntity")
      * @ORM\JoinTable(name="pggo_newsdate_articleevents")
      * @var \Pggo\NewsDatesModule\Entity\EventEntity[] $events
      */
@@ -759,7 +759,6 @@ abstract class AbstractArticleEntity extends EntityAccess
     public function addEvents(\Pggo\NewsDatesModule\Entity\EventEntity $event)
     {
         $this->events->add($event);
-        $event->setArticle($this);
     }
     
     /**
@@ -772,7 +771,6 @@ abstract class AbstractArticleEntity extends EntityAccess
     public function removeEvents(\Pggo\NewsDatesModule\Entity\EventEntity $event)
     {
         $this->events->removeElement($event);
-        $event->setArticle(null);
     }
     
     

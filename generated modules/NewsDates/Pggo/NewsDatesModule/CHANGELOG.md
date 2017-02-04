@@ -1,3 +1,3 @@
 # CHANGELOG
 
-Changes in PggoNewsDatesModule 0.5.0
+Changes in PggoNewsDatesModule 0.5.3

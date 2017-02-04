@@ -49,19 +49,6 @@
             {% else %}&nbsp;{% endif %}
             </dd>
         {% endif %}
-        {% if event.article|default %}
-            <dt>{{ __('Article') }}</dt>
-            <dd>
-              {% if not isQuickView %}
-                  <a href="{{ path('pggonewsdatesmodule_article_' ~ routeArea ~ 'display', { 'id': event.article.id, 'slug': event.article.slug }) }}">{% spaceless %}
-                    {{ event.article.getTitleFromDisplayPattern() }}
-                  {% endspaceless %}</a>
-                  <a id="articleItem{{ event.article.id }}Display" href="{{ path('pggonewsdatesmodule_article_' ~ routeArea ~ 'display', { 'id': event.article.id, 'slug': event.article.slug, 'raw': 1 }) }}" title="{{ __('Open quick view window')|e('html_attr') }}" class="pggonewsdates-inline-window hidden" data-modal-title="{{ event.article.getTitleFromDisplayPattern()|e('html_attr') }}"><span class="fa fa-id-card-o"></span></a>
-              {% else %}
-                  {{ event.article.getTitleFromDisplayPattern() }}
-              {% endif %}
-            </dd>
-        {% endif %}
         
     </dl>
     {% if featureActivationHelper.isEnabled(constant('Pggo\\NewsDatesModule\\Helper\\FeatureActivationHelper::CATEGORIES'), 'event') %}

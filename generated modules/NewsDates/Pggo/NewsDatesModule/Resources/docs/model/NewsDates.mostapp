@@ -4,7 +4,7 @@ application "NewsDates" {
     author "Ralf Koester"
     email "webmaster@pggo.de"
     url "http://pggo.de"
-    version "0.5.0"
+    version "0.5.3"
     prefix "newsdate"
     generatorSettings {
         settingsContainer "Settings"
@@ -166,16 +166,16 @@ application "NewsDates" {
             sourceAlias "article"
             target "picture"
             targetAlias "pictures"
-            editType ACTIVE_EDIT_PASSIVE_EDIT
+            editType ACTIVE_NONE_PASSIVE_CHOOSE
             cascade ALL
             orderBy ""
         },
-        one2many bidirectional {
+        one2many {
             source "article"
             sourceAlias "article"
             target "event"
             targetAlias "events"
-            editType ACTIVE_EDIT_PASSIVE_EDIT
+            editType ACTIVE_NONE_PASSIVE_CHOOSE
         }
     }
     }

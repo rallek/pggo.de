@@ -24,7 +24,6 @@ services:
         class: Pggo\NewsDatesModule\Form\Type\QuickNavigation\EventQuickNavType
         arguments:
             - "@translator.default"
-            - "@request_stack"
             - "@pggo_newsdates_module.listentries_helper"
             - "@pggo_newsdates_module.feature_activation_helper"
         tags:

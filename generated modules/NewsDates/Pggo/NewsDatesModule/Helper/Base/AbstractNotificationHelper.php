@@ -238,7 +238,7 @@ abstract class AbstractNotificationHelper
                     $this->addRecipient($uid);
                 }
             }
-        } elseif ($this->recipientType == 'creator' && method_exists($entity, 'getCreatedBy')) {
+        } elseif ($this->recipientType == 'creator' && method_exists($this->entity, 'getCreatedBy')) {
             $creatorUid = $this->entity->getCreatedBy()->getUid();
     
             $this->addRecipient($creatorUid);

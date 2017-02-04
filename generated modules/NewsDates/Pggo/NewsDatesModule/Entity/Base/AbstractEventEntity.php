@@ -140,16 +140,6 @@ abstract class AbstractEventEntity extends EntityAccess
      */
     protected $categories = null;
     
-    /**
-     * Bidirectional - Many events [events] are linked by one article [article] (OWNING SIDE).
-     *
-     * @ORM\ManyToOne(targetEntity="Pggo\NewsDatesModule\Entity\ArticleEntity", inversedBy="events")
-     * @ORM\JoinTable(name="pggo_newsdate_article")
-     * @Assert\Type(type="Pggo\NewsDatesModule\Entity\ArticleEntity")
-     * @var \Pggo\NewsDatesModule\Entity\ArticleEntity $article
-     */
-    protected $article;
-    
     
     /**
      * EventEntity constructor.
@@ -466,28 +456,6 @@ abstract class AbstractEventEntity extends EntityAccess
         }
     
         return false;
-    }
-    
-    /**
-     * Returns the article.
-     *
-     * @return \Pggo\NewsDatesModule\Entity\ArticleEntity
-     */
-    public function getArticle()
-    {
-        return $this->article;
-    }
-    
-    /**
-     * Sets the article.
-     *
-     * @param \Pggo\NewsDatesModule\Entity\ArticleEntity $article
-     *
-     * @return void
-     */
-    public function setArticle($article = null)
-    {
-        $this->article = $article;
     }
     
     

@@ -1,6 +1,6 @@
 {
     "name": "pggo/newsdates-module",
-    "version": "0.5.0",
+    "version": "0.5.3",
     "description": "A module to create News with images and dates",
     "type": "zikula-module",
     "license": "LGPL-3.0+",
