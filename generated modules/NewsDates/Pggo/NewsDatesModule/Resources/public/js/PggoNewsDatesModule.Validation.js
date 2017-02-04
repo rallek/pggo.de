@@ -85,7 +85,7 @@ function pggoNewsDatesValidateDateRangeArticle(val)
 {
     var cmpVal, cmpVal2, result;
     cmpVal = pggoNewsDatesReadDate(jQuery("[id$='startDate']").val(), true);
-    cmpVal2 = pggoNewsDatesReadDate(jQuery("[id$='endDatetime']").val(), true);
+    cmpVal2 = pggoNewsDatesReadDate(jQuery("[id$='endDate']").val(), true);
 
     if (typeof cmpVal == 'undefined' && typeof cmpVal2 == 'undefined') {
         result = true;

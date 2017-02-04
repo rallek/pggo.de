@@ -155,6 +155,7 @@ abstract class AbstractEventFinderType extends AbstractType
                 'choices' => [
                     $this->__('Title') => 'title',
                     $this->__('Start date') => 'startDate',
+                    $this->__('Start time') => 'startTime',
                     $this->__('Location') => 'location',
                     $this->__('Event url') => 'eventUrl',
                     $this->__('Creation date') => 'createdDate',

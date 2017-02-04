@@ -4,7 +4,7 @@ application "NewsDates" {
     author "Ralf Koester"
     email "webmaster@pggo.de"
     url "http://pggo.de"
-    version "0.5.3"
+    version "0.6.1"
     prefix "newsdate"
     generatorSettings {
         settingsContainer "Settings"
@@ -71,7 +71,7 @@ application "NewsDates" {
                     defaultValue ""
                     mandatory false
                 },
-                datetime "endDatetime" endDate {
+                datetime "endDate" endDate {
                     defaultValue "2099-12-31 00:00:00"
                     mandatory false
                 },
@@ -121,15 +121,15 @@ application "NewsDates" {
         },
         entity "event" categorisable categorisableMultiSelection {
             nameMultiple "events"
-            displayPattern "#title# #startDate# #location#"
+            displayPattern "#title# #startDate# #startTime# #location#"
             slugUnique false
             fields {
                 string "title" {
                     defaultValue ""
                     sluggablePosition 1
                 },
-                datetime "startDate" {
-                    defaultValue ""
+                date "startDate",
+                time "startTime" {
                     mandatory false
                 },
                 string "duration"  {

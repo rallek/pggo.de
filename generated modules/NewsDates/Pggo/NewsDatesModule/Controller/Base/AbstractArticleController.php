@@ -149,7 +149,7 @@ abstract class AbstractArticleController extends AbstractController
             new Column('title'),
             new Column('displayOnIndex'),
             new Column('startDate'),
-            new Column('endDatetime'),
+            new Column('endDate'),
             new Column('views'),
             new Column('createdBy'),
             new Column('createdDate'),

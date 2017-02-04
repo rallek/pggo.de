@@ -1,4 +1,4 @@
-# pggo\NewsDates 0.5.3
+# pggo\NewsDates 0.6.1
 
 A module to create News with images and dates
 

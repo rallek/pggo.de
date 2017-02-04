@@ -53,7 +53,7 @@
         <option value="title"{if $sort eq 'title'} selected="selected"{/if}>{gt text='Title'}</option>
         <option value="displayOnIndex"{if $sort eq 'displayOnIndex'} selected="selected"{/if}>{gt text='Display on index'}</option>
         <option value="startDate"{if $sort eq 'startDate'} selected="selected"{/if}>{gt text='Start date'}</option>
-        <option value="endDatetime"{if $sort eq 'endDatetime'} selected="selected"{/if}>{gt text='End datetime'}</option>
+        <option value="endDate"{if $sort eq 'endDate'} selected="selected"{/if}>{gt text='End date'}</option>
         <option value="views"{if $sort eq 'views'} selected="selected"{/if}>{gt text='Views'}</option>
         <option value="createdDate"{if $sort eq 'createdDate'} selected="selected"{/if}>{gt text='Creation date'}</option>
         <option value="createdBy"{if $sort eq 'createdBy'} selected="selected"{/if}>{gt text='Creator'}</option>

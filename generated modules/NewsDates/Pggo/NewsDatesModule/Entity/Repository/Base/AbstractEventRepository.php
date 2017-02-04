@@ -61,6 +61,7 @@ abstract class AbstractEventRepository extends EntityRepository
         return [
             'title',
             'startDate',
+            'startTime',
             'location',
             'eventUrl',
             'createdBy',
@@ -707,6 +708,8 @@ abstract class AbstractEventRepository extends EntityRepository
             $where .= ((!empty($where)) ? ' OR ' : '');
             $where .= 'tbl.startDate = \'' . $fragment . '\'';
             $where .= ((!empty($where)) ? ' OR ' : '');
+            $where .= 'tbl.startTime = \'' . $fragment . '\'';
+            $where .= ((!empty($where)) ? ' OR ' : '');
             $where .= 'tbl.duration LIKE \'%' . $fragment . '%\'';
             $where .= ((!empty($where)) ? ' OR ' : '');
             $where .= 'tbl.location LIKE \'%' . $fragment . '%\'';
@@ -719,6 +722,8 @@ abstract class AbstractEventRepository extends EntityRepository
             $where .= 'tbl.title LIKE \'%' . $fragment . '%\'';
             $where .= ((!empty($where)) ? ' OR ' : '');
             $where .= 'tbl.startDate = \'' . $fragment . '\'';
+            $where .= ((!empty($where)) ? ' OR ' : '');
+            $where .= 'tbl.startTime = \'' . $fragment . '\'';
             $where .= ((!empty($where)) ? ' OR ' : '');
             $where .= 'tbl.duration LIKE \'%' . $fragment . '%\'';
             $where .= ((!empty($where)) ? ' OR ' : '');
@@ -866,6 +871,9 @@ abstract class AbstractEventRepository extends EntityRepository
             $selection .= ', tbl.startDate';
             
             
+            $selection .= ', tbl.startTime';
+            
+            
             $selection .= ', tbl.location';
             $selection .= ', tbl.slug';
             $useJoins = false;
@@ -914,7 +922,7 @@ abstract class AbstractEventRepository extends EntityRepository
                 // If no plugin with default = true given the compare plugin is loaded and used for unconfigured fields.
                 // Multiple objects of the same plugin with different configurations are possible.
                 [
-                    new DateFilter(['startDate'/*, 'tblJoin.someJoinedField'*/])
+                    new DateFilter(['startDate', 'startTime'/*, 'tblJoin.someJoinedField'*/])
                 ],
     
                 // Allowed operators per field.

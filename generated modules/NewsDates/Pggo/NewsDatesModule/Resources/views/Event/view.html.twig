@@ -21,6 +21,7 @@
                 {% endif %}
                 <col id="cTitle" />
                 <col id="cStartDate" />
+                <col id="cStartTime" />
                 <col id="cDuration" />
                 <col id="cLocation" />
                 <col id="cEventUrl" />
@@ -38,6 +39,9 @@
                 </th>
                 <th id="hStartDate" scope="col" class="text-left">
                     <a href="{{ sort.startDate.url }}" title="{{ __f('Sort by %s', {'%s': 'start date'}) }}" class="{{ sort.startDate.class }}">{{ __('Start date') }}</a>
+                </th>
+                <th id="hStartTime" scope="col" class="text-left">
+                    <a href="{{ sort.startTime.url }}" title="{{ __f('Sort by %s', {'%s': 'start time'}) }}" class="{{ sort.startTime.class }}">{{ __('Start time') }}</a>
                 </th>
                 <th id="hDuration" scope="col" class="text-left z-order-unsorted">
                     {{ __('Duration') }}
@@ -64,7 +68,10 @@
                     <a href="{{ path('pggonewsdatesmodule_event_' ~ routeArea ~ 'display', { 'id': event.id, 'slug': event.slug }) }}" title="{{ __('View detail page')|e('html_attr') }}">{{ event.title|notifyFilters('pggonewsdatesmodule.filterhook.events') }}</a>
                 </td>
                 <td headers="hStartDate" class="text-left">
-                    {{ event.startDate|localizeddate('medium', 'short') }}
+                    {{ event.startDate|localizeddate('medium', 'none') }}
+                </td>
+                <td headers="hStartTime" class="text-left">
+                    {{ event.startTime|localizeddate('none', 'short') }}
                 </td>
                 <td headers="hDuration" class="text-left">
                     {{ event.duration }}
@@ -87,7 +94,7 @@
             </tr>
         {% else %}
             <tr class="z-{{ routeArea == 'admin' ? 'admin' : 'data' }}tableempty">
-                <td class="text-left" colspan="{% if routeArea == 'admin' %}7{% else %}6{% endif %}">
+                <td class="text-left" colspan="{% if routeArea == 'admin' %}8{% else %}7{% endif %}">
             {{ __('No events found.') }}
               </td>
             </tr>

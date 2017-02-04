@@ -166,9 +166,9 @@ abstract class AbstractArticleEntity extends EntityAccess
      * @ORM\Column(type="datetime")
      * @Assert\NotNull()
      * @Assert\DateTime()
-     * @var DateTime $endDatetime
+     * @var DateTime $endDate
      */
-    protected $endDatetime;
+    protected $endDate;
     
     /**
      * @ORM\Column(type="integer")
@@ -229,7 +229,7 @@ abstract class AbstractArticleEntity extends EntityAccess
     {
         $this->views = 1;
         $this->startDate = \DateTime::createFromFormat('Y-m-d H:i:s', date('Y-m-d H:i:s'));
-        $this->endDatetime = \DateTime::createFromFormat('Y-m-d H:i:s', '2099-12-31 00:00:00');
+        $this->endDate = \DateTime::createFromFormat('Y-m-d H:i:s', '2099-12-31 00:00:00');
         $this->initWorkflow();
         $this->pictures = new ArrayCollection();
         $this->events = new ArrayCollection();
@@ -552,28 +552,28 @@ abstract class AbstractArticleEntity extends EntityAccess
     }
     
     /**
-     * Returns the end datetime.
+     * Returns the end date.
      *
      * @return DateTime
      */
-    public function getEndDatetime()
+    public function getEndDate()
     {
-        return $this->endDatetime;
+        return $this->endDate;
     }
     
     /**
-     * Sets the end datetime.
+     * Sets the end date.
      *
-     * @param DateTime $endDatetime
+     * @param DateTime $endDate
      *
      * @return void
      */
-    public function setEndDatetime($endDatetime)
+    public function setEndDate($endDate)
     {
-        if (is_object($endDatetime) && $endDatetime instanceOf \DateTime) {
-            $this->endDatetime = $endDatetime;
+        if (is_object($endDate) && $endDate instanceOf \DateTime) {
+            $this->endDate = $endDate;
         } else {
-            $this->endDatetime = new \DateTime($endDatetime);
+            $this->endDate = new \DateTime($endDate);
         }
     }
     
@@ -813,16 +813,16 @@ abstract class AbstractArticleEntity extends EntityAccess
     }
     
     /**
-     * Checks whether the startDate value is earlier than the endDatetime value.
+     * Checks whether the startDate value is earlier than the endDate value.
      * This method is used for validation.
      *
      * @Assert\IsTrue(message="The start date must be before the end date.")
      *
      * @return boolean True if data is valid else false
      */
-    public function isStartDateBeforeEndDatetime()
+    public function isStartDateBeforeEndDate()
     {
-        return ($this['startDate'] < $this['endDatetime']);
+        return ($this['startDate'] < $this['endDate']);
     }
     
     

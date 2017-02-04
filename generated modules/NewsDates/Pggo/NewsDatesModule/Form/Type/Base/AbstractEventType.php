@@ -103,15 +103,27 @@ abstract class AbstractEventType extends AbstractType
             ],'required' => true,
         ]);
         
-        $builder->add('startDate', 'Pggo\NewsDatesModule\Form\Type\Field\DateTimeType', [
+        $builder->add('startDate', 'Symfony\Component\Form\Extension\Core\Type\DateType', [
             'label' => $this->__('Start date') . ':',
             'empty_data' => '',
             'attr' => [
                 'class' => '',
                 'title' => $this->__('Enter the start date of the event')
-            ],'empty_data' => date('Y-m-d H:i'),
-            'required' => false,
+            ],'empty_data' => date('Y-m-d'),
+            'required' => true,
             'widget' => 'single_text'
+        ]);
+        
+        $builder->add('startTime', 'Symfony\Component\Form\Extension\Core\Type\TimeType', [
+            'label' => $this->__('Start time') . ':',
+            'empty_data' => '',
+            'attr' => [
+                'class' => '',
+                'title' => $this->__('Enter the start time of the event')
+            ],'empty_data' => '',
+            'required' => false,
+            'widget' => 'single_text',
+            'maxlength' => 8
         ]);
         
         $builder->add('duration', 'Symfony\Component\Form\Extension\Core\Type\TextType', [

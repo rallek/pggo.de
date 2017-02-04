@@ -147,6 +147,7 @@ abstract class AbstractEventController extends AbstractController
         $sortableColumns->addColumns([
             new Column('title'),
             new Column('startDate'),
+            new Column('startTime'),
             new Column('location'),
             new Column('eventUrl'),
             new Column('createdBy'),

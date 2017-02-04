@@ -27,7 +27,7 @@
                 <col id="cNotes" />
                 <col id="cDisplayOnIndex" />
                 <col id="cStartDate" />
-                <col id="cEndDatetime" />
+                <col id="cEndDate" />
                 <col id="cViews" />
                 <col id="cItemActions" />
             </colgroup>
@@ -58,8 +58,8 @@
                 <th id="hStartDate" scope="col" class="text-left">
                     <a href="{{ sort.startDate.url }}" title="{{ __f('Sort by %s', {'%s': 'start date'}) }}" class="{{ sort.startDate.class }}">{{ __('Start date') }}</a>
                 </th>
-                <th id="hEndDatetime" scope="col" class="text-left">
-                    <a href="{{ sort.endDatetime.url }}" title="{{ __f('Sort by %s', {'%s': 'end datetime'}) }}" class="{{ sort.endDatetime.class }}">{{ __('End datetime') }}</a>
+                <th id="hEndDate" scope="col" class="text-left">
+                    <a href="{{ sort.endDate.url }}" title="{{ __f('Sort by %s', {'%s': 'end date'}) }}" class="{{ sort.endDate.class }}">{{ __('End date') }}</a>
                 </th>
                 <th id="hViews" scope="col" class="text-right">
                     <a href="{{ sort.views.url }}" title="{{ __f('Sort by %s', {'%s': 'views'}) }}" class="{{ sort.views.class }}">{{ __('Views') }}</a>
@@ -114,8 +114,8 @@
                 <td headers="hStartDate" class="text-left">
                     {{ article.startDate|localizeddate('medium', 'short') }}
                 </td>
-                <td headers="hEndDatetime" class="text-left">
-                    {{ article.endDatetime|localizeddate('medium', 'short') }}
+                <td headers="hEndDate" class="text-left">
+                    {{ article.endDate|localizeddate('medium', 'short') }}
                 </td>
                 <td headers="hViews" class="text-right">
                     {{ article.views }}

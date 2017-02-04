@@ -68,7 +68,7 @@ abstract class AbstractArticleRepository extends EntityRepository
             'title',
             'displayOnIndex',
             'startDate',
-            'endDatetime',
+            'endDate',
             'views',
             'createdBy',
             'createdDate',
@@ -690,8 +690,8 @@ abstract class AbstractArticleRepository extends EntityRepository
         $startDate = null !== $this->getRequest() ? $this->getRequest()->query->get('startDate', date('Y-m-d H:i:s')) : date('Y-m-d H:i:s');
         $qb->andWhere('(tbl.startDate <= :startDate OR tbl.startDate IS NULL)')
            ->setParameter('startDate', $startDate);
-        $endDate = null !== $this->getRequest() ? $this->getRequest()->query->get('endDatetime', date('Y-m-d H:i:s')) : date('Y-m-d H:i:s');
-        $qb->andWhere('(tbl.endDatetime >= :endDate OR tbl.endDatetime IS NULL)')
+        $endDate = null !== $this->getRequest() ? $this->getRequest()->query->get('endDate', date('Y-m-d H:i:s')) : date('Y-m-d H:i:s');
+        $qb->andWhere('(tbl.endDate >= :endDate OR tbl.endDate IS NULL)')
            ->setParameter('endDate', $endDate);
     
         return $qb;
@@ -759,7 +759,7 @@ abstract class AbstractArticleRepository extends EntityRepository
             $where .= ((!empty($where)) ? ' OR ' : '');
             $where .= 'tbl.startDate = \'' . $fragment . '\'';
             $where .= ((!empty($where)) ? ' OR ' : '');
-            $where .= 'tbl.endDatetime = \'' . $fragment . '\'';
+            $where .= 'tbl.endDate = \'' . $fragment . '\'';
         } else {
             $where .= ((!empty($where)) ? ' OR ' : '');
             $where .= 'tbl.workflowState = \'' . $fragment . '\'';
@@ -778,7 +778,7 @@ abstract class AbstractArticleRepository extends EntityRepository
             $where .= ((!empty($where)) ? ' OR ' : '');
             $where .= 'tbl.startDate = \'' . $fragment . '\'';
             $where .= ((!empty($where)) ? ' OR ' : '');
-            $where .= 'tbl.endDatetime = \'' . $fragment . '\'';
+            $where .= 'tbl.endDate = \'' . $fragment . '\'';
             $where .= ((!empty($where)) ? ' OR ' : '');
             $where .= 'tbl.views = \'' . $fragment . '\'';
         }
@@ -962,7 +962,7 @@ abstract class AbstractArticleRepository extends EntityRepository
                 // If no plugin with default = true given the compare plugin is loaded and used for unconfigured fields.
                 // Multiple objects of the same plugin with different configurations are possible.
                 [
-                    new DateFilter(['startDate', 'endDatetime'/*, 'tblJoin.someJoinedField'*/])
+                    new DateFilter(['startDate', 'endDate'/*, 'tblJoin.someJoinedField'*/])
                 ],
     
                 // Allowed operators per field.
@@ -1137,7 +1137,7 @@ abstract class AbstractArticleRepository extends EntityRepository
         $qb->andWhere('tbl.workflowState = :approvedState')
            ->setParameter('approvedState', 'approved');
     
-        $qb->andWhere('tbl.endDatetime < :today')
+        $qb->andWhere('tbl.endDate < :today')
            ->setParameter('today', $today);
     
         $query = $this->getQueryFromBuilder($qb);

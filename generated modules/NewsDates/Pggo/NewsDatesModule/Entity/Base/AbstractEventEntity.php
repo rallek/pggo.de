@@ -83,12 +83,20 @@ abstract class AbstractEventEntity extends EntityAccess
     protected $title = '';
     
     /**
-     * @ORM\Column(type="datetime")
-     * @Assert\NotNull()
-     * @Assert\DateTime()
-     * @var DateTime $startDate
+     * @ORM\Column(type="date")
+     * @Assert\NotBlank()
+     * @Assert\Date()
+     * @var date $startDate
      */
     protected $startDate;
+    
+    /**
+     * @ORM\Column(type="time")
+     * @Assert\NotNull()
+     * @Assert\Time()
+     * @var time $startTime
+     */
+    protected $startTime;
     
     /**
      * @ORM\Column(length=255)
@@ -152,7 +160,8 @@ abstract class AbstractEventEntity extends EntityAccess
      */
     public function __construct()
     {
-        $this->startDate = \DateTime::createFromFormat('Y-m-d H:i:s', date('Y-m-d H:i:s'));
+        $this->startDate = \DateTime::createFromFormat('Y-m-d', date('Y-m-d'));
+        $this->startTime = \DateTime::createFromFormat('H:i:s', date('H:i:s'));
         $this->initWorkflow();
         $this->categories = new ArrayCollection();
     }
@@ -271,7 +280,7 @@ abstract class AbstractEventEntity extends EntityAccess
     /**
      * Returns the start date.
      *
-     * @return DateTime
+     * @return date
      */
     public function getStartDate()
     {
@@ -281,7 +290,7 @@ abstract class AbstractEventEntity extends EntityAccess
     /**
      * Sets the start date.
      *
-     * @param DateTime $startDate
+     * @param date $startDate
      *
      * @return void
      */
@@ -291,6 +300,32 @@ abstract class AbstractEventEntity extends EntityAccess
             $this->startDate = $startDate;
         } else {
             $this->startDate = new \DateTime($startDate);
+        }
+    }
+    
+    /**
+     * Returns the start time.
+     *
+     * @return time
+     */
+    public function getStartTime()
+    {
+        return $this->startTime;
+    }
+    
+    /**
+     * Sets the start time.
+     *
+     * @param time $startTime
+     *
+     * @return void
+     */
+    public function setStartTime($startTime)
+    {
+        if (is_object($startTime) && $startTime instanceOf \DateTime) {
+            $this->startTime = $startTime;
+        } else {
+            $this->startTime = new \DateTime($startTime);
         }
     }
     
@@ -473,7 +508,9 @@ abstract class AbstractEventEntity extends EntityAccess
         $formattedTitle = ''
                 . $this->getTitle()
                 . ' '
-                . \DateUtil::formatDatetime($this->getStartDate(), 'datetimebrief')
+                . \DateUtil::formatDatetime($this->getStartDate(), 'datebrief')
+                . ' '
+                . \DateUtil::formatDatetime($this->getStartTime(), 'timebrief')
                 . ' '
                 . $this->getLocation();
     
@@ -500,6 +537,7 @@ abstract class AbstractEventEntity extends EntityAccess
     
         return $allowedValues;
     }
+    
     
     
     /**

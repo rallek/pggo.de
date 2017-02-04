@@ -204,12 +204,12 @@ abstract class AbstractArticleType extends AbstractType
             'widget' => 'single_text'
         ]);
         
-        $builder->add('endDatetime', 'Pggo\NewsDatesModule\Form\Type\Field\DateTimeType', [
-            'label' => $this->__('End datetime') . ':',
+        $builder->add('endDate', 'Pggo\NewsDatesModule\Form\Type\Field\DateTimeType', [
+            'label' => $this->__('End date') . ':',
             'empty_data' => '2099-12-31 00:00:00',
             'attr' => [
                 'class' => ' validate-daterange-article',
-                'title' => $this->__('Enter the end datetime of the article')
+                'title' => $this->__('Enter the end date of the article')
             ],'empty_data' => '2099-12-31 00:00:00',
             'required' => false,
             'widget' => 'single_text'
@@ -394,7 +394,7 @@ abstract class AbstractArticleType extends AbstractType
                 },
                 'error_mapping' => [
                     'image' => 'image.image',
-                    'isStartDateBeforeEndDatetime' => 'startDate',
+                    'isStartDateBeforeEndDate' => 'startDate',
                 ],
                 'mode' => 'create',
                 'isModerator' => false,

@@ -76,9 +76,9 @@
             <dt>{{ __('Start date') }}</dt>
             <dd>{{ article.startDate|localizeddate('medium', 'short') }}</dd>
         {% endif %}
-        {% if article.endDatetime is not empty %}
-            <dt>{{ __('End datetime') }}</dt>
-            <dd>{{ article.endDatetime|localizeddate('medium', 'short') }}</dd>
+        {% if article.endDate is not empty %}
+            <dt>{{ __('End date') }}</dt>
+            <dd>{{ article.endDate|localizeddate('medium', 'short') }}</dd>
         {% endif %}
         {% if article.views is not empty %}
             <dt>{{ __('Views') }}</dt>

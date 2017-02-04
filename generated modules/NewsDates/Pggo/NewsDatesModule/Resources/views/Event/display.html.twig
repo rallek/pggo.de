@@ -24,7 +24,11 @@
         {% endif %}
         {% if event.startDate is not empty %}
             <dt>{{ __('Start date') }}</dt>
-            <dd>{{ event.startDate|localizeddate('medium', 'short') }}</dd>
+            <dd>{{ event.startDate|localizeddate('medium', 'none') }}</dd>
+        {% endif %}
+        {% if event.startTime is not empty %}
+            <dt>{{ __('Start time') }}</dt>
+            <dd>{{ event.startTime|localizeddate('none', 'short') }}</dd>
         {% endif %}
         {% if event.duration is not empty %}
             <dt>{{ __('Duration') }}</dt>

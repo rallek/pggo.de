@@ -51,6 +51,7 @@
     <select id="{$baseID}Sort" name="sort" class="form-control"{$rightSide}>
         <option value="title"{if $sort eq 'title'} selected="selected"{/if}>{gt text='Title'}</option>
         <option value="startDate"{if $sort eq 'startDate'} selected="selected"{/if}>{gt text='Start date'}</option>
+        <option value="startTime"{if $sort eq 'startTime'} selected="selected"{/if}>{gt text='Start time'}</option>
         <option value="location"{if $sort eq 'location'} selected="selected"{/if}>{gt text='Location'}</option>
         <option value="eventUrl"{if $sort eq 'eventUrl'} selected="selected"{/if}>{gt text='Event url'}</option>
         <option value="createdDate"{if $sort eq 'createdDate'} selected="selected"{/if}>{gt text='Creation date'}</option>

@@ -36,7 +36,7 @@
                     {{ form_row(form.notes) }}
                     {{ form_row(form.displayOnIndex) }}
                     {{ form_row(form.startDate) }}
-                    {{ form_row(form.endDatetime) }}
+                    {{ form_row(form.endDate) }}
                     {{ form_row(form.views) }}
                 </fieldset>
             </div>
@@ -124,7 +124,7 @@
                 pggoNewsDatesInitEditForm('{{ mode }}', '{% if mode != 'create' %}{{ article.id }}{% endif %}');
                 pggoNewsDatesInitUploadField('pggonewsdatesmodule_article_image_image');
                 pggoNewsDatesInitDateField('pggonewsdatesmodule_article_startDate');
-                pggoNewsDatesInitDateField('pggonewsdatesmodule_article_endDatetime');
+                pggoNewsDatesInitDateField('pggonewsdatesmodule_article_endDate');
             });
         })(jQuery);
     /* ]]> */

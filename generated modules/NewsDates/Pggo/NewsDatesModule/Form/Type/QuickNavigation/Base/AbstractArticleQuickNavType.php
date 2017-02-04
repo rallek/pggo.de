@@ -182,7 +182,7 @@ abstract class AbstractArticleQuickNavType extends AbstractType
                     $this->__('Title') => 'title',
                     $this->__('Display on index') => 'displayOnIndex',
                     $this->__('Start date') => 'startDate',
-                    $this->__('End datetime') => 'endDatetime',
+                    $this->__('End date') => 'endDate',
                     $this->__('Views') => 'views',
                     $this->__('Creation date') => 'createdDate',
                     $this->__('Creator') => 'createdBy',
