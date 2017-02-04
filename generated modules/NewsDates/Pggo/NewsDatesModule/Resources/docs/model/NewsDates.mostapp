@@ -171,10 +171,10 @@ application "NewsDates" {
             orderBy ""
         },
         one2many bidirectional {
-            source "event"
-            sourceAlias "event"
-            target "article"
-            targetAlias "articles"
+            source "article"
+            sourceAlias "article"
+            target "event"
+            targetAlias "events"
         }
     }
     }

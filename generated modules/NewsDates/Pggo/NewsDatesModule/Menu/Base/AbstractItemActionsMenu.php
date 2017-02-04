@@ -124,6 +124,13 @@ class AbstractItemActionsMenu implements ContainerAwareInterface
                     'routeParameters' => ['article' => $entity['id']]
                 ])->setAttribute('icon', 'fa fa-plus');
                 $menu[$title]->setLinkAttribute('title', $title);
+            
+                $title = $this->__('Create event');
+                $menu->addChild($title, [
+                    'route' => 'pggonewsdatesmodule_event_' . $routeArea . 'edit',
+                    'routeParameters' => ['article' => $entity['id']]
+                ])->setAttribute('icon', 'fa fa-plus');
+                $menu[$title]->setLinkAttribute('title', $title);
             }
         }
         if ($entity instanceof PictureEntity) {
@@ -196,19 +203,6 @@ class AbstractItemActionsMenu implements ContainerAwareInterface
                 $menu->addChild($title, [
                     'route' => $routePrefix . $routeArea . 'view'
                 ])->setAttribute('icon', 'fa fa-reply');
-                $menu[$title]->setLinkAttribute('title', $title);
-            }
-            
-            // more actions for adding new related items
-            $authAdmin = $permissionApi->hasPermission($component, $instance, ACCESS_ADMIN);
-            
-            if ($isOwner || $authAdmin) {
-            
-                $title = $this->__('Create article');
-                $menu->addChild($title, [
-                    'route' => 'pggonewsdatesmodule_article_' . $routeArea . 'edit',
-                    'routeParameters' => ['event' => $entity['id']]
-                ])->setAttribute('icon', 'fa fa-plus');
                 $menu[$title]->setLinkAttribute('title', $title);
             }
         }

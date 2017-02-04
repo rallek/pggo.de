@@ -29,7 +29,6 @@
                 <col id="cStartDate" />
                 <col id="cEndDatetime" />
                 <col id="cViews" />
-                <col id="cEvent" />
                 <col id="cItemActions" />
             </colgroup>
             <thead>
@@ -64,9 +63,6 @@
                 </th>
                 <th id="hViews" scope="col" class="text-right">
                     <a href="{{ sort.views.url }}" title="{{ __f('Sort by %s', {'%s': 'views'}) }}" class="{{ sort.views.class }}">{{ __('Views') }}</a>
-                </th>
-                <th id="hEvent" scope="col" class="text-left">
-                    <a href="{{ sort.event.url }}" title="{{ __f('Sort by %s', {'%s': 'event'}) }}" class="{{ sort.event.class }}">{{ __('Event') }}</a>
                 </th>
                 <th id="hItemActions" scope="col" class="text-right z-order-unsorted">{{ __('Actions') }}</th>
             </tr>
@@ -124,16 +120,6 @@
                 <td headers="hViews" class="text-right">
                     {{ article.views }}
                 </td>
-                <td headers="hEvent" class="text-left">
-                    {% if article.event|default %}
-                        <a href="{{ path('pggonewsdatesmodule_event_' ~ routeArea ~ 'display', { 'id': article.event.id, 'slug': article.event.slug }) }}">{% spaceless %}
-                          {{ article.event.getTitleFromDisplayPattern() }}
-                        {% endspaceless %}</a>
-                        <a id="eventItem{{ article.id }}_rel_{{ article.event.id }}Display" href="{{ path('pggonewsdatesmodule_event_' ~ routeArea ~ 'display', {'id': article.event.id, 'slug': article.event.slug, 'raw': 1 }) }}" title="{{ __('Open quick view window')|e('html_attr') }}" class="pggonewsdates-inline-window hidden" data-modal-title="{{ article.event.getTitleFromDisplayPattern()|e('html_attr') }}"><span class="fa fa-id-card-o"></span></a>
-                    {% else %}
-                        {{ __('Not set.') }}
-                    {% endif %}
-                </td>
                 <td id="itemActions{{ article.id }}" headers="hItemActions" class="actions text-right nowrap z-w02">
                     {% set itemActions = knp_menu_get('PggoNewsDatesModule:ItemActionsMenu:menu', [], { entity: article, area: routeArea, context: 'view' }) %}
                     <div class="dropdown">
@@ -144,7 +130,7 @@
             </tr>
         {% else %}
             <tr class="z-{{ routeArea == 'admin' ? 'admin' : 'data' }}tableempty">
-                <td class="text-left" colspan="{% if routeArea == 'admin' %}11{% else %}10{% endif %}">
+                <td class="text-left" colspan="{% if routeArea == 'admin' %}10{% else %}9{% endif %}">
             {{ __('No articles found.') }}
               </td>
             </tr>

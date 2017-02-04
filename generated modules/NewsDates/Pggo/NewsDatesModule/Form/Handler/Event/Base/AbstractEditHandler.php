@@ -64,6 +64,28 @@ abstract class AbstractEditHandler extends EditHandler
     }
     
     /**
+     * Initialises relationship presets.
+     */
+    protected function initRelationPresets()
+    {
+        $entity = $this->entityRef;
+    
+        
+        // assign identifiers of predefined incoming relationships
+        // editable relation, we store the id and assign it now to show it in UI
+        $this->relationPresets['article'] = $this->request->get('article', '');
+        if (!empty($this->relationPresets['article'])) {
+            $relObj = $this->selectionHelper->getEntity('article', $this->relationPresets['article']);
+            if (null !== $relObj) {
+                $relObj->addEvents($entity);
+            }
+        }
+    
+        // save entity reference for later reuse
+        $this->entityRef = $entity;
+    }
+    
+    /**
      * Creates the form type.
      */
     protected function createForm()
@@ -105,6 +127,18 @@ abstract class AbstractEditHandler extends EditHandler
         // admin detail page of treated event
         $codes[] = 'adminDisplay';
     
+        // user list of articles
+        $codes[] = 'userViewArticles';
+        // admin list of articles
+        $codes[] = 'adminViewArticles';
+        // user list of own articles
+        $codes[] = 'userOwnViewArticles';
+        // admin list of own articles
+        $codes[] = 'adminOwnViewArticles';
+        // user detail page of related article
+        $codes[] = 'userDisplayArticle';
+        // admin detail page of related article
+        $codes[] = 'adminDisplayArticle';
     
         return $codes;
     }
@@ -287,6 +321,19 @@ abstract class AbstractEditHandler extends EditHandler
                     }
     
                     return $this->router->generate($routePrefix . 'display', $urlArgs);
+                }
+    
+                return $this->getDefaultReturnUrl($args);
+            case 'userViewArticles':
+            case 'adminViewArticles':
+                return $this->router->generate('pggonewsdatesmodule_article_' . $routeArea . 'view');
+            case 'userOwnViewArticles':
+            case 'adminOwnViewArticles':
+                return $this->router->generate('pggonewsdatesmodule_article_' . $routeArea . 'view', [ 'own' => 1 ]);
+            case 'userDisplayArticle':
+            case 'adminDisplayArticle':
+                if (!empty($this->relationPresets['article'])) {
+                    return $this->router->generate('pggonewsdatesmodule_article_' . $routeArea . 'display',  ['id' => $this->relationPresets['article']]);
                 }
     
                 return $this->getDefaultReturnUrl($args);

@@ -16,10 +16,6 @@
     {% set isQuickView = app.request.query.getBoolean('raw', false) %}
     <div class="pggonewsdatesmodule-event pggonewsdatesmodule-display">
 
-    {% if not isQuickView %}
-        <div class="row">
-            <div class="col-sm-9">
-    {% endif %}
 
     <dl>
         {% if event.title is not empty %}
@@ -53,6 +49,19 @@
             {% else %}&nbsp;{% endif %}
             </dd>
         {% endif %}
+        {% if event.article|default %}
+            <dt>{{ __('Article') }}</dt>
+            <dd>
+              {% if not isQuickView %}
+                  <a href="{{ path('pggonewsdatesmodule_article_' ~ routeArea ~ 'display', { 'id': event.article.id, 'slug': event.article.slug }) }}">{% spaceless %}
+                    {{ event.article.getTitleFromDisplayPattern() }}
+                  {% endspaceless %}</a>
+                  <a id="articleItem{{ event.article.id }}Display" href="{{ path('pggonewsdatesmodule_article_' ~ routeArea ~ 'display', { 'id': event.article.id, 'slug': event.article.slug, 'raw': 1 }) }}" title="{{ __('Open quick view window')|e('html_attr') }}" class="pggonewsdates-inline-window hidden" data-modal-title="{{ event.article.getTitleFromDisplayPattern()|e('html_attr') }}"><span class="fa fa-id-card-o"></span></a>
+              {% else %}
+                  {{ event.article.getTitleFromDisplayPattern() }}
+              {% endif %}
+            </dd>
+        {% endif %}
         
     </dl>
     {% if featureActivationHelper.isEnabled(constant('Pggo\\NewsDatesModule\\Helper\\FeatureActivationHelper::CATEGORIES'), 'event') %}
@@ -63,36 +72,8 @@
     {% if not isQuickView %}
         {# include display hooks #}
         {{ block('display_hooks') }}
-            </div>
-            <div class="col-sm-3">
-                {{ block('related_items') }}
-            </div>
-        </div>
     {% endif %}
 </div>
-{% endblock %}
-{% block related_items %}
-    {% if routeArea == 'admin' %}
-        <h4>{{ __('Articles') }}</h4>
-    {% else %}
-        <h3>{{ __('Articles') }}</h3>
-    {% endif %}
-    
-    {% if event.articles|default %}
-        {{ include(
-            '@PggoNewsDatesModule/Article/includeDisplayItemListMany.html.twig',
-            { items: event.articles }
-        ) }}
-    {% endif %}
-    
-    {% set permLevel = routeArea == 'admin' ? 'ACCESS_ADMIN' : 'ACCESS_EDIT' %}
-    {% set mayManage = hasPermission('PggoNewsDatesModule:Event:', event.id ~ '::', permLevel) %}
-    {% if mayManage %}
-        <p class="managelink">
-            {% set createTitle = __('Create article') %}
-            <a href="{{ path('pggonewsdatesmodule_article_' ~ routeArea ~ 'edit', { event: event.id }) }}" title="{{ createTitle|e('html_attr') }}" class="fa fa-plus">{{ createTitle }}</a>
-        </p>
-    {% endif %}
 {% endblock %}
 {% block display_hooks %}
     {% set hooks = notifyDisplayHooks(eventName='pggonewsdatesmodule.ui_hooks.events.display_view', id=event.id, urlObject=currentUrlObject) %}

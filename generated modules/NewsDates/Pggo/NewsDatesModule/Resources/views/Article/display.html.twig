@@ -84,19 +84,6 @@
             <dt>{{ __('Views') }}</dt>
             <dd>{{ article.views }}</dd>
         {% endif %}
-        {% if article.event|default %}
-            <dt>{{ __('Event') }}</dt>
-            <dd>
-              {% if not isQuickView %}
-                  <a href="{{ path('pggonewsdatesmodule_event_' ~ routeArea ~ 'display', { 'id': article.event.id, 'slug': article.event.slug }) }}">{% spaceless %}
-                    {{ article.event.getTitleFromDisplayPattern() }}
-                  {% endspaceless %}</a>
-                  <a id="eventItem{{ article.event.id }}Display" href="{{ path('pggonewsdatesmodule_event_' ~ routeArea ~ 'display', { 'id': article.event.id, 'slug': article.event.slug, 'raw': 1 }) }}" title="{{ __('Open quick view window')|e('html_attr') }}" class="pggonewsdates-inline-window hidden" data-modal-title="{{ article.event.getTitleFromDisplayPattern()|e('html_attr') }}"><span class="fa fa-id-card-o"></span></a>
-              {% else %}
-                  {{ article.event.getTitleFromDisplayPattern() }}
-              {% endif %}
-            </dd>
-        {% endif %}
         
     </dl>
     {% if featureActivationHelper.isEnabled(constant('Pggo\\NewsDatesModule\\Helper\\FeatureActivationHelper::CATEGORIES'), 'article') %}
@@ -135,6 +122,27 @@
         <p class="managelink">
             {% set createTitle = __('Create picture') %}
             <a href="{{ path('pggonewsdatesmodule_picture_' ~ routeArea ~ 'edit', { article: article.id }) }}" title="{{ createTitle|e('html_attr') }}" class="fa fa-plus">{{ createTitle }}</a>
+        </p>
+    {% endif %}
+    {% if routeArea == 'admin' %}
+        <h4>{{ __('Events') }}</h4>
+    {% else %}
+        <h3>{{ __('Events') }}</h3>
+    {% endif %}
+    
+    {% if article.events|default %}
+        {{ include(
+            '@PggoNewsDatesModule/Event/includeDisplayItemListMany.html.twig',
+            { items: article.events }
+        ) }}
+    {% endif %}
+    
+    {% set permLevel = routeArea == 'admin' ? 'ACCESS_ADMIN' : 'ACCESS_COMMENT' %}
+    {% set mayManage = hasPermission('PggoNewsDatesModule:Article:', article.id ~ '::', permLevel) %}
+    {% if mayManage %}
+        <p class="managelink">
+            {% set createTitle = __('Create event') %}
+            <a href="{{ path('pggonewsdatesmodule_event_' ~ routeArea ~ 'edit', { article: article.id }) }}" title="{{ createTitle|e('html_attr') }}" class="fa fa-plus">{{ createTitle }}</a>
         </p>
     {% endif %}
 {% endblock %}

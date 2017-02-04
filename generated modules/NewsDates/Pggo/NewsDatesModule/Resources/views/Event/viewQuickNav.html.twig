@@ -15,6 +15,13 @@
         {% if (categoryFilter is defined and categoryFilter != true) or not categoriesEnabled %}
             </div>
         {% endif %}
+        {% if articleFilter is defined and articleFilter != true %}
+            <div class="hidden">
+        {% endif %}
+            {{ form_row(quickNavForm.article) }}
+        {% if articleFilter is defined and articleFilter != true %}
+            </div>
+        {% endif %}
         {% if workflowStateFilter is defined and workflowStateFilter != true %}
             <div class="hidden">
         {% endif %}

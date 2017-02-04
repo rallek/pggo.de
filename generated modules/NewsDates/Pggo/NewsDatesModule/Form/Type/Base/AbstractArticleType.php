@@ -83,7 +83,7 @@ abstract class AbstractArticleType extends AbstractType
         if ($this->featureActivationHelper->isEnabled(FeatureActivationHelper::CATEGORIES, 'article')) {
             $this->addCategoriesField($builder, $options);
         }
-        $this->addIncomingRelationshipFields($builder, $options);
+        $this->addOutgoingRelationshipFields($builder, $options);
         $this->addAdditionalNotificationRemarksField($builder, $options);
         $this->addModerationFields($builder, $options);
         $this->addReturnControlField($builder, $options);
@@ -253,26 +253,26 @@ abstract class AbstractArticleType extends AbstractType
     }
 
     /**
-     * Adds fields for incoming relationships.
+     * Adds fields for outgoing relationships.
      *
      * @param FormBuilderInterface $builder The form builder
      * @param array                $options The options
      */
-    public function addIncomingRelationshipFields(FormBuilderInterface $builder, array $options)
+    public function addOutgoingRelationshipFields(FormBuilderInterface $builder, array $options)
     {
         $queryBuilder = function(EntityRepository $er) {
             // select without joins
             return $er->getListQueryBuilder('', '', false);
         };
-        $builder->add('event', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
+        $builder->add('events', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
             'class' => 'PggoNewsDatesModule:EventEntity',
             'choice_label' => 'getTitleFromDisplayPattern',
-            'multiple' => false,
+            'multiple' => true,
             'expanded' => false,
             'query_builder' => $queryBuilder,
-            'label' => $this->__('Event'),
+            'label' => $this->__('Events'),
             'attr' => [
-                'title' => $this->__('Choose the event')
+                'title' => $this->__('Choose the events')
             ]
         ]);
     }

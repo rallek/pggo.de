@@ -219,6 +219,7 @@ abstract class AbstractEventRepository extends EntityRepository
         $parameters = [];
         $categoryHelper = ServiceUtil::get('pggo_newsdates_module.category_helper');
         $parameters['catIdList'] = $categoryHelper->retrieveCategoriesFromRequest('event', 'GET');
+        $parameters['article'] = $this->getRequest()->query->get('article', 0);
         $parameters['workflowState'] = $this->getRequest()->query->get('workflowState', '');
         $parameters['q'] = $this->getRequest()->query->get('q', '');
         
@@ -1031,7 +1032,7 @@ abstract class AbstractEventRepository extends EntityRepository
      */
     protected function addJoinsToSelection()
     {
-        $selection = ', tblArticles';
+        $selection = ', tblArticle';
     
         $selection = ', tblCategories';
     
@@ -1047,7 +1048,7 @@ abstract class AbstractEventRepository extends EntityRepository
      */
     protected function addJoinsToFrom(QueryBuilder $qb)
     {
-        $qb->leftJoin('tbl.articles', 'tblArticles');
+        $qb->leftJoin('tbl.article', 'tblArticle');
     
         $qb->leftJoin('tbl.categories', 'tblCategories');
     

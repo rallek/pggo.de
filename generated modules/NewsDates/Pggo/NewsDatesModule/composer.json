@@ -42,10 +42,10 @@
                 "PggoNewsDatesModule:ItemListBlock:": "Block title::",
                 "PggoNewsDatesModule:ModerationBlock:": "Block title::",
                 "PggoNewsDatesModule:Article:": "Article ID::",
-                "PggoNewsDatesModule:Event:Article": "Event ID:Article ID:",
                 "PggoNewsDatesModule:Picture:": "Picture ID::",
                 "PggoNewsDatesModule:Article:Picture": "Article ID:Picture ID:",
                 "PggoNewsDatesModule:Event:": "Event ID::",
+                "PggoNewsDatesModule:Article:Event": "Article ID:Event ID:",
                 "PggoNewsDatesModule::Ajax": "::"
             }
         }

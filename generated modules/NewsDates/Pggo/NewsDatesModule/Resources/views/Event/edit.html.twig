@@ -33,8 +33,8 @@
     {{ include('@PggoNewsDatesModule/Helper/includeCategoriesEdit.html.twig', { obj: event }) }}
 {% endif %}
 {{ include(
-    '@PggoNewsDatesModule/Article/Many.html.twig',
-    { group: 'event', alias: 'articles', aliasReverse: 'event', mandatory: false, idPrefix: 'newsdateEvent_Articles', linkingItem: event, displayMode: 'choices', allowEditing: true }
+    '@PggoNewsDatesModule/Article/includeSelectOne.html.twig',
+    { group: 'event', alias: 'article', aliasReverse: 'events', mandatory: false, idPrefix: 'newsdateEvent_Article', linkingItem: event, displayMode: 'choices', allowEditing: false }
 ) }}
 {% if mode != 'create' %}
     {{ include('@PggoNewsDatesModule/Helper/includeStandardFieldsEdit.html.twig', { obj: event }) }}

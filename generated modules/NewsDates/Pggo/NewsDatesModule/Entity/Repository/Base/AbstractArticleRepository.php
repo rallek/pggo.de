@@ -230,7 +230,6 @@ abstract class AbstractArticleRepository extends EntityRepository
         $parameters = [];
         $categoryHelper = ServiceUtil::get('pggo_newsdates_module.category_helper');
         $parameters['catIdList'] = $categoryHelper->retrieveCategoriesFromRequest('article', 'GET');
-        $parameters['event'] = $this->getRequest()->query->get('event', 0);
         $parameters['workflowState'] = $this->getRequest()->query->get('workflowState', '');
         $parameters['q'] = $this->getRequest()->query->get('q', '');
         
@@ -1080,7 +1079,7 @@ abstract class AbstractArticleRepository extends EntityRepository
      */
     protected function addJoinsToSelection()
     {
-        $selection = ', tblEvent, tblPictures';
+        $selection = ', tblPictures, tblEvents';
     
         $selection = ', tblCategories';
     
@@ -1096,8 +1095,8 @@ abstract class AbstractArticleRepository extends EntityRepository
      */
     protected function addJoinsToFrom(QueryBuilder $qb)
     {
-        $qb->leftJoin('tbl.event', 'tblEvent');
         $qb->leftJoin('tbl.pictures', 'tblPictures');
+        $qb->leftJoin('tbl.events', 'tblEvents');
     
         $qb->leftJoin('tbl.categories', 'tblCategories');
     

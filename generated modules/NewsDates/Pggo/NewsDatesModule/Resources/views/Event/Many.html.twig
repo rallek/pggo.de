@@ -1,4 +1,4 @@
-{# purpose of this template: inclusion template for managing related event #}
+{# purpose of this template: inclusion template for managing related events #}
 {% if displayMode is not defined or displayMode is empty %}
     {% set displayMode = 'choices' %}
 {% endif %}
@@ -8,14 +8,14 @@
 {% if panel|default(false) == true %}
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseEvent">{{ __('Event') }}</a></h3>
+            <h3 class="panel-title"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseEvents">{{ __('Events') }}</a></h3>
         </div>
-        <div id="collapseEvent" class="panel-collapse collapse in">
+        <div id="collapseEvents" class="panel-collapse collapse in">
             <div class="panel-body">
 {% else %}
-    <fieldset class="event">
+    <fieldset class="events">
 {% endif %}
-    <legend>{{ __('Event') }}</legend>
+    <legend>{{ __('Events') }}</legend>
     {% if displayMode == 'choices' %}
         {{ form_row(attribute(form, alias)) }}
     {% elseif displayMode == 'autocomplete' %}
@@ -24,11 +24,11 @@
             <div class="pggonewsdatesmodule-relation-leftside">
                 {% if attribute(linkingItem, alias) is defined %}
                     {{ include(
-                        'Event/includeSelectItemListOne.html.twig',
-                        { item: attribute(linkingItem, alias) }
+                        'Event/includeSelectEditItemListMany.html.twig',
+                        { items: attribute(linkingItem, alias) }
                     ) }}
                 {% else %}
-                    {{ include('Event/includeSelectItemListOne.html.twig') }}
+                    {{ include('Event/includeSelectEditItemListMany.html.twig') }}
                 {% endif %}
             </div>
             <br style="clear: both" />

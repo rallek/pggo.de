@@ -141,13 +141,14 @@ abstract class AbstractEventEntity extends EntityAccess
     protected $categories = null;
     
     /**
-     * Bidirectional - One event [event] has many articles [articles] (INVERSE SIDE).
+     * Bidirectional - Many events [events] are linked by one article [article] (OWNING SIDE).
      *
-     * @ORM\OneToMany(targetEntity="Pggo\NewsDatesModule\Entity\ArticleEntity", mappedBy="event")
-     * @ORM\JoinTable(name="pggo_newsdate_eventarticles")
-     * @var \Pggo\NewsDatesModule\Entity\ArticleEntity[] $articles
+     * @ORM\ManyToOne(targetEntity="Pggo\NewsDatesModule\Entity\ArticleEntity", inversedBy="events")
+     * @ORM\JoinTable(name="pggo_newsdate_article")
+     * @Assert\Type(type="Pggo\NewsDatesModule\Entity\ArticleEntity")
+     * @var \Pggo\NewsDatesModule\Entity\ArticleEntity $article
      */
-    protected $articles = null;
+    protected $article;
     
     
     /**
@@ -163,7 +164,6 @@ abstract class AbstractEventEntity extends EntityAccess
     {
         $this->startDate = \DateTime::createFromFormat('Y-m-d H:i:s', date('Y-m-d H:i:s'));
         $this->initWorkflow();
-        $this->articles = new ArrayCollection();
         $this->categories = new ArrayCollection();
     }
     
@@ -469,53 +469,25 @@ abstract class AbstractEventEntity extends EntityAccess
     }
     
     /**
-     * Returns the articles.
+     * Returns the article.
      *
-     * @return \Pggo\NewsDatesModule\Entity\ArticleEntity[]
+     * @return \Pggo\NewsDatesModule\Entity\ArticleEntity
      */
-    public function getArticles()
+    public function getArticle()
     {
-        return $this->articles;
+        return $this->article;
     }
     
     /**
-     * Sets the articles.
+     * Sets the article.
      *
-     * @param \Pggo\NewsDatesModule\Entity\ArticleEntity[] $articles
-     *
-     * @return void
-     */
-    public function setArticles($articles)
-    {
-        foreach ($articles as $articleSingle) {
-            $this->addArticles($articleSingle);
-        }
-    }
-    
-    /**
-     * Adds an instance of \Pggo\NewsDatesModule\Entity\ArticleEntity to the list of articles.
-     *
-     * @param \Pggo\NewsDatesModule\Entity\ArticleEntity $article The instance to be added to the collection
+     * @param \Pggo\NewsDatesModule\Entity\ArticleEntity $article
      *
      * @return void
      */
-    public function addArticles(\Pggo\NewsDatesModule\Entity\ArticleEntity $article)
+    public function setArticle($article = null)
     {
-        $this->articles->add($article);
-        $article->setEvent($this);
-    }
-    
-    /**
-     * Removes an instance of \Pggo\NewsDatesModule\Entity\ArticleEntity from the list of articles.
-     *
-     * @param \Pggo\NewsDatesModule\Entity\ArticleEntity $article The instance to be removed from the collection
-     *
-     * @return void
-     */
-    public function removeArticles(\Pggo\NewsDatesModule\Entity\ArticleEntity $article)
-    {
-        $this->articles->removeElement($article);
-        $article->setEvent(null);
+        $this->article = $article;
     }
     
     

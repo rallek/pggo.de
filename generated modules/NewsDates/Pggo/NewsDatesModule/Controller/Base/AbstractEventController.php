@@ -149,6 +149,7 @@ abstract class AbstractEventController extends AbstractController
             new Column('startDate'),
             new Column('location'),
             new Column('eventUrl'),
+            new Column('article'),
             new Column('createdBy'),
             new Column('createdDate'),
             new Column('updatedBy'),

@@ -198,16 +198,6 @@ abstract class AbstractArticleEntity extends EntityAccess
     protected $categories = null;
     
     /**
-     * Bidirectional - Many articles [articles] are linked by one event [event] (OWNING SIDE).
-     *
-     * @ORM\ManyToOne(targetEntity="Pggo\NewsDatesModule\Entity\EventEntity", inversedBy="articles")
-     * @ORM\JoinTable(name="pggo_newsdate_event")
-     * @Assert\Type(type="Pggo\NewsDatesModule\Entity\EventEntity")
-     * @var \Pggo\NewsDatesModule\Entity\EventEntity $event
-     */
-    protected $event;
-    
-    /**
      * Bidirectional - One article [article] has many pictures [pictures] (INVERSE SIDE).
      *
      * @ORM\OneToMany(targetEntity="Pggo\NewsDatesModule\Entity\PictureEntity", mappedBy="article", cascade={"all"})
@@ -215,6 +205,15 @@ abstract class AbstractArticleEntity extends EntityAccess
      * @var \Pggo\NewsDatesModule\Entity\PictureEntity[] $pictures
      */
     protected $pictures = null;
+    
+    /**
+     * Bidirectional - One article [article] has many events [events] (INVERSE SIDE).
+     *
+     * @ORM\OneToMany(targetEntity="Pggo\NewsDatesModule\Entity\EventEntity", mappedBy="article")
+     * @ORM\JoinTable(name="pggo_newsdate_articleevents")
+     * @var \Pggo\NewsDatesModule\Entity\EventEntity[] $events
+     */
+    protected $events = null;
     
     
     /**
@@ -233,6 +232,7 @@ abstract class AbstractArticleEntity extends EntityAccess
         $this->endDatetime = \DateTime::createFromFormat('Y-m-d H:i:s', '2099-12-31 00:00:00');
         $this->initWorkflow();
         $this->pictures = new ArrayCollection();
+        $this->events = new ArrayCollection();
         $this->categories = new ArrayCollection();
     }
     
@@ -676,28 +676,6 @@ abstract class AbstractArticleEntity extends EntityAccess
     }
     
     /**
-     * Returns the event.
-     *
-     * @return \Pggo\NewsDatesModule\Entity\EventEntity
-     */
-    public function getEvent()
-    {
-        return $this->event;
-    }
-    
-    /**
-     * Sets the event.
-     *
-     * @param \Pggo\NewsDatesModule\Entity\EventEntity $event
-     *
-     * @return void
-     */
-    public function setEvent($event = null)
-    {
-        $this->event = $event;
-    }
-    
-    /**
      * Returns the pictures.
      *
      * @return \Pggo\NewsDatesModule\Entity\PictureEntity[]
@@ -745,6 +723,56 @@ abstract class AbstractArticleEntity extends EntityAccess
     {
         $this->pictures->removeElement($picture);
         $picture->setArticle(null);
+    }
+    
+    /**
+     * Returns the events.
+     *
+     * @return \Pggo\NewsDatesModule\Entity\EventEntity[]
+     */
+    public function getEvents()
+    {
+        return $this->events;
+    }
+    
+    /**
+     * Sets the events.
+     *
+     * @param \Pggo\NewsDatesModule\Entity\EventEntity[] $events
+     *
+     * @return void
+     */
+    public function setEvents($events)
+    {
+        foreach ($events as $eventSingle) {
+            $this->addEvents($eventSingle);
+        }
+    }
+    
+    /**
+     * Adds an instance of \Pggo\NewsDatesModule\Entity\EventEntity to the list of events.
+     *
+     * @param \Pggo\NewsDatesModule\Entity\EventEntity $event The instance to be added to the collection
+     *
+     * @return void
+     */
+    public function addEvents(\Pggo\NewsDatesModule\Entity\EventEntity $event)
+    {
+        $this->events->add($event);
+        $event->setArticle($this);
+    }
+    
+    /**
+     * Removes an instance of \Pggo\NewsDatesModule\Entity\EventEntity from the list of events.
+     *
+     * @param \Pggo\NewsDatesModule\Entity\EventEntity $event The instance to be removed from the collection
+     *
+     * @return void
+     */
+    public function removeEvents(\Pggo\NewsDatesModule\Entity\EventEntity $event)
+    {
+        $this->events->removeElement($event);
+        $event->setArticle(null);
     }
     
     

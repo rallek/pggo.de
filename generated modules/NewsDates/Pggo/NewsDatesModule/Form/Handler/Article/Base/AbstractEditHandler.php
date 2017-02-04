@@ -64,28 +64,6 @@ abstract class AbstractEditHandler extends EditHandler
     }
     
     /**
-     * Initialises relationship presets.
-     */
-    protected function initRelationPresets()
-    {
-        $entity = $this->entityRef;
-    
-        
-        // assign identifiers of predefined incoming relationships
-        // editable relation, we store the id and assign it now to show it in UI
-        $this->relationPresets['event'] = $this->request->get('event', '');
-        if (!empty($this->relationPresets['event'])) {
-            $relObj = $this->selectionHelper->getEntity('event', $this->relationPresets['event']);
-            if (null !== $relObj) {
-                $relObj->addArticles($entity);
-            }
-        }
-    
-        // save entity reference for later reuse
-        $this->entityRef = $entity;
-    }
-    
-    /**
      * Creates the form type.
      */
     protected function createForm()
@@ -131,18 +109,6 @@ abstract class AbstractEditHandler extends EditHandler
         // admin detail page of treated article
         $codes[] = 'adminDisplay';
     
-        // user list of events
-        $codes[] = 'userViewEvents';
-        // admin list of events
-        $codes[] = 'adminViewEvents';
-        // user list of own events
-        $codes[] = 'userOwnViewEvents';
-        // admin list of own events
-        $codes[] = 'adminOwnViewEvents';
-        // user detail page of related event
-        $codes[] = 'userDisplayEvent';
-        // admin detail page of related event
-        $codes[] = 'adminDisplayEvent';
     
         return $codes;
     }
@@ -325,19 +291,6 @@ abstract class AbstractEditHandler extends EditHandler
                     }
     
                     return $this->router->generate($routePrefix . 'display', $urlArgs);
-                }
-    
-                return $this->getDefaultReturnUrl($args);
-            case 'userViewEvents':
-            case 'adminViewEvents':
-                return $this->router->generate('pggonewsdatesmodule_event_' . $routeArea . 'view');
-            case 'userOwnViewEvents':
-            case 'adminOwnViewEvents':
-                return $this->router->generate('pggonewsdatesmodule_event_' . $routeArea . 'view', [ 'own' => 1 ]);
-            case 'userDisplayEvent':
-            case 'adminDisplayEvent':
-                if (!empty($this->relationPresets['event'])) {
-                    return $this->router->generate('pggonewsdatesmodule_event_' . $routeArea . 'display',  ['id' => $this->relationPresets['event']]);
                 }
     
                 return $this->getDefaultReturnUrl($args);

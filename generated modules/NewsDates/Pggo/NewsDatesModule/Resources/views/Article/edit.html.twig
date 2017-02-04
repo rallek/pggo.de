@@ -19,73 +19,91 @@
 ] %}
 {{ form_start(form, {attr: {id: 'articleEditForm', class: 'pggonewsdates-edit-form'}}) }}
 {{ form_errors(form) }}
-<fieldset>
-    <legend>{{ __('Content') }}</legend>
-    {{ form_row(form.title) }}
-    {{ form_row(form.teaser) }}
-    {{ form_row(form.bodyText) }}
-    {{ form_row(form.image) }}
-    {{ form_row(form.copyright) }}
-    {{ form_row(form.notes) }}
-    {{ form_row(form.displayOnIndex) }}
-    {{ form_row(form.startDate) }}
-    {{ form_row(form.endDatetime) }}
-    {{ form_row(form.views) }}
-</fieldset>
-
-{% if featureActivationHelper.isEnabled(constant('Pggo\\NewsDatesModule\\Helper\\FeatureActivationHelper::CATEGORIES'), 'article') %}
-    {{ include('@PggoNewsDatesModule/Helper/includeCategoriesEdit.html.twig', { obj: article }) }}
-{% endif %}
-{{ include(
-    '@PggoNewsDatesModule/Event/includeSelectOne.html.twig',
-    { group: 'article', alias: 'event', aliasReverse: 'articles', mandatory: false, idPrefix: 'newsdateArticle_Event', linkingItem: article, displayMode: 'choices', allowEditing: false }
-) }}
-{% if mode != 'create' %}
-    {{ include('@PggoNewsDatesModule/Helper/includeStandardFieldsEdit.html.twig', { obj: article }) }}
-{% endif %}
-
-{# include display hooks #}
-{% set hookId = mode != 'create' ? article.id : null %}
-{% set hooks = notifyDisplayHooks(eventName='pggonewsdatesmodule.ui_hooks.articles.form_edit', id=hookId) %}
-{% if hooks is iterable and hooks|length > 0 %}
-    {% for providerArea, hook in hooks if providerArea != 'provider.scribite.ui_hooks.editor' %}
-        <fieldset>
-            {{ hook }}
-        </fieldset>
-    {% endfor %}
-{% endif %}
-
-<fieldset>
-    <legend>{{ __('Communication') }}</legend>
-    {{ form_row(form.additionalNotificationRemarks) }}
-</fieldset>
-
-{% if form.moderationSpecificCreator is defined %}
-    <fieldset id="moderationFieldsSection">
-        <legend>{{ __('Moderation') }} <i class="fa fa-expand"></i></legend>
-        <div id="moderationFieldsContent">
-            {{ form_row(form.moderationSpecificCreator) }}
-            {{ form_row(form.moderationSpecificCreationDate) }}
+<div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseFields">{{ __('Fields') }}</a></h3>
         </div>
-    </fieldset>
-{% endif %}
-
-{# include return control #}
-{% if mode == 'create' %}
-    <fieldset>
-        <legend>{{ __('Return control') }}</legend>
-        {{ form_row(form.repeatCreation) }}
-    </fieldset>
-{% endif %}
-
-{# include possible submit actions #}
-<div class="form-group form-buttons">
-    <div class="col-sm-offset-3 col-sm-9">
-        {% for action in actions %}
-            {{ form_widget(attribute(form, action.id)) }}
+        <div id="collapseFields" class="panel-collapse collapse in">
+            <div class="panel-body">
+                <fieldset>
+                    <legend>{{ __('Content') }}</legend>
+                    {{ form_row(form.title) }}
+                    {{ form_row(form.teaser) }}
+                    {{ form_row(form.bodyText) }}
+                    {{ form_row(form.image) }}
+                    {{ form_row(form.copyright) }}
+                    {{ form_row(form.notes) }}
+                    {{ form_row(form.displayOnIndex) }}
+                    {{ form_row(form.startDate) }}
+                    {{ form_row(form.endDatetime) }}
+                    {{ form_row(form.views) }}
+                </fieldset>
+            </div>
+        </div>
+    </div>
+    
+    {% if featureActivationHelper.isEnabled(constant('Pggo\\NewsDatesModule\\Helper\\FeatureActivationHelper::CATEGORIES'), 'article') %}
+        {{ include('@PggoNewsDatesModule/Helper/includeCategoriesEdit.html.twig', { obj: article, panel: true }) }}
+    {% endif %}
+    {{ include(
+        '@PggoNewsDatesModule/Event/Many.html.twig',
+        { group: 'article', alias: 'events', aliasReverse: 'article', mandatory: false, idPrefix: 'newsdateArticle_Events', linkingItem: article, panel: true, displayMode: 'choices', allowEditing: true }
+    ) }}
+    {% if mode != 'create' %}
+        {{ include('@PggoNewsDatesModule/Helper/includeStandardFieldsEdit.html.twig', { obj: article, panel: true }) }}
+    {% endif %}
+    
+    {# include display hooks #}
+    {% set hookId = mode != 'create' ? article.id : null %}
+    {% set hooks = notifyDisplayHooks(eventName='pggonewsdatesmodule.ui_hooks.articles.form_edit', id=hookId) %}
+    {% if hooks is iterable and hooks|length > 0 %}
+        {% for providerArea, hook in hooks if providerArea != 'provider.scribite.ui_hooks.editor' %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseHook{{ loop.index }}">{{ providerArea }}</a></h3>
+                </div>
+                <div id="collapseHook{{ loop.index }}" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        {{ hook }}
+                    </div>
+                </div>
+            </div>
         {% endfor %}
-        {{ form_widget(form.reset) }}
-        {{ form_widget(form.cancel) }}
+    {% endif %}
+    
+    <fieldset>
+        <legend>{{ __('Communication') }}</legend>
+        {{ form_row(form.additionalNotificationRemarks) }}
+    </fieldset>
+    
+    {% if form.moderationSpecificCreator is defined %}
+        <fieldset id="moderationFieldsSection">
+            <legend>{{ __('Moderation') }} <i class="fa fa-expand"></i></legend>
+            <div id="moderationFieldsContent">
+                {{ form_row(form.moderationSpecificCreator) }}
+                {{ form_row(form.moderationSpecificCreationDate) }}
+            </div>
+        </fieldset>
+    {% endif %}
+    
+    {# include return control #}
+    {% if mode == 'create' %}
+        <fieldset>
+            <legend>{{ __('Return control') }}</legend>
+            {{ form_row(form.repeatCreation) }}
+        </fieldset>
+    {% endif %}
+    
+    {# include possible submit actions #}
+    <div class="form-group form-buttons">
+        <div class="col-sm-offset-3 col-sm-9">
+            {% for action in actions %}
+                {{ form_widget(attribute(form, action.id)) }}
+            {% endfor %}
+            {{ form_widget(form.reset) }}
+            {{ form_widget(form.cancel) }}
+        </div>
     </div>
 </div>
 {{ form_end(form) }}

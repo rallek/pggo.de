@@ -1,4 +1,4 @@
-{# purpose of this template: inclusion template for display of related articles #}
+{# purpose of this template: inclusion template for display of related events #}
 {% set editImage = '<span class="fa fa-pencil-square-o"></span>' %}
 {% set removeImage = '<span class="fa fa-trash-o"></span>' %}
 
@@ -11,12 +11,8 @@
 {% set idPrefixItem = idPrefix ~ 'Reference_' ~ item.id %}
 <li id="{{ idPrefixItem }}">
     {{ item.getTitleFromDisplayPattern() }}
-    <a id="{{ idPrefixItem }}Edit" href="{{ path('pggonewsdatesmodule_article_' ~ routeArea ~ 'edit', { 'id': item.id, 'slug': item.slug }) }}">{{ editImage }}</a>
+    <a id="{{ idPrefixItem }}Edit" href="{{ path('pggonewsdatesmodule_event_' ~ routeArea ~ 'edit', { 'id': item.id, 'slug': item.slug }) }}">{{ editImage }}</a>
      <a id="{{ idPrefixItem }}Remove" href="javascript:newsdateRemoveRelatedItem('{{ idPrefix }}', '{{ item.id }}');">{{ removeImage }}</a>
-    <br />
-    {% if item.image is not empty and item.imageMeta.isImage %}
-        <img src="{{ item.image.getPathname()|imagine_filter('zkroot', relationThumbRuntimeOptions) }}" alt="{{ item.getTitleFromDisplayPattern()|e('html_attr') }}" width="{{ relationThumbRuntimeOptions.thumbnail.size[0] }}" height="{{ relationThumbRuntimeOptions.thumbnail.size[1] }}" class="img-rounded" />
-    {% endif %}
 </li>
 {% endfor %}
 {% endif %}
