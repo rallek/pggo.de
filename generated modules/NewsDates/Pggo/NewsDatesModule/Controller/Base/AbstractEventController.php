@@ -171,7 +171,7 @@ abstract class AbstractEventController extends AbstractController
     }
     /**
      * This action provides a item detail view in the admin area.
-     * @ParamConverter("event", class="PggoNewsDatesModule:EventEntity", options = {"mapping: {"slug": "slug", "id": "id"}, "repository_method" = "selectByIdList"})
+     * @ParamConverter("event", class="PggoNewsDatesModule:EventEntity", options = {"mapping": {"slug": "slug", "id": "id"}, "repository_method" = "selectByIdList"})
      * @Cache(lastModified="event.getUpdatedDate()", ETag="'Event' ~ event.getid() ~ event.getUpdatedDate().format('U')")
      *
      * @param Request $request Current request instance
@@ -189,7 +189,7 @@ abstract class AbstractEventController extends AbstractController
     
     /**
      * This action provides a item detail view.
-     * @ParamConverter("event", class="PggoNewsDatesModule:EventEntity", options = {"mapping: {"slug": "slug", "id": "id"}, "repository_method" = "selectByIdList"})
+     * @ParamConverter("event", class="PggoNewsDatesModule:EventEntity", options = {"mapping": {"slug": "slug", "id": "id"}, "repository_method" = "selectByIdList"})
      * @Cache(lastModified="event.getUpdatedDate()", ETag="'Event' ~ event.getid() ~ event.getUpdatedDate().format('U')")
      *
      * @param Request $request Current request instance
@@ -309,7 +309,7 @@ abstract class AbstractEventController extends AbstractController
     }
     /**
      * This action provides a handling of simple delete requests in the admin area.
-     * @ParamConverter("event", class="PggoNewsDatesModule:EventEntity", options = {"mapping: {"slug": "slug", "id": "id"}, "repository_method" = "selectByIdList"})
+     * @ParamConverter("event", class="PggoNewsDatesModule:EventEntity", options = {"mapping": {"slug": "slug", "id": "id"}, "repository_method" = "selectByIdList"})
      * @Cache(lastModified="event.getUpdatedDate()", ETag="'Event' ~ event.getid() ~ event.getUpdatedDate().format('U')")
      *
      * @param Request $request Current request instance
@@ -328,7 +328,7 @@ abstract class AbstractEventController extends AbstractController
     
     /**
      * This action provides a handling of simple delete requests.
-     * @ParamConverter("event", class="PggoNewsDatesModule:EventEntity", options = {"mapping: {"slug": "slug", "id": "id"}, "repository_method" = "selectByIdList"})
+     * @ParamConverter("event", class="PggoNewsDatesModule:EventEntity", options = {"mapping": {"slug": "slug", "id": "id"}, "repository_method" = "selectByIdList"})
      * @Cache(lastModified="event.getUpdatedDate()", ETag="'Event' ~ event.getid() ~ event.getUpdatedDate().format('U')")
      *
      * @param Request $request Current request instance

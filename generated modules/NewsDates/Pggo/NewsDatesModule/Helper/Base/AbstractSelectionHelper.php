@@ -115,7 +115,7 @@ abstract class AbstractSelectionHelper
         $slimMode = (bool) $slimMode; 
     
         $entity = null;
-        if (null !== $slug) {
+        if (null !== $slug && method_exists($repository, 'selectBySlug')) {
             $entity = $repository->selectBySlug($slug, $useJoins, $slimMode);
         } else {
             $entity = $repository->selectById($id, $useJoins, $slimMode);

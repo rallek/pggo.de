@@ -220,7 +220,6 @@ jQuery(document).ready(function() {
 
     jQuery('a.image-link').magnificPopup({
         type: 'image',
-        disableOn: 400,
         closeOnContentClick: true,
         image: {
             titleSrc: 'title',

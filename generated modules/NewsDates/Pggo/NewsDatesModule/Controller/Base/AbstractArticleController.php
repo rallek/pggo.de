@@ -174,7 +174,7 @@ abstract class AbstractArticleController extends AbstractController
     }
     /**
      * This action provides a item detail view in the admin area.
-     * @ParamConverter("article", class="PggoNewsDatesModule:ArticleEntity", options = {"mapping: {"slug": "slug", "id": "id"}, "repository_method" = "selectByIdList"})
+     * @ParamConverter("article", class="PggoNewsDatesModule:ArticleEntity", options = {"mapping": {"slug": "slug", "id": "id"}, "repository_method" = "selectByIdList"})
      * @Cache(lastModified="article.getUpdatedDate()", ETag="'Article' ~ article.getid() ~ article.getUpdatedDate().format('U')")
      *
      * @param Request $request Current request instance
@@ -192,7 +192,7 @@ abstract class AbstractArticleController extends AbstractController
     
     /**
      * This action provides a item detail view.
-     * @ParamConverter("article", class="PggoNewsDatesModule:ArticleEntity", options = {"mapping: {"slug": "slug", "id": "id"}, "repository_method" = "selectByIdList"})
+     * @ParamConverter("article", class="PggoNewsDatesModule:ArticleEntity", options = {"mapping": {"slug": "slug", "id": "id"}, "repository_method" = "selectByIdList"})
      * @Cache(lastModified="article.getUpdatedDate()", ETag="'Article' ~ article.getid() ~ article.getUpdatedDate().format('U')")
      *
      * @param Request $request Current request instance
@@ -312,7 +312,7 @@ abstract class AbstractArticleController extends AbstractController
     }
     /**
      * This action provides a handling of simple delete requests in the admin area.
-     * @ParamConverter("article", class="PggoNewsDatesModule:ArticleEntity", options = {"mapping: {"slug": "slug", "id": "id"}, "repository_method" = "selectByIdList"})
+     * @ParamConverter("article", class="PggoNewsDatesModule:ArticleEntity", options = {"mapping": {"slug": "slug", "id": "id"}, "repository_method" = "selectByIdList"})
      * @Cache(lastModified="article.getUpdatedDate()", ETag="'Article' ~ article.getid() ~ article.getUpdatedDate().format('U')")
      *
      * @param Request $request Current request instance
@@ -331,7 +331,7 @@ abstract class AbstractArticleController extends AbstractController
     
     /**
      * This action provides a handling of simple delete requests.
-     * @ParamConverter("article", class="PggoNewsDatesModule:ArticleEntity", options = {"mapping: {"slug": "slug", "id": "id"}, "repository_method" = "selectByIdList"})
+     * @ParamConverter("article", class="PggoNewsDatesModule:ArticleEntity", options = {"mapping": {"slug": "slug", "id": "id"}, "repository_method" = "selectByIdList"})
      * @Cache(lastModified="article.getUpdatedDate()", ETag="'Article' ~ article.getid() ~ article.getUpdatedDate().format('U')")
      *
      * @param Request $request Current request instance
