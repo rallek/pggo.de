@@ -264,6 +264,21 @@ abstract class AbstractArticleType extends AbstractType
             // select without joins
             return $er->getListQueryBuilder('', '', false);
         };
+        $builder->add('pictures', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
+            'class' => 'PggoNewsDatesModule:PictureEntity',
+            'choice_label' => 'getTitleFromDisplayPattern',
+            'multiple' => true,
+            'expanded' => false,
+            'query_builder' => $queryBuilder,
+            'label' => $this->__('Pictures'),
+            'attr' => [
+                'title' => $this->__('Choose the pictures')
+            ]
+        ]);
+        $queryBuilder = function(EntityRepository $er) {
+            // select without joins
+            return $er->getListQueryBuilder('', '', false);
+        };
         $builder->add('events', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
             'class' => 'PggoNewsDatesModule:EventEntity',
             'choice_label' => 'getTitleFromDisplayPattern',

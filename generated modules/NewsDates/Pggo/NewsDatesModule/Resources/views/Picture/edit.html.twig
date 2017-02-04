@@ -28,8 +28,8 @@
 </fieldset>
 
 {{ include(
-    '@PggoNewsDatesModule/Article/includeSelectOne.html.twig',
-    { group: 'picture', alias: 'article', aliasReverse: 'pictures', mandatory: false, idPrefix: 'newsdatePicture_Article', linkingItem: picture, displayMode: 'choices', allowEditing: false }
+    '@PggoNewsDatesModule/Article/includeSelectEditOne.html.twig',
+    { group: 'picture', alias: 'article', aliasReverse: 'pictures', mandatory: false, idPrefix: 'newsdatePicture_Article', linkingItem: picture, displayMode: 'choices', allowEditing: true }
 ) }}
 
 {# include return control #}

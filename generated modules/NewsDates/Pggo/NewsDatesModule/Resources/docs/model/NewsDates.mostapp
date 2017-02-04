@@ -166,7 +166,7 @@ application "NewsDates" {
             sourceAlias "article"
             target "picture"
             targetAlias "pictures"
-            editType ACTIVE_NONE_PASSIVE_CHOOSE
+            editType ACTIVE_EDIT_PASSIVE_EDIT
             cascade ALL
             orderBy ""
         },
@@ -175,6 +175,7 @@ application "NewsDates" {
             sourceAlias "article"
             target "event"
             targetAlias "events"
+            editType ACTIVE_EDIT_PASSIVE_EDIT
         }
     }
     }
