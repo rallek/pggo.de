@@ -1,0 +1,30 @@
+{
+    "name": "pggo/X2017-theme",
+    "version": "1.0.0",
+    "description": "Bootstrap based theme",
+    "type": "zikula-theme",
+    "license": "LGPL-3.0+",
+    "authors": [
+        {
+            "name": "pggo",
+            "homepage": "http://pggo.de/"
+        }
+    ],
+    "autoload": {
+        "psr-4": { "Pggo\\X2017Theme\\": "" }
+    },
+    "require": {
+        "php": ">=5.4.1"
+    },
+    "extra": {
+        "zikula" : {
+            "core-compatibility": ">=1.4.5",
+            "class": "Pggo\\X2017Theme\\PggoX2017Theme",
+            "displayname": "X2017",
+            "capabilities": {
+                "user": true,
+                "admin": true
+            }
+        }
+    }
+}
