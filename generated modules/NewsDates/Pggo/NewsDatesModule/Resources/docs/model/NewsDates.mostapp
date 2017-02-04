@@ -175,9 +175,6 @@ application "NewsDates" {
             sourceAlias "event"
             target "article"
             targetAlias "articles"
-            editType ACTIVE_NONE_PASSIVE_CHOOSE
-            cascade ALL
-            orderBy ""
         }
     }
     }

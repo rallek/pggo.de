@@ -143,7 +143,7 @@ abstract class AbstractEventEntity extends EntityAccess
     /**
      * Bidirectional - One event [event] has many articles [articles] (INVERSE SIDE).
      *
-     * @ORM\OneToMany(targetEntity="Pggo\NewsDatesModule\Entity\ArticleEntity", mappedBy="event", cascade={"all"})
+     * @ORM\OneToMany(targetEntity="Pggo\NewsDatesModule\Entity\ArticleEntity", mappedBy="event")
      * @ORM\JoinTable(name="pggo_newsdate_eventarticles")
      * @var \Pggo\NewsDatesModule\Entity\ArticleEntity[] $articles
      */
@@ -657,14 +657,7 @@ abstract class AbstractEventEntity extends EntityAccess
      */
     public function getRelatedObjectsToPersist(&$objects = []) 
     {
-        foreach ($this->articles as $rel) {
-            if (!in_array($rel, $objects, true)) {
-                $objects[] = $rel;
-                $rel->getRelatedObjectsToPersist($objects);
-            }
-        }
-    
-        return $objects;
+        return [];
     }
     
     /**
@@ -681,7 +674,7 @@ abstract class AbstractEventEntity extends EntityAccess
     /**
      * Clone interceptor implementation.
      * This method is for example called by the reuse functionality.
-     * Performs a deep copy.
+     * Performs a quite simple shallow copy.
      *
      * See also:
      * (1) http://docs.doctrine-project.org/en/latest/cookbook/implementing-wakeup-or-clone.html
@@ -708,14 +701,6 @@ abstract class AbstractEventEntity extends EntityAccess
         $this->setUpdatedBy(null);
         $this->setUpdatedDate(null);
     
-        // handle related objects
-        // prevent shared references by doing a deep copy - see (2) and (3) for more information
-        // clone referenced objects only if a new record is necessary
-        $collection = $this->articles;
-        $this->articles = new ArrayCollection();
-        foreach ($collection as $rel) {
-            $this->addArticles( clone $rel);
-        }
     
         // clone categories
         $categories = $this->categories;
