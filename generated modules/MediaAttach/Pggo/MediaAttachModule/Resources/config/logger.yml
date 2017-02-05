@@ -1,0 +1,6 @@
+services:
+    # Log processor
+    pggo_mediaattach_module.log.processor:
+        class: Monolog\Processor\PsrLogMessageProcessor
+        tags:
+            - { name: monolog.processor }

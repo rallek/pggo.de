@@ -1,0 +1,5 @@
+pggomediaattachmodule:
+    # define routing support for these controllers
+    resource: "@PggoMediaAttachModule/Controller"
+    # enable support for defining routes by annotations
+    type: annotation

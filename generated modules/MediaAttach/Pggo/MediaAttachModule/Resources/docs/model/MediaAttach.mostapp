@@ -1,0 +1,64 @@
+application "MediaAttach" {
+    documentation "This is a simplified version of mediaattach of original author guite"
+    vendor "Pggo"
+    author "Ralf Koester"
+    email "ralf@familie-koester.de"
+    url "http://pggo.de"
+    version "0.1.0"
+    prefix "mediaattach"
+    generatorSettings {
+        settingsContainer "Settings"
+        targetCoreVersion ZK14DEV
+        generateMailzApi false
+        generateNewsletterPlugin false
+        generateTagSupport false
+        generateMultiHookNeedles false
+        generateRssTemplates false
+        generateAtomTemplates false
+        generateCsvTemplates false
+        generateXmlTemplates false
+        generateJsonTemplates false
+        generateKmlTemplates false
+        generateIcsTemplates false
+        versionAllGeneratedFiles false
+        generateTests false
+    }
+    entities {
+        entity "file" leading {
+            nameMultiple "files"
+            displayPattern "#title#"
+            fields {
+                string "title",
+                text "description" {
+                    mandatory false
+                },
+                upload "fileName" {
+                    allowedExtensions "application/pdf"
+                    maxSize "500k"
+                }
+            }
+            actions {
+                mainAction "Index",
+                viewAction "View",
+                displayAction "Display",
+                editAction "Edit",
+                deleteAction "Delete"
+            }
+        }
+    }
+    variables {
+        varContainer "fileSettings" {
+            vars {
+                textVar "mimeTypes" {
+                    value "application/pdf"
+                },
+                filePathVar writable "filePath"
+            ,
+                textVar "uploadFileSize" {
+                    documentation "e.g. 200k, 2M"
+                    value "500k"
+                }
+            }
+        }
+    }
+}

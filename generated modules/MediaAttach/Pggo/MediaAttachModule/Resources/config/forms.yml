@@ -1,0 +1,70 @@
+services:
+    # Form types
+    
+    pggo_mediaattach_module.form.type.filequicknav:
+        class: Pggo\MediaAttachModule\Form\Type\QuickNavigation\FileQuickNavType
+        arguments:
+            - "@translator.default"
+            - "@pggo_mediaattach_module.listentries_helper"
+        tags:
+            - { name: form.type }
+    
+    pggo_mediaattach_module.form.handler.file:
+        class: Pggo\MediaAttachModule\Form\Handler\File\EditHandler
+        arguments:
+            - "@kernel"
+            - "@translator.default"
+            - "@form.factory"
+            - "@request_stack"
+            - "@router"
+            - "@logger"
+            - "@zikula_permissions_module.api.permission"
+            - "@zikula_users_module.current_user"
+            - "@pggo_mediaattach_module.entity_factory"
+            - "@pggo_mediaattach_module.controller_helper"
+            - "@pggo_mediaattach_module.model_helper"
+            - "@pggo_mediaattach_module.selection_helper"
+            - "@pggo_mediaattach_module.workflow_helper"
+            - "@pggo_mediaattach_module.hook_helper"
+        calls:
+            - [setLockingApi, ["@?zikula_pagelock_module.api.locking"]]
+        tags:
+            - { name: form.type }
+    
+    pggo_mediaattach_module.form.type.file:
+        class: Pggo\MediaAttachModule\Form\Type\FileType
+        arguments:
+            - "@translator.default"
+            - "@pggo_mediaattach_module.entity_factory"
+            - "@pggo_mediaattach_module.listentries_helper"
+        tags:
+            - { name: form.type }
+    
+    pggo_mediaattach_module.form.type.deleteentity:
+        class: Pggo\MediaAttachModule\Form\DeleteEntityType
+        arguments:
+            - "@translator.default"
+        tags:
+            - { name: form.type }
+    
+    pggo_mediaattach_module.form.type.block.itemlist:
+        class: Pggo\MediaAttachModule\Block\Form\Type\ItemListBlockType
+        arguments:
+            - "@translator.default"
+        tags:
+            - { name: form.type }
+    
+    pggo_mediaattach_module.form.type.filefinder:
+        class: Pggo\MediaAttachModule\Form\Type\Finder\FileFinderType
+        arguments:
+            - "@translator.default"
+        tags:
+            - { name: form.type }
+    
+    pggo_mediaattach_module.form.type.appsettings:
+        class: Pggo\MediaAttachModule\Form\AppSettingsType
+        arguments:
+            - "@translator.default"
+            - "@zikula_extensions_module.api.variable"
+        tags:
+            - { name: form.type }

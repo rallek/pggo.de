@@ -1,0 +1,24 @@
+services:
+    # Form field types
+    
+    pggo_mediaattach_module.form.type.field.datetime:
+        class: Pggo\MediaAttachModule\Form\Type\Field\DateTimeType
+        tags:
+            - { name: form.type }
+    
+    pggo_mediaattach_module.form.type.field.upload:
+        class: Pggo\MediaAttachModule\Form\Type\Field\UploadType
+        arguments:
+            - "@translator.default"
+            - "@request_stack"
+            - "@pggo_mediaattach_module.image_helper"
+            - "@pggo_mediaattach_module.upload_helper"
+        tags:
+            - { name: form.type }
+    
+    pggo_mediaattach_module.form.type.field.user:
+        class: Pggo\MediaAttachModule\Form\Type\Field\UserType
+        arguments:
+            - "@zikula_users_module.user_repository"
+        tags:
+            - { name: form.type }

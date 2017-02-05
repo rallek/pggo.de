@@ -1,0 +1,89 @@
+services:
+    # Event subscriber and listener classes
+    pggo_mediaattach_module.entity_lifecycle_listener:
+        class: Pggo\MediaAttachModule\Listener\EntityLifecycleListener
+        arguments:
+            - "@service_container"
+        tags:
+            - { name: doctrine.event_subscriber }
+    
+    pggo_mediaattach_module.core_listener:
+        class: Pggo\MediaAttachModule\Listener\CoreListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_mediaattach_module.kernel_listener:
+        class: Pggo\MediaAttachModule\Listener\KernelListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_mediaattach_module.installer_listener:
+        class: Pggo\MediaAttachModule\Listener\InstallerListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_mediaattach_module.moduledispatch_listener:
+        class: Pggo\MediaAttachModule\Listener\ModuleDispatchListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_mediaattach_module.mailer_listener:
+        class: Pggo\MediaAttachModule\Listener\MailerListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_mediaattach_module.page_listener:
+        class: Pggo\MediaAttachModule\Listener\PageListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_mediaattach_module.theme_listener:
+        class: Pggo\MediaAttachModule\Listener\ThemeListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_mediaattach_module.view_listener:
+        class: Pggo\MediaAttachModule\Listener\ViewListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_mediaattach_module.userlogin_listener:
+        class: Pggo\MediaAttachModule\Listener\UserLoginListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_mediaattach_module.userlogout_listener:
+        class: Pggo\MediaAttachModule\Listener\UserLogoutListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_mediaattach_module.user_listener:
+        class: Pggo\MediaAttachModule\Listener\UserListener
+        arguments:
+            - "@translator.default"
+            - "@pggo_mediaattach_module.entity_factory"
+            - "@zikula_users_module.current_user"
+            - "@logger"
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_mediaattach_module.userregistration_listener:
+        class: Pggo\MediaAttachModule\Listener\UserRegistrationListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_mediaattach_module.users_listener:
+        class: Pggo\MediaAttachModule\Listener\UsersListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_mediaattach_module.group_listener:
+        class: Pggo\MediaAttachModule\Listener\GroupListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_mediaattach_module.thirdparty_listener:
+        class: Pggo\MediaAttachModule\Listener\ThirdPartyListener
+        tags:
+            - { name: kernel.event_subscriber }
+    

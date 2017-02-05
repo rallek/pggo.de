@@ -1,0 +1,80 @@
+services:
+    # Helper classes
+    pggo_mediaattach_module.controller_helper:
+        class: Pggo\MediaAttachModule\Helper\ControllerHelper
+        arguments:
+            - "@translator.default"
+            - "@request_stack"
+            - "@session"
+            - "@logger"
+            - "@form.factory"
+            - "@zikula_extensions_module.api.variable"
+            - "@pggo_mediaattach_module.entity_factory"
+            - "@pggo_mediaattach_module.model_helper"
+            - "@pggo_mediaattach_module.selection_helper"
+            - "@pggo_mediaattach_module.image_helper"
+    
+    pggo_mediaattach_module.hook_helper:
+        class: Pggo\MediaAttachModule\Helper\HookHelper
+        arguments:
+            - "@hook_dispatcher"
+    
+    pggo_mediaattach_module.image_helper:
+        class: Pggo\MediaAttachModule\Helper\ImageHelper
+        arguments:
+            - "@translator.default"
+            - "@session"
+            - "@zikula_extensions_module.api.variable"
+    
+    pggo_mediaattach_module.listentries_helper:
+        class: Pggo\MediaAttachModule\Helper\ListEntriesHelper
+        arguments:
+            - "@translator.default"
+    
+    pggo_mediaattach_module.model_helper:
+        class: Pggo\MediaAttachModule\Helper\ModelHelper
+        arguments:
+            - "@pggo_mediaattach_module.entity_factory"
+    
+    pggo_mediaattach_module.search_helper:
+        class: Pggo\MediaAttachModule\Helper\SearchHelper
+        arguments:
+            - "@zikula_permissions_module.api.permission"
+            - "@templating.engine.twig"
+            - "@session"
+            - "@request_stack"
+            - "@pggo_mediaattach_module.entity_factory"
+            - "@pggo_mediaattach_module.controller_helper"
+        tags:
+            - { name: zikula.searchable_module, bundleName: PggoMediaAttachModule }
+    
+    pggo_mediaattach_module.selection_helper:
+        class: Pggo\MediaAttachModule\Helper\SelectionHelper
+        arguments:
+            - "@translator.default"
+            - "@pggo_mediaattach_module.entity_factory"
+    
+    pggo_mediaattach_module.upload_helper:
+        class: Pggo\MediaAttachModule\Helper\UploadHelper
+        arguments:
+            - "@translator.default"
+            - "@session"
+            - "@logger"
+            - "@zikula_users_module.current_user"
+            - "@zikula_extensions_module.api.variable"
+            - "%datadir%"
+    
+    pggo_mediaattach_module.view_helper:
+        class: Pggo\MediaAttachModule\Helper\ViewHelper
+        arguments:
+            - "@templating"
+            - "@request_stack"
+            - "@zikula_permissions_module.api.permission"
+            - "@zikula_extensions_module.api.variable"
+            - "@pggo_mediaattach_module.controller_helper"
+    
+    pggo_mediaattach_module.workflow_helper:
+        class: Pggo\MediaAttachModule\Helper\WorkflowHelper
+        arguments:
+            - "@translator.default"
+            - "@pggo_mediaattach_module.listentries_helper"

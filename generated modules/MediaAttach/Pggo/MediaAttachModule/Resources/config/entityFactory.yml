@@ -1,0 +1,6 @@
+services:
+    # Entity factory class
+    pggo_mediaattach_module.entity_factory:
+        class: Pggo\MediaAttachModule\Entity\Factory\MediaAttachFactory
+        arguments:
+            - "@doctrine.orm.default_entity_manager"
