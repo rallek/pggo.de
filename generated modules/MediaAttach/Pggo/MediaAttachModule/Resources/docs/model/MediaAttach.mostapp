@@ -33,7 +33,7 @@ application "MediaAttach" {
                     mandatory false
                 },
                 upload "fileName" {
-                    allowedExtensions "application/pdf"
+                    allowedExtensions "pdf, application/pdf"
                     maxSize "500k"
                 }
             }
@@ -49,8 +49,8 @@ application "MediaAttach" {
     variables {
         varContainer "fileSettings" {
             vars {
-                textVar "mimeTypes" {
-                    value "application/pdf"
+                textVar "fileTypes" {
+                    value "pdf"
                 },
                 filePathVar writable "filePath"
             ,

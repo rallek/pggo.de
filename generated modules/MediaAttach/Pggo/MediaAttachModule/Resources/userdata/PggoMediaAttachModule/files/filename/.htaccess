@@ -14,7 +14,7 @@
     Require all denied
 </IfModule>
 
-<FilesMatch "\.(application/pdf)$">
+<FilesMatch "\.(pdf|application/pdf)$">
     # Apache 2.2
     <IfModule !mod_authz_core.c>
         Order allow,deny

@@ -94,14 +94,14 @@ abstract class AbstractAppSettingsType extends AbstractType
     public function addFileSettingsFields(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('mimeTypes', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
-                'label' => $this->__('Mime types') . ':',
+            ->add('fileTypes', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
+                'label' => $this->__('File types') . ':',
                 'required' => false,
-                'data' => isset($this->modVars['mimeTypes']) ? $this->modVars['mimeTypes'] : '',
-                'empty_data' => 'application/pdf',
+                'data' => isset($this->modVars['fileTypes']) ? $this->modVars['fileTypes'] : '',
+                'empty_data' => 'pdf',
                 'attr' => [
                     'maxlength' => 255,
-                    'title' => $this->__('Enter the mime types.')
+                    'title' => $this->__('Enter the file types.')
                 ],
             ])
             ->add('filePath', 'Symfony\Component\Form\Extension\Core\Type\TextType', [

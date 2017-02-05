@@ -119,10 +119,10 @@ abstract class AbstractSearchHelper implements SearchableInterface
         // retrieve list of activated object types
         $searchTypes = isset($modVars['objectTypes']) ? (array)$modVars['objectTypes'] : [];
         if (!is_array($searchTypes) || !count($searchTypes)) {
-            if ($this->->isMethod('GET')) {
-                $searchTypes = $this->->query->get('pggoMediaAttachModuleSearchTypes', []);
-            } elseif ($this->->isMethod('POST')) {
-                $searchTypes = $this->->request->get('pggoMediaAttachModuleSearchTypes', []);
+            if ($this->request->isMethod('GET')) {
+                $searchTypes = $this->request->query->get('pggoMediaAttachModuleSearchTypes', []);
+            } elseif ($this->request->isMethod('POST')) {
+                $searchTypes = $this->request->request->get('pggoMediaAttachModuleSearchTypes', []);
             }
         }
     
@@ -183,7 +183,7 @@ abstract class AbstractSearchHelper implements SearchableInterface
                 $description = !empty($descriptionField) ? $entity[$descriptionField] : '';
                 $created = isset($entity['createdBy']) ? $entity['createdBy'] : null;
     
-                $urlArgs['_locale'] = (null !== $languageField && !empty($entity[$languageField])) ? $entity[$languageField] : $this->->getLocale();
+                $urlArgs['_locale'] = (null !== $languageField && !empty($entity[$languageField])) ? $entity[$languageField] : $this->request->getLocale();
     
                 $displayUrl = $hasDisplayAction ? new RouteUrl('pggomediaattachmodule_' . $objectType . '_display', $urlArgs) : '';
     

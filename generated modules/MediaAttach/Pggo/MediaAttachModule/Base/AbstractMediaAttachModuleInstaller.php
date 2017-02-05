@@ -56,7 +56,7 @@ abstract class AbstractMediaAttachModuleInstaller extends AbstractExtensionInsta
         }
     
         // set up all our vars with initial values
-        $this->setVar('mimeTypes', 'application/pdf');
+        $this->setVar('fileTypes', 'pdf');
         $this->setVar('filePath', '');
         $this->setVar('uploadFileSize', '500k');
         $this->setVar('fileEntriesPerPage', 10);
