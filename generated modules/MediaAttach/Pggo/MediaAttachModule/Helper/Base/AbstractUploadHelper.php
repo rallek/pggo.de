@@ -321,7 +321,7 @@ abstract class AbstractUploadHelper
         $allowedExtensions = [];
         switch ($objectType) {
             case 'file':
-                $allowedExtensions = ['pdf', 'application/pdf'];
+                $allowedExtensions = ['pdf'];
                     break;
         }
     
@@ -511,7 +511,7 @@ abstract class AbstractUploadHelper
     {
         $result = true;
     
-        $result &= $this->checkAndCreateUploadFolder('file', 'fileName', 'pdf, application/pdf');
+        $result &= $this->checkAndCreateUploadFolder('file', 'fileName', 'pdf');
     
         return $result;
     }

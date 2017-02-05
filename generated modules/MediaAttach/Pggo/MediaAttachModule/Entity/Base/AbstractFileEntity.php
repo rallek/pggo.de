@@ -108,7 +108,7 @@ abstract class AbstractFileEntity extends EntityAccess
      * @Assert\Length(min="0", max="255")
      * @Assert\File(
         maxSize = "500k",
-        mimeTypes = {"image/*"}
+        mimeTypes = {"application/pdf", "application/x-pdf"}
      * )
      * @var string $fileName
      */

@@ -33,8 +33,9 @@ application "MediaAttach" {
                     mandatory false
                 },
                 upload "fileName" {
-                    allowedExtensions "pdf, application/pdf"
+                    allowedExtensions "pdf"
                     maxSize "500k"
+                mimeTypes "application/pdf, application/x-pdf"
                 }
             }
             actions {

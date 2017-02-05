@@ -129,7 +129,7 @@ abstract class AbstractFileType extends AbstractType
                 'title' => $this->__('Enter the file name of the file')
             ],'required' => true && $options['mode'] == 'create',
             'entity' => $options['entity'],
-            'allowed_extensions' => 'pdf, application/pdf',
+            'allowed_extensions' => 'pdf',
             'allowed_size' => 0
         ]);
     }
