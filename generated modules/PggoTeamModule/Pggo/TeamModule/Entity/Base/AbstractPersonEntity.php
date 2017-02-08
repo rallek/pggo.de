@@ -119,7 +119,6 @@ abstract class AbstractPersonEntity extends EntityAccess
      * Full image path as url.
      *
      * @Assert\Type(type="string")
-     * @Assert\Url()
      * @var string $imageUrl
      */
     protected $imageUrl = '';

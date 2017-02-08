@@ -236,7 +236,7 @@ abstract class AbstractItemList extends \Content_AbstractContentType implements 
      */
     public function display()
     {
-        $repository = $this->container->get('pggo_team_module.entity_factory')->getRepository($objectType);
+        $repository = $this->container->get('pggo_team_module.entity_factory')->getRepository($this->objectType);
         $permissionApi = $this->container->get('zikula_permissions_module.api.permission');
     
         // create query
@@ -287,11 +287,11 @@ abstract class AbstractItemList extends \Content_AbstractContentType implements 
         }
     
         $imageHelper = $this->container->get('pggo_team_module.image_helper');
-        $templateParameters = array_merge($templateData, $repository->getAdditionalTemplateParameters($imageHelper, 'contentType'));
+        $templateParameters = array_merge($templateParameters, $repository->getAdditionalTemplateParameters($imageHelper, 'contentType'));
     
         $template = $this->getDisplayTemplate();
     
-        return $this->container->get('twig')->render('@PggoTeamModule/' . $template, $templateParameters);
+        return $this->container->get('twig')->render($template, $templateParameters);
     }
     
     /**
@@ -307,14 +307,20 @@ abstract class AbstractItemList extends \Content_AbstractContentType implements 
         }
     
         $templateForObjectType = str_replace('itemlist_', 'itemlist_' . $this->objectType . '_', $templateFile);
+        $templating = $this->container->get('templating');
+    
+        $templateOptions = [
+            'ContentType/' . $templateForObjectType,
+            'ContentType/' . $templateFile,
+            'ContentType/itemlist_display.html.twig'
+        ];
     
         $template = '';
-        if ($this->view->template_exists('ContentType/' . $templateForObjectType)) {
-            $template = 'ContentType/' . $templateForObjectType;
-        } elseif ($this->view->template_exists('ContentType/' . $templateFile)) {
-            $template = 'ContentType/' . $templateFile;
-        } else {
-            $template = 'ContentType/itemlist_display.html.twig';
+        foreach ($templateOptions as $templatePath) {
+            if ($templating->exists('@PggoTeamModule/' . $templatePath)) {
+                $template = '@PggoTeamModule/' . $templatePath;
+                break;
+            }
         }
     
         return $template;

@@ -23,9 +23,10 @@
  */
 function smarty_function_pggoteammoduleObjectTypeSelector($params, $view)
 {
+    $dom = ZLanguage::getModuleDomain('PggoTeamModule');
     $result = [];
 
-    $result[] = ['text' => $this->__('Persons'), 'value' => 'person'];
+    $result[] = ['text' => __('Persons', $dom), 'value' => 'person'];
 
     if (array_key_exists('assign', $params)) {
         $view->assign($params['assign'], $result);

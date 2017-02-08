@@ -171,7 +171,7 @@ abstract class AbstractPersonController extends AbstractController
     }
     /**
      * This action provides a item detail view in the admin area.
-     * @ParamConverter("person", class="PggoTeamModule:PersonEntity", options={"id" = "id", "repository_method" = "selectById"})
+     * @ParamConverter("person", class="PggoTeamModule:PersonEntity", options = {"id" = "id", "repository_method" = "selectById"})
      * @Cache(lastModified="person.getUpdatedDate()", ETag="'Person' ~ person.getid() ~ person.getUpdatedDate().format('U')")
      *
      * @param Request $request Current request instance
@@ -189,7 +189,7 @@ abstract class AbstractPersonController extends AbstractController
     
     /**
      * This action provides a item detail view.
-     * @ParamConverter("person", class="PggoTeamModule:PersonEntity", options={"id" = "id", "repository_method" = "selectById"})
+     * @ParamConverter("person", class="PggoTeamModule:PersonEntity", options = {"id" = "id", "repository_method" = "selectById"})
      * @Cache(lastModified="person.getUpdatedDate()", ETag="'Person' ~ person.getid() ~ person.getUpdatedDate().format('U')")
      *
      * @param Request $request Current request instance
@@ -309,7 +309,7 @@ abstract class AbstractPersonController extends AbstractController
     }
     /**
      * This action provides a handling of simple delete requests in the admin area.
-     * @ParamConverter("person", class="PggoTeamModule:PersonEntity", options={"id" = "id", "repository_method" = "selectById"})
+     * @ParamConverter("person", class="PggoTeamModule:PersonEntity", options = {"id" = "id", "repository_method" = "selectById"})
      * @Cache(lastModified="person.getUpdatedDate()", ETag="'Person' ~ person.getid() ~ person.getUpdatedDate().format('U')")
      *
      * @param Request $request Current request instance
@@ -328,7 +328,7 @@ abstract class AbstractPersonController extends AbstractController
     
     /**
      * This action provides a handling of simple delete requests.
-     * @ParamConverter("person", class="PggoTeamModule:PersonEntity", options={"id" = "id", "repository_method" = "selectById"})
+     * @ParamConverter("person", class="PggoTeamModule:PersonEntity", options = {"id" = "id", "repository_method" = "selectById"})
      * @Cache(lastModified="person.getUpdatedDate()", ETag="'Person' ~ person.getid() ~ person.getUpdatedDate().format('U')")
      *
      * @param Request $request Current request instance
@@ -514,7 +514,7 @@ abstract class AbstractPersonController extends AbstractController
                 // execute the workflow action
                 $success = $workflowHelper->executeAction($entity, $action);
             } catch(\Exception $e) {
-                $this->addFlash('error', $this->__f('Sorry, but an error occured during the %s action.', ['%s' => $action]) . '  ' . $e->getMessage());
+                $this->addFlash('error', $this->__f('Sorry, but an error occured during the %action% action.', ['%action%' => $action]) . '  ' . $e->getMessage());
                 $logger->error('{app}: User {user} tried to execute the {action} workflow action for the {entity} with id {id}, but failed. Error details: {errorMessage}.', ['app' => 'PggoTeamModule', 'user' => $userName, 'action' => $action, 'entity' => 'person', 'id' => $itemid, 'errorMessage' => $e->getMessage()]);
             }
         

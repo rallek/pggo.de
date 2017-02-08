@@ -142,7 +142,7 @@ abstract class AbstractCategoryHelper
         $result = false;
         switch ($objectType) {
             case 'person':
-                $result = false;
+                $result = true;
                 break;
         }
     

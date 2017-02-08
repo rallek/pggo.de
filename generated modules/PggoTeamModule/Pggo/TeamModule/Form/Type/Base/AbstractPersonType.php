@@ -141,7 +141,7 @@ abstract class AbstractPersonType extends AbstractType
             ],'required' => false,
             'entity' => $options['entity'],
             'allowed_extensions' => 'gif, jpeg, jpg, png',
-            'allowed_size' => 0
+            'allowed_size' => 
         ]);
         
         $builder->add('copyright', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
@@ -234,13 +234,13 @@ abstract class AbstractPersonType extends AbstractType
     public function addCategoriesField(FormBuilderInterface $builder, array $options)
     {
         $builder->add('categories', 'Zikula\CategoriesModule\Form\Type\CategoriesType', [
-            'label' => $this->__('Category') . ':',
-            'empty_data' => null,
+            'label' => $this->__('Categories') . ':',
+            'empty_data' => [],
             'attr' => [
                 'class' => 'category-selector'
             ],
             'required' => false,
-            'multiple' => false,
+            'multiple' => true,
             'module' => 'PggoTeamModule',
             'entity' => 'PersonEntity',
             'entityCategoryClass' => 'Pggo\TeamModule\Entity\PersonCategoryEntity'

@@ -57,18 +57,18 @@ abstract class AbstractTeamModuleInstaller extends AbstractExtensionInstaller
         }
     
         // set up all our vars with initial values
-        $this->setVar('personEntriesPerPage', 10);
+        $this->setVar('personEntriesPerPage', '10');
         $this->setVar('linkOwnPersonsOnAccountPage', true);
         $this->setVar('enableShrinkingForPersonImage', false);
-        $this->setVar('shrinkWidthPersonImage', 800);
-        $this->setVar('shrinkHeightPersonImage', 600);
+        $this->setVar('shrinkWidthPersonImage', '800');
+        $this->setVar('shrinkHeightPersonImage', '600');
         $this->setVar('thumbnailModePersonImage',  'inset' );
-        $this->setVar('thumbnailWidthPersonImageView', 32);
-        $this->setVar('thumbnailHeightPersonImageView', 24);
-        $this->setVar('thumbnailWidthPersonImageDisplay', 240);
-        $this->setVar('thumbnailHeightPersonImageDisplay', 180);
-        $this->setVar('thumbnailWidthPersonImageEdit', 240);
-        $this->setVar('thumbnailHeightPersonImageEdit', 180);
+        $this->setVar('thumbnailWidthPersonImageView', '32');
+        $this->setVar('thumbnailHeightPersonImageView', '24');
+        $this->setVar('thumbnailWidthPersonImageDisplay', '240');
+        $this->setVar('thumbnailHeightPersonImageDisplay', '180');
+        $this->setVar('thumbnailWidthPersonImageEdit', '240');
+        $this->setVar('thumbnailHeightPersonImageEdit', '180');
     
         $categoryRegistryIdsPerEntity = [];
     
@@ -95,7 +95,7 @@ abstract class AbstractTeamModuleInstaller extends AbstractExtensionInstaller
             $entityManager->persist($registry);
             $entityManager->flush();
         } catch (\Exception $e) {
-            $this->addFlash('error', $this->__f('Error! Could not create a category registry for the %s entity.', ['%s' => 'person']));
+            $this->addFlash('error', $this->__f('Error! Could not create a category registry for the %entity% entity.', ['%entity%' => 'person']));
             $logger->error('{app}: User {user} could not create a category registry for {entities} during installation. Error details: {errorMessage}.', ['app' => 'PggoTeamModule', 'user' => $userName, 'entities' => 'persons', 'errorMessage' => $e->getMessage()]);
         }
         $categoryRegistryIdsPerEntity['person'] = $registry->getId();
@@ -387,7 +387,7 @@ abstract class AbstractTeamModuleInstaller extends AbstractExtensionInstaller
         // delete stored object workflows
         $result = Zikula_Workflow_Util::deleteWorkflowsForModule('PggoTeamModule');
         if (false === $result) {
-            $this->addFlash('error', $this->__f('An error was encountered while removing stored object workflows for the %s extension.', ['%s' => 'PggoTeamModule']));
+            $this->addFlash('error', $this->__f('An error was encountered while removing stored object workflows for the %extension% extension.', ['%extension%' => 'PggoTeamModule']));
             $logger->error('{app}: Could not remove stored object workflows during uninstallation.', ['app' => 'PggoTeamModule']);
     
             return false;
@@ -422,7 +422,7 @@ abstract class AbstractTeamModuleInstaller extends AbstractExtensionInstaller
     
         // remind user about upload folders not being deleted
         $uploadPath = $this->container->getParameter('datadir') . '/PggoTeamModule/';
-        $this->addFlash('status', $this->__f('The upload directories at [%s] can be removed manually.', ['%s' => $uploadPath]));
+        $this->addFlash('status', $this->__f('The upload directories at "%path%" can be removed manually.', ['%path%' => $uploadPath]));
     
         // uninstallation successful
         return true;

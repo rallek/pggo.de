@@ -98,15 +98,15 @@ abstract class AbstractPersonQuickNavType extends AbstractType
         $objectType = 'person';
     
         $builder->add('categories', 'Zikula\CategoriesModule\Form\Type\CategoriesType', [
-            'label' => $this->__('Category'),
-            'empty_data' => null,
+            'label' => $this->__('Categories'),
+            'empty_data' => [],
             'attr' => [
                 'class' => 'input-sm category-selector',
                 'title' => $this->__('This is an optional filter.')
             ],
             'help' => $this->__('This is an optional filter.'),
             'required' => false,
-            'multiple' => false,
+            'multiple' => true,
             'module' => 'PggoTeamModule',
             'entity' => ucfirst($objectType) . 'Entity',
             'entityCategoryClass' => 'Pggo\TeamModule\Entity\\' . ucfirst($objectType) . 'CategoryEntity'

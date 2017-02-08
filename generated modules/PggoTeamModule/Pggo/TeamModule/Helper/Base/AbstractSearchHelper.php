@@ -22,39 +22,28 @@ use Pggo\TeamModule\Helper\FeatureActivationHelper;
 abstract class AbstractSearchHelper extends AbstractSearchable
 {
     /**
-     * Display the search form.
-     *
-     * @param boolean    $active  if the module should be checked as active
-     * @param array|null $modVars module form vars as previously set
-     *
-     * @return string Template output
+     * {@inheritdoc}
      */
     public function getOptions($active, $modVars = null)
     {
         $permissionApi = $this->container->get('zikula_permissions_module.api.permission');
     
-        if (!$permissionApi->hasPermission($this->name . '::', '::', ACCESS_READ)) {
+        if (!$permissionApi->hasPermission('PggoTeamModule::', '::', ACCESS_READ)) {
             return '';
         }
     
         $templateParameters = [];
     
-        $searchTypes = array('person');
+        $searchTypes = ['person'];
         foreach ($searchTypes as $searchType) {
-            $templateParameters['active_' . $searchType] = (!isset($args['pggoTeamModuleSearchTypes']) || in_array($searchType, $args['pggoTeamModuleSearchTypes']));
+            $templateParameters['active_' . $searchType] = !isset($args['pggoTeamModuleSearchTypes']) || in_array($searchType, $args['pggoTeamModuleSearchTypes']);
         }
     
         return $this->getContainer()->get('twig')->render('@PggoTeamModule/Search/options.html.twig', $templateParameters);
     }
     
     /**
-     * Returns the search results.
-     *
-     * @param array      $words      Array of words to search for
-     * @param string     $searchType AND|OR|EXACT (defaults to AND)
-     * @param array|null $modVars    Module form vars passed though
-     *
-     * @return array List of fetched results
+     * {@inheritdoc}
      */
     public function getResults(array $words, $searchType = 'AND', $modVars = null)
     {
@@ -62,7 +51,7 @@ abstract class AbstractSearchHelper extends AbstractSearchable
         $featureActivationHelper = $this->container->get('pggo_team_module.feature_activation_helper');
         $request = $this->container->get('request_stack')->getCurrentRequest();
     
-        if (!$permissionApi->hasPermission($this->name . '::', '::', ACCESS_READ)) {
+        if (!$permissionApi->hasPermission('PggoTeamModule::', '::', ACCESS_READ)) {
             return [];
         }
     
@@ -70,15 +59,15 @@ abstract class AbstractSearchHelper extends AbstractSearchable
         $sessionId = $this->container->get('session')->getId();
     
         // initialise array for results
-        $records = [];
+        $results = [];
     
         // retrieve list of activated object types
         $searchTypes = isset($modVars['objectTypes']) ? (array)$modVars['objectTypes'] : [];
         if (!is_array($searchTypes) || !count($searchTypes)) {
-            if ($request->isMethod('GET')) {
-                $searchTypes = $request->query->get('pggoTeamModuleSearchTypes', []);
-            } elseif ($request->isMethod('POST')) {
-                $searchTypes = $request->request->get('pggoTeamModuleSearchTypes', []);
+            if ($this->request->isMethod('GET')) {
+                $searchTypes = $this->request->query->get('pggoTeamModuleSearchTypes', []);
+            } elseif ($this->request->isMethod('POST')) {
+                $searchTypes = $this->request->request->get('pggoTeamModuleSearchTypes', []);
             }
         }
     
@@ -139,7 +128,7 @@ abstract class AbstractSearchHelper extends AbstractSearchable
     
                 $instanceId = $entity->createCompositeIdentifier();
                 // perform permission check
-                if (!$permissionApi->hasPermission($this->name . ':' . ucfirst($objectType) . ':', $instanceId . '::', ACCESS_OVERVIEW)) {
+                if (!$permissionApi->hasPermission('PggoTeamModule:' . ucfirst($objectType) . ':', $instanceId . '::', ACCESS_OVERVIEW)) {
                     continue;
                 }
                 if (in_array($objectType, ['person'])) {
@@ -151,16 +140,16 @@ abstract class AbstractSearchHelper extends AbstractSearchable
                 }
     
                 $description = !empty($descriptionField) ? $entity[$descriptionField] : '';
-                $created = isset($entity['createdDate']) ? $entity['createdDate'] : null;
+                $created = isset($entity['createdBy']) ? $entity['createdBy'] : null;
     
-                $urlArgs['_locale'] = (null !== $languageField && !empty($entity[$languageField])) ? $entity[$languageField] : $request->getLocale();
+                $urlArgs['_locale'] = (null !== $languageField && !empty($entity[$languageField])) ? $entity[$languageField] : $this->request->getLocale();
     
                 $displayUrl = $hasDisplayAction ? new RouteUrl('pggoteammodule_' . $objectType . '_display', $urlArgs) : '';
     
-                $records[] = [
+                $results[] = [
                     'title' => $entity->getTitleFromDisplayPattern(),
                     'text' => $description,
-                    'module' => $this->name,
+                    'module' => 'PggoTeamModule',
                     'sesid' => $sessionId,
                     'created' => $created,
                     'url' => $displayUrl
@@ -168,6 +157,6 @@ abstract class AbstractSearchHelper extends AbstractSearchable
             }
         }
     
-        return $records;
+        return $results;
     }
 }

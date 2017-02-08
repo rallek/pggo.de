@@ -4,12 +4,12 @@
     {formlabel for='pggoTeamModuleObjectType' text=$objectTypeSelectorLabel cssClass='col-sm-3 control-label'}
     <div class="col-sm-9">
         {pggoteammoduleObjectTypeSelector assign='allObjectTypes'}
-        {formdropdownlist id='pggoTeamModuleOjectType' dataField='objectType' group='data' mandatory=true items=$allObjectTypes cssClass='form-control'}
+        {formdropdownlist id='pggoTeamModuleObjectType' dataField='objectType' group='data' mandatory=true items=$allObjectTypes cssClass='form-control'}
         <span class="help-block">{gt text='If you change this please save the element once to reload the parameters below.' domain='pggoteammodule'}</span>
     </div>
 </div>
 
-{if $featureActivationHelper->isEnabled(const('Pggo\\TeamModule\\Helper\\FeatureActivationHelper::CATEGORIES', $objectType))}
+{if $featureActivationHelper->isEnabled(constant('Pggo\\TeamModule\\Helper\\FeatureActivationHelper::CATEGORIES', $objectType))}
 {formvolatile}
 {if $properties ne null && is_array($properties)}
     {nocache}
@@ -60,7 +60,7 @@
     {gt text='Amount' domain='pggoteammodule' assign='amountLabel'}
     {formlabel for='pggoTeamModuleAmount' text=$amountLabel cssClass='col-sm-3 control-label'}
     <div class="col-sm-9">
-        {formintinput id='pggoTeamModuleAmount' dataField='amount' group='data' mandatory=true maxLength=2}
+        {formintinput id='pggoTeamModuleAmount' dataField='amount' group='data' mandatory=true maxLength=2 cssClass='form-control'}
     </div>
 </div>
 
@@ -73,12 +73,12 @@
     </div>
 </div>
 
-<div id="customTemplateArea" class="form-group" data-switch="pggoTeamModuleTemplate" data-switch-value="custom">
+<div id="customTemplateArea" class="form-group"{* data-switch="pggoTeamModuleTemplate" data-switch-value="custom"*}>
     {gt text='Custom template' domain='pggoteammodule' assign='customTemplateLabel'}
     {formlabel for='pggoTeamModuleCustomTemplate' text=$customTemplateLabel cssClass='col-sm-3 control-label'}
     <div class="col-sm-9">
         {formtextinput id='pggoTeamModuleCustomTemplate' dataField='customTemplate' group='data' mandatory=false maxLength=80 cssClass='form-control'}
-        <span class="help-block">{gt text='Example' domain='pggoteammodule'}: <em>itemlist_[objectType]_display.tpl</em></span>
+        <span class="help-block">{gt text='Example' domain='pggoteammodule'}: <em>itemlist_[objectType]_display.html.twig</em></span>
     </div>
 </div>
 
@@ -95,6 +95,10 @@
 
 {*include file='include_filterSyntaxDialog.tpl'*}
 
-{pageaddvar name='stylesheet' value='web/bootstrap/css/bootstrap.min.css'}
-{pageaddvar name='stylesheet' value='web/bootstrap/css/bootstrap-theme.min.css'}
-{pageaddvar name='javascript' value='web/bootstrap/js/bootstrap.min.js'}
+<script type="text/javascript">
+    (function($) {
+    	$('#pggoTeamModuleTemplate').change(function() {
+    	    $('#customTemplateArea').toggleClass('hidden', $(this).val() != 'custom');
+	    }).trigger('change');
+    })(jQuery)
+</script>

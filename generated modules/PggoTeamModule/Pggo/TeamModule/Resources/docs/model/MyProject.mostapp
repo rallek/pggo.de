@@ -1,9 +1,10 @@
 application "Team" {
+    documentation "team presentation extenstion. Different teams by different categories"
     vendor "Pggo"
     author "Ralf Koester"
     email "ralf@familie-koester.de"
     url "http://pggo.de"
-    version "0.1.0"
+    version "0.2.0"
     prefix "team"
     generatorSettings {
         settingsContainer "Settings"
@@ -27,7 +28,7 @@ application "Team" {
         generateTests false
     }
     entities {
-        entity "person" leading categorisable {
+        entity "person" leading categorisable categorisableMultiSelection {
             nameMultiple "persons"
             displayPattern "#functionRole# - #lastName#, #firstName#"
             fields {
