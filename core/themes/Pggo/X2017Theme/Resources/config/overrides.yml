@@ -1,4 +1,13 @@
 ## YAML Override template
 ## original/file.tpl: override/file.tpl
 ---
-system/BlocksModule/Resources/views/Block/Extmenu/topnav.tpl: themes/Pggo/X2017Theme/Resources/views/modules/ZikulaBlocksModule/Block/Extmenu/topnav.tpl
+system/UsersModule/Resources/views/User/main.tpl: themes/Pggo/X2017/Resources/views/modules/ZikulaUsersModule/User/main.tpl
+system/UsersModule/Resources/views/Block/login_topnav.tpl: themes/Pggo/X2017/Resources/views/modules/ZikulaUsersModule/Block/login_topnav.tpl
+system/ThemeModule/Resources/views/moduleheader.tpl: themes/Pggo/X2017/Resources/views/modules/ZikulaThemeModule/moduleheader.tpl
+modules/News/templates/user/index.tpl: themes/Pggo/X2017/Resources/views/modules/News/templates/user/index.tpl
+modules/News/templates/user/view.tpl: themes/Pggo/X2017/Resources/views/modules/News/templates/user/view.tpl
+modules/News/templates/user/menu.tpl: themes/Pggo/X2017/Resources/views/modules/News/templates/user/menu.tpl
+modules/News/templates/user/article.tpl: themes/Pggo/X2017/Resources/views/modules/News/templates/user/article.tpl
+modules/News/templates/user/articlecontent.tpl: themes/Pggo/X2017/Resources/views/modules/News/templates/user/articlecontent.tpl
+modules/News/templates/block/storiesext/row2.tpl: themes/Pggo/X2017/Resources/views/modules/News/templates/block/storiesext/row2.tpl
+modules/News/templates/block/storiesext/main2.tpl: themes/Pggo/X2017/Resources/views/modules/News/templates/block/storiesext/main2.tpl
