@@ -26,7 +26,7 @@ function PggoInstititutionenModuleFinderCKEditor(editor, institUrl)
     currentPggoInstititutionenModuleEditor = editor;
 
     editor.popup(
-        Routing.generate('pggoinstititutionenmodule_external_finder', { objectType: 'image', editor: 'ckeditor' }),
+        Routing.generate('pggoinstititutionenmodule_external_finder', { objectType: 'institution', editor: 'ckeditor' }),
         /*width*/ '80%', /*height*/ '70%',
         'location=no,menubar=no,toolbar=no,dependent=yes,minimizable=no,modal=yes,alwaysRaised=yes,resizable=yes,scrollbars=yes'
     );

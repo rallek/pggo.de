@@ -164,7 +164,7 @@ abstract class AbstractItem extends \Content_AbstractContentType implements Cont
     public function getDefaultData()
     {
         return [
-            'objectType' => 'image',
+            'objectType' => 'institution',
             'id' => null,
             'displayMode' => 'embed'
         ];

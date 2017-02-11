@@ -7,13 +7,6 @@
     {{ form_errors(quickNavForm) }}
     <fieldset>
         <h3>{{ __('Quick navigation') }}</h3>
-        {% if imageFilter is defined and imageFilter != true %}
-            <div class="hidden">
-        {% endif %}
-            {{ form_row(quickNavForm.institution) }}
-        {% if imageFilter is defined and imageFilter != true %}
-            </div>
-        {% endif %}
         {% if workflowStateFilter is defined and workflowStateFilter != true %}
             <div class="hidden">
         {% endif %}

@@ -23,7 +23,6 @@
                 <col id="cName" />
                 <col id="cImage" />
                 <col id="cCopyright" />
-                <col id="cInstitution" />
             </colgroup>
             <thead>
             <tr>
@@ -41,9 +40,6 @@
                 </th>
                 <th id="hCopyright" scope="col" class="text-left">
                     <a href="{{ sort.copyright.url }}" title="{{ __f('Sort by %s', {'%s': 'copyright'}) }}" class="{{ sort.copyright.class }}">{{ __('Copyright') }}</a>
-                </th>
-                <th id="hInstitution" scope="col" class="text-left">
-                    <a href="{{ sort.institution.url }}" title="{{ __f('Sort by %s', {'%s': 'institution'}) }}" class="{{ sort.institution.class }}">{{ __('Institution') }}</a>
                 </th>
             </tr>
             </thead>
@@ -81,20 +77,10 @@
                 <td headers="hCopyright" class="text-left">
                     {{ institution.copyright }}
                 </td>
-                <td headers="hInstitution" class="text-left">
-                    {% if institution.institution|default %}
-                        <a href="{{ path('pggoinstititutionenmodule_image_' ~ routeArea ~ 'display', { 'id': institution.institution.id }) }}">{% spaceless %}
-                          {{ institution.institution.getTitleFromDisplayPattern() }}
-                        {% endspaceless %}</a>
-                        <a id="imageItem{{ institution.id }}_rel_{{ institution.institution.id }}Display" href="{{ path('pggoinstititutionenmodule_image_' ~ routeArea ~ 'display', {'id': institution.institution.id, 'raw': 1 }) }}" title="{{ __('Open quick view window')|e('html_attr') }}" class="pggoinstititutionen-inline-window hidden" data-modal-title="{{ institution.institution.getTitleFromDisplayPattern()|e('html_attr') }}"><span class="fa fa-id-card-o"></span></a>
-                    {% else %}
-                        {{ __('Not set.') }}
-                    {% endif %}
-                </td>
             </tr>
         {% else %}
             <tr class="z-{{ routeArea == 'admin' ? 'admin' : 'data' }}tableempty">
-                <td class="text-left" colspan="{% if routeArea == 'admin' %}6{% else %}5{% endif %}">
+                <td class="text-left" colspan="{% if routeArea == 'admin' %}5{% else %}4{% endif %}">
             {{ __('No institutions found.') }}
               </td>
             </tr>

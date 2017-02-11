@@ -13,6 +13,7 @@
 namespace Pggo\InstititutionenModule\Entity\Base;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -129,14 +130,13 @@ abstract class AbstractInstitutionEntity extends EntityAccess
     
     
     /**
-     * Bidirectional - Many images [institutions] are linked by one institution [image] (OWNING SIDE).
+     * Bidirectional - One institution [institution] has many pictures [pictures] (INVERSE SIDE).
      *
-     * @ORM\ManyToOne(targetEntity="Pggo\InstititutionenModule\Entity\ImageEntity", inversedBy="images")
-     * @ORM\JoinTable(name="pggo_instit_image")
-     * @Assert\Type(type="Pggo\InstititutionenModule\Entity\ImageEntity")
-     * @var \Pggo\InstititutionenModule\Entity\ImageEntity $institution
+     * @ORM\OneToMany(targetEntity="Pggo\InstititutionenModule\Entity\PictureEntity", mappedBy="institution")
+     * @ORM\JoinTable(name="pggo_instit_institutionpictures")
+     * @var \Pggo\InstititutionenModule\Entity\PictureEntity[] $pictures
      */
-    protected $institution;
+    protected $pictures = null;
     
     
     /**
@@ -151,6 +151,7 @@ abstract class AbstractInstitutionEntity extends EntityAccess
     public function __construct()
     {
         $this->initWorkflow();
+        $this->pictures = new ArrayCollection();
     }
     
     /**
@@ -376,25 +377,53 @@ abstract class AbstractInstitutionEntity extends EntityAccess
     
     
     /**
-     * Returns the institution.
+     * Returns the pictures.
      *
-     * @return \Pggo\InstititutionenModule\Entity\ImageEntity
+     * @return \Pggo\InstititutionenModule\Entity\PictureEntity[]
      */
-    public function getInstitution()
+    public function getPictures()
     {
-        return $this->institution;
+        return $this->pictures;
     }
     
     /**
-     * Sets the institution.
+     * Sets the pictures.
      *
-     * @param \Pggo\InstititutionenModule\Entity\ImageEntity $institution
+     * @param \Pggo\InstititutionenModule\Entity\PictureEntity[] $pictures
      *
      * @return void
      */
-    public function setInstitution($institution = null)
+    public function setPictures($pictures)
     {
-        $this->institution = $institution;
+        foreach ($pictures as $pictureSingle) {
+            $this->addPictures($pictureSingle);
+        }
+    }
+    
+    /**
+     * Adds an instance of \Pggo\InstititutionenModule\Entity\PictureEntity to the list of pictures.
+     *
+     * @param \Pggo\InstititutionenModule\Entity\PictureEntity $picture The instance to be added to the collection
+     *
+     * @return void
+     */
+    public function addPictures(\Pggo\InstititutionenModule\Entity\PictureEntity $picture)
+    {
+        $this->pictures->add($picture);
+        $picture->setInstitution($this);
+    }
+    
+    /**
+     * Removes an instance of \Pggo\InstititutionenModule\Entity\PictureEntity from the list of pictures.
+     *
+     * @param \Pggo\InstititutionenModule\Entity\PictureEntity $picture The instance to be removed from the collection
+     *
+     * @return void
+     */
+    public function removePictures(\Pggo\InstititutionenModule\Entity\PictureEntity $picture)
+    {
+        $this->pictures->removeElement($picture);
+        $picture->setInstitution(null);
     }
     
     

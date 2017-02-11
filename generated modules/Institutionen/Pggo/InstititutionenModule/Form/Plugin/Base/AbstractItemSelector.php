@@ -154,7 +154,7 @@ class AbstractItemSelector extends Zikula_Form_Plugin_TextInput implements Conta
     public function decode(Zikula_Form_View $view)
     {
         $request = $this->container->get('request_stack')->getCurrentRequest();
-        $this->objectType = $request->request->get('PggoInstititutionenModule_objecttype', 'image');
+        $this->objectType = $request->request->get('PggoInstititutionenModule_objecttype', 'institution');
         $this->selectedItemId = $this->text = $request->request->get($this->inputName, 0);
     }
 }

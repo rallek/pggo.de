@@ -26,7 +26,7 @@ function smarty_function_pggoinstititutionenmoduleObjectTypeSelector($params, $v
     $dom = ZLanguage::getModuleDomain('PggoInstititutionenModule');
     $result = [];
 
-    $result[] = ['text' => __('Images', $dom), 'value' => 'image'];
+    $result[] = ['text' => __('Pictures', $dom), 'value' => 'picture'];
     $result[] = ['text' => __('Institutions', $dom), 'value' => 'institution'];
 
     if (array_key_exists('assign', $params)) {

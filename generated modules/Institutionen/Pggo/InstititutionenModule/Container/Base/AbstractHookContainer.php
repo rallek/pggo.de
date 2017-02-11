@@ -28,27 +28,27 @@ abstract class AbstractHookContainer extends ZikulaHookContainer
      */
     protected function setupHookBundles()
     {
-        $bundle = new SubscriberBundle('PggoInstititutionenModule', 'subscriber.pggoinstititutionenmodule.ui_hooks.images', 'ui_hooks', $this->__('pggoinstititutionenmodule. Images Display Hooks'));
+        $bundle = new SubscriberBundle('PggoInstititutionenModule', 'subscriber.pggoinstititutionenmodule.ui_hooks.pictures', 'ui_hooks', $this->__('pggoinstititutionenmodule. Pictures Display Hooks'));
         
         // Display hook for view/display templates.
-        $bundle->addEvent('display_view', 'pggoinstititutionenmodule.ui_hooks.images.display_view');
+        $bundle->addEvent('display_view', 'pggoinstititutionenmodule.ui_hooks.pictures.display_view');
         // Display hook for create/edit forms.
-        $bundle->addEvent('form_edit', 'pggoinstititutionenmodule.ui_hooks.images.form_edit');
+        $bundle->addEvent('form_edit', 'pggoinstititutionenmodule.ui_hooks.pictures.form_edit');
         // Display hook for delete dialogues.
-        $bundle->addEvent('form_delete', 'pggoinstititutionenmodule.ui_hooks.images.form_delete');
+        $bundle->addEvent('form_delete', 'pggoinstititutionenmodule.ui_hooks.pictures.form_delete');
         // Validate input from an ui create/edit form.
-        $bundle->addEvent('validate_edit', 'pggoinstititutionenmodule.ui_hooks.images.validate_edit');
+        $bundle->addEvent('validate_edit', 'pggoinstititutionenmodule.ui_hooks.pictures.validate_edit');
         // Validate input from an ui delete form.
-        $bundle->addEvent('validate_delete', 'pggoinstititutionenmodule.ui_hooks.images.validate_delete');
+        $bundle->addEvent('validate_delete', 'pggoinstititutionenmodule.ui_hooks.pictures.validate_delete');
         // Perform the final update actions for a ui create/edit form.
-        $bundle->addEvent('process_edit', 'pggoinstititutionenmodule.ui_hooks.images.process_edit');
+        $bundle->addEvent('process_edit', 'pggoinstititutionenmodule.ui_hooks.pictures.process_edit');
         // Perform the final delete actions for a ui form.
-        $bundle->addEvent('process_delete', 'pggoinstititutionenmodule.ui_hooks.images.process_delete');
+        $bundle->addEvent('process_delete', 'pggoinstititutionenmodule.ui_hooks.pictures.process_delete');
         $this->registerHookSubscriberBundle($bundle);
         
-        $bundle = new SubscriberBundle('PggoInstititutionenModule', 'subscriber.pggoinstititutionenmodule.filter_hooks.images', 'filter_hooks', $this->__('pggoinstititutionenmodule. Images Filter Hooks'));
+        $bundle = new SubscriberBundle('PggoInstititutionenModule', 'subscriber.pggoinstititutionenmodule.filter_hooks.pictures', 'filter_hooks', $this->__('pggoinstititutionenmodule. Pictures Filter Hooks'));
         // A filter applied to the given area.
-        $bundle->addEvent('filter', 'pggoinstititutionenmodule.filter_hooks.images.filter');
+        $bundle->addEvent('filter', 'pggoinstititutionenmodule.filter_hooks.pictures.filter');
         $this->registerHookSubscriberBundle($bundle);
         
         $bundle = new SubscriberBundle('PggoInstititutionenModule', 'subscriber.pggoinstititutionenmodule.ui_hooks.institutions', 'ui_hooks', $this->__('pggoinstititutionenmodule. Institutions Display Hooks'));

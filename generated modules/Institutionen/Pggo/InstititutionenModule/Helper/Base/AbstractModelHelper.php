@@ -57,7 +57,7 @@ abstract class AbstractModelHelper
         $result = false;
     
         switch ($objectType) {
-            case 'image':
+            case 'picture':
                 $result = true;
                 break;
             case 'institution':

@@ -78,7 +78,7 @@ abstract class AbstractSelectionHelper
     public function hasCompositeKeys($objectType)
     {
         switch ($objectType) {
-            case 'image':
+            case 'picture':
                 return false;
             case 'institution':
                 return false;

@@ -145,7 +145,7 @@ abstract class AbstractControllerHelper
         }
     
         $allowedObjectTypes = [];
-        $allowedObjectTypes[] = 'image';
+        $allowedObjectTypes[] = 'picture';
         $allowedObjectTypes[] = 'institution';
     
         return $allowedObjectTypes;
@@ -165,7 +165,7 @@ abstract class AbstractControllerHelper
             $context = 'controllerAction';
         }
     
-        $defaultObjectType = 'image';
+        $defaultObjectType = 'institution';
     
         return $defaultObjectType;
     }

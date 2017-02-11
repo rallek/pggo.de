@@ -5,7 +5,7 @@
 {% block content %}
     <div class="container">
         <ul class="nav nav-tabs">
-        <li{{ objectType == 'image' ? ' class="active"' : '' }}><a href="{{ path('pggoinstititutionenmodule_external_finder', {'objectType': 'image', 'editor': editorName}) }}" title="{{ __('Search and select image') }}">{{ __('Images') }}</a></li>
+        <li{{ objectType == 'picture' ? ' class="active"' : '' }}><a href="{{ path('pggoinstititutionenmodule_external_finder', {'objectType': 'picture', 'editor': editorName}) }}" title="{{ __('Search and select picture') }}">{{ __('Pictures') }}</a></li>
         <li{{ objectType == 'institution' ? ' class="active"' : '' }}><a href="{{ path('pggoinstititutionenmodule_external_finder', {'objectType': 'institution', 'editor': editorName}) }}" title="{{ __('Search and select institution') }}">{{ __('Institutions') }}</a></li>
         </ul>
         {% form_theme finderForm with [

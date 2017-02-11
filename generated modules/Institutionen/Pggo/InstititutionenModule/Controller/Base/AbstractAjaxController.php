@@ -88,7 +88,7 @@ abstract class AbstractAjaxController extends AbstractController
             return true;
         }
         
-        $objectType = $request->request->getAlnum('ot', 'image');
+        $objectType = $request->request->getAlnum('ot', 'institution');
         $controllerHelper = $this->get('pggo_instititutionen_module.controller_helper');
         $contextArgs = ['controller' => 'ajax', 'action' => 'getItemListFinder'];
         if (!in_array($objectType, $controllerHelper->getObjectTypes('controllerAction', $contextArgs))) {

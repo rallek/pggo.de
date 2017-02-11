@@ -119,7 +119,7 @@ abstract class AbstractWorkflowHelper
     {
         $result = '';
         switch ($objectType) {
-            case 'image':
+            case 'picture':
                 $result = 'none';
                 break;
             case 'institution':

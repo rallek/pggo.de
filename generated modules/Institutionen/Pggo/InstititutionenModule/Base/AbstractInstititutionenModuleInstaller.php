@@ -56,20 +56,20 @@ abstract class AbstractInstititutionenModuleInstaller extends AbstractExtensionI
         }
     
         // set up all our vars with initial values
-        $this->setVar('imageEntriesPerPage', '10');
-        $this->setVar('linkOwnImagesOnAccountPage', true);
+        $this->setVar('pictureEntriesPerPage', '10');
+        $this->setVar('linkOwnPicturesOnAccountPage', true);
         $this->setVar('institutionEntriesPerPage', '10');
         $this->setVar('linkOwnInstitutionsOnAccountPage', true);
-        $this->setVar('enableShrinkingForImageImage', false);
-        $this->setVar('shrinkWidthImageImage', '800');
-        $this->setVar('shrinkHeightImageImage', '600');
-        $this->setVar('thumbnailModeImageImage',  'inset' );
-        $this->setVar('thumbnailWidthImageImageView', '32');
-        $this->setVar('thumbnailHeightImageImageView', '24');
-        $this->setVar('thumbnailWidthImageImageDisplay', '240');
-        $this->setVar('thumbnailHeightImageImageDisplay', '180');
-        $this->setVar('thumbnailWidthImageImageEdit', '240');
-        $this->setVar('thumbnailHeightImageImageEdit', '180');
+        $this->setVar('enableShrinkingForPictureImage', false);
+        $this->setVar('shrinkWidthPictureImage', '800');
+        $this->setVar('shrinkHeightPictureImage', '600');
+        $this->setVar('thumbnailModePictureImage',  'inset' );
+        $this->setVar('thumbnailWidthPictureImageView', '32');
+        $this->setVar('thumbnailHeightPictureImageView', '24');
+        $this->setVar('thumbnailWidthPictureImageDisplay', '240');
+        $this->setVar('thumbnailHeightPictureImageDisplay', '180');
+        $this->setVar('thumbnailWidthPictureImageEdit', '240');
+        $this->setVar('thumbnailHeightPictureImageEdit', '180');
         $this->setVar('enableShrinkingForInstitutionImage', false);
         $this->setVar('shrinkWidthInstitutionImage', '800');
         $this->setVar('shrinkHeightInstitutionImage', '600');
@@ -391,7 +391,7 @@ abstract class AbstractInstititutionenModuleInstaller extends AbstractExtensionI
     protected function listEntityClasses()
     {
         $classNames = [];
-        $classNames[] = 'Pggo\InstititutionenModule\Entity\ImageEntity';
+        $classNames[] = 'Pggo\InstititutionenModule\Entity\PictureEntity';
         $classNames[] = 'Pggo\InstititutionenModule\Entity\InstitutionEntity';
     
         return $classNames;
@@ -408,7 +408,7 @@ abstract class AbstractInstititutionenModuleInstaller extends AbstractExtensionI
         $logger = $this->container->get('logger');
         $request = $this->container->get('request_stack')->getCurrentRequest();
         
-        $entityClass = 'Pggo\InstititutionenModule\Entity\ImageEntity';
+        $entityClass = 'Pggo\InstititutionenModule\Entity\PictureEntity';
         $entityManager->getRepository($entityClass)->truncateTable($logger);
         $entityClass = 'Pggo\InstititutionenModule\Entity\InstitutionEntity';
         $entityManager->getRepository($entityClass)->truncateTable($logger);

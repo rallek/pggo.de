@@ -62,28 +62,6 @@ abstract class AbstractEditHandler extends EditHandler
     }
     
     /**
-     * Initialises relationship presets.
-     */
-    protected function initRelationPresets()
-    {
-        $entity = $this->entityRef;
-    
-        
-        // assign identifiers of predefined incoming relationships
-        // editable relation, we store the id and assign it now to show it in UI
-        $this->relationPresets['institution'] = $this->request->get('institution', '');
-        if (!empty($this->relationPresets['institution'])) {
-            $relObj = $this->selectionHelper->getEntity('image', $this->relationPresets['institution']);
-            if (null !== $relObj) {
-                $relObj->addImages($entity);
-            }
-        }
-    
-        // save entity reference for later reuse
-        $this->entityRef = $entity;
-    }
-    
-    /**
      * Creates the form type.
      */
     protected function createForm()
@@ -126,18 +104,6 @@ abstract class AbstractEditHandler extends EditHandler
         // admin detail page of treated institution
         $codes[] = 'adminDisplay';
     
-        // user list of images
-        $codes[] = 'userViewImages';
-        // admin list of images
-        $codes[] = 'adminViewImages';
-        // user list of own images
-        $codes[] = 'userOwnViewImages';
-        // admin list of own images
-        $codes[] = 'adminOwnViewImages';
-        // user detail page of related image
-        $codes[] = 'userDisplayImage';
-        // admin detail page of related image
-        $codes[] = 'adminDisplayImage';
     
         return $codes;
     }
@@ -321,19 +287,6 @@ abstract class AbstractEditHandler extends EditHandler
                     }
     
                     return $this->router->generate($routePrefix . 'display', $urlArgs);
-                }
-    
-                return $this->getDefaultReturnUrl($args);
-            case 'userViewImages':
-            case 'adminViewImages':
-                return $this->router->generate('pggoinstititutionenmodule_image_' . $routeArea . 'view');
-            case 'userOwnViewImages':
-            case 'adminOwnViewImages':
-                return $this->router->generate('pggoinstititutionenmodule_image_' . $routeArea . 'view', [ 'own' => 1 ]);
-            case 'userDisplayImage':
-            case 'adminDisplayImage':
-                if (!empty($this->relationPresets['institution'])) {
-                    return $this->router->generate('pggoinstititutionenmodule_image_' . $routeArea . 'display',  ['id' => $this->relationPresets['institution']]);
                 }
     
                 return $this->getDefaultReturnUrl($args);

@@ -146,7 +146,6 @@ abstract class AbstractInstitutionController extends AbstractController
         $sortableColumns->addColumns([
             new Column('name'),
             new Column('copyright'),
-            new Column('institution'),
             new Column('createdBy'),
             new Column('createdDate'),
             new Column('updatedBy'),

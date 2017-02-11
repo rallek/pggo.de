@@ -95,7 +95,7 @@ abstract class AbstractUploadHelper
         $this->variableApi = $variableApi;
         $this->dataDirectory = $dataDirectory;
 
-        $this->allowedObjectTypes = ['image', 'institution'];
+        $this->allowedObjectTypes = ['picture', 'institution'];
         $this->imageFileTypes = ['gif', 'jpeg', 'jpg', 'png', 'swf'];
         $this->forbiddenFileTypes = ['cgi', 'pl', 'asp', 'phtml', 'php', 'php3', 'php4', 'php5', 'exe', 'com', 'bat', 'jsp', 'cfm', 'shtml'];
     }
@@ -320,7 +320,7 @@ abstract class AbstractUploadHelper
         // determine the allowed extensions
         $allowedExtensions = [];
         switch ($objectType) {
-            case 'image':
+            case 'picture':
                 $allowedExtensions = ['gif', 'jpeg', 'jpg', 'png'];
                     break;
             case 'institution':
@@ -361,7 +361,7 @@ abstract class AbstractUploadHelper
         $namingScheme = 0;
     
         switch ($objectType) {
-            case 'image':
+            case 'picture':
                 $namingScheme = 0;
                     break;
             case 'institution':
@@ -459,8 +459,8 @@ abstract class AbstractUploadHelper
         $basePath = $this->dataDirectory . '/PggoInstititutionenModule/';
     
         switch ($objectType) {
-            case 'image':
-                $basePath .= 'images/image/';
+            case 'picture':
+                $basePath .= 'pictures/image/';
                 break;
             case 'institution':
                 $basePath .= 'institutions/image/';
@@ -520,7 +520,7 @@ abstract class AbstractUploadHelper
     {
         $result = true;
     
-        $result &= $this->checkAndCreateUploadFolder('image', 'image', 'gif, jpeg, jpg, png');
+        $result &= $this->checkAndCreateUploadFolder('picture', 'image', 'gif, jpeg, jpg, png');
     
         $result &= $this->checkAndCreateUploadFolder('institution', 'image', 'gif, jpeg, jpg, png');
     

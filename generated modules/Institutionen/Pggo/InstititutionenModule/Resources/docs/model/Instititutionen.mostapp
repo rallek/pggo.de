@@ -1,9 +1,10 @@
 application "Instititutionen" {
+    documentation "A module to deliver standardized layouts for institutions, building and teams"
     vendor "Pggo"
     author "Ralf Koester"
     email "ralf@familie-koester.de"
     url "http://k62.de"
-    version "0.1.0"
+    version "0.1.1"
     prefix "instit"
     generatorSettings {
         settingsContainer "Settings"
@@ -28,8 +29,8 @@ application "Instititutionen" {
         generateTests false
     }
     entities {
-        entity "image" leading {
-            nameMultiple "images"
+        entity "picture" {
+            nameMultiple "pictures"
             displayPattern "#title#"
             ownerPermission true
             fields {
@@ -52,7 +53,7 @@ application "Instititutionen" {
                 editAction "Edit"
             }
         },
-        entity "institution" {
+        entity "institution" leading {
             nameMultiple "institutions"
             displayPattern "#name#"
             fields {
@@ -80,10 +81,11 @@ application "Instititutionen" {
     }
     relations {
         one2many {
-            source "image"
+            source 
+            "institution"
             sourceAlias "institution"
-            target "institution"
-            targetAlias "images"
+            target "picture"
+            targetAlias "pictures"
         }
     }
 }

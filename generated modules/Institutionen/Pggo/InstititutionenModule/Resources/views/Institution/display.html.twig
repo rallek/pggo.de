@@ -16,6 +16,10 @@
     {% set isQuickView = app.request.query.getBoolean('raw', false) %}
     <div class="pggoinstititutionenmodule-institution pggoinstititutionenmodule-display">
 
+    {% if not isQuickView %}
+        <div class="row">
+            <div class="col-sm-9">
+    {% endif %}
 
     <dl>
         {% if institution.name is not empty %}
@@ -44,19 +48,6 @@
             <dt>{{ __('Description') }}</dt>
             <dd>{{ institution.description|safeHtml }}</dd>
         {% endif %}
-        {% if institution.institution|default %}
-            <dt>{{ __('Institution') }}</dt>
-            <dd>
-              {% if not isQuickView %}
-                  <a href="{{ path('pggoinstititutionenmodule_image_' ~ routeArea ~ 'display', { 'id': institution.institution.id }) }}">{% spaceless %}
-                    {{ institution.institution.getTitleFromDisplayPattern() }}
-                  {% endspaceless %}</a>
-                  <a id="imageItem{{ institution.institution.id }}Display" href="{{ path('pggoinstititutionenmodule_image_' ~ routeArea ~ 'display', { 'id': institution.institution.id, 'raw': 1 }) }}" title="{{ __('Open quick view window')|e('html_attr') }}" class="pggoinstititutionen-inline-window hidden" data-modal-title="{{ institution.institution.getTitleFromDisplayPattern()|e('html_attr') }}"><span class="fa fa-id-card-o"></span></a>
-              {% else %}
-                  {{ institution.institution.getTitleFromDisplayPattern() }}
-              {% endif %}
-            </dd>
-        {% endif %}
         
     </dl>
     {{ include('@PggoInstititutionenModule/Helper/includeStandardFieldsDisplay.html.twig', { obj: institution }) }}
@@ -64,8 +55,36 @@
     {% if not isQuickView %}
         {# include display hooks #}
         {{ block('display_hooks') }}
+            </div>
+            <div class="col-sm-3">
+                {{ block('related_items') }}
+            </div>
+        </div>
     {% endif %}
 </div>
+{% endblock %}
+{% block related_items %}
+    {% if routeArea == 'admin' %}
+        <h4>{{ __('Pictures') }}</h4>
+    {% else %}
+        <h3>{{ __('Pictures') }}</h3>
+    {% endif %}
+    
+    {% if institution.pictures|default %}
+        {{ include(
+            '@PggoInstititutionenModule/Picture/includeDisplayItemListMany.html.twig',
+            { items: institution.pictures }
+        ) }}
+    {% endif %}
+    
+    {% set permLevel = 'ACCESS_ADD' %}
+    {% set mayManage = hasPermission('PggoInstititutionenModule:Picture:', picture.id ~ '::', permLevel) %}
+    {% if mayManage or (currentUser|default and picture.createdBy|default and picture.createdBy.getUid() == currentUser.uid) %}
+        <p class="managelink">
+            {% set createTitle = __('Create picture') %}
+            <a href="{{ path('pggoinstititutionenmodule_picture_' ~ routeArea ~ 'edit', { institution: institution.id }) }}" title="{{ createTitle|e('html_attr') }}" class="fa fa-plus">{{ createTitle }}</a>
+        </p>
+    {% endif %}
 {% endblock %}
 {% block display_hooks %}
     {% set hooks = notifyDisplayHooks(eventName='pggoinstititutionenmodule.ui_hooks.institutions.display_view', id=institution.id, urlObject=currentUrlObject) %}

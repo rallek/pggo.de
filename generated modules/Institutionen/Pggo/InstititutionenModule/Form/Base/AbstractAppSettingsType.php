@@ -94,32 +94,32 @@ abstract class AbstractAppSettingsType extends AbstractType
     public function addListViewsFields(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('imageEntriesPerPage', 'Symfony\Component\Form\Extension\Core\Type\IntegerType', [
-                'label' => $this->__('Image entries per page') . ':',
+            ->add('pictureEntriesPerPage', 'Symfony\Component\Form\Extension\Core\Type\IntegerType', [
+                'label' => $this->__('Picture entries per page') . ':',
                 'label_attr' => [
                     'class' => 'tooltips',
-                    'title' => $this->__('The amount of images shown per page')
+                    'title' => $this->__('The amount of pictures shown per page')
                 ],
-                'help' => $this->__('The amount of images shown per page'),
+                'help' => $this->__('The amount of pictures shown per page'),
                 'required' => false,
-                'data' => isset($this->modVars['imageEntriesPerPage']) ? $this->modVars['imageEntriesPerPage'] : '',
+                'data' => isset($this->modVars['pictureEntriesPerPage']) ? $this->modVars['pictureEntriesPerPage'] : '',
                 'empty_data' => intval('10'),
                 'attr' => [
                     'maxlength' => 255,
-                    'title' => $this->__('Enter the image entries per page.') . ' ' . $this->__('Only digits are allowed.')
+                    'title' => $this->__('Enter the picture entries per page.') . ' ' . $this->__('Only digits are allowed.')
                 ],'scale' => 0
             ])
-            ->add('linkOwnImagesOnAccountPage', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', [
-                'label' => $this->__('Link own images on account page') . ':',
+            ->add('linkOwnPicturesOnAccountPage', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', [
+                'label' => $this->__('Link own pictures on account page') . ':',
                 'label_attr' => [
                     'class' => 'tooltips',
-                    'title' => $this->__('Whether to add a link to images of the current user on his account page')
+                    'title' => $this->__('Whether to add a link to pictures of the current user on his account page')
                 ],
-                'help' => $this->__('Whether to add a link to images of the current user on his account page'),
+                'help' => $this->__('Whether to add a link to pictures of the current user on his account page'),
                 'required' => false,
-                'data' => (bool)(isset($this->modVars['linkOwnImagesOnAccountPage']) ? $this->modVars['linkOwnImagesOnAccountPage'] : true),
+                'data' => (bool)(isset($this->modVars['linkOwnPicturesOnAccountPage']) ? $this->modVars['linkOwnPicturesOnAccountPage'] : true),
                 'attr' => [
-                    'title' => $this->__('The link own images on account page option.')
+                    'title' => $this->__('The link own pictures on account page option.')
                 ],
             ])
             ->add('institutionEntriesPerPage', 'Symfony\Component\Form\Extension\Core\Type\IntegerType', [
@@ -162,66 +162,66 @@ abstract class AbstractAppSettingsType extends AbstractType
     public function addImagesFields(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('enableShrinkingForImageImage', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', [
-                'label' => $this->__('Enable shrinking for image image') . ':',
+            ->add('enableShrinkingForPictureImage', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', [
+                'label' => $this->__('Enable shrinking for picture image') . ':',
                 'label_attr' => [
                     'class' => 'tooltips',
                     'title' => $this->__('Whether to enable shrinking huge images to maximum dimensions. Stores downscaled version of the original image.')
                 ],
                 'help' => $this->__('Whether to enable shrinking huge images to maximum dimensions. Stores downscaled version of the original image.'),
                 'required' => false,
-                'data' => (bool)(isset($this->modVars['enableShrinkingForImageImage']) ? $this->modVars['enableShrinkingForImageImage'] : false),
+                'data' => (bool)(isset($this->modVars['enableShrinkingForPictureImage']) ? $this->modVars['enableShrinkingForPictureImage'] : false),
                 'attr' => [
-                    'title' => $this->__('The enable shrinking for image image option.'),
+                    'title' => $this->__('The enable shrinking for picture image option.'),
                     'class' => 'shrink-enabler'
                 ],
             ])
-            ->add('shrinkWidthImageImage', 'Symfony\Component\Form\Extension\Core\Type\IntegerType', [
-                'label' => $this->__('Shrink width image image') . ':',
+            ->add('shrinkWidthPictureImage', 'Symfony\Component\Form\Extension\Core\Type\IntegerType', [
+                'label' => $this->__('Shrink width picture image') . ':',
                 'label_attr' => [
                     'class' => 'tooltips',
                     'title' => $this->__('The maximum image width in pixels.')
                 ],
                 'help' => $this->__('The maximum image width in pixels.'),
                 'required' => false,
-                'data' => isset($this->modVars['shrinkWidthImageImage']) ? $this->modVars['shrinkWidthImageImage'] : '',
+                'data' => isset($this->modVars['shrinkWidthPictureImage']) ? $this->modVars['shrinkWidthPictureImage'] : '',
                 'empty_data' => intval('800'),
                 'attr' => [
                     'maxlength' => 4,
-                    'title' => $this->__('Enter the shrink width image image.') . ' ' . $this->__('Only digits are allowed.'),
-                    'class' => 'shrinkdimension-shrinkwidthimageimage'
+                    'title' => $this->__('Enter the shrink width picture image.') . ' ' . $this->__('Only digits are allowed.'),
+                    'class' => 'shrinkdimension-shrinkwidthpictureimage'
                 ],'scale' => 0,
                 'input_group' => ['right' => $this->__('pixels')]
             ])
-            ->add('shrinkHeightImageImage', 'Symfony\Component\Form\Extension\Core\Type\IntegerType', [
-                'label' => $this->__('Shrink height image image') . ':',
+            ->add('shrinkHeightPictureImage', 'Symfony\Component\Form\Extension\Core\Type\IntegerType', [
+                'label' => $this->__('Shrink height picture image') . ':',
                 'label_attr' => [
                     'class' => 'tooltips',
                     'title' => $this->__('The maximum image height in pixels.')
                 ],
                 'help' => $this->__('The maximum image height in pixels.'),
                 'required' => false,
-                'data' => isset($this->modVars['shrinkHeightImageImage']) ? $this->modVars['shrinkHeightImageImage'] : '',
+                'data' => isset($this->modVars['shrinkHeightPictureImage']) ? $this->modVars['shrinkHeightPictureImage'] : '',
                 'empty_data' => intval('600'),
                 'attr' => [
                     'maxlength' => 4,
-                    'title' => $this->__('Enter the shrink height image image.') . ' ' . $this->__('Only digits are allowed.'),
-                    'class' => 'shrinkdimension-shrinkheightimageimage'
+                    'title' => $this->__('Enter the shrink height picture image.') . ' ' . $this->__('Only digits are allowed.'),
+                    'class' => 'shrinkdimension-shrinkheightpictureimage'
                 ],'scale' => 0,
                 'input_group' => ['right' => $this->__('pixels')]
             ])
-            ->add('thumbnailModeImageImage', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', [
-                'label' => $this->__('Thumbnail mode image image') . ':',
+            ->add('thumbnailModePictureImage', 'Symfony\Component\Form\Extension\Core\Type\ChoiceType', [
+                'label' => $this->__('Thumbnail mode picture image') . ':',
                 'label_attr' => [
                     'class' => 'tooltips',
                     'title' => $this->__('Thumbnail mode (inset or outbound).')
                 ],
                 'help' => $this->__('Thumbnail mode (inset or outbound).'),
                 'required' => false,
-                'data' => isset($this->modVars['thumbnailModeImageImage']) ? $this->modVars['thumbnailModeImageImage'] : '',
+                'data' => isset($this->modVars['thumbnailModePictureImage']) ? $this->modVars['thumbnailModePictureImage'] : '',
                 'empty_data' => 'inset',
                 'attr' => [
-                    'title' => $this->__('Choose the thumbnail mode image image.')
+                    'title' => $this->__('Choose the thumbnail mode picture image.')
                 ],'choices' => [
                     $this->__('Inset') => 'inset'
                     ,$this->__('Outbound') => 'outbound'
@@ -229,99 +229,99 @@ abstract class AbstractAppSettingsType extends AbstractType
                 'choices_as_values' => true,
                 'multiple' => false
             ])
-            ->add('thumbnailWidthImageImageView', 'Symfony\Component\Form\Extension\Core\Type\IntegerType', [
-                'label' => $this->__('Thumbnail width image image view') . ':',
+            ->add('thumbnailWidthPictureImageView', 'Symfony\Component\Form\Extension\Core\Type\IntegerType', [
+                'label' => $this->__('Thumbnail width picture image view') . ':',
                 'label_attr' => [
                     'class' => 'tooltips',
                     'title' => $this->__('Thumbnail width on view pages in pixels.')
                 ],
                 'help' => $this->__('Thumbnail width on view pages in pixels.'),
                 'required' => false,
-                'data' => isset($this->modVars['thumbnailWidthImageImageView']) ? $this->modVars['thumbnailWidthImageImageView'] : '',
+                'data' => isset($this->modVars['thumbnailWidthPictureImageView']) ? $this->modVars['thumbnailWidthPictureImageView'] : '',
                 'empty_data' => intval('32'),
                 'attr' => [
                     'maxlength' => 4,
-                    'title' => $this->__('Enter the thumbnail width image image view.') . ' ' . $this->__('Only digits are allowed.')
+                    'title' => $this->__('Enter the thumbnail width picture image view.') . ' ' . $this->__('Only digits are allowed.')
                 ],'scale' => 0,
                 'input_group' => ['right' => $this->__('pixels')]
             ])
-            ->add('thumbnailHeightImageImageView', 'Symfony\Component\Form\Extension\Core\Type\IntegerType', [
-                'label' => $this->__('Thumbnail height image image view') . ':',
+            ->add('thumbnailHeightPictureImageView', 'Symfony\Component\Form\Extension\Core\Type\IntegerType', [
+                'label' => $this->__('Thumbnail height picture image view') . ':',
                 'label_attr' => [
                     'class' => 'tooltips',
                     'title' => $this->__('Thumbnail height on view pages in pixels.')
                 ],
                 'help' => $this->__('Thumbnail height on view pages in pixels.'),
                 'required' => false,
-                'data' => isset($this->modVars['thumbnailHeightImageImageView']) ? $this->modVars['thumbnailHeightImageImageView'] : '',
+                'data' => isset($this->modVars['thumbnailHeightPictureImageView']) ? $this->modVars['thumbnailHeightPictureImageView'] : '',
                 'empty_data' => intval('24'),
                 'attr' => [
                     'maxlength' => 4,
-                    'title' => $this->__('Enter the thumbnail height image image view.') . ' ' . $this->__('Only digits are allowed.')
+                    'title' => $this->__('Enter the thumbnail height picture image view.') . ' ' . $this->__('Only digits are allowed.')
                 ],'scale' => 0,
                 'input_group' => ['right' => $this->__('pixels')]
             ])
-            ->add('thumbnailWidthImageImageDisplay', 'Symfony\Component\Form\Extension\Core\Type\IntegerType', [
-                'label' => $this->__('Thumbnail width image image display') . ':',
+            ->add('thumbnailWidthPictureImageDisplay', 'Symfony\Component\Form\Extension\Core\Type\IntegerType', [
+                'label' => $this->__('Thumbnail width picture image display') . ':',
                 'label_attr' => [
                     'class' => 'tooltips',
                     'title' => $this->__('Thumbnail width on display pages in pixels.')
                 ],
                 'help' => $this->__('Thumbnail width on display pages in pixels.'),
                 'required' => false,
-                'data' => isset($this->modVars['thumbnailWidthImageImageDisplay']) ? $this->modVars['thumbnailWidthImageImageDisplay'] : '',
+                'data' => isset($this->modVars['thumbnailWidthPictureImageDisplay']) ? $this->modVars['thumbnailWidthPictureImageDisplay'] : '',
                 'empty_data' => intval('240'),
                 'attr' => [
                     'maxlength' => 4,
-                    'title' => $this->__('Enter the thumbnail width image image display.') . ' ' . $this->__('Only digits are allowed.')
+                    'title' => $this->__('Enter the thumbnail width picture image display.') . ' ' . $this->__('Only digits are allowed.')
                 ],'scale' => 0,
                 'input_group' => ['right' => $this->__('pixels')]
             ])
-            ->add('thumbnailHeightImageImageDisplay', 'Symfony\Component\Form\Extension\Core\Type\IntegerType', [
-                'label' => $this->__('Thumbnail height image image display') . ':',
+            ->add('thumbnailHeightPictureImageDisplay', 'Symfony\Component\Form\Extension\Core\Type\IntegerType', [
+                'label' => $this->__('Thumbnail height picture image display') . ':',
                 'label_attr' => [
                     'class' => 'tooltips',
                     'title' => $this->__('Thumbnail height on display pages in pixels.')
                 ],
                 'help' => $this->__('Thumbnail height on display pages in pixels.'),
                 'required' => false,
-                'data' => isset($this->modVars['thumbnailHeightImageImageDisplay']) ? $this->modVars['thumbnailHeightImageImageDisplay'] : '',
+                'data' => isset($this->modVars['thumbnailHeightPictureImageDisplay']) ? $this->modVars['thumbnailHeightPictureImageDisplay'] : '',
                 'empty_data' => intval('180'),
                 'attr' => [
                     'maxlength' => 4,
-                    'title' => $this->__('Enter the thumbnail height image image display.') . ' ' . $this->__('Only digits are allowed.')
+                    'title' => $this->__('Enter the thumbnail height picture image display.') . ' ' . $this->__('Only digits are allowed.')
                 ],'scale' => 0,
                 'input_group' => ['right' => $this->__('pixels')]
             ])
-            ->add('thumbnailWidthImageImageEdit', 'Symfony\Component\Form\Extension\Core\Type\IntegerType', [
-                'label' => $this->__('Thumbnail width image image edit') . ':',
+            ->add('thumbnailWidthPictureImageEdit', 'Symfony\Component\Form\Extension\Core\Type\IntegerType', [
+                'label' => $this->__('Thumbnail width picture image edit') . ':',
                 'label_attr' => [
                     'class' => 'tooltips',
                     'title' => $this->__('Thumbnail width on edit pages in pixels.')
                 ],
                 'help' => $this->__('Thumbnail width on edit pages in pixels.'),
                 'required' => false,
-                'data' => isset($this->modVars['thumbnailWidthImageImageEdit']) ? $this->modVars['thumbnailWidthImageImageEdit'] : '',
+                'data' => isset($this->modVars['thumbnailWidthPictureImageEdit']) ? $this->modVars['thumbnailWidthPictureImageEdit'] : '',
                 'empty_data' => intval('240'),
                 'attr' => [
                     'maxlength' => 4,
-                    'title' => $this->__('Enter the thumbnail width image image edit.') . ' ' . $this->__('Only digits are allowed.')
+                    'title' => $this->__('Enter the thumbnail width picture image edit.') . ' ' . $this->__('Only digits are allowed.')
                 ],'scale' => 0,
                 'input_group' => ['right' => $this->__('pixels')]
             ])
-            ->add('thumbnailHeightImageImageEdit', 'Symfony\Component\Form\Extension\Core\Type\IntegerType', [
-                'label' => $this->__('Thumbnail height image image edit') . ':',
+            ->add('thumbnailHeightPictureImageEdit', 'Symfony\Component\Form\Extension\Core\Type\IntegerType', [
+                'label' => $this->__('Thumbnail height picture image edit') . ':',
                 'label_attr' => [
                     'class' => 'tooltips',
                     'title' => $this->__('Thumbnail height on edit pages in pixels.')
                 ],
                 'help' => $this->__('Thumbnail height on edit pages in pixels.'),
                 'required' => false,
-                'data' => isset($this->modVars['thumbnailHeightImageImageEdit']) ? $this->modVars['thumbnailHeightImageImageEdit'] : '',
+                'data' => isset($this->modVars['thumbnailHeightPictureImageEdit']) ? $this->modVars['thumbnailHeightPictureImageEdit'] : '',
                 'empty_data' => intval('180'),
                 'attr' => [
                     'maxlength' => 4,
-                    'title' => $this->__('Enter the thumbnail height image image edit.') . ' ' . $this->__('Only digits are allowed.')
+                    'title' => $this->__('Enter the thumbnail height picture image edit.') . ' ' . $this->__('Only digits are allowed.')
                 ],'scale' => 0,
                 'input_group' => ['right' => $this->__('pixels')]
             ])

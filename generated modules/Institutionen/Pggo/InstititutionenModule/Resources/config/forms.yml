@@ -1,10 +1,11 @@
 services:
     # Form types
     
-    pggo_instititutionen_module.form.type.imagequicknav:
-        class: Pggo\InstititutionenModule\Form\Type\QuickNavigation\ImageQuickNavType
+    pggo_instititutionen_module.form.type.picturequicknav:
+        class: Pggo\InstititutionenModule\Form\Type\QuickNavigation\PictureQuickNavType
         arguments:
             - "@translator.default"
+            - "@request_stack"
             - "@pggo_instititutionen_module.listentries_helper"
         tags:
             - { name: form.type }
@@ -13,13 +14,12 @@ services:
         class: Pggo\InstititutionenModule\Form\Type\QuickNavigation\InstitutionQuickNavType
         arguments:
             - "@translator.default"
-            - "@request_stack"
             - "@pggo_instititutionen_module.listentries_helper"
         tags:
             - { name: form.type }
     
-    pggo_instititutionen_module.form.handler.image:
-        class: Pggo\InstititutionenModule\Form\Handler\Image\EditHandler
+    pggo_instititutionen_module.form.handler.picture:
+        class: Pggo\InstititutionenModule\Form\Handler\Picture\EditHandler
         arguments:
             - "@kernel"
             - "@translator.default"
@@ -40,8 +40,8 @@ services:
         tags:
             - { name: form.type }
     
-    pggo_instititutionen_module.form.type.image:
-        class: Pggo\InstititutionenModule\Form\Type\ImageType
+    pggo_instititutionen_module.form.type.picture:
+        class: Pggo\InstititutionenModule\Form\Type\PictureType
         arguments:
             - "@translator.default"
             - "@pggo_instititutionen_module.entity_factory"
@@ -80,8 +80,8 @@ services:
         tags:
             - { name: form.type }
     
-    pggo_instititutionen_module.form.type.imagefinder:
-        class: Pggo\InstititutionenModule\Form\Type\Finder\ImageFinderType
+    pggo_instititutionen_module.form.type.picturefinder:
+        class: Pggo\InstititutionenModule\Form\Type\Finder\PictureFinderType
         arguments:
             - "@translator.default"
         tags:

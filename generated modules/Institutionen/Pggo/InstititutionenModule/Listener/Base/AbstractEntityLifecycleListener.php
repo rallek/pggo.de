@@ -22,7 +22,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Zikula\Core\Doctrine\EntityAccess;
 use Pggo\InstititutionenModule\InstititutionenEvents;
-use Pggo\InstititutionenModule\Event\FilterImageEvent;
+use Pggo\InstititutionenModule\Event\FilterPictureEvent;
 use Pggo\InstititutionenModule\Event\FilterInstitutionEvent;
 
 /**
@@ -336,7 +336,7 @@ abstract class AbstractEntityLifecycleListener implements EventSubscriber, Conta
     {
         $uploadFields = [];
         switch ($objectType) {
-            case 'image':
+            case 'picture':
                 $uploadFields = ['image'];
                 break;
             case 'institution':

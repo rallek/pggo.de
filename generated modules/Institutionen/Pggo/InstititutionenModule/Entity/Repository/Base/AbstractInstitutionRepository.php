@@ -217,7 +217,6 @@ abstract class AbstractInstitutionRepository extends EntityRepository
         }
     
         $parameters = [];
-        $parameters['institution'] = $this->getRequest()->query->get('institution', 0);
         $parameters['workflowState'] = $this->getRequest()->query->get('workflowState', '');
         $parameters['q'] = $this->getRequest()->query->get('q', '');
         
@@ -992,7 +991,7 @@ abstract class AbstractInstitutionRepository extends EntityRepository
      */
     protected function addJoinsToSelection()
     {
-        $selection = ', tblInstitution';
+        $selection = ', tblPictures';
     
         return $selection;
     }
@@ -1006,7 +1005,7 @@ abstract class AbstractInstitutionRepository extends EntityRepository
      */
     protected function addJoinsToFrom(QueryBuilder $qb)
     {
-        $qb->leftJoin('tbl.institution', 'tblInstitution');
+        $qb->leftJoin('tbl.pictures', 'tblPictures');
     
         return $qb;
     }

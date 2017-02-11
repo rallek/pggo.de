@@ -130,7 +130,7 @@ abstract class AbstractListEntriesHelper
     
         $result = false;
         switch ($objectType) {
-            case 'image':
+            case 'picture':
                 switch ($fieldName) {
                     case 'workflowState':
                         $result = false;
@@ -166,10 +166,10 @@ abstract class AbstractListEntriesHelper
     
         $entries = [];
         switch ($objectType) {
-            case 'image':
+            case 'picture':
                 switch ($fieldName) {
                     case 'workflowState':
-                        $entries = $this->getWorkflowStateEntriesForImage();
+                        $entries = $this->getWorkflowStateEntriesForPicture();
                         break;
                 }
                 break;
@@ -191,7 +191,7 @@ abstract class AbstractListEntriesHelper
      *
      * @return array Array with desired list entries
      */
-    public function getWorkflowStateEntriesForImage()
+    public function getWorkflowStateEntriesForPicture()
     {
         $states = [];
         $states[] = [

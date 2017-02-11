@@ -106,12 +106,12 @@ abstract class AbstractLinkContainer implements LinkContainerInterface
                 return $links;
             }
 
-            if (true === $this->variableApi->get('PggoInstititutionenModule', 'linkOwnImagesOnAccountPage', true)) {
-                $objectType = 'image';
+            if (true === $this->variableApi->get('PggoInstititutionenModule', 'linkOwnPicturesOnAccountPage', true)) {
+                $objectType = 'picture';
                 if ($this->permissionApi->hasPermission($this->getBundleName() . ':' . ucfirst($objectType) . ':', '::', ACCESS_READ)) {
                     $links[] = [
                         'url' => $this->router->generate('pggoinstititutionenmodule_' . strtolower($objectType) . '_view', ['own' => 1]),
-                        'text' => $this->__('My images'),
+                        'text' => $this->__('My pictures'),
                         'icon' => 'list-alt'
                     ];
                 }
@@ -130,7 +130,7 @@ abstract class AbstractLinkContainer implements LinkContainerInterface
 
             if ($this->permissionApi->hasPermission($this->getBundleName() . '::', '::', ACCESS_ADMIN)) {
                 $links[] = [
-                    'url' => $this->router->generate('pggoinstititutionenmodule_image_adminindex'),
+                    'url' => $this->router->generate('pggoinstititutionenmodule_institution_adminindex'),
                     'text' => $this->__('Instititutionen Backend'),
                     'icon' => 'wrench'
                 ];
@@ -144,7 +144,7 @@ abstract class AbstractLinkContainer implements LinkContainerInterface
         if (LinkContainerInterface::TYPE_ADMIN == $type) {
             if ($this->permissionApi->hasPermission($this->getBundleName() . '::', '::', ACCESS_READ)) {
                 $links[] = [
-                    'url' => $this->router->generate('pggoinstititutionenmodule_image_index'),
+                    'url' => $this->router->generate('pggoinstititutionenmodule_institution_index'),
                     'text' => $this->__('Frontend'),
                     'title' => $this->__('Switch to user area.'),
                     'icon' => 'home'
@@ -153,7 +153,7 @@ abstract class AbstractLinkContainer implements LinkContainerInterface
         } else {
             if ($this->permissionApi->hasPermission($this->getBundleName() . '::', '::', ACCESS_ADMIN)) {
                 $links[] = [
-                    'url' => $this->router->generate('pggoinstititutionenmodule_image_adminindex'),
+                    'url' => $this->router->generate('pggoinstititutionenmodule_institution_adminindex'),
                     'text' => $this->__('Backend'),
                     'title' => $this->__('Switch to administration area.'),
                     'icon' => 'wrench'
@@ -161,12 +161,12 @@ abstract class AbstractLinkContainer implements LinkContainerInterface
             }
         }
         
-        if (in_array('image', $allowedObjectTypes)
-            && $this->permissionApi->hasPermission($this->getBundleName() . ':Image:', '::', $permLevel)) {
+        if (in_array('picture', $allowedObjectTypes)
+            && $this->permissionApi->hasPermission($this->getBundleName() . ':Picture:', '::', $permLevel)) {
             $links[] = [
-                'url' => $this->router->generate('pggoinstititutionenmodule_image_' . $routeArea . 'view'),
-                'text' => $this->__('Images'),
-                'title' => $this->__('Image list')
+                'url' => $this->router->generate('pggoinstititutionenmodule_picture_' . $routeArea . 'view'),
+                'text' => $this->__('Pictures'),
+                'title' => $this->__('Picture list')
             ];
         }
         if (in_array('institution', $allowedObjectTypes)

@@ -15,6 +15,7 @@ namespace Pggo\InstititutionenModule\Entity;
 use Pggo\InstititutionenModule\Entity\Base\AbstractInstitutionEntity as BaseEntity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;

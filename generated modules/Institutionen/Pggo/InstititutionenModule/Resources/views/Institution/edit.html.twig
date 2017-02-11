@@ -27,10 +27,6 @@
     {{ form_row(form.description) }}
 </fieldset>
 
-{{ include(
-    '@PggoInstititutionenModule/Image/includeSelectOne.html.twig',
-    { group: 'institution', alias: 'institution', aliasReverse: 'images', mandatory: false, idPrefix: 'institInstitution_Institution', linkingItem: institution, displayMode: 'choices', allowEditing: false }
-) }}
 {% if mode != 'create' %}
     {{ include('@PggoInstititutionenModule/Helper/includeStandardFieldsEdit.html.twig', { obj: institution }) }}
 {% endif %}

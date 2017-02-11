@@ -277,7 +277,7 @@ abstract class AbstractItemList extends \Content_AbstractContentType implements 
     public function getDefaultData()
     {
         return [
-            'objectType' => 'image',
+            'objectType' => 'institution',
             'sorting' => 'default',
             'amount' => 1,
             'template' => 'itemlist_display.html.twig',

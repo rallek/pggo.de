@@ -52,13 +52,13 @@ abstract class AbstractInstititutionenFactory
     }
 
     /**
-     * Creates a new image instance.
+     * Creates a new picture instance.
      *
-     * @return Pggo\InstititutionenModule\Entity\imageEntity The newly created entity instance
+     * @return Pggo\InstititutionenModule\Entity\pictureEntity The newly created entity instance
      */
-    public function createImage()
+    public function createPicture()
     {
-        $entityClass = 'Pggo\\InstititutionenModule\\Entity\\ImageEntity';
+        $entityClass = 'Pggo\\InstititutionenModule\\Entity\\PictureEntity';
 
         return new $entityClass();
     }

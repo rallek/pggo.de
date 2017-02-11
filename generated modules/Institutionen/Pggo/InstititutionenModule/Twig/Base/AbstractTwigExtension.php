@@ -228,7 +228,7 @@ abstract class AbstractTwigExtension extends Twig_Extension
     {
         $result = [];
     
-        $result[] = ['text' => $this->__('Images'), 'value' => 'image'];
+        $result[] = ['text' => $this->__('Pictures'), 'value' => 'picture'];
         $result[] = ['text' => $this->__('Institutions'), 'value' => 'institution'];
     
         return $result;

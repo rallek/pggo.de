@@ -12,7 +12,6 @@
 
 namespace Pggo\InstititutionenModule\Form\Type\Base;
 
-use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -72,7 +71,6 @@ abstract class AbstractInstitutionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $this->addEntityFields($builder, $options);
-        $this->addIncomingRelationshipFields($builder, $options);
         $this->addModerationFields($builder, $options);
         $this->addReturnControlField($builder, $options);
         $this->addSubmitButtons($builder, $options);
@@ -143,40 +141,6 @@ abstract class AbstractInstitutionType extends AbstractType
                 'class' => '',
                 'title' => $this->__('Enter the description of the institution')
             ],'required' => false
-        ]);
-    }
-
-    /**
-     * Adds fields for incoming relationships.
-     *
-     * @param FormBuilderInterface $builder The form builder
-     * @param array                $options The options
-     */
-    public function addIncomingRelationshipFields(FormBuilderInterface $builder, array $options)
-    {
-        $queryBuilder = function(EntityRepository $er) {
-            // select without joins
-            return $er->getListQueryBuilder('', '', false);
-        };
-        if (true === $options['filterByOwnership']) {
-            $queryBuilder = function(EntityRepository $er) {
-                // select without joins
-                $qb = $er->getListQueryBuilder('', '', false);
-                $qb = $er->addCreatorFilter($qb);
-        
-                return $qb;
-            };
-        }
-        $builder->add('institution', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', [
-            'class' => 'PggoInstititutionenModule:ImageEntity',
-            'choice_label' => 'getTitleFromDisplayPattern',
-            'multiple' => false,
-            'expanded' => false,
-            'query_builder' => $queryBuilder,
-            'label' => $this->__('Institution'),
-            'attr' => [
-                'title' => $this->__('Choose the institution')
-            ]
         ]);
     }
 

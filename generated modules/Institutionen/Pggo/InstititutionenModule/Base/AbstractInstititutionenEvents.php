@@ -18,88 +18,88 @@ namespace Pggo\InstititutionenModule\Base;
 abstract class AbstractInstititutionenEvents
 {
     /**
-     * The pggoinstititutionenmodule.image_post_load event is thrown when images
+     * The pggoinstititutionenmodule.picture_post_load event is thrown when pictures
      * are loaded from the database.
      *
      * The event listener receives an
-     * Pggo\InstititutionenModule\Event\FilterImageEvent instance.
+     * Pggo\InstititutionenModule\Event\FilterPictureEvent instance.
      *
      * @see Pggo\InstititutionenModule\Listener\EntityLifecycleListener::postLoad()
      * @var string
      */
-    const IMAGE_POST_LOAD = 'pggoinstititutionenmodule.image_post_load';
+    const PICTURE_POST_LOAD = 'pggoinstititutionenmodule.picture_post_load';
     
     /**
-     * The pggoinstititutionenmodule.image_pre_persist event is thrown before a new image
+     * The pggoinstititutionenmodule.picture_pre_persist event is thrown before a new picture
      * is created in the system.
      *
      * The event listener receives an
-     * Pggo\InstititutionenModule\Event\FilterImageEvent instance.
+     * Pggo\InstititutionenModule\Event\FilterPictureEvent instance.
      *
      * @see Pggo\InstititutionenModule\Listener\EntityLifecycleListener::prePersist()
      * @var string
      */
-    const IMAGE_PRE_PERSIST = 'pggoinstititutionenmodule.image_pre_persist';
+    const PICTURE_PRE_PERSIST = 'pggoinstititutionenmodule.picture_pre_persist';
     
     /**
-     * The pggoinstititutionenmodule.image_post_persist event is thrown after a new image
+     * The pggoinstititutionenmodule.picture_post_persist event is thrown after a new picture
      * has been created in the system.
      *
      * The event listener receives an
-     * Pggo\InstititutionenModule\Event\FilterImageEvent instance.
+     * Pggo\InstititutionenModule\Event\FilterPictureEvent instance.
      *
      * @see Pggo\InstititutionenModule\Listener\EntityLifecycleListener::postPersist()
      * @var string
      */
-    const IMAGE_POST_PERSIST = 'pggoinstititutionenmodule.image_post_persist';
+    const PICTURE_POST_PERSIST = 'pggoinstititutionenmodule.picture_post_persist';
     
     /**
-     * The pggoinstititutionenmodule.image_pre_remove event is thrown before an existing image
+     * The pggoinstititutionenmodule.picture_pre_remove event is thrown before an existing picture
      * is removed from the system.
      *
      * The event listener receives an
-     * Pggo\InstititutionenModule\Event\FilterImageEvent instance.
+     * Pggo\InstititutionenModule\Event\FilterPictureEvent instance.
      *
      * @see Pggo\InstititutionenModule\Listener\EntityLifecycleListener::preRemove()
      * @var string
      */
-    const IMAGE_PRE_REMOVE = 'pggoinstititutionenmodule.image_pre_remove';
+    const PICTURE_PRE_REMOVE = 'pggoinstititutionenmodule.picture_pre_remove';
     
     /**
-     * The pggoinstititutionenmodule.image_post_remove event is thrown after an existing image
+     * The pggoinstititutionenmodule.picture_post_remove event is thrown after an existing picture
      * has been removed from the system.
      *
      * The event listener receives an
-     * Pggo\InstititutionenModule\Event\FilterImageEvent instance.
+     * Pggo\InstititutionenModule\Event\FilterPictureEvent instance.
      *
      * @see Pggo\InstititutionenModule\Listener\EntityLifecycleListener::postRemove()
      * @var string
      */
-    const IMAGE_POST_REMOVE = 'pggoinstititutionenmodule.image_post_remove';
+    const PICTURE_POST_REMOVE = 'pggoinstititutionenmodule.picture_post_remove';
     
     /**
-     * The pggoinstititutionenmodule.image_pre_update event is thrown before an existing image
+     * The pggoinstititutionenmodule.picture_pre_update event is thrown before an existing picture
      * is updated in the system.
      *
      * The event listener receives an
-     * Pggo\InstititutionenModule\Event\FilterImageEvent instance.
+     * Pggo\InstititutionenModule\Event\FilterPictureEvent instance.
      *
      * @see Pggo\InstititutionenModule\Listener\EntityLifecycleListener::preUpdate()
      * @var string
      */
-    const IMAGE_PRE_UPDATE = 'pggoinstititutionenmodule.image_pre_update';
+    const PICTURE_PRE_UPDATE = 'pggoinstititutionenmodule.picture_pre_update';
     
     /**
-     * The pggoinstititutionenmodule.image_post_update event is thrown after an existing new image
+     * The pggoinstititutionenmodule.picture_post_update event is thrown after an existing new picture
      * has been updated in the system.
      *
      * The event listener receives an
-     * Pggo\InstititutionenModule\Event\FilterImageEvent instance.
+     * Pggo\InstititutionenModule\Event\FilterPictureEvent instance.
      *
      * @see Pggo\InstititutionenModule\Listener\EntityLifecycleListener::postUpdate()
      * @var string
      */
-    const IMAGE_POST_UPDATE = 'pggoinstititutionenmodule.image_post_update';
+    const PICTURE_POST_UPDATE = 'pggoinstititutionenmodule.picture_post_update';
     
     /**
      * The pggoinstititutionenmodule.institution_post_load event is thrown when institutions

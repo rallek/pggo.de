@@ -17,7 +17,7 @@ use Knp\Menu\MenuItem;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Zikula\Common\Translator\TranslatorTrait;
-use Pggo\InstititutionenModule\Entity\ImageEntity;
+use Pggo\InstititutionenModule\Entity\PictureEntity;
 use Pggo\InstititutionenModule\Entity\InstitutionEntity;
 
 /**
@@ -64,10 +64,10 @@ class AbstractItemActionsMenu implements ContainerAwareInterface
         $menu->setChildrenAttribute('class', 'list-inline');
 
         $currentUserId = $currentUserApi->isLoggedIn() ? $currentUserApi->get('uid') : 1;
-        if ($entity instanceof ImageEntity) {
-            $component = 'PggoInstititutionenModule:Image:';
+        if ($entity instanceof PictureEntity) {
+            $component = 'PggoInstititutionenModule:Picture:';
             $instance = $entity['id'] . '::';
-            $routePrefix = 'pggoinstititutionenmodule_image_';
+            $routePrefix = 'pggoinstititutionenmodule_picture_';
             $isOwner = $currentUserId > 0 && null !== $entity->getCreatedBy() && $currentUserId == $entity->getCreatedBy()->getUid();
         
             if ($routeArea == 'admin') {
@@ -92,12 +92,12 @@ class AbstractItemActionsMenu implements ContainerAwareInterface
                         'route' => $routePrefix . $routeArea . 'edit',
                         'routeParameters' => ['id' => $entity['id']]
                     ])->setAttribute('icon', 'fa fa-pencil-square-o');
-                    $menu[$this->__('Edit')]->setLinkAttribute('title', $this->__('Edit this image'));
+                    $menu[$this->__('Edit')]->setLinkAttribute('title', $this->__('Edit this picture'));
                     $menu->addChild($this->__('Reuse'), [
                         'route' => $routePrefix . $routeArea . 'edit',
                         'routeParameters' => ['astemplate' => $entity['id']]
                     ])->setAttribute('icon', 'fa fa-files-o');
-                    $menu[$this->__('Reuse')]->setLinkAttribute('title', $this->__('Reuse for new image'));
+                    $menu[$this->__('Reuse')]->setLinkAttribute('title', $this->__('Reuse for new picture'));
                 }
             }
             if ($context == 'display') {
@@ -105,19 +105,6 @@ class AbstractItemActionsMenu implements ContainerAwareInterface
                 $menu->addChild($title, [
                     'route' => $routePrefix . $routeArea . 'view'
                 ])->setAttribute('icon', 'fa fa-reply');
-                $menu[$title]->setLinkAttribute('title', $title);
-            }
-            
-            // more actions for adding new related items
-            
-            $relatedComponent = 'PggoInstititutionenModule:Institution:';
-            $relatedInstance = $entity['id'] . '::';
-            if ($isOwner || $permissionApi->hasPermission($relatedComponent, $relatedInstance, ACCESS_EDIT)) {
-                $title = $this->__('Create institution');
-                $menu->addChild($title, [
-                    'route' => 'pggoinstititutionenmodule_institution_' . $routeArea . 'edit',
-                    'routeParameters' => ['institution' => $entity['id']]
-                ])->setAttribute('icon', 'fa fa-plus');
                 $menu[$title]->setLinkAttribute('title', $title);
             }
         }
@@ -159,6 +146,19 @@ class AbstractItemActionsMenu implements ContainerAwareInterface
                 $menu->addChild($title, [
                     'route' => $routePrefix . $routeArea . 'view'
                 ])->setAttribute('icon', 'fa fa-reply');
+                $menu[$title]->setLinkAttribute('title', $title);
+            }
+            
+            // more actions for adding new related items
+            
+            $relatedComponent = 'PggoInstititutionenModule:Picture:';
+            $relatedInstance = $entity['id'] . '::';
+            if ($isOwner || $permissionApi->hasPermission($relatedComponent, $relatedInstance, ACCESS_ADD)) {
+                $title = $this->__('Create picture');
+                $menu->addChild($title, [
+                    'route' => 'pggoinstititutionenmodule_picture_' . $routeArea . 'edit',
+                    'routeParameters' => ['institution' => $entity['id']]
+                ])->setAttribute('icon', 'fa fa-plus');
                 $menu[$title]->setLinkAttribute('title', $title);
             }
         }

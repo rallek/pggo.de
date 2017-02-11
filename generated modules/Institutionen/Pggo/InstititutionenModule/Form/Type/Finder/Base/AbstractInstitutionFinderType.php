@@ -227,7 +227,7 @@ abstract class AbstractInstitutionFinderType extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'objectType' => 'image',
+                'objectType' => 'institution',
                 'editorName' => 'ckeditor'
             ])
             ->setRequired(['objectType', 'editorName'])
