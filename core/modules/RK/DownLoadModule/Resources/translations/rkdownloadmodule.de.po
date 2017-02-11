@@ -1,16 +1,16 @@
 msgid ""
 msgstr ""
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
-"Language-Team: \n"
-"MIME-Version: 1.0\n"
-"X-Generator: Poedit 1.8.11\n"
 "Last-Translator: Ralf Köster <ralf@familie-koester.de>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language-Team: \n"
 "Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid ""
 "\"%bar\" will match \"FOObar\", \"Blubbar\" and so on, but not \"BarFoo\"."
@@ -18,16 +18,46 @@ msgstr ""
 "\"%bar\" wird \"FOObar\", \"Blubbar\" usw. entsprechen, aber nicht \"BarFoo"
 "\"."
 
+msgid "10"
+msgstr "10"
+
+msgid "100"
+msgstr "100"
+
+msgid "15"
+msgstr "15"
+
+msgid "20"
+msgstr "20"
+
+msgid "30"
+msgstr "30"
+
+msgid "5"
+msgstr "5"
+
+msgid "50"
+msgstr "50"
+
 msgid "A filter consists of several statements."
 msgstr "Ein Filter besteht aus mehreren Anweisungen."
 
 msgid "Actions"
 msgstr "Aktionen"
 
+msgid "All"
+msgstr "Alle"
+
 msgid "All additional joined tables can be referenced by \"tblFoo\"."
 msgstr ""
 "Alle zusätzlichen verknüpften Tabellen können durch \"tblFoo\" referenziert "
 "werden."
+
+msgid "All except approved"
+msgstr "Alle außer freigegebene"
+
+msgid "All except archived"
+msgstr "Alle außer Archivierte"
 
 msgid "All items with a date in July 2016."
 msgstr "Alle Elemente mit einem Datum im Juli 2016."
@@ -53,6 +83,23 @@ msgstr "Erlaubte Dateigröße:"
 msgid "Also you can use \"%\" as placeholder."
 msgstr "Sie können auch \"%\" als Platzhalter verwenden."
 
+msgid "Amount"
+msgstr "Anzahl"
+
+msgid ""
+"An error occured during creation of the .htaccess file in directory \"%path%"
+"\"."
+msgstr ""
+"Während der Erstellung der .htaccess-Datei im Verzeichnis \"%path%\" ist ein "
+"Fehler aufgetreten."
+
+msgid ""
+"An error was encountered while removing stored object workflows for the "
+"%extension% extension."
+msgstr ""
+"Während des Entfernens des gespeicherten Workflow-Objektes für das Modul "
+"%extension% ist ein Fehler aufgetreten."
+
 msgid "Approved"
 msgstr "Genehmigt"
 
@@ -62,11 +109,32 @@ msgstr "Archiv"
 msgid "Archived"
 msgstr "Archiviert"
 
+msgid "Ascending"
+msgstr "Aufsteigend"
+
+msgid "Back to overview"
+msgstr "Zurück zur Übersicht"
+
 msgid "Back to paginated view"
 msgstr "Zurück zur Seitenansicht"
 
+msgid "Backend"
+msgstr "Backend"
+
+msgid "Bytes"
+msgstr "Bytes"
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
 msgid "Categories"
 msgstr "Kategorien"
+
+msgid "Category"
+msgstr "Kategorie"
+
+msgid "Change selection"
+msgstr "Ändere Auswahl"
 
 msgid "Choose action"
 msgstr "Aktion wählen"
@@ -76,6 +144,9 @@ msgstr "Schließen"
 
 msgid "Combining statements"
 msgstr "Kombination von Aussagen"
+
+msgid "Configuration"
+msgstr "Konfiguration"
 
 msgid "Confirmation prompt"
 msgstr "Bestätigungsabfrage"
@@ -88,6 +159,9 @@ msgstr "Inhalt wurde geprüft und ist online verfügbar."
 
 msgid "Content has reached the end and became archived."
 msgstr "Inhalt ist abgelaufen und wurde archiviert."
+
+msgid "Create another item after save"
+msgstr "Nach dem speichern einen neuen Eintrag erstellen"
 
 msgid "Create file"
 msgstr "Datei erstellen"
@@ -107,8 +181,17 @@ msgstr "Erstellung"
 msgid "Creation and update"
 msgstr "Erstellung und Aktualisierung"
 
+msgid "Creation date"
+msgstr "Erstellungsdatum"
+
+msgid "Creator"
+msgstr "Ersteller"
+
 msgid "Current file"
 msgstr "Aktuelle Datei"
+
+msgid "Custom template"
+msgstr "Benutzerdefinierte Vorlage"
 
 msgid "Date operators"
 msgstr "Datumsauswahl"
@@ -116,20 +199,68 @@ msgstr "Datumsauswahl"
 msgid "Dates"
 msgstr "Datum"
 
+msgid "Default"
+msgstr "Standard"
+
 msgid "Delete"
 msgstr "Löschen"
 
 msgid "Delete content permanently."
 msgstr "Inhalt dauerhaft löschen."
 
+msgid "Delete existing file"
+msgstr "Vorhandene Datei löschen"
+
 msgid "Delete file"
 msgstr "Datei löschen"
+
+msgid "Delete this file"
+msgstr "Diese Datei löschen"
+
+msgid "Delete this file ?"
+msgstr "Diese Datei löschen?"
 
 msgid "Deleted"
 msgstr "Gelöscht"
 
+msgid "Descending"
+msgstr "Absteigend"
+
+msgid "Details"
+msgstr "Details"
+
+msgid "Display list of RKDownLoadModule objects."
+msgstr "Zeigt die Liste von RKDownLoadModule-Objekten."
+
+msgid "Display or link a single RKDownLoadModule object."
+msgstr "Anzeigen oder ein einzelnes RKDownLoadModule-Objekt verknüpfen."
+
 msgid "Do you really want to delete this file: \"%name%\" ?"
 msgstr "Möchten Sie wirklich diese Datei löschen: \"%name%\"?"
+
+msgid "Doctrine Exception"
+msgstr "Doctrine Fehler"
+
+msgid "Done! File created."
+msgstr "Fertig! Datei erstellt."
+
+msgid "Done! File deleted."
+msgstr "Fertig! Datei gelöscht."
+
+msgid "Done! File updated."
+msgstr "Fertig! Datei aktualisiert."
+
+msgid "Done! Item created."
+msgstr "Erledigt! Element erstellt."
+
+msgid "Done! Item deleted."
+msgstr "Erledigt! Element gelöscht."
+
+msgid "Done! Item updated."
+msgstr "Erledigt! Element aktualisiert."
+
+msgid "Done! Module configuration updated."
+msgstr "Erledigt! Modul Konfiguration aktualisiert."
 
 msgid "Download"
 msgstr "Download"
@@ -141,8 +272,14 @@ msgstr ""
 "Jede Aussage ist ein Satz von Feldnamen, Operator und Wert durch einen "
 "Doppelpunkt verbunden."
 
+msgid "Edit"
+msgstr "Bearbeiten"
+
 msgid "Edit file"
 msgstr "Datei bearbeiten"
+
+msgid "Edit this file"
+msgstr "Diese Datei bearbeiten"
 
 msgid ""
 "Either the first name is Peter and the house number of any address is below "
@@ -156,11 +293,81 @@ msgstr ""
 msgid "End date"
 msgstr "Enddatum"
 
+msgid "Enter a part of the user name to search"
+msgstr "Zum Suchen geben Sie einen Teil des Benutzernamens ein"
+
+msgid "Enter the end date of the file"
+msgstr "Geben Sie das Enddatum der Datei an"
+
+msgid "Enter the file entries per page."
+msgstr "Geben Sie die Datei-Einträge pro Seite an."
+
+msgid "Enter the file name of the file"
+msgstr "Geben Sie den Namen der Datei ein."
+
+msgid "Enter the my description of the file"
+msgstr "Beschreibung für die Datei angeben"
+
+msgid "Enter the my file of the file"
+msgstr "Datei auswählen"
+
+msgid "Enter the start date of the file"
+msgstr "Startdatum der Datei angeben"
+
+msgid "Error! Could not create a category registry for the %entity% entity."
+msgstr ""
+"Fehler! Eine Kategorie-Registrierung für die Entität %entity% konnte nicht "
+"erstellt werden."
+
+msgid "Error! Could not determine workflow actions."
+msgstr "Fehler! Kann den zugeordneten Workflow nicht erkennen."
+
+msgid "Error! Could not load the associated workflow."
+msgstr "Fehler! Kann den zugeordneten Workflow nicht laden."
+
+msgid "Error! Could not remove stored workflow. Deletion has been aborted."
+msgstr ""
+"Fehler! Konnte den gespeicherten Workflow nicht entfernen. Löschen wurde "
+"abgebrochen."
+
+msgid "Error! Creation attempt failed."
+msgstr "Fehler! Erstellung fehlgeschlagen."
+
+msgid "Error! Deletion attempt failed."
+msgstr "Fehler! Löschen fehlgeschlagen."
+
+msgid "Error! Invalid identifier received."
+msgstr "Fehler! Ungültiger Bezeichner aufgerufen."
+
+msgid "Error! Invalid object type received."
+msgstr "Fehler! Ungültigen Objekttyp erhalten."
+
+msgid "Error! It is not allowed to delete this file."
+msgstr "Fehler! Es ist nicht erlaubt, diese Datei zu löschen."
+
+msgid ""
+"Error! This file type is not allowed. Please choose another file format."
+msgstr ""
+"Fehler! Dieser Dateityp ist nicht erlaubt. Wähle bitte ein anderes Format."
+
+msgid "Error! This file type seems not to be a valid image."
+msgstr "Fehler! Dieser Dateityp scheint kein gültiges Bild zu sein."
+
+msgid "Error! Update attempt failed."
+msgstr "Fehler! Aktualisierung fehlgeschlagen."
+
+msgid "Error: Invalid editor context given for external controller action."
+msgstr ""
+"Fehler: ungültiger Editor Kontext für externe Controller-Aktion gegeben."
+
 msgid "Example"
 msgstr "Beispiel"
 
 msgid "File"
 msgstr "Datei"
+
+msgid "File entries per page"
+msgstr "Datei-Einträge pro Seite"
 
 msgid "File list"
 msgstr "Dateiliste"
@@ -170,6 +377,9 @@ msgstr "Dateiname"
 
 msgid "Files"
 msgstr "Dateien"
+
+msgid "Filter (expert option)"
+msgstr "Filter ( Expertenoption )"
 
 msgid "Filter statements"
 msgstr "Filter Statements"
@@ -205,14 +415,30 @@ msgstr ""
 "Für Zeiträume: Ende der gegeben Periode. \"Date:le:today\" betrift alle "
 "Items mit dem Datum von heute oder früher."
 
+msgid "Frontend"
+msgstr "Frontend"
+
 msgid "Furthermore you can use brackets to group statements."
 msgstr "Desweiteren können Klammern genutzt werden um Aussagen zu gruppieren."
+
+msgid "GB"
+msgstr "GB"
 
 msgid "General syntax"
 msgstr "Allgemeine Syntax"
 
+msgid "Here you can choose a custom creation date"
+msgstr "Hier kann ein benutzerdefiniertes Erstellungsdatum gewählt werden"
+
+msgid "Here you can choose a user which will be set as creator"
+msgstr ""
+"Hier können Sie einen Benutzer wählen, die als Ersteller festgelegt wird"
+
 msgid "Here you can configure parameters for list views."
 msgstr "Hier können Sie Parameter für die Listenansichten konfigurieren."
+
+msgid "ID of file"
+msgstr "ID der Datei"
 
 msgid ""
 "If a \"Person\" has Categories support then you can also filter by category "
@@ -221,8 +447,23 @@ msgstr ""
 "Wenn eine \"Person\" Kategorien-Unterstützung hat, können Sie auch nach "
 "Kategorie-Id oder Name filtern."
 
+msgid ""
+"If you change this please save the block once to reload the parameters below."
+msgstr ""
+"Wenn das geändert wird, bitte den Block einmal speichern, um die Parameter "
+"unten neu zu laden."
+
 msgid "Initial"
 msgstr "Anfänglich"
+
+msgid "Invalid identifier received."
+msgstr "Fehler! Ungültiger Bezeichner erhalten."
+
+msgid "Invalid object type received."
+msgstr "Fehler! Ungültigen Objekttyp erhalten."
+
+msgid "Invalid user identifier received."
+msgstr "Fehler! Ungültiger Benutzer Bezeichner aufgerufen."
 
 msgid ""
 "It is possible to filter the list of retrieved items by specifying arbitrary "
@@ -232,11 +473,29 @@ msgstr ""
 "frei wählbarer Filterausdrücke. Diese Seite zeigt, wie Sie diese Ausdrücke "
 "erstellen."
 
+msgid "KB"
+msgstr "KB"
+
 msgid "Last update"
 msgstr "Letzte Aktualisierung"
 
+msgid "Link to the file"
+msgstr "Link zur Datei"
+
 msgid "List views"
 msgstr "Listenansichten"
+
+msgid "MB"
+msgstr "MB"
+
+msgid "Manage settings for this application"
+msgstr "Einstellungen für diese Anwendung"
+
+msgid "Manage user"
+msgstr "Benutzer verwalten"
+
+msgid "Moderation"
+msgstr "Moderation"
 
 msgid "Move content into the archive."
 msgstr "Inhalt ins Archiv verschieben"
@@ -250,20 +509,59 @@ msgstr "Meine Datei"
 msgid "My files"
 msgstr "Meine Dateien"
 
+msgid "Newest"
+msgstr "Neueste"
+
 msgid "No entries found."
 msgstr "Keine Einträge gefunden."
 
 msgid "No files found."
 msgstr "Keine Dateien gefunden."
 
+msgid "No item selected."
+msgstr "Kein Element ausgewählt."
+
+msgid "No results found!"
+msgstr "Keine Ergebnisse gefunden!"
+
+msgid "No such item found."
+msgstr "Kein entsprechendes Element gefunden."
+
+msgid "No such item."
+msgstr "Kein solches Element"
+
 msgid "None workflow (no approval)"
 msgstr "Kein Workflow (keine Freigabe)"
+
+msgid "OK"
+msgstr "Ok"
+
+msgid "Object type"
+msgstr "Objekttyp"
+
+msgid "Only digits are allowed."
+msgstr "Nur Ziffern sind erlaubt."
+
+msgid "Only item titles"
+msgstr "Nur Element Titel"
 
 msgid "Open file"
 msgstr "Datei öffnen"
 
+msgid "Open preview page"
+msgstr "Vorschau öffnen"
+
+msgid "Operation cancelled."
+msgstr "Vorgang abgebrochen."
+
 msgid "Operators"
 msgstr "Operatoren"
+
+msgid "Page size"
+msgstr "Seitengröße"
+
+msgid "Paste as"
+msgstr "Einfügen als"
 
 msgid "Person is assigned to category with id \"4\"."
 msgstr "Person wird Kategorie mit der Id \"4\" zugewiesen."
@@ -289,6 +587,9 @@ msgstr ""
 "\", \"Stunde\", \"min\" gefolgt von einem Doppelpunkt, um für einen "
 "bestimmten Zeitraum zu suchen."
 
+msgid "Preview"
+msgstr "Vorschau"
+
 msgid "Pseudo-state for content which has been deleted from the database."
 msgstr "Pseudo-Status für Inhalt, welcher aus der Datenbank gelöscht wurde."
 
@@ -300,8 +601,23 @@ msgstr ""
 msgid "Quick navigation"
 msgstr "Schnellnavigation"
 
+msgid "RKDownLoadModule detail view"
+msgstr "RKDownLoadModule Detailansicht"
+
+msgid "RKDownLoadModule items"
+msgstr "RKDownLoadModule Elemente"
+
+msgid "RKDownLoadModule list view"
+msgstr "RKDownLoadModule-Listenansicht"
+
+msgid "Random"
+msgstr "Zufall"
+
 msgid "Read more"
 msgstr "Weiterlesen"
+
+msgid "Reset"
+msgstr "Zurücksetzen"
 
 msgid "Reset to empty value"
 msgstr "Eingabe Löschen"
@@ -309,8 +625,23 @@ msgstr "Eingabe Löschen"
 msgid "Return control"
 msgstr "Return Control"
 
+msgid "Reuse"
+msgstr "Wiederverwenden"
+
+msgid "Reuse for new file"
+msgstr "Wiederverwendung für neue Datei"
+
+msgid "Search"
+msgstr "Suchen"
+
 msgid "Search and select file"
 msgstr "Suche und Datei auswählen"
+
+msgid "Search for"
+msgstr "Suche nach"
+
+msgid "Search user"
+msgstr "Benutzer suchen"
 
 msgid "Settings"
 msgstr "Einstellungen"
@@ -327,6 +658,12 @@ msgstr "Zeige alle Einträge"
 msgid "Show syntax examples"
 msgstr "Syntaxbeispiele zeigen"
 
+msgid "Shows all items except these which are approved"
+msgstr "Zeigt alle Einträge außer den Freigegebenen"
+
+msgid "Shows all items except these which are archived"
+msgstr "Zeigt alle Elemente außer den Archivierten"
+
 msgid ""
 "So in our example we can reference Persons with \"tbl\" and addresses with "
 "\"tblAddresses\"."
@@ -342,8 +679,34 @@ msgstr ""
 "\" der Name der Eigenschaft für das gewünschte Register, zum Beispiel \"Main"
 "\" ist."
 
+msgid "Sorry, but an error occured during the %action% action."
+msgstr "Sorry, aber ein Fehler ist bei Aktion %action% aufgetreten."
+
+msgid ""
+"Sorry, but an error occured during the %action% action. Please apply the "
+"changes again!"
+msgstr ""
+"Sorry, aber ein Fehler ist bei Aktion %action% aufgetreten. Bitte die "
+"Änderungen erneut anwenden!"
+
+msgid ""
+"Sorry, but you can not create the file yet as other items are required which "
+"must be created before!"
+msgstr ""
+"Tut mir leid, aber Sie können die Datei noch nicht erstellen! "
+"Pflichteinträge müssen vorher gemacht werden!"
+
+msgid "Sort by"
+msgstr "Sortiere nach"
+
 msgid "Sort by %s"
 msgstr "Sortieren nach %s"
+
+msgid "Sort direction"
+msgstr "Sortierreihenfolge"
+
+msgid "Sorting"
+msgstr "Sortierung"
 
 msgid "Special field types"
 msgstr "Spezielle Feldtypen"
@@ -360,8 +723,23 @@ msgstr "Bestätigen"
 msgid "Submit content."
 msgstr "Inhalt bestätigen."
 
+msgid "Switch to administration area."
+msgstr "Wechsel zum Administrationsbereich."
+
+msgid "Switch to user area."
+msgstr "Wechsel zum Nutzerbereich."
+
+msgid "Switch to users administration"
+msgstr "Wechseln Sie in die Benutzerverwaltung"
+
 msgid "Table aliases"
 msgstr "Tabellen Aliase"
+
+msgid "Template"
+msgstr "Vorlage"
+
+msgid "The amount of files shown per page"
+msgstr "Die Anzahl der Dateien die pro Seite angezeigt werden"
 
 msgid ""
 "The field name \"categories\" is the default name for category fields. "
@@ -403,6 +781,9 @@ msgstr ""
 "Abfrage ist, ist immer direkt bekannt. Das heißt, Sie können \"tbl.\" "
 "voranstellen, aber Sie müssen es nicht."
 
+msgid "The maximum amount of items to be shown."
+msgstr "Die maximale Anzahl von Elementen, die angezeigt werden."
+
 msgid "The operator defines the condition type (equal, lower than, etc.)."
 msgstr ""
 "Der Operator definiert die Konditionsart (gleich, niedriger als, etc..)."
@@ -428,6 +809,18 @@ msgstr ""
 "Der Begriff \"foo\" passt für \"fOo\", \"FOObar\", \"FooBlub\" und so "
 "weiter, aber nicht für \"AnotherFoo\"."
 
+msgid "The upload directories at \"%path%\" can be removed manually."
+msgstr "Das Upload-Verzeichnis \"%path%\" kann manuell entfernt werden."
+
+msgid ""
+"The upload directory \"%path%\" does not exist and could not be created. Try "
+"to create it yourself and make sure that this folder is accessible via the "
+"web and writable by the webserver."
+msgstr ""
+"Das Upload-Verzeichnis \"%path%\" ist nicht vorhanden und konnte nicht "
+"erstellt werden. Versuchen Sie es selbst und stellen Sie sicher, dass dieser "
+"Ordner über das Web zugänglich und vom Webserver beschreibbar ist."
+
 msgid "The value is scanned case insensitive."
 msgstr "Der Wert wird unabhängig von Groß- bzw. Kleinschreibung abgefragt."
 
@@ -441,6 +834,9 @@ msgstr ""
 msgid "Therefore we create a virtual fields for each registry property."
 msgstr "Daher erstellen wir virtuelle Felder für jede Register-Eigenschaft."
 
+msgid "This function requires JavaScript activated!"
+msgstr "Diese Funktion verlangt aktiviertes Javascript!"
+
 msgid ""
 "This has the advantage that it is possible to join a certain table multiple "
 "times. For example instead of having many addresses for a person one could "
@@ -450,6 +846,9 @@ msgstr ""
 "zu verknüpfen. Zum Beispiel könnte anstatt viele Adressen für eine Person "
 "auch zwei Beziehungen für Geschäfts- und Privatadressen auf diese Weise "
 "entstehen."
+
+msgid "This is an optional filter."
+msgstr "Dies ist ein optionaler Filter"
 
 msgid ""
 "This is like a non-existing workflow. Everything is online immediately after "
@@ -461,8 +860,14 @@ msgstr ""
 msgid "Update"
 msgstr "Aktualisieren"
 
+msgid "Update configuration"
+msgstr "Update-Konfiguration"
+
 msgid "Update content."
 msgstr "Aktualisiere Inhalt."
+
+msgid "Update date"
+msgstr "Aktualisierungsdatum"
 
 msgid "Updated by %user"
 msgstr "Aktualisiert von %user"
@@ -473,6 +878,16 @@ msgstr "Aktualisiert von %user am %date"
 msgid "Updated on %date"
 msgstr "Aktualisiert am %date"
 
+msgid "Updater"
+msgstr "Aktualisieren"
+
+msgid ""
+"Warning! The upload directory at \"%path%\" exists but is not writable by "
+"the webserver."
+msgstr ""
+"Warnung! Das Upload-Verzeichnis \"%path%\" besteht, ist allerdings nicht vom "
+"Webserver beschreibbar."
+
 msgid "Welcome to the file section of the Down load application."
 msgstr "Willkommen in der Datei Sektion vom Downloadmodule."
 
@@ -482,6 +897,9 @@ msgid ""
 msgstr ""
 "Beim Filtern nach Datum können Sie bequeme Erweiterungen und sogar Zeiträume "
 "benutzen."
+
+msgid "With description"
+msgstr "Mit Beschreibung"
 
 msgid "With selected files"
 msgstr "Mit ausgewählten Dateien"
@@ -525,3 +943,12 @@ msgstr "ist nicht leer und nicht NULL."
 
 msgid "is not equal."
 msgstr "ist ungleich"
+
+msgid "rkdownloadmodule. Files Display Hooks"
+msgstr "rkdownloadmodule. Dateien Display Hooks"
+
+msgid "rkdownloadmodule. Files Filter Hooks"
+msgstr "rkdownloadmodule. Dateien Filter Hooks"
+
+msgid "the quantity of characters are limited to {{length}}"
+msgstr "Die Mindestlänge der Kennwörter liegt bei %s Zeichen."
