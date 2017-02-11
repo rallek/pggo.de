@@ -1,0 +1,24 @@
+services:
+    # Form field types
+    
+    pggo_instititutionen_module.form.type.field.datetime:
+        class: Pggo\InstititutionenModule\Form\Type\Field\DateTimeType
+        tags:
+            - { name: form.type }
+    
+    pggo_instititutionen_module.form.type.field.upload:
+        class: Pggo\InstititutionenModule\Form\Type\Field\UploadType
+        arguments:
+            - "@translator.default"
+            - "@request_stack"
+            - "@pggo_instititutionen_module.image_helper"
+            - "@pggo_instititutionen_module.upload_helper"
+        tags:
+            - { name: form.type }
+    
+    pggo_instititutionen_module.form.type.field.user:
+        class: Pggo\InstititutionenModule\Form\Type\Field\UserType
+        arguments:
+            - "@zikula_users_module.user_repository"
+        tags:
+            - { name: form.type }

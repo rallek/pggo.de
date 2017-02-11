@@ -1,0 +1,6 @@
+services:
+    # Entity factory class
+    pggo_instititutionen_module.entity_factory:
+        class: Pggo\InstititutionenModule\Entity\Factory\InstititutionenFactory
+        arguments:
+            - "@doctrine.orm.default_entity_manager"

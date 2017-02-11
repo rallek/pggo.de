@@ -1,0 +1,12 @@
+services:
+    # Twig extension
+    pggo_instititutionen_module.twig_extension:
+        class: Pggo\InstititutionenModule\Twig\TwigExtension
+        arguments:
+            - "@translator.default"
+            - "@zikula_extensions_module.api.variable"
+            - "@pggo_instititutionen_module.workflow_helper"
+            - "@pggo_instititutionen_module.listentries_helper"
+        public: false
+        tags:
+            - { name: twig.extension }

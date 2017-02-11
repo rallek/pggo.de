@@ -1,0 +1,89 @@
+services:
+    # Event subscriber and listener classes
+    pggo_instititutionen_module.entity_lifecycle_listener:
+        class: Pggo\InstititutionenModule\Listener\EntityLifecycleListener
+        arguments:
+            - "@service_container"
+        tags:
+            - { name: doctrine.event_subscriber }
+    
+    pggo_instititutionen_module.core_listener:
+        class: Pggo\InstititutionenModule\Listener\CoreListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_instititutionen_module.kernel_listener:
+        class: Pggo\InstititutionenModule\Listener\KernelListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_instititutionen_module.installer_listener:
+        class: Pggo\InstititutionenModule\Listener\InstallerListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_instititutionen_module.moduledispatch_listener:
+        class: Pggo\InstititutionenModule\Listener\ModuleDispatchListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_instititutionen_module.mailer_listener:
+        class: Pggo\InstititutionenModule\Listener\MailerListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_instititutionen_module.page_listener:
+        class: Pggo\InstititutionenModule\Listener\PageListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_instititutionen_module.theme_listener:
+        class: Pggo\InstititutionenModule\Listener\ThemeListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_instititutionen_module.view_listener:
+        class: Pggo\InstititutionenModule\Listener\ViewListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_instititutionen_module.userlogin_listener:
+        class: Pggo\InstititutionenModule\Listener\UserLoginListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_instititutionen_module.userlogout_listener:
+        class: Pggo\InstititutionenModule\Listener\UserLogoutListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_instititutionen_module.user_listener:
+        class: Pggo\InstititutionenModule\Listener\UserListener
+        arguments:
+            - "@translator.default"
+            - "@pggo_instititutionen_module.entity_factory"
+            - "@zikula_users_module.current_user"
+            - "@logger"
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_instititutionen_module.userregistration_listener:
+        class: Pggo\InstititutionenModule\Listener\UserRegistrationListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_instititutionen_module.users_listener:
+        class: Pggo\InstititutionenModule\Listener\UsersListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_instititutionen_module.group_listener:
+        class: Pggo\InstititutionenModule\Listener\GroupListener
+        tags:
+            - { name: kernel.event_subscriber }
+    
+    pggo_instititutionen_module.thirdparty_listener:
+        class: Pggo\InstititutionenModule\Listener\ThirdPartyListener
+        tags:
+            - { name: kernel.event_subscriber }
+    

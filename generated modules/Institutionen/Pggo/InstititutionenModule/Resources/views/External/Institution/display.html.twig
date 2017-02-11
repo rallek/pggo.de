@@ -1,0 +1,51 @@
+{# Purpose of this template: Display one certain institution within an external context #}
+{{ pageAddAsset('javascript', asset('magnific-popup/jquery.magnific-popup.min.js')) }}
+{{ pageAddAsset('stylesheet', asset('magnific-popup/magnific-popup.css')) }}
+{{ pageAddAsset('javascript', zasset('@PggoInstititutionenModule:js/PggoInstititutionenModule.js')) }}
+<div id="institution{$institution.id}" class="pggoinstititutionenmodule-external-institution">
+{% if displayMode == 'link' %}
+    <p class="pggoinstititutionenmodule-external-link">
+    <a href="{{ path('pggoinstititutionenmodule_institution_display', { 'id': institution.id }) }}" title="{{ institution.getTitleFromDisplayPattern()|e('html_attr') }}">
+    {{ institution.getTitleFromDisplayPattern()|notifyFilters('instititutionen.filter_hooks.institutions.filter') }}
+    </a>
+    </p>
+{% endif %}
+{% if hasPermission('PggoInstititutionenModule::', '::', 'ACCESS_EDIT') %}
+    {# for normal users without edit permission show only the actual file per default #}
+    {% if displayMode == 'embed' %}
+        <p class="pggoinstititutionenmodule-external-title">
+            <strong>{{ institution.getTitleFromDisplayPattern()|notifyFilters('instititutionen.filter_hooks.institutions.filter') }}</strong>
+        </p>
+    {% endif %}
+{% endif %}
+
+{% if displayMode == 'link' %}
+{% elseif displayMode == 'embed' %}
+    <div class="pggoinstititutionenmodule-external-snippet">
+        {% if institution.image is not empty and institution.imageMeta|default %}
+                    <a href="{{ institution.imageUrl }}" title="{{ institution.getTitleFromDisplayPattern()|e('html_attr') }}"{% if institution.imageMeta.isImage %} class="image-link"{% endif %}>
+        {% if institution.imageMeta.isImage %}
+            {% set thumbOptions = attribute(thumbRuntimeOptions, 'institutionImage') %}
+            <img src="{{ institution.image.getPathname()|imagine_filter('zkroot', thumbOptions) }}" alt="{{ institution.getTitleFromDisplayPattern()|e('html_attr') }}" width="{{ thumbOptions.thumbnail.size[0] }}" height="{{ thumbOptions.thumbnail.size[1] }}" class="img-thumbnail" />
+        {% else %}
+            {{ __('Download') }} ({{ institution.imageMeta.size|pggoinstititutionenmodule_fileSize(institution.image.getPathname(), false, false) }})
+        {% endif %}
+        </a>
+        {% else %}&nbsp;{% endif %}
+    </div>
+
+    {# you can distinguish the context like this: #}
+    {# % if source == 'contentType' %}
+        ...
+    {% elseif source == 'scribite' %}
+        ...
+    {% endif % #}
+
+    {# you can enable more details about the item: #}
+    {#
+        <p class="pggoinstititutionenmodule-external-description">
+            {% if institution.description is not empty %}{{ institution.description }}<br />{% endif %}
+        </p>
+    #}
+{% endif %}
+</div>

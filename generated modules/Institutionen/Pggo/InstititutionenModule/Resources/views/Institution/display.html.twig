@@ -1,0 +1,75 @@
+{# purpose of this template: institutions display view #}
+{% set baseTemplate = app.request.query.getBoolean('raw', false) ? 'raw' : (routeArea == 'admin' ? 'adminBase' : 'base') %}
+{% extends 'PggoInstititutionenModule::' ~ baseTemplate ~ '.html.twig' %}
+{% block pageTitle %}{{ institution.getTitleFromDisplayPattern()|default(__('Institution')) }}{% endblock %}
+{% block title %}
+    {% set templateTitle = institution.getTitleFromDisplayPattern()|default(__('Institution')) %}
+    {{ templateTitle|notifyFilters('pggoinstititutionenmodule.filter_hooks.institutions.filter') }}
+    {% set itemActions = knp_menu_get('PggoInstititutionenModule:ItemActionsMenu:menu', [], { entity: institution, area: routeArea, context: 'display' }) %}
+    <div class="dropdown">
+        <a id="itemActions{{ institution.id }}DropDownToggle" role="button" data-toggle="dropdown" data-target="#" href="javascript:void(0);" class="hidden dropdown-toggle"><i class="fa fa-tasks"></i> {{ __('Actions') }} <span class="caret"></span></a>
+        {{ knp_menu_render(itemActions, { template: 'ZikulaMenuModule:Override:actions.html.twig' }) }}
+    </div>
+{% endblock %}
+{% block admin_page_icon 'eye' %}
+{% block content %}
+    {% set isQuickView = app.request.query.getBoolean('raw', false) %}
+    <div class="pggoinstititutionenmodule-institution pggoinstititutionenmodule-display">
+
+
+    <dl>
+        {% if institution.name is not empty %}
+            <dt>{{ __('Name') }}</dt>
+            <dd>{{ institution.name }}</dd>
+        {% endif %}
+        {% if institution.image is not empty %}
+            <dt>{{ __('Image') }}</dt>
+            <dd>{% if institution.image is not empty and institution.imageMeta|default %}
+                        <a href="{{ institution.imageUrl }}" title="{{ institution.getTitleFromDisplayPattern()|e('html_attr') }}"{% if institution.imageMeta.isImage %} class="image-link"{% endif %}>
+            {% if institution.imageMeta.isImage %}
+                {% set thumbOptions = attribute(thumbRuntimeOptions, 'institutionImage') %}
+                <img src="{{ institution.image.getPathname()|imagine_filter('zkroot', thumbOptions) }}" alt="{{ institution.getTitleFromDisplayPattern()|e('html_attr') }}" width="{{ thumbOptions.thumbnail.size[0] }}" height="{{ thumbOptions.thumbnail.size[1] }}" class="img-thumbnail" />
+            {% else %}
+                {{ __('Download') }} ({{ institution.imageMeta.size|pggoinstititutionenmodule_fileSize(institution.image.getPathname(), false, false) }})
+            {% endif %}
+            </a>
+            {% else %}&nbsp;{% endif %}
+            </dd>
+        {% endif %}
+        {% if institution.copyright is not empty %}
+            <dt>{{ __('Copyright') }}</dt>
+            <dd>{{ institution.copyright }}</dd>
+        {% endif %}
+        {% if institution.description is not empty %}
+            <dt>{{ __('Description') }}</dt>
+            <dd>{{ institution.description|safeHtml }}</dd>
+        {% endif %}
+        {% if institution.institution|default %}
+            <dt>{{ __('Institution') }}</dt>
+            <dd>
+              {% if not isQuickView %}
+                  <a href="{{ path('pggoinstititutionenmodule_image_' ~ routeArea ~ 'display', { 'id': institution.institution.id }) }}">{% spaceless %}
+                    {{ institution.institution.getTitleFromDisplayPattern() }}
+                  {% endspaceless %}</a>
+                  <a id="imageItem{{ institution.institution.id }}Display" href="{{ path('pggoinstititutionenmodule_image_' ~ routeArea ~ 'display', { 'id': institution.institution.id, 'raw': 1 }) }}" title="{{ __('Open quick view window')|e('html_attr') }}" class="pggoinstititutionen-inline-window hidden" data-modal-title="{{ institution.institution.getTitleFromDisplayPattern()|e('html_attr') }}"><span class="fa fa-id-card-o"></span></a>
+              {% else %}
+                  {{ institution.institution.getTitleFromDisplayPattern() }}
+              {% endif %}
+            </dd>
+        {% endif %}
+        
+    </dl>
+    {{ include('@PggoInstititutionenModule/Helper/includeStandardFieldsDisplay.html.twig', { obj: institution }) }}
+
+    {% if not isQuickView %}
+        {# include display hooks #}
+        {{ block('display_hooks') }}
+    {% endif %}
+</div>
+{% endblock %}
+{% block display_hooks %}
+    {% set hooks = notifyDisplayHooks(eventName='pggoinstititutionenmodule.ui_hooks.institutions.display_view', id=institution.id, urlObject=currentUrlObject) %}
+    {% for providerArea, hook in hooks if providerArea != 'provider.scribite.ui_hooks.editor' %}
+        {{ hook }}
+    {% endfor %}
+{% endblock %}

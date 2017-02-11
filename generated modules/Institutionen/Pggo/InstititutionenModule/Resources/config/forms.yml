@@ -1,0 +1,103 @@
+services:
+    # Form types
+    
+    pggo_instititutionen_module.form.type.imagequicknav:
+        class: Pggo\InstititutionenModule\Form\Type\QuickNavigation\ImageQuickNavType
+        arguments:
+            - "@translator.default"
+            - "@pggo_instititutionen_module.listentries_helper"
+        tags:
+            - { name: form.type }
+    
+    pggo_instititutionen_module.form.type.institutionquicknav:
+        class: Pggo\InstititutionenModule\Form\Type\QuickNavigation\InstitutionQuickNavType
+        arguments:
+            - "@translator.default"
+            - "@request_stack"
+            - "@pggo_instititutionen_module.listentries_helper"
+        tags:
+            - { name: form.type }
+    
+    pggo_instititutionen_module.form.handler.image:
+        class: Pggo\InstititutionenModule\Form\Handler\Image\EditHandler
+        arguments:
+            - "@kernel"
+            - "@translator.default"
+            - "@form.factory"
+            - "@request_stack"
+            - "@router"
+            - "@logger"
+            - "@zikula_permissions_module.api.permission"
+            - "@zikula_users_module.current_user"
+            - "@pggo_instititutionen_module.entity_factory"
+            - "@pggo_instititutionen_module.controller_helper"
+            - "@pggo_instititutionen_module.model_helper"
+            - "@pggo_instititutionen_module.selection_helper"
+            - "@pggo_instititutionen_module.workflow_helper"
+            - "@pggo_instititutionen_module.hook_helper"
+        calls:
+            - [setLockingApi, ["@?zikula_pagelock_module.api.locking"]]
+        tags:
+            - { name: form.type }
+    
+    pggo_instititutionen_module.form.type.image:
+        class: Pggo\InstititutionenModule\Form\Type\ImageType
+        arguments:
+            - "@translator.default"
+            - "@pggo_instititutionen_module.entity_factory"
+            - "@pggo_instititutionen_module.listentries_helper"
+        tags:
+            - { name: form.type }
+    
+    pggo_instititutionen_module.form.handler.institution:
+        class: Pggo\InstititutionenModule\Form\Handler\Institution\EditHandler
+        arguments:
+            - "@kernel"
+            - "@translator.default"
+            - "@form.factory"
+            - "@request_stack"
+            - "@router"
+            - "@logger"
+            - "@zikula_permissions_module.api.permission"
+            - "@zikula_users_module.current_user"
+            - "@pggo_instititutionen_module.entity_factory"
+            - "@pggo_instititutionen_module.controller_helper"
+            - "@pggo_instititutionen_module.model_helper"
+            - "@pggo_instititutionen_module.selection_helper"
+            - "@pggo_instititutionen_module.workflow_helper"
+            - "@pggo_instititutionen_module.hook_helper"
+        calls:
+            - [setLockingApi, ["@?zikula_pagelock_module.api.locking"]]
+        tags:
+            - { name: form.type }
+    
+    pggo_instititutionen_module.form.type.institution:
+        class: Pggo\InstititutionenModule\Form\Type\InstitutionType
+        arguments:
+            - "@translator.default"
+            - "@pggo_instititutionen_module.entity_factory"
+            - "@pggo_instititutionen_module.listentries_helper"
+        tags:
+            - { name: form.type }
+    
+    pggo_instititutionen_module.form.type.imagefinder:
+        class: Pggo\InstititutionenModule\Form\Type\Finder\ImageFinderType
+        arguments:
+            - "@translator.default"
+        tags:
+            - { name: form.type }
+    
+    pggo_instititutionen_module.form.type.institutionfinder:
+        class: Pggo\InstititutionenModule\Form\Type\Finder\InstitutionFinderType
+        arguments:
+            - "@translator.default"
+        tags:
+            - { name: form.type }
+    
+    pggo_instititutionen_module.form.type.appsettings:
+        class: Pggo\InstititutionenModule\Form\AppSettingsType
+        arguments:
+            - "@translator.default"
+            - "@zikula_extensions_module.api.variable"
+        tags:
+            - { name: form.type }

@@ -1,0 +1,68 @@
+services:
+    # Helper classes
+    pggo_instititutionen_module.controller_helper:
+        class: Pggo\InstititutionenModule\Helper\ControllerHelper
+        arguments:
+            - "@translator.default"
+            - "@request_stack"
+            - "@session"
+            - "@logger"
+            - "@form.factory"
+            - "@zikula_extensions_module.api.variable"
+            - "@pggo_instititutionen_module.entity_factory"
+            - "@pggo_instititutionen_module.model_helper"
+            - "@pggo_instititutionen_module.selection_helper"
+            - "@pggo_instititutionen_module.image_helper"
+    
+    pggo_instititutionen_module.hook_helper:
+        class: Pggo\InstititutionenModule\Helper\HookHelper
+        arguments:
+            - "@hook_dispatcher"
+    
+    pggo_instititutionen_module.image_helper:
+        class: Pggo\InstititutionenModule\Helper\ImageHelper
+        arguments:
+            - "@translator.default"
+            - "@session"
+            - "@zikula_extensions_module.api.variable"
+    
+    pggo_instititutionen_module.listentries_helper:
+        class: Pggo\InstititutionenModule\Helper\ListEntriesHelper
+        arguments:
+            - "@translator.default"
+    
+    pggo_instititutionen_module.model_helper:
+        class: Pggo\InstititutionenModule\Helper\ModelHelper
+        arguments:
+            - "@pggo_instititutionen_module.entity_factory"
+    
+    pggo_instititutionen_module.selection_helper:
+        class: Pggo\InstititutionenModule\Helper\SelectionHelper
+        arguments:
+            - "@translator.default"
+            - "@pggo_instititutionen_module.entity_factory"
+    
+    pggo_instititutionen_module.upload_helper:
+        class: Pggo\InstititutionenModule\Helper\UploadHelper
+        arguments:
+            - "@translator.default"
+            - "@session"
+            - "@logger"
+            - "@zikula_users_module.current_user"
+            - "@zikula_extensions_module.api.variable"
+            - "%datadir%"
+    
+    pggo_instititutionen_module.view_helper:
+        class: Pggo\InstititutionenModule\Helper\ViewHelper
+        arguments:
+            - "@templating"
+            - "@request_stack"
+            - "@zikula_permissions_module.api.permission"
+            - "@zikula_extensions_module.api.variable"
+            - "@pggo_instititutionen_module.controller_helper"
+    
+    pggo_instititutionen_module.workflow_helper:
+        class: Pggo\InstititutionenModule\Helper\WorkflowHelper
+        arguments:
+            - "@translator.default"
+            - "@pggo_instititutionen_module.listentries_helper"

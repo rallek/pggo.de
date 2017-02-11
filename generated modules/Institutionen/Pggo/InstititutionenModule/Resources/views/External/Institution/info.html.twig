@@ -1,0 +1,16 @@
+{# Purpose of this template: Display item information for previewing from other modules #}
+<dl id="institution{{ institution.id }}">
+<dt>{{ institution.getTitleFromDisplayPattern()|notifyFilters('instititutionen.filter_hooks.institutions.filter') }}</dt>
+<dd>{% if institution.image is not empty and institution.imageMeta|default %}
+            <a href="{{ institution.imageUrl }}" title="{{ institution.getTitleFromDisplayPattern()|e('html_attr') }}"{% if institution.imageMeta.isImage %} class="image-link"{% endif %}>
+{% if institution.imageMeta.isImage %}
+    {% set thumbOptions = attribute(thumbRuntimeOptions, 'institutionImage') %}
+    <img src="{{ institution.image.getPathname()|imagine_filter('zkroot', thumbOptions) }}" alt="{{ institution.getTitleFromDisplayPattern()|e('html_attr') }}" width="{{ thumbOptions.thumbnail.size[0] }}" height="{{ thumbOptions.thumbnail.size[1] }}" class="img-thumbnail" />
+{% else %}
+    {{ __('Download') }} ({{ institution.imageMeta.size|pggoinstititutionenmodule_fileSize(institution.image.getPathname(), false, false) }})
+{% endif %}
+</a>
+{% else %}&nbsp;{% endif %}
+</dd>
+{% if institution.description is not empty %}<dd>{{ institution.description }}</dd>{% endif %}
+</dl>

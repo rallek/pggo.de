@@ -1,0 +1,89 @@
+application "Instititutionen" {
+    vendor "Pggo"
+    author "Ralf Koester"
+    email "ralf@familie-koester.de"
+    url "http://k62.de"
+    version "0.1.0"
+    prefix "instit"
+    generatorSettings {
+        settingsContainer "Settings"
+        targetCoreVersion ZK14DEV
+        generateSearchApi false
+        generateMailzApi false
+        generateListBlock false
+        generateModerationBlock false
+        generateNewsletterPlugin false
+        generateModerationPanel false
+        generatePendingContentSupport false
+        generateTagSupport false
+        generateMultiHookNeedles false
+        generateRssTemplates false
+        generateAtomTemplates false
+        generateCsvTemplates false
+        generateXmlTemplates false
+        generateJsonTemplates false
+        generateKmlTemplates false
+        generateIcsTemplates false
+        versionAllGeneratedFiles false
+        generateTests false
+    }
+    entities {
+        entity "image" leading {
+            nameMultiple "images"
+            displayPattern "#title#"
+            ownerPermission true
+            fields {
+                string "title",
+                upload "image" {
+                    displayType VIEW_DISPLAY
+                },
+                string "copyright" {
+                    mandatory false
+                },
+                text "description" {
+                    mandatory false
+                    displayType DISPLAY
+                }
+            }
+            actions {
+                mainAction "Index",
+                viewAction "View",
+                displayAction "Display",
+                editAction "Edit"
+            }
+        },
+        entity "institution" {
+            nameMultiple "institutions"
+            displayPattern "#name#"
+            fields {
+                string "name",
+                upload "image" {
+                    mandatory false
+                    displayType VIEW_DISPLAY
+                },
+                string "copyright" {
+                    mandatory false
+                },
+                text "description" {
+                    mandatory false
+                    displayType DISPLAY
+                    length 8000
+                }
+            }
+            actions {
+                mainAction "Index",
+                viewAction "View",
+                displayAction "Display",
+                editAction "Edit"
+            }
+        }
+    }
+    relations {
+        one2many {
+            source "image"
+            sourceAlias "institution"
+            target "institution"
+            targetAlias "images"
+        }
+    }
+}
