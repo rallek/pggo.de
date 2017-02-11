@@ -126,7 +126,7 @@ abstract class AbstractLinkerType extends AbstractType
             ],'required' => true && $options['mode'] == 'create',
             'entity' => $options['entity'],
             'allowed_extensions' => 'gif, jpeg, jpg, png',
-            'allowed_size' => 
+            'allowed_size' => ''
         ]);
         
         $builder->add('linkerHeadline', 'Symfony\Component\Form\Extension\Core\Type\TextType', [

@@ -199,7 +199,7 @@ rKHelperModule.itemSelector.getItemList = function ()
     var baseId;
     var params;
 
-    baseId = helper.itemSelector.baseId;
+    baseId = rKHelperModule.itemSelector.baseId;
     params = {
         ot: baseId,
         sort: jQuery('#' + baseId + 'Sort').val(),
@@ -238,7 +238,7 @@ rKHelperModule.itemSelector.updateItemDropdownEntries = function ()
     items = rKHelperModule.itemSelector.items[baseId];
     for (i = 0; i < items.length; ++i) {
         item = items[i];
-        itemSelector.options[i] = new Option(item.title, item.id, false);
+        itemSelector.get(0).options[i] = new Option(item.title, item.id, false);
     }
 
     if (rKHelperModule.itemSelector.selectedId > 0) {
@@ -273,6 +273,7 @@ rKHelperModule.itemSelector.updatePreview = function ()
         jQuery('#' + baseId + 'PreviewContainer')
             .html(window.atob(selectedElement.previewInfo))
             .removeClass('hidden');
+        rKHelperInitImageViewer();
     }
 };
 
@@ -281,9 +282,10 @@ rKHelperModule.itemSelector.onItemChanged = function ()
     var baseId, itemSelector, preview;
 
     baseId = rKHelperModule.itemSelector.baseId;
-    itemSelector = jQuery('#' + baseId + 'Id');
+    itemSelector = jQuery('#' + baseId + 'Id').get(0);
     preview = window.atob(rKHelperModule.itemSelector.items[baseId][itemSelector.selectedIndex].previewInfo);
 
     jQuery('#' + baseId + 'PreviewContainer').html(preview);
     rKHelperModule.itemSelector.selectedId = jQuery('#' + baseId + 'Id').val();
+    rKHelperInitImageViewer();
 };

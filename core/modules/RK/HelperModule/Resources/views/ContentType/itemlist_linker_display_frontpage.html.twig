@@ -10,7 +10,7 @@
 							{% if linker.linkerImageMeta.isImage %}                 
 								<a href="{{ linker.theLink }}"><img src="{{ linker.linkerImage.getPathname() }}" width="100%" alt="{{ linker.getTitleFromDisplayPattern()|e('html_attr') }}" /></a>
 							{% else %}
-								{{ __('Download') }} ({{ linker.linkerImageMeta.size|rkwebsitehelpermodule_fileSize(linker.linkerImage.getPathname(), false, false) }})
+								{{ __('Download') }} ({{ linker.linkerImageMeta.size|rkhelpermodule_fileSize(linker.linkerImage.getPathname(), false, false) }})
 							{% endif %}
 							<a href="{{ linker.theLink }}"><h2>{{ linker.getTitleFromDisplayPattern() }}</h2></a>
 							{% if linker.linkerText %}
@@ -29,7 +29,7 @@
 								{% if linker.linkerImageMeta.isImage %}                 
 									<a href="{{ linker.theLink }}"><img src="{{ linker.linkerImage.getPathname() }}" width="100%" alt="{{ linker.getTitleFromDisplayPattern()|e('html_attr') }}" /></a>
 								{% else %}
-									{{ __('Download') }} ({{ linker.linkerImageMeta.size|rkwebsitehelpermodule_fileSize(linker.linkerImage.getPathname(), false, false) }})
+									{{ __('Download') }} ({{ linker.linkerImageMeta.size|rkhelpermodule_fileSize(linker.linkerImage.getPathname(), false, false) }})
 								{% endif %}
 
 							</div>

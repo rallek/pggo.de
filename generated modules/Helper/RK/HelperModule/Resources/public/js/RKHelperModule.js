@@ -77,7 +77,7 @@ function rKHelperInitItemActions(context)
     containerSelector = '';
     if (context == 'view') {
         containerSelector = '.rkhelpermodule-view';
-        listClasses = 'list-unstyled dropdown-menu dropdown-menu-right';
+        listClasses = 'list-unstyled dropdown-menu';
     } else if (context == 'display') {
         containerSelector = 'h2, h3';
         listClasses = 'list-unstyled dropdown-menu';
@@ -160,13 +160,11 @@ function rKHelperInitQuickViewModals()
     });
 }
 
-jQuery(document).ready(function() {
-    var isViewPage;
-    var isDisplayPage;
-
-    isViewPage = jQuery('.rkhelpermodule-view').length > 0;
-    isDisplayPage = jQuery('.rkhelpermodule-display').length > 0;
-
+/**
+ * Initialises image viewing behaviour.
+ */
+function rKHelperInitImageViewer()
+{
     jQuery('a.image-link').magnificPopup({
         type: 'image',
         closeOnContentClick: true,
@@ -181,13 +179,23 @@ jQuery(document).ready(function() {
             tPrev: Translator.__('Previous (Left arrow key)'),
             tNext: Translator.__('Next (Right arrow key)'),
             tCounter: '<span class="mfp-counter">%curr% ' + Translator.__('of') + ' %total%</span>'
-    	},
+        },
         zoom: {
             enabled: true,
             duration: 300,
             easing: 'ease-in-out'
         }
     });
+}
+
+jQuery(document).ready(function() {
+    var isViewPage;
+    var isDisplayPage;
+
+    isViewPage = jQuery('.rkhelpermodule-view').length > 0;
+    isDisplayPage = jQuery('.rkhelpermodule-display').length > 0;
+
+    rKHelperInitImageViewer();
 
     if (isViewPage) {
         rKHelperInitQuickNavigation();

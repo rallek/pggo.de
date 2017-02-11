@@ -190,10 +190,10 @@ class AbstractItemActionsMenu implements ContainerAwareInterface
             }
             
             // more actions for adding new related items
-            $authAdmin = $permissionApi->hasPermission($component, $instance, ACCESS_ADMIN);
             
-            if ($isOwner || $authAdmin) {
-            
+            $relatedComponent = 'RKHelperModule:CarouselItem:';
+            $relatedInstance = $entity['id'] . '::';
+            if ($isOwner || $permissionApi->hasPermission($relatedComponent, $relatedInstance, ACCESS_EDIT)) {
                 $title = $this->__('Create carousel item');
                 $menu->addChild($title, [
                     'route' => 'rkhelpermodule_carouselitem_' . $routeArea . 'edit',

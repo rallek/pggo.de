@@ -21,18 +21,19 @@
                 {% if routeArea == 'admin' %}
                     <col id="cSelect" />
                 {% endif %}
+                <col id="cItemActions" />
                 <col id="cInfoTitle" />
                 <col id="cInfoDescription" />
                 <col id="cInfoLocale" />
-                <col id="cItemActions" />
             </colgroup>
             <thead>
             <tr>
                 {% if routeArea == 'admin' %}
-                    <th id="hSelect" scope="col" class="text-center">
+                    <th id="hSelect" scope="col" class="fixed-column text-center">
                         <input type="checkbox" class="rkhelper-mass-toggle" />
                     </th>
                 {% endif %}
+                <th id="hItemActions" scope="col" class="fixed-column text-right z-order-unsorted">{{ __('Actions') }}</th>
                 <th id="hInfoTitle" scope="col" class="text-left">
                     <a href="{{ sort.infoTitle.url }}" title="{{ __f('Sort by %s', {'%s': 'info title'}) }}" class="{{ sort.infoTitle.class }}">{{ __('Info title') }}</a>
                 </th>
@@ -42,7 +43,6 @@
                 <th id="hInfoLocale" scope="col" class="text-left">
                     <a href="{{ sort.infoLocale.url }}" title="{{ __f('Sort by %s', {'%s': 'info locale'}) }}" class="{{ sort.infoLocale.class }}">{{ __('Info locale') }}</a>
                 </th>
-                <th id="hItemActions" scope="col" class="text-right z-order-unsorted">{{ __('Actions') }}</th>
             </tr>
             </thead>
             <tbody>
@@ -50,10 +50,17 @@
         {% for info in items %}
             <tr>
                 {% if routeArea == 'admin' %}
-                    <td headers="hSelect" class="text-center">
+                    <td headers="hSelect" class="fixed-column text-center">
                         <input type="checkbox" name="items[]" value="{{ info.id }}" class="rkhelper-toggle-checkbox" />
                     </td>
                 {% endif %}
+                <td id="itemActions{{ info.id }}" headers="hItemActions" class="fixed-column actions nowrap z-w02">
+                    {% set itemActions = knp_menu_get('RKHelperModule:ItemActionsMenu:menu', [], { entity: info, area: routeArea, context: 'view' }) %}
+                    <div class="dropdown">
+                        <a id="itemActions{{ info.id }}DropDownToggle" role="button" data-toggle="dropdown" data-target="#" href="javascript:void(0);" class="hidden dropdown-toggle"><i class="fa fa-tasks"></i> <span class="caret"></span></a>
+                        {{ knp_menu_render(itemActions, { template: 'ZikulaMenuModule:Override:actions.html.twig' }) }}
+                    </div>
+                </td>
                 <td headers="hInfoTitle" class="text-left">
                     {{ info.infoTitle }}
                 </td>
@@ -62,13 +69,6 @@
                 </td>
                 <td headers="hInfoLocale" class="text-left">
                     {{ info.infoLocale|languageName }}
-                </td>
-                <td id="itemActions{{ info.id }}" headers="hItemActions" class="actions text-right nowrap z-w02">
-                    {% set itemActions = knp_menu_get('RKHelperModule:ItemActionsMenu:menu', [], { entity: info, area: routeArea, context: 'view' }) %}
-                    <div class="dropdown">
-                        <a id="itemActions{{ info.id }}DropDownToggle" role="button" data-toggle="dropdown" data-target="#" href="javascript:void(0);" class="hidden dropdown-toggle"><i class="fa fa-tasks"></i> <span class="caret"></span></a>
-                        {{ knp_menu_render(itemActions, { template: 'ZikulaMenuModule:Override:actions.html.twig' }) }}
-                    </div>
                 </td>
             </tr>
         {% else %}

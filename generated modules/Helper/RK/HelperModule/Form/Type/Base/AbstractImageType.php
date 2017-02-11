@@ -128,7 +128,7 @@ abstract class AbstractImageType extends AbstractType
             ],'required' => true && $options['mode'] == 'create',
             'entity' => $options['entity'],
             'allowed_extensions' => 'gif, jpeg, jpg, png',
-            'allowed_size' => 
+            'allowed_size' => ''
         ]);
         
         $builder->add('myDescription', 'Symfony\Component\Form\Extension\Core\Type\TextareaType', [

@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Zikula Core 1.4.X\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2017-02-05 10:13+0100\n"
+"PO-Revision-Date: 2017-02-10 12:58+0100\n"
 "Last-Translator: Ralf Köster <ralf@familie-koester.de>\n"
 "Language-Team: team@zikula.de <team@zikula.de>\n"
 "Language: de\n"
@@ -8053,7 +8053,6 @@ msgstr "ist nicht leer und nicht NULL."
 msgid "is not equal."
 msgstr "ist ungleich"
 
-#, fuzzy
 msgid "lang"
 msgstr "Sprache"
 

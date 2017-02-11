@@ -656,7 +656,7 @@ abstract class AbstractInfoRepository extends EntityRepository
     {
         $qb = $this->genericBaseQuery('', $orderBy, $useJoins);
         if (count($exclude) > 0) {
-        	$qb = $this->addExclusion($qb, $exclude);
+            $qb = $this->addExclusion($qb, $exclude);
         }
     
         $qb = $this->addSearchFilter($qb, $fragment);

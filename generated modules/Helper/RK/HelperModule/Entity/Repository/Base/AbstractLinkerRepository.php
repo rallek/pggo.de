@@ -664,7 +664,7 @@ abstract class AbstractLinkerRepository extends SortableRepository
     {
         $qb = $this->genericBaseQuery('', $orderBy, $useJoins);
         if (count($exclude) > 0) {
-        	$qb = $this->addExclusion($qb, $exclude);
+            $qb = $this->addExclusion($qb, $exclude);
         }
     
         $qb = $this->addSearchFilter($qb, $fragment);

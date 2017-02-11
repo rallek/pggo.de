@@ -109,6 +109,7 @@ class AbstractItemSelector extends Zikula_Form_Plugin_TextInput implements Conta
 
             $jsAssetBag->add($homePath . '/web/magnific-popup/jquery.magnific-popup.min.js');
             $cssAssetBag->add($homePath . '/web/magnific-popup/magnific-popup.css');
+            $jsAssetBag->add($assetHelper->resolve('@RKHelperModule:js/RKHelperModule.js'));
             $jsAssetBag->add($assetHelper->resolve('@RKHelperModule:js/RKHelperModule.Finder.js'));
             $cssAssetBag->add($assetHelper->resolve('@RKHelperModule:css/style.css'));
         }
@@ -152,8 +153,8 @@ class AbstractItemSelector extends Zikula_Form_Plugin_TextInput implements Conta
      */
     public function decode(Zikula_Form_View $view)
     {
-        parent::decode($view);
-        $this->objectType = $this->container->get('request_stack')->getCurrentRequest()->request->get('RKHelperModule_objecttype', 'linker');
-        $this->selectedItemId = $this->text;
+        $request = $this->container->get('request_stack')->getCurrentRequest();
+        $this->objectType = $request->request->get('RKHelperModule_objecttype', 'linker');
+        $this->selectedItemId = $this->text = $request->request->get($this->inputName, 0);
     }
 }

@@ -21,6 +21,7 @@
                 {% if routeArea == 'admin' %}
                     <col id="cSelect" />
                 {% endif %}
+                <col id="cItemActions" />
                 <col id="cLinkerImage" />
                 <col id="cLinkerHeadline" />
                 <col id="cLinkerText" />
@@ -29,15 +30,15 @@
                 <col id="cLinkerLocale" />
                 <col id="cSorting" />
                 <col id="cLinkerGroup" />
-                <col id="cItemActions" />
             </colgroup>
             <thead>
             <tr>
                 {% if routeArea == 'admin' %}
-                    <th id="hSelect" scope="col" class="text-center">
+                    <th id="hSelect" scope="col" class="fixed-column text-center">
                         <input type="checkbox" class="rkhelper-mass-toggle" />
                     </th>
                 {% endif %}
+                <th id="hItemActions" scope="col" class="fixed-column text-right z-order-unsorted">{{ __('Actions') }}</th>
                 <th id="hLinkerImage" scope="col" class="text-left">
                     <a href="{{ sort.linkerImage.url }}" title="{{ __f('Sort by %s', {'%s': 'linker image'}) }}" class="{{ sort.linkerImage.class }}">{{ __('Linker image') }}</a>
                 </th>
@@ -62,7 +63,6 @@
                 <th id="hLinkerGroup" scope="col" class="text-left">
                     <a href="{{ sort.linkerGroup.url }}" title="{{ __f('Sort by %s', {'%s': 'linker group'}) }}" class="{{ sort.linkerGroup.class }}">{{ __('Linker group') }}</a>
                 </th>
-                <th id="hItemActions" scope="col" class="text-right z-order-unsorted">{{ __('Actions') }}</th>
             </tr>
             </thead>
             <tbody>
@@ -70,10 +70,17 @@
         {% for linker in items %}
             <tr>
                 {% if routeArea == 'admin' %}
-                    <td headers="hSelect" class="text-center">
+                    <td headers="hSelect" class="fixed-column text-center">
                         <input type="checkbox" name="items[]" value="{{ linker.id }}" class="rkhelper-toggle-checkbox" />
                     </td>
                 {% endif %}
+                <td id="itemActions{{ linker.id }}" headers="hItemActions" class="fixed-column actions nowrap z-w02">
+                    {% set itemActions = knp_menu_get('RKHelperModule:ItemActionsMenu:menu', [], { entity: linker, area: routeArea, context: 'view' }) %}
+                    <div class="dropdown">
+                        <a id="itemActions{{ linker.id }}DropDownToggle" role="button" data-toggle="dropdown" data-target="#" href="javascript:void(0);" class="hidden dropdown-toggle"><i class="fa fa-tasks"></i> <span class="caret"></span></a>
+                        {{ knp_menu_render(itemActions, { template: 'ZikulaMenuModule:Override:actions.html.twig' }) }}
+                    </div>
+                </td>
                 <td headers="hLinkerImage" class="text-left">
                     {% if linker.linkerImageMeta|default %}
                     <a href="{{ linker.linkerImageUrl }}" title="{{ linker.getTitleFromDisplayPattern()|e('html_attr') }}"{% if linker.linkerImageMeta.isImage %} class="image-link"{% endif %}>
@@ -106,13 +113,6 @@
                 </td>
                 <td headers="hLinkerGroup" class="text-left">
                     {{ linker.linkerGroup }}
-                </td>
-                <td id="itemActions{{ linker.id }}" headers="hItemActions" class="actions text-right nowrap z-w02">
-                    {% set itemActions = knp_menu_get('RKHelperModule:ItemActionsMenu:menu', [], { entity: linker, area: routeArea, context: 'view' }) %}
-                    <div class="dropdown">
-                        <a id="itemActions{{ linker.id }}DropDownToggle" role="button" data-toggle="dropdown" data-target="#" href="javascript:void(0);" class="hidden dropdown-toggle"><i class="fa fa-tasks"></i> <span class="caret"></span></a>
-                        {{ knp_menu_render(itemActions, { template: 'ZikulaMenuModule:Override:actions.html.twig' }) }}
-                    </div>
                 </td>
             </tr>
         {% else %}

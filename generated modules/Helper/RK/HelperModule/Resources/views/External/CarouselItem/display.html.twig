@@ -1,4 +1,7 @@
 {# Purpose of this template: Display one certain carousel item within an external context #}
+{{ pageAddAsset('javascript', asset('magnific-popup/jquery.magnific-popup.min.js')) }}
+{{ pageAddAsset('stylesheet', asset('magnific-popup/magnific-popup.css')) }}
+{{ pageAddAsset('javascript', zasset('@RKHelperModule:js/RKHelperModule.js')) }}
 <div id="carouselItem{$carouselItem.id}" class="rkhelpermodule-external-carouselitem">
 {% if displayMode == 'link' %}
     <p class="rkhelpermodule-external-link">

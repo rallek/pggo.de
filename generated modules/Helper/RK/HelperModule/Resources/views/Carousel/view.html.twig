@@ -19,21 +19,22 @@
                 {% if routeArea == 'admin' %}
                     <col id="cSelect" />
                 {% endif %}
+                <col id="cItemActions" />
                 <col id="cCarouselName" />
                 <col id="cRemarks" />
                 <col id="cSlidingTime" />
                 <col id="cControls" />
                 <col id="cCarouselGroup" />
                 <col id="cCarouselLocale" />
-                <col id="cItemActions" />
             </colgroup>
             <thead>
             <tr>
                 {% if routeArea == 'admin' %}
-                    <th id="hSelect" scope="col" class="text-center">
+                    <th id="hSelect" scope="col" class="fixed-column text-center">
                         <input type="checkbox" class="rkhelper-mass-toggle" />
                     </th>
                 {% endif %}
+                <th id="hItemActions" scope="col" class="fixed-column text-right z-order-unsorted">{{ __('Actions') }}</th>
                 <th id="hCarouselName" scope="col" class="text-left">
                     <a href="{{ sort.carouselName.url }}" title="{{ __f('Sort by %s', {'%s': 'carousel name'}) }}" class="{{ sort.carouselName.class }}">{{ __('Carousel name') }}</a>
                 </th>
@@ -52,7 +53,6 @@
                 <th id="hCarouselLocale" scope="col" class="text-left">
                     <a href="{{ sort.carouselLocale.url }}" title="{{ __f('Sort by %s', {'%s': 'carousel locale'}) }}" class="{{ sort.carouselLocale.class }}">{{ __('Carousel locale') }}</a>
                 </th>
-                <th id="hItemActions" scope="col" class="text-right z-order-unsorted">{{ __('Actions') }}</th>
             </tr>
             </thead>
             <tbody>
@@ -60,10 +60,17 @@
         {% for carousel in items %}
             <tr>
                 {% if routeArea == 'admin' %}
-                    <td headers="hSelect" class="text-center">
+                    <td headers="hSelect" class="fixed-column text-center">
                         <input type="checkbox" name="items[]" value="{{ carousel.id }}" class="rkhelper-toggle-checkbox" />
                     </td>
                 {% endif %}
+                <td id="itemActions{{ carousel.id }}" headers="hItemActions" class="fixed-column actions nowrap z-w02">
+                    {% set itemActions = knp_menu_get('RKHelperModule:ItemActionsMenu:menu', [], { entity: carousel, area: routeArea, context: 'view' }) %}
+                    <div class="dropdown">
+                        <a id="itemActions{{ carousel.id }}DropDownToggle" role="button" data-toggle="dropdown" data-target="#" href="javascript:void(0);" class="hidden dropdown-toggle"><i class="fa fa-tasks"></i> <span class="caret"></span></a>
+                        {{ knp_menu_render(itemActions, { template: 'ZikulaMenuModule:Override:actions.html.twig' }) }}
+                    </div>
+                </td>
                 <td headers="hCarouselName" class="text-left">
                     {{ carousel.carouselName }}
                 </td>
@@ -85,13 +92,6 @@
                 </td>
                 <td headers="hCarouselLocale" class="text-left">
                     {{ carousel.carouselLocale|languageName }}
-                </td>
-                <td id="itemActions{{ carousel.id }}" headers="hItemActions" class="actions text-right nowrap z-w02">
-                    {% set itemActions = knp_menu_get('RKHelperModule:ItemActionsMenu:menu', [], { entity: carousel, area: routeArea, context: 'view' }) %}
-                    <div class="dropdown">
-                        <a id="itemActions{{ carousel.id }}DropDownToggle" role="button" data-toggle="dropdown" data-target="#" href="javascript:void(0);" class="hidden dropdown-toggle"><i class="fa fa-tasks"></i> <span class="caret"></span></a>
-                        {{ knp_menu_render(itemActions, { template: 'ZikulaMenuModule:Override:actions.html.twig' }) }}
-                    </div>
                 </td>
             </tr>
         {% else %}

@@ -141,7 +141,7 @@ abstract class AbstractPersonType extends AbstractType
             ],'required' => false,
             'entity' => $options['entity'],
             'allowed_extensions' => 'gif, jpeg, jpg, png',
-            'allowed_size' => 
+            'allowed_size' => ''
         ]);
         
         $builder->add('copyright', 'Symfony\Component\Form\Extension\Core\Type\TextType', [
