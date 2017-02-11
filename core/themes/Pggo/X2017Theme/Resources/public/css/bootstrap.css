@@ -5,8 +5,8 @@
  */
 
 /*!
- * Generated using the Bootstrap Customizer (http://getbootstrap.com/customize/?id=b315734251b2605356ffae7b4c3ef968)
- * Config saved to config.json and https://gist.github.com/b315734251b2605356ffae7b4c3ef968
+ * Generated using the Bootstrap Customizer (http://getbootstrap.com/customize/?id=0999d6bbaeb50d4453a2e6989f077391)
+ * Config saved to config.json and https://gist.github.com/0999d6bbaeb50d4453a2e6989f077391
  */
 /*!
  * Bootstrap v3.3.7 (http://getbootstrap.com)
@@ -6323,8 +6323,8 @@ button.close {
   left: 0;
   bottom: 0;
   width: 15%;
-  opacity: 0.5;
-  filter: alpha(opacity=50);
+  opacity: 0.1;
+  filter: alpha(opacity=10);
   font-size: 20px;
   color: #ffffff;
   text-align: center;
