@@ -9,7 +9,7 @@
     </div>
 </div>
 
-{if $featureActivationHelper->isEnabled(constant('Pggo\\InstititutionenModule\\Helper\\FeatureActivationHelper::CATEGORIES', $objectType))}
+{if $featureActivationHelper->isEnabled(constant('Pggo\\InstititutionenModule\\Helper\\FeatureActivationHelper::CATEGORIES'), $objectType)}
 {formvolatile}
 {if $properties ne null && is_array($properties)}
     {nocache}

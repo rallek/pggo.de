@@ -227,6 +227,7 @@ jQuery(document).ready(function() {
         pggoInstititutionenInitMassToggle();
         jQuery(window).resize(pggoInstititutionenInitFixedColumns);
         pggoInstititutionenInitFixedColumns();
+        window.setTimeout(pggoInstititutionenInitFixedColumns, 1000);
         pggoInstititutionenInitItemActions('view');
     } else if (isDisplayPage) {
         pggoInstititutionenInitItemActions('display');

@@ -153,7 +153,8 @@ abstract class AbstractAjaxController extends AbstractController
     protected function prepareSlimItem($repository, $objectType, $item, $itemId, $descriptionField)
     {
         $previewParameters = [
-            $objectType => $item
+            $objectType => $item,
+            'featureActivationHelper' => $this->get('pggo_instititutionen_module.feature_activation_helper')
         ];
         $contextArgs = ['controller' => $objectType, 'action' => 'display'];
         $additionalParameters = $repository->getAdditionalTemplateParameters($this->get('pggo_instititutionen_module.image_helper'), 'controllerAction', $contextArgs);

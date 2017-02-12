@@ -4,14 +4,14 @@ application "Instititutionen" {
     author "Ralf Koester"
     email "ralf@familie-koester.de"
     url "http://k62.de"
-    version "0.2.0"
+    version "0.3.0"
     prefix "instit"
     generatorSettings {
         settingsContainer "Settings"
-        targetCoreVersion ZK14DEV
+        targetCoreVersion ZK14
         generateSearchApi false
         generateMailzApi false
-        generateListBlock false
+        generateListBlock true
         generateModerationBlock false
         generateNewsletterPlugin false
         generateModerationPanel false

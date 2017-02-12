@@ -86,6 +86,13 @@ services:
         tags:
             - { name: form.type }
     
+    pggo_instititutionen_module.form.type.block.itemlist:
+        class: Pggo\InstititutionenModule\Block\Form\Type\ItemListBlockType
+        arguments:
+            - "@translator.default"
+        tags:
+            - { name: form.type }
+    
     pggo_instititutionen_module.form.type.picturefinder:
         class: Pggo\InstititutionenModule\Form\Type\Finder\PictureFinderType
         arguments:

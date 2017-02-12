@@ -431,6 +431,8 @@ abstract class AbstractItemList extends \Content_AbstractContentType implements 
             $this->view->assign('categories', $categories)
                        ->assign('categoryHelper', $this->container->get('pggo_instititutionen_module.category_helper'));
         }
+        $this->view->assign('featureActivationHelper', $featureActivationHelper)
+                   ->assign('objectType', $this->objectType);
     }
     
     /**
