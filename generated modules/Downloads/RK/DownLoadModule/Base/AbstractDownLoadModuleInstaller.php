@@ -58,6 +58,7 @@ abstract class AbstractDownLoadModuleInstaller extends AbstractExtensionInstalle
     
         // set up all our vars with initial values
         $this->setVar('fileEntriesPerPage', '10');
+        $this->setVar('linkOwnFilesOnAccountPage', true);
     
         $categoryRegistryIdsPerEntity = [];
     

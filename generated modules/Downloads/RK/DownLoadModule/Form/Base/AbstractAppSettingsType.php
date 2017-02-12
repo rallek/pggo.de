@@ -108,6 +108,19 @@ abstract class AbstractAppSettingsType extends AbstractType
                     'title' => $this->__('Enter the file entries per page.') . ' ' . $this->__('Only digits are allowed.')
                 ],'scale' => 0
             ])
+            ->add('linkOwnFilesOnAccountPage', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', [
+                'label' => $this->__('Link own files on account page') . ':',
+                'label_attr' => [
+                    'class' => 'tooltips',
+                    'title' => $this->__('Whether to add a link to files of the current user on his account page')
+                ],
+                'help' => $this->__('Whether to add a link to files of the current user on his account page'),
+                'required' => false,
+                'data' => (bool)(isset($this->modVars['linkOwnFilesOnAccountPage']) ? $this->modVars['linkOwnFilesOnAccountPage'] : true),
+                'attr' => [
+                    'title' => $this->__('The link own files on account page option.')
+                ],
+            ])
         ;
     }
 

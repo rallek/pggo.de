@@ -4,11 +4,11 @@ application "DownLoad" {
     author "Ralf Koester"
     email "ralf@familie-koester.de"
     url "http://oldtimer-ig-osnabrueck.de"
-    version "0.3.0"
+    version "0.3.1"
     prefix "downlo"
     generatorSettings {
         settingsContainer "Settings"
-        generateAccountApi false
+        generateAccountApi true
         generateMailzApi false
         generateModerationBlock false
         generateNewsletterPlugin false

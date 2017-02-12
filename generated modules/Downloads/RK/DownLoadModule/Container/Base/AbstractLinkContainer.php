@@ -17,6 +17,7 @@ use Zikula\Common\Translator\TranslatorInterface;
 use Zikula\Common\Translator\TranslatorTrait;
 use Zikula\Core\Doctrine\EntityAccess;
 use Zikula\Core\LinkContainer\LinkContainerInterface;
+use Zikula\ExtensionsModule\Api\VariableApi;
 use Zikula\PermissionsModule\Api\PermissionApi;
 use Zikula\UsersModule\Api\CurrentUserApi;
 use RK\DownLoadModule\Helper\ControllerHelper;
@@ -39,6 +40,11 @@ abstract class AbstractLinkContainer implements LinkContainerInterface
     protected $permissionApi;
 
     /**
+     * @var VariableApi
+     */
+    protected $variableApi;
+
+    /**
      * @var CurrentUserApi
      */
     private $currentUserApi;
@@ -54,14 +60,16 @@ abstract class AbstractLinkContainer implements LinkContainerInterface
      * @param TranslatorInterface $translator       Translator service instance
      * @param Routerinterface     $router           Router service instance
      * @param PermissionApi       $permissionApi    PermissionApi service instance
+     * @param VariableApi         $variableApi      VariableApi service instance
      * @param CurrentUserApi      $currentUserApi   CurrentUserApi service instance
      * @param ControllerHelper    $controllerHelper ControllerHelper service instance
      */
-    public function __construct(TranslatorInterface $translator, RouterInterface $router, PermissionApi $permissionApi, CurrentUserApi $currentUserApi, ControllerHelper $controllerHelper)
+    public function __construct(TranslatorInterface $translator, RouterInterface $router, PermissionApi $permissionApi, VariableApi $variableApi, CurrentUserApi $currentUserApi, ControllerHelper $controllerHelper)
     {
         $this->setTranslator($translator);
         $this->router = $router;
         $this->permissionApi = $permissionApi;
+        $this->variableApi = $variableApi;
         $this->currentUserApi = $currentUserApi;
         $this->controllerHelper = $controllerHelper;
     }
@@ -94,6 +102,29 @@ abstract class AbstractLinkContainer implements LinkContainerInterface
         $links = [];
 
         if (LinkContainerInterface::TYPE_ACCOUNT == $type) {
+            if (!$this->permissionApi->hasPermission($this->getBundleName() . '::', '::', ACCESS_OVERVIEW)) {
+                return $links;
+            }
+
+            if (true === $this->variableApi->get('RKDownLoadModule', 'linkOwnFilesOnAccountPage', true)) {
+                $objectType = 'file';
+                if ($this->permissionApi->hasPermission($this->getBundleName() . ':' . ucfirst($objectType) . ':', '::', ACCESS_READ)) {
+                    $links[] = [
+                        'url' => $this->router->generate('rkdownloadmodule_' . strtolower($objectType) . '_view', ['own' => 1]),
+                        'text' => $this->__('My files'),
+                        'icon' => 'list-alt'
+                    ];
+                }
+            }
+
+            if ($this->permissionApi->hasPermission($this->getBundleName() . '::', '::', ACCESS_ADMIN)) {
+                $links[] = [
+                    'url' => $this->router->generate('rkdownloadmodule_file_adminindex'),
+                    'text' => $this->__('Down load Backend'),
+                    'icon' => 'wrench'
+                ];
+            }
+
 
             return $links;
         }
