@@ -262,7 +262,7 @@ rKHelperModule.itemSelector.updatePreview = function ()
     selectedElement = items[0];
     if (rKHelperModule.itemSelector.selectedId > 0) {
         for (var i = 0; i < items.length; ++i) {
-            if (items[i].id === rKHelperModule.itemSelector.selectedId) {
+            if (items[i].id == rKHelperModule.itemSelector.selectedId) {
                 selectedElement = items[i];
                 break;
             }

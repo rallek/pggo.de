@@ -4,11 +4,11 @@ application "Helper" {
     author "Ralf Koester"
     email "ralf@familie-koester.de"
     url "http://k62.de"
-    version "0.7.0"
+    version "0.7.1"
     prefix "helper"
     generatorSettings {
         settingsContainer "Settings"
-        targetCoreVersion ZK14DEV
+        targetCoreVersion ZK14
         generateAccountApi false
         generateSearchApi false
         generateMailzApi false
@@ -56,7 +56,7 @@ application "Helper" {
                 string "linkerLocale" nospace locale {
                     mandatory false
                 },
-                integer "sorting" sortablePosition {
+                integer "sorting" {
                     defaultValue "0"
                 }
             ,

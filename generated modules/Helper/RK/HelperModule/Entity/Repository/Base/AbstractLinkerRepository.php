@@ -13,7 +13,7 @@
 namespace RK\HelperModule\Entity\Repository\Base;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Gedmo\Sortable\Entity\Repository\SortableRepository;
+use Doctrine\ORM\EntityRepository;
 
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
@@ -35,13 +35,13 @@ use RK\HelperModule\Helper\ImageHelper;
  *
  * This is the base repository class for linker entities.
  */
-abstract class AbstractLinkerRepository extends SortableRepository
+abstract class AbstractLinkerRepository extends EntityRepository
 {
     
     /**
      * @var string The default sorting field/expression
      */
-    protected $defaultSortingField = 'sorting';
+    protected $defaultSortingField = 'linkerImage';
 
     /**
      * @var Request The request object given by the calling controller

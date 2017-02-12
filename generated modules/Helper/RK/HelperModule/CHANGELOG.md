@@ -1,3 +1,3 @@
 # CHANGELOG
 
-Changes in RKHelperModule 0.7.0
+Changes in RKHelperModule 0.7.1

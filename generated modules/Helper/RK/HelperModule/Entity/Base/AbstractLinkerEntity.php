@@ -154,7 +154,6 @@ abstract class AbstractLinkerEntity extends EntityAccess
     protected $linkerLocale = '';
     
     /**
-     * @Gedmo\SortablePosition
      * @ORM\Column(type="integer")
      * @Assert\Type(type="integer")
      * @Assert\NotBlank()

@@ -165,6 +165,7 @@ abstract class AbstractCarouselItemEntity extends EntityAccess
      * @Assert\NotBlank()
      * @Assert\Date()
      * @Assert\GreaterThan("now")
+     * @Assert\Expression("value > this.itemStartDate")
      * @var date $intemEndDate
      */
     protected $intemEndDate;
@@ -673,20 +674,6 @@ abstract class AbstractCarouselItemEntity extends EntityAccess
     
         return $allowedValues;
     }
-    
-    /**
-     * Checks whether the itemStartDate value is earlier than the intemEndDate value.
-     * This method is used for validation.
-     *
-     * @Assert\IsTrue(message="The start date must be before the end date.")
-     *
-     * @return boolean True if data is valid else false
-     */
-    public function isItemStartDateBeforeIntemEndDate()
-    {
-        return ($this['itemStartDate'] < $this['intemEndDate']);
-    }
-    
     
     /**
      * Start validation and raise exception if invalid data is found.

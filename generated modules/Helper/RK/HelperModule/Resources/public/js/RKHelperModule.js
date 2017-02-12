@@ -66,6 +66,31 @@ function rKHelperInitMassToggle()
 }
 
 /**
+ * Initialises fixed table columns.
+ */
+function rKHelperInitFixedColumns()
+{
+    var originalTable, fixedColumnsTable;
+
+    jQuery('.table.fixed-columns').remove();
+    jQuery('.table').each(function() {
+        originalTable = jQuery(this);
+        if (originalTable.find('.fixed-column').length > 0) {
+            fixedColumnsTable = originalTable.clone().insertBefore(originalTable).addClass('fixed-columns');
+            originalTable.find('.dropdown').addClass('hidden');
+            fixedColumnsTable.find('.dropdown').removeClass('hidden');
+            fixedColumnsTable.css('left', originalTable.parent().offset().left);
+
+            fixedColumnsTable.find('th, td').not('.fixed-column').remove();
+
+            fixedColumnsTable.find('tr').each(function (i, elem) {
+                jQuery(this).height(originalTable.find('tr:eq(' + i + ')').height());
+            });
+        }
+    });
+}
+
+/**
  * Creates a dropdown menu for the item actions.
  */
 function rKHelperInitItemActions(context)
@@ -200,6 +225,9 @@ jQuery(document).ready(function() {
     if (isViewPage) {
         rKHelperInitQuickNavigation();
         rKHelperInitMassToggle();
+        jQuery(window).resize(rKHelperInitFixedColumns);
+        rKHelperInitFixedColumns();
+        window.setTimeout(rKHelperInitFixedColumns, 1000);
         rKHelperInitItemActions('view');
     } else if (isDisplayPage) {
         rKHelperInitItemActions('display');

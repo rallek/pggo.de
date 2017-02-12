@@ -2,17 +2,12 @@
 div#z-maincontent.z-module-helper table tbody tr td {
     vertical-align: top;
 }
-.table-responsive > .fixed-column {
+.table-responsive > .fixed-columns {
     position: absolute;
     display: inline-block;
     width: auto;
     border-right: 1px solid #ddd;
     background-color: #fff;
-}
-@media(min-width: 768px) {
-    .table-responsive > .fixed-column {
-        display: none;
-    }
 }
 
 /* display pages */
@@ -30,6 +25,8 @@ div#z-maincontent.z-module-helper table tbody tr td {
 .rkhelpermoduleColourPicker {
     cursor: pointer;
 }
+
+
 /* validation */
 div.form-group input:required, div.form-group textarea:required, div.form-group select:required {
     /*border: 1px solid #00a8e6;*/
