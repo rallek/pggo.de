@@ -32,7 +32,7 @@
             <thead>
             <tr>
                 {% if routeArea == 'admin' %}
-                    <th id="hSelect" scope="col" class="fixed-column text-center">
+                    <th id="hSelect" scope="col" class="fixed-column text-center z-w02">
                         <input type="checkbox" class="rkdownload-mass-toggle" />
                     </th>
                 {% endif %}
@@ -83,7 +83,7 @@
                 </td>
                 <td headers="hMyFile" class="text-left">
                     {% if file.myFileMeta|default %}
-                    <a href="{{ file.myFileUrl }}" title="{{ file.getTitleFromDisplayPattern()|e('html_attr') }}"{% if file.myFileMeta.isImage %} class="lightbox"{% endif %}>
+                    <a href="{{ file.myFileUrl }}" title="{{ file.getTitleFromDisplayPattern()|e('html_attr') }}"{% if file.myFileMeta.isImage %} class="image-link"{% endif %}>
                     {% if file.myFileMeta.isImage %}
                         {% set thumbOptions = attribute(thumbRuntimeOptions, 'fileMyFile') %}
                         <img src="{{ file.myFile.getPathname()|imagine_filter('zkroot', thumbOptions) }}" alt="{{ file.getTitleFromDisplayPattern()|e('html_attr') }}" width="{{ thumbOptions.thumbnail.size[0] }}" height="{{ thumbOptions.thumbnail.size[1] }}" class="img-thumbnail" />

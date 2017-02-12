@@ -62,6 +62,20 @@ services:
         arguments:
             - "@rk_download_module.entity_factory"
     
+    rk_download_module.search_helper:
+        class: RK\DownLoadModule\Helper\SearchHelper
+        arguments:
+            - "@zikula_permissions_module.api.permission"
+            - "@templating.engine.twig"
+            - "@session"
+            - "@request_stack"
+            - "@rk_download_module.entity_factory"
+            - "@rk_download_module.controller_helper"
+            - "@rk_download_module.feature_activation_helper"
+            - "@rk_download_module.category_helper"
+        tags:
+            - { name: zikula.searchable_module, bundleName: RKDownLoadModule }
+    
     rk_download_module.selection_helper:
         class: RK\DownLoadModule\Helper\SelectionHelper
         arguments:

@@ -19,9 +19,9 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Zikula\Bundle\CoreBundle\HttpKernel\ZikulaHttpKernelInterface;
 use Zikula\Common\Translator\TranslatorInterface;
 use Zikula\Common\Translator\TranslatorTrait;
 use Zikula\Core\Doctrine\EntityAccess;
@@ -130,7 +130,7 @@ abstract class AbstractEditHandler
     protected $hasPageLockSupport = false;
 
     /**
-     * @var KernelInterface
+     * @var ZikulaHttpKernelInterface
      */
     protected $kernel;
 
@@ -227,24 +227,24 @@ abstract class AbstractEditHandler
     /**
      * EditHandler constructor.
      *
-     * @param KernelInterface      $kernel           Kernel service instance
-     * @param TranslatorInterface  $translator       Translator service instance
-     * @param FormFactoryInterface $formFactory      FormFactory service instance
-     * @param RequestStack         $requestStack     RequestStack service instance
-     * @param RouterInterface      $router           Router service instance
-     * @param LoggerInterface      $logger           Logger service instance
-     * @param PermissionApi        $permissionApi    PermissionApi service instance
-     * @param CurrentUserApi       $currentUserApi   CurrentUserApi service instance
+     * @param ZikulaHttpKernelInterface $kernel           Kernel service instance
+     * @param TranslatorInterface       $translator       Translator service instance
+     * @param FormFactoryInterface      $formFactory      FormFactory service instance
+     * @param RequestStack              $requestStack     RequestStack service instance
+     * @param RouterInterface           $router           Router service instance
+     * @param LoggerInterface           $logger           Logger service instance
+     * @param PermissionApi             $permissionApi    PermissionApi service instance
+     * @param CurrentUserApi            $currentUserApi   CurrentUserApi service instance
      * @param DownLoadFactory $entityFactory DownLoadFactory service instance
-     * @param ControllerHelper     $controllerHelper ControllerHelper service instance
-     * @param ModelHelper          $modelHelper      ModelHelper service instance
-     * @param SelectionHelper      $selectionHelper  SelectionHelper service instance
-     * @param WorkflowHelper       $workflowHelper   WorkflowHelper service instance
-     * @param HookHelper           $hookHelper       HookHelper service instance
-     * @param FeatureActivationHelper $featureActivationHelper FeatureActivationHelper service instance
+     * @param ControllerHelper          $controllerHelper ControllerHelper service instance
+     * @param ModelHelper               $modelHelper      ModelHelper service instance
+     * @param SelectionHelper           $selectionHelper  SelectionHelper service instance
+     * @param WorkflowHelper            $workflowHelper   WorkflowHelper service instance
+     * @param HookHelper                $hookHelper       HookHelper service instance
+     * @param FeatureActivationHelper   $featureActivationHelper FeatureActivationHelper service instance
      */
     public function __construct(
-        KernelInterface $kernel,
+        ZikulaHttpKernelInterface $kernel,
         TranslatorInterface $translator,
         FormFactoryInterface $formFactory,
         RequestStack $requestStack,

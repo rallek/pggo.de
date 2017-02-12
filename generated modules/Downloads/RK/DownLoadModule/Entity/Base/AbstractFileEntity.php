@@ -134,6 +134,7 @@ abstract class AbstractFileEntity extends EntityAccess
      * @ORM\Column(type="date")
      * @Assert\NotBlank()
      * @Assert\Date()
+     * @Assert\Expression("value > this.startDate")
      * @var date $endDate
      */
     protected $endDate;
@@ -508,20 +509,6 @@ abstract class AbstractFileEntity extends EntityAccess
     
         return $allowedValues;
     }
-    
-    /**
-     * Checks whether the startDate value is earlier than the endDate value.
-     * This method is used for validation.
-     *
-     * @Assert\IsTrue(message="The start date must be before the end date.")
-     *
-     * @return boolean True if data is valid else false
-     */
-    public function isStartDateBeforeEndDate()
-    {
-        return ($this['startDate'] < $this['endDate']);
-    }
-    
     
     /**
      * Start validation and raise exception if invalid data is found.

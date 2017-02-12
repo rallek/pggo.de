@@ -22,14 +22,13 @@
     },
     "extra": {
         "zikula": {
-            "core-compatibility": ">=1.4.5",
+            "core-compatibility": ">=1.4.6 <3.0",
             "class": "RK\\DownLoadModule\\RKDownLoadModule",
             "displayname": "Down load",
             "url": "download",
             "capabilities": {
                 "user": {"route": "rkdownloadmodule_file_index"},
                 "admin": {"route": "rkdownloadmodule_file_adminindex"},
-                "searchable": {"class": "RK\\DownLoadModule\\Helper\\SearchHelper"},
                 "categorizable": {
                     "entities": [
                         "RK\\DownLoadModule\\Entity\\FileEntity"

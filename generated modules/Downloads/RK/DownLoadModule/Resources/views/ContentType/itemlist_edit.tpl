@@ -9,7 +9,7 @@
     </div>
 </div>
 
-{if $featureActivationHelper->isEnabled(constant('RK\\DownLoadModule\\Helper\\FeatureActivationHelper::CATEGORIES', $objectType))}
+{if $featureActivationHelper->isEnabled(constant('RK\\DownLoadModule\\Helper\\FeatureActivationHelper::CATEGORIES'), $objectType)}
 {formvolatile}
 {if $properties ne null && is_array($properties)}
     {nocache}

@@ -233,7 +233,7 @@ rKDownLoadModule.itemSelector.updatePreview = function ()
     selectedElement = items[0];
     if (rKDownLoadModule.itemSelector.selectedId > 0) {
         for (var i = 0; i < items.length; ++i) {
-            if (items[i].id === rKDownLoadModule.itemSelector.selectedId) {
+            if (items[i].id == rKDownLoadModule.itemSelector.selectedId) {
                 selectedElement = items[i];
                 break;
             }

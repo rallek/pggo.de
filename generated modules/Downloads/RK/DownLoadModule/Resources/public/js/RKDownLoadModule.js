@@ -137,6 +137,7 @@ jQuery(document).ready(function() {
         rKDownLoadInitMassToggle();
         jQuery(window).resize(rKDownLoadInitFixedColumns);
         rKDownLoadInitFixedColumns();
+        window.setTimeout(rKDownLoadInitFixedColumns, 1000);
         rKDownLoadInitItemActions('view');
     } else if (isDisplayPage) {
         rKDownLoadInitItemActions('display');
