@@ -40,6 +40,18 @@ services:
         arguments:
             - "@rk_helper_module.entity_factory"
     
+    rk_helper_module.search_helper:
+        class: RK\HelperModule\Helper\SearchHelper
+        arguments:
+            - "@zikula_permissions_module.api.permission"
+            - "@templating.engine.twig"
+            - "@session"
+            - "@request_stack"
+            - "@rk_helper_module.entity_factory"
+            - "@rk_helper_module.controller_helper"
+        tags:
+            - { name: zikula.searchable_module, bundleName: RKHelperModule }
+    
     rk_helper_module.selection_helper:
         class: RK\HelperModule\Helper\SelectionHelper
         arguments:

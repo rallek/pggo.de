@@ -10,7 +10,7 @@ application "Helper" {
         settingsContainer "Settings"
         targetCoreVersion ZK14
         generateAccountApi false
-        generateSearchApi false
+        generateSearchApi true
         generateMailzApi false
         generateModerationBlock false
         generateNewsletterPlugin false
