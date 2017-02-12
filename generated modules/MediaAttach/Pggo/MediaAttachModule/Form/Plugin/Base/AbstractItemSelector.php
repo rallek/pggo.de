@@ -109,6 +109,7 @@ class AbstractItemSelector extends Zikula_Form_Plugin_TextInput implements Conta
 
             $jsAssetBag->add($homePath . '/web/magnific-popup/jquery.magnific-popup.min.js');
             $cssAssetBag->add($homePath . '/web/magnific-popup/magnific-popup.css');
+            $jsAssetBag->add($assetHelper->resolve('@PggoMediaAttachModule:js/PggoMediaAttachModule.js'));
             $jsAssetBag->add($assetHelper->resolve('@PggoMediaAttachModule:js/PggoMediaAttachModule.Finder.js'));
             $cssAssetBag->add($assetHelper->resolve('@PggoMediaAttachModule:css/style.css'));
         }
@@ -152,8 +153,8 @@ class AbstractItemSelector extends Zikula_Form_Plugin_TextInput implements Conta
      */
     public function decode(Zikula_Form_View $view)
     {
-        parent::decode($view);
-        $this->objectType = $this->container->get('request_stack')->getCurrentRequest()->request->get('PggoMediaAttachModule_objecttype', 'file');
-        $this->selectedItemId = $this->text;
+        $request = $this->container->get('request_stack')->getCurrentRequest();
+        $this->objectType = $request->request->get('PggoMediaAttachModule_objecttype', 'file');
+        $this->selectedItemId = $this->text = $request->request->get($this->inputName, 0);
     }
 }

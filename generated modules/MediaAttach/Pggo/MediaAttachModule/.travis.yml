@@ -33,9 +33,9 @@ before_install:
 install:
     - composer install
     - zip -qr PggoMediaAttachModule.zip .
-    - wget http://ci.zikula.org/job/Zikula_Core-1.4.6/106/artifact/build/archive/Zikula_Core-1.4.6.build106.tar.gz
-    - tar -xpzf Zikula_Core-1.4.6.build106.tar.gz
-    - rm Zikula_Core-1.4.6.build106.tar.gz
+    - wget http://ci.zikula.org/job/Zikula_Core-1.4.6/119/artifact/build/archive/Zikula_Core-1.4.6.build119.tar.gz
+    - tar -xpzf Zikula_Core-1.4.6.build119.tar.gz
+    - rm Zikula_Core-1.4.6.build119.tar.gz
     - cd Zikula_Core-1.4.6
     - php app/console zikula:install:start -n --database_user=root --database_name=zk_test --password=12345678 --email=admin@example.com --router:request_context:host=localhost
     - php app/console zikula:install:finish

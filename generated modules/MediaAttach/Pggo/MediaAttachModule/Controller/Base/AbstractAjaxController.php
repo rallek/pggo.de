@@ -37,7 +37,7 @@ abstract class AbstractAjaxController extends AbstractController
      */ 
     public function getCommonUsersListAction(Request $request)
     {
-        if (!$this->hasPermission($this->name . '::Ajax', '::', ACCESS_EDIT)) {
+        if (!$this->hasPermission('PggoMediaAttachModule::Ajax', '::', ACCESS_EDIT)) {
             return true;
         }
         
@@ -84,16 +84,11 @@ abstract class AbstractAjaxController extends AbstractController
      */
     public function getItemListFinderAction(Request $request)
     {
-        if (!$this->hasPermission($this->name . '::Ajax', '::', ACCESS_EDIT)) {
+        if (!$this->hasPermission('PggoMediaAttachModule::Ajax', '::', ACCESS_EDIT)) {
             return true;
         }
         
-        $objectType = 'file';
-        if ($request->isMethod('POST') && $request->request->has('ot')) {
-            $objectType = $request->request->getAlnum('ot', 'file');
-        } elseif ($request->isMethod('GET') && $request->query->has('ot')) {
-            $objectType = $request->query->getAlnum('ot', 'file');
-        }
+        $objectType = $request->request->getAlnum('ot', 'file');
         $controllerHelper = $this->get('pggo_mediaattach_module.controller_helper');
         $contextArgs = ['controller' => 'ajax', 'action' => 'getItemListFinder'];
         if (!in_array($objectType, $controllerHelper->getObjectTypes('controllerAction', $contextArgs))) {
@@ -118,12 +113,18 @@ abstract class AbstractAjaxController extends AbstractController
         }
         
         $where = ''; // filters are processed inside the repository class
+        $searchTerm = $request->request->get('q', '');
         $sortParam = $sort . ' ' . $sdir;
         
-        $entities = $repository->selectWhere($where, $sortParam);
+        $entities = [];
+        if ($searchTerm != '') {
+            list ($entities, $totalAmount) = $repository->selectSearch($searchTerm, [], $sortParam, 1, 50);
+        } else {
+            $entities = $repository->selectWhere($where, $sortParam);
+        }
         
         $slimItems = [];
-        $component = $this->name . ':' . ucfirst($objectType) . ':';
+        $component = 'PggoMediaAttachModule:' . ucfirst($objectType) . ':';
         foreach ($entities as $item) {
             $itemId = '';
             foreach ($idFields as $idField) {
@@ -132,7 +133,7 @@ abstract class AbstractAjaxController extends AbstractController
             if (!$this->hasPermission($component, $itemId . '::', ACCESS_READ)) {
                 continue;
             }
-            $slimItems[] = $this->prepareSlimItem($objectType, $item, $itemId, $descriptionField);
+            $slimItems[] = $this->prepareSlimItem($repository, $objectType, $item, $itemId, $descriptionField);
         }
         
         return new AjaxResponse($slimItems);
@@ -141,18 +142,24 @@ abstract class AbstractAjaxController extends AbstractController
     /**
      * Builds and returns a slim data array from a given entity.
      *
-     * @param string $objectType       The currently treated object type
-     * @param object $item             The currently treated entity
-     * @param string $itemid           Data item identifier(s)
-     * @param string $descriptionField Name of item description field
+     * @param EntityRepository $repository       Repository for the treated object type
+     * @param string           $objectType       The currently treated object type
+     * @param object           $item             The currently treated entity
+     * @param string           $itemId           Data item identifier(s)
+     * @param string           $descriptionField Name of item description field
      *
      * @return array The slim data representation
      */
-    protected function prepareSlimItem($objectType, $item, $itemId, $descriptionField)
+    protected function prepareSlimItem($repository, $objectType, $item, $itemId, $descriptionField)
     {
-        $view = Zikula_View::getInstance('PggoMediaAttachModule', false);
-        $view->assign($objectType, $item);
-        $previewInfo = base64_encode($view->fetch('External/' . ucfirst($objectType) . '/info.html.twig'));
+        $previewParameters = [
+            $objectType => $item
+        ];
+        $contextArgs = ['controller' => $objectType, 'action' => 'display'];
+        $additionalParameters = $repository->getAdditionalTemplateParameters($this->get('pggo_mediaattach_module.image_helper'), 'controllerAction', $contextArgs);
+        $previewParameters = array_merge($previewParameters, $additionalParameters);
+    
+        $previewInfo = base64_encode($this->get('twig')->render('@PggoMediaAttachModule/External/' . ucfirst($objectType) . '/info.html.twig', $previewParameters));
     
         $title = $item->getTitleFromDisplayPattern();
         $description = $descriptionField != '' ? $item[$descriptionField] : '';

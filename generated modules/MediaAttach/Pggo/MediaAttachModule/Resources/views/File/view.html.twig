@@ -19,18 +19,19 @@
                 {% if routeArea == 'admin' %}
                     <col id="cSelect" />
                 {% endif %}
+                <col id="cItemActions" />
                 <col id="cTitle" />
                 <col id="cDescription" />
                 <col id="cFileName" />
-                <col id="cItemActions" />
             </colgroup>
             <thead>
             <tr>
                 {% if routeArea == 'admin' %}
-                    <th id="hSelect" scope="col" class="text-center">
+                    <th id="hSelect" scope="col" class="fixed-column text-center z-w02">
                         <input type="checkbox" class="pggomediaattach-mass-toggle" />
                     </th>
                 {% endif %}
+                <th id="hItemActions" scope="col" class="fixed-column text-right z-order-unsorted">{{ __('Actions') }}</th>
                 <th id="hTitle" scope="col" class="text-left">
                     <a href="{{ sort.title.url }}" title="{{ __f('Sort by %s', {'%s': 'title'}) }}" class="{{ sort.title.class }}">{{ __('Title') }}</a>
                 </th>
@@ -40,7 +41,6 @@
                 <th id="hFileName" scope="col" class="text-left">
                     <a href="{{ sort.fileName.url }}" title="{{ __f('Sort by %s', {'%s': 'file name'}) }}" class="{{ sort.fileName.class }}">{{ __('File name') }}</a>
                 </th>
-                <th id="hItemActions" scope="col" class="text-right z-order-unsorted">{{ __('Actions') }}</th>
             </tr>
             </thead>
             <tbody>
@@ -48,10 +48,17 @@
         {% for file in items %}
             <tr>
                 {% if routeArea == 'admin' %}
-                    <td headers="hSelect" class="text-center">
+                    <td headers="hSelect" class="fixed-column text-center">
                         <input type="checkbox" name="items[]" value="{{ file.id }}" class="pggomediaattach-toggle-checkbox" />
                     </td>
                 {% endif %}
+                <td id="itemActions{{ file.id }}" headers="hItemActions" class="fixed-column actions nowrap z-w02">
+                    {% set itemActions = knp_menu_get('PggoMediaAttachModule:ItemActionsMenu:menu', [], { entity: file, area: routeArea, context: 'view' }) %}
+                    <div class="dropdown">
+                        <a id="itemActions{{ file.id }}DropDownToggle" role="button" data-toggle="dropdown" data-target="#" href="javascript:void(0);" class="hidden dropdown-toggle"><i class="fa fa-tasks"></i> <span class="caret"></span></a>
+                        {{ knp_menu_render(itemActions, { template: 'ZikulaMenuModule:Override:actions.html.twig' }) }}
+                    </div>
+                </td>
                 <td headers="hTitle" class="text-left">
                     <a href="{{ path('pggomediaattachmodule_file_' ~ routeArea ~ 'display', { 'id': file.id }) }}" title="{{ __('View detail page')|e('html_attr') }}">{{ file.title|notifyFilters('pggomediaattachmodule.filterhook.files') }}</a>
                 </td>
@@ -69,13 +76,6 @@
                     {% endif %}
                     </a>
                     {% endif %}
-                </td>
-                <td id="itemActions{{ file.id }}" headers="hItemActions" class="actions text-right nowrap z-w02">
-                    {% set itemActions = knp_menu_get('PggoMediaAttachModule:ItemActionsMenu:menu', [], { entity: file, area: routeArea, context: 'view' }) %}
-                    <div class="dropdown">
-                        <a id="itemActions{{ file.id }}DropDownToggle" role="button" data-toggle="dropdown" data-target="#" href="javascript:void(0);" class="hidden dropdown-toggle"><i class="fa fa-tasks"></i> <span class="caret"></span></a>
-                        {{ knp_menu_render(itemActions, { template: 'ZikulaMenuModule:Override:actions.html.twig' }) }}
-                    </div>
                 </td>
             </tr>
         {% else %}

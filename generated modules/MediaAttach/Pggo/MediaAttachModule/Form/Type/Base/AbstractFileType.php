@@ -130,7 +130,7 @@ abstract class AbstractFileType extends AbstractType
             ],'required' => true && $options['mode'] == 'create',
             'entity' => $options['entity'],
             'allowed_extensions' => 'pdf',
-            'allowed_size' => 0
+            'allowed_size' => '500k'
         ]);
     }
 

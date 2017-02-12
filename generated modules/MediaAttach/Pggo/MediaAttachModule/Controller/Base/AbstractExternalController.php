@@ -14,6 +14,7 @@ namespace Pggo\MediaAttachModule\Controller\Base;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Zikula\Core\Controller\AbstractController;
 use Zikula\Core\Response\PlainResponse;
@@ -41,26 +42,24 @@ abstract class AbstractExternalController extends AbstractController
             $objectType = $controllerHelper->getDefaultObjectType('controllerType', $contextArgs);
         }
         
-        $component = $this->name . ':' . ucfirst($objectType) . ':';
+        $component = 'PggoMediaAttachModule:' . ucfirst($objectType) . ':';
         if (!$this->hasPermission($component, $id . '::', ACCESS_READ)) {
             return '';
         }
         
         $repository = $this->get('pggo_mediaattach_module.entity_factory')->getRepository($objectType);
         $repository->setRequest($this->get('request_stack')->getCurrentRequest());
-        $selectionHelper = $this->get('pggo_mediaattach_module.selection_helper');
-        $idFields = $selectionHelper->getIdFields($objectType);
         $idValues = ['id' => $id];
         
         $hasIdentifier = $controllerHelper->isValidIdentifier($idValues);
         if (!$hasIdentifier) {
-            return $this->__('Error! Invalid identifier received.');
+            return new Response($this->__('Error! Invalid identifier received.'));
         }
         
         // assign object data fetched from the database
         $entity = $repository->selectById($idValues);
-        if ((!is_array($entity) && !is_object($entity)) || !isset($entity[$idFields[0]])) {
-            return $this->__('No such item.');
+        if (null === $entity) {
+            return new Response($this->__('No such item.'));
         }
         
         $entity->initWorkflow();
@@ -73,6 +72,10 @@ abstract class AbstractExternalController extends AbstractController
             $objectType => $entity,
             'displayMode' => $displayMode
         ];
+        
+        $contextArgs = ['controller' => $objectType, 'action' => 'display'];
+        $additionalParameters = $repository->getAdditionalTemplateParameters($this->get('pggo_mediaattach_module.image_helper'), 'controllerAction', $contextArgs);
+        $templateParameters = array_merge($templateParameters, $additionalParameters);
         
         return $this->render('@PggoMediaAttachModule/External/' . ucfirst($objectType) . '/display.html.twig', $templateParameters);
     }
@@ -110,7 +113,7 @@ abstract class AbstractExternalController extends AbstractController
         }
         
         if (empty($editor) || !in_array($editor, ['ckeditor', 'tinymce'])) {
-            return $this->__('Error: Invalid editor context given for external controller action.');
+            return new Response($this->__('Error: Invalid editor context given for external controller action.'));
         }
         
         $repository = $this->get('pggo_mediaattach_module.entity_factory')->getRepository($objectType);

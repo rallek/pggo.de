@@ -8,7 +8,7 @@ application "MediaAttach" {
     prefix "mediaattach"
     generatorSettings {
         settingsContainer "Settings"
-        targetCoreVersion ZK14DEV
+        targetCoreVersion ZK14
         generateMailzApi false
         generateNewsletterPlugin false
         generateTagSupport false

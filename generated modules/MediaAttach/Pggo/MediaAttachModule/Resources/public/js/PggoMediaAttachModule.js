@@ -66,6 +66,31 @@ function pggoMediaAttachInitMassToggle()
 }
 
 /**
+ * Initialises fixed table columns.
+ */
+function pggoMediaAttachInitFixedColumns()
+{
+    var originalTable, fixedColumnsTable;
+
+    jQuery('.table.fixed-columns').remove();
+    jQuery('.table').each(function() {
+        originalTable = jQuery(this);
+        if (originalTable.find('.fixed-column').length > 0) {
+            fixedColumnsTable = originalTable.clone().insertBefore(originalTable).addClass('fixed-columns');
+            originalTable.find('.dropdown').addClass('hidden');
+            fixedColumnsTable.find('.dropdown').removeClass('hidden');
+            fixedColumnsTable.css('left', originalTable.parent().offset().left);
+
+            fixedColumnsTable.find('th, td').not('.fixed-column').remove();
+
+            fixedColumnsTable.find('tr').each(function (i, elem) {
+                jQuery(this).height(originalTable.find('tr:eq(' + i + ')').height());
+            });
+        }
+    });
+}
+
+/**
  * Creates a dropdown menu for the item actions.
  */
 function pggoMediaAttachInitItemActions(context)
@@ -77,7 +102,7 @@ function pggoMediaAttachInitItemActions(context)
     containerSelector = '';
     if (context == 'view') {
         containerSelector = '.pggomediaattachmodule-view';
-        listClasses = 'list-unstyled dropdown-menu dropdown-menu-right';
+        listClasses = 'list-unstyled dropdown-menu';
     } else if (context == 'display') {
         containerSelector = 'h2, h3';
         listClasses = 'list-unstyled dropdown-menu';
@@ -110,6 +135,9 @@ jQuery(document).ready(function() {
     if (isViewPage) {
         pggoMediaAttachInitQuickNavigation();
         pggoMediaAttachInitMassToggle();
+        jQuery(window).resize(pggoMediaAttachInitFixedColumns);
+        pggoMediaAttachInitFixedColumns();
+        window.setTimeout(pggoMediaAttachInitFixedColumns, 1000);
         pggoMediaAttachInitItemActions('view');
     } else if (isDisplayPage) {
         pggoMediaAttachInitItemActions('display');

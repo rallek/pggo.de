@@ -295,7 +295,7 @@ abstract class AbstractItemList extends \Content_AbstractContentType implements 
         $this->view->toplevelmodule = 'PggoMediaAttachModule';
     
         // ensure our custom plugins are loaded
-        array_push($this->view->plugins_dir, 'modules/Pggo/MediaAttachModule/Resources/views//plugins');
+        array_push($this->view->plugins_dir, 'modules/Pggo/MediaAttachModule/Resources/views/plugins');
     }
     
     /**

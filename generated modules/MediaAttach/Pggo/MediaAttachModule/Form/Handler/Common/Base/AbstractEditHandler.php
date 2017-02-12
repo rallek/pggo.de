@@ -21,9 +21,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Zikula\Bundle\CoreBundle\HttpKernel\ZikulaHttpKernelInterface;
 use Zikula\Common\Translator\TranslatorInterface;
 use Zikula\Common\Translator\TranslatorTrait;
-use Zikula\Bundle\CoreBundle\HttpKernel\ZikulaHttpKernelInterface;
 use Zikula\Core\Doctrine\EntityAccess;
 use Zikula\Core\RouteUrl;
 use Zikula\PageLockModule\Api\LockingApi;
@@ -221,20 +221,20 @@ abstract class AbstractEditHandler
     /**
      * EditHandler constructor.
      *
-     * @param ZikulaHttpKernelInterface $kernel      Kernel service instance
-     * @param TranslatorInterface  $translator       Translator service instance
-     * @param FormFactoryInterface $formFactory      FormFactory service instance
-     * @param RequestStack         $requestStack     RequestStack service instance
-     * @param RouterInterface      $router           Router service instance
-     * @param LoggerInterface      $logger           Logger service instance
-     * @param PermissionApi        $permissionApi    PermissionApi service instance
-     * @param CurrentUserApi       $currentUserApi   CurrentUserApi service instance
+     * @param ZikulaHttpKernelInterface $kernel           Kernel service instance
+     * @param TranslatorInterface       $translator       Translator service instance
+     * @param FormFactoryInterface      $formFactory      FormFactory service instance
+     * @param RequestStack              $requestStack     RequestStack service instance
+     * @param RouterInterface           $router           Router service instance
+     * @param LoggerInterface           $logger           Logger service instance
+     * @param PermissionApi             $permissionApi    PermissionApi service instance
+     * @param CurrentUserApi            $currentUserApi   CurrentUserApi service instance
      * @param MediaAttachFactory $entityFactory MediaAttachFactory service instance
-     * @param ControllerHelper     $controllerHelper ControllerHelper service instance
-     * @param ModelHelper          $modelHelper      ModelHelper service instance
-     * @param SelectionHelper      $selectionHelper  SelectionHelper service instance
-     * @param WorkflowHelper       $workflowHelper   WorkflowHelper service instance
-     * @param HookHelper           $hookHelper       HookHelper service instance
+     * @param ControllerHelper          $controllerHelper ControllerHelper service instance
+     * @param ModelHelper               $modelHelper      ModelHelper service instance
+     * @param SelectionHelper           $selectionHelper  SelectionHelper service instance
+     * @param WorkflowHelper            $workflowHelper   WorkflowHelper service instance
+     * @param HookHelper                $hookHelper       HookHelper service instance
      */
     public function __construct(
         ZikulaHttpKernelInterface $kernel,

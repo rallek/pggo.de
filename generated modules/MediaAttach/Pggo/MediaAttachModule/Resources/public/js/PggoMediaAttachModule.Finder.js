@@ -170,7 +170,7 @@ pggoMediaAttachModule.itemSelector.getItemList = function ()
     var baseId;
     var params;
 
-    baseId = mediaattach.itemSelector.baseId;
+    baseId = pggoMediaAttachModule.itemSelector.baseId;
     params = {
         ot: baseId,
         sort: jQuery('#' + baseId + 'Sort').val(),
@@ -209,7 +209,7 @@ pggoMediaAttachModule.itemSelector.updateItemDropdownEntries = function ()
     items = pggoMediaAttachModule.itemSelector.items[baseId];
     for (i = 0; i < items.length; ++i) {
         item = items[i];
-        itemSelector.options[i] = new Option(item.title, item.id, false);
+        itemSelector.get(0).options[i] = new Option(item.title, item.id, false);
     }
 
     if (pggoMediaAttachModule.itemSelector.selectedId > 0) {
@@ -233,7 +233,7 @@ pggoMediaAttachModule.itemSelector.updatePreview = function ()
     selectedElement = items[0];
     if (pggoMediaAttachModule.itemSelector.selectedId > 0) {
         for (var i = 0; i < items.length; ++i) {
-            if (items[i].id === pggoMediaAttachModule.itemSelector.selectedId) {
+            if (items[i].id == pggoMediaAttachModule.itemSelector.selectedId) {
                 selectedElement = items[i];
                 break;
             }
@@ -252,7 +252,7 @@ pggoMediaAttachModule.itemSelector.onItemChanged = function ()
     var baseId, itemSelector, preview;
 
     baseId = pggoMediaAttachModule.itemSelector.baseId;
-    itemSelector = jQuery('#' + baseId + 'Id');
+    itemSelector = jQuery('#' + baseId + 'Id').get(0);
     preview = window.atob(pggoMediaAttachModule.itemSelector.items[baseId][itemSelector.selectedIndex].previewInfo);
 
     jQuery('#' + baseId + 'PreviewContainer').html(preview);
