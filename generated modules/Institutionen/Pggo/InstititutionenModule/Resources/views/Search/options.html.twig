@@ -1,0 +1,10 @@
+{# Purpose of this template: Display search options #}
+<input type="hidden" id="pggoInstititutionenModuleActive" name="active[PggoInstititutionenModule]" value="1" />
+<div>
+    <input type="checkbox" id="active_pggoInstititutionenModulePictures" name="pggoInstititutionenModuleSearchTypes[]" value="picture"{% if active_picture %} checked="checked"{% endif %} />
+    <label for="active_pggoInstititutionenModulePictures">{{ __('Pictures', 'pggoinstititutionenmodule') }}</label>
+</div>
+<div>
+    <input type="checkbox" id="active_pggoInstititutionenModuleInstitutions" name="pggoInstititutionenModuleSearchTypes[]" value="institution"{% if active_institution %} checked="checked"{% endif %} />
+    <label for="active_pggoInstititutionenModuleInstitutions">{{ __('Institutions', 'pggoinstititutionenmodule') }}</label>
+</div>

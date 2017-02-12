@@ -51,6 +51,20 @@ services:
         arguments:
             - "@pggo_instititutionen_module.entity_factory"
     
+    pggo_instititutionen_module.search_helper:
+        class: Pggo\InstititutionenModule\Helper\SearchHelper
+        arguments:
+            - "@zikula_permissions_module.api.permission"
+            - "@templating.engine.twig"
+            - "@session"
+            - "@request_stack"
+            - "@pggo_instititutionen_module.entity_factory"
+            - "@pggo_instititutionen_module.controller_helper"
+            - "@pggo_instititutionen_module.feature_activation_helper"
+            - "@pggo_instititutionen_module.category_helper"
+        tags:
+            - { name: zikula.searchable_module, bundleName: PggoInstititutionenModule }
+    
     pggo_instititutionen_module.selection_helper:
         class: Pggo\InstititutionenModule\Helper\SelectionHelper
         arguments:

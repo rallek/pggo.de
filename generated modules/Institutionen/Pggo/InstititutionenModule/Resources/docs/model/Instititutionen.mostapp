@@ -9,7 +9,7 @@ application "Instititutionen" {
     generatorSettings {
         settingsContainer "Settings"
         targetCoreVersion ZK14
-        generateSearchApi false
+        generateSearchApi true
         generateMailzApi false
         generateListBlock true
         generateModerationBlock false
