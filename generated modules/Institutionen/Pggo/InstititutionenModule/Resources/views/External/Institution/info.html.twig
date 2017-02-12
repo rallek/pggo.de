@@ -13,4 +13,14 @@
 {% else %}&nbsp;{% endif %}
 </dd>
 {% if institution.description is not empty %}<dd>{{ institution.description }}</dd>{% endif %}
+{% if featureActivationHelper.isEnabled(constant('Pggo\\InstititutionenModule\\Helper\\FeatureActivationHelper::CATEGORIES'), 'institution') %}
+    <dd>
+        <dl class="category-list">
+        {% for propName, catMapping in institution.categories %}
+            <dt>{{ propName }}</dt>
+            <dd>{{ catMapping.category.display_name[lang] }}</dd>
+        {% endfor %}
+        </dl>
+    </dd>
+{% endif %}
 </dl>

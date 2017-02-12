@@ -25,6 +25,7 @@ use Zikula\Component\SortableColumns\SortableColumns;
 use Zikula\Core\Controller\AbstractController;
 use Zikula\Core\RouteUrl;
 use Pggo\InstititutionenModule\Entity\PictureEntity;
+use Pggo\InstititutionenModule\Helper\FeatureActivationHelper;
 
 /**
  * Picture controller base class.

@@ -53,6 +53,16 @@
                 </ul>
                 <hr />
                 <h4>{{ __('Special field types') }}</h4>
+                <h5>{{ __('Categories') }}</h5>
+                <p>{{ __('If a "Person" has Categories support then you can also filter by category id or name.') }}</p>
+                <ul>
+                    <li><code>categories:eq:4</code> {{ __('Person is assigned to category with id "4".') }}</li>
+                    <li><code>categories:eq:Sports</code> {{ __('Person is assigned to category with name "Sports".') }}</li>
+                    <li><code>categories:ne:4</code> {{ __('Person is not assigned to category with id "4".') }}</li>
+                    <li><code>categories:sub:Sports</code> {{ __('Person is assigned to category with name "Sports" or one of it\'s sub categories.') }}</li>
+                </ul>
+                <p>{{ __('The field name "categories" is the default name for category fields. However, in practice we need to define different field names for possibly several registries.') }}</p>
+                <p>{{ __('Therefore we create a virtual fields for each registry property.') }} {{ __('So instead of "categories" use "categoriesFoo" whereby "Foo" is the property name for the desired registry, for example "Main".') }}</p>
                 <h5>{{ __('Dates') }}</h5>
                 <p>{{ __('When filtering for dates you can use convenient extensions and even time periods.') }}</p>
                 <ul>

@@ -22,6 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Zikula\Common\Translator\TranslatorInterface;
 use Zikula\Common\Translator\TranslatorTrait;
 use Pggo\InstititutionenModule\Entity\Factory\InstititutionenFactory;
+use Pggo\InstititutionenModule\Helper\FeatureActivationHelper;
 use Pggo\InstititutionenModule\Helper\ListEntriesHelper;
 
 /**
@@ -42,17 +43,24 @@ abstract class AbstractInstitutionType extends AbstractType
     protected $listHelper;
 
     /**
+     * @var FeatureActivationHelper
+     */
+    protected $featureActivationHelper;
+
+    /**
      * InstitutionType constructor.
      *
      * @param TranslatorInterface $translator    Translator service instance
      * @param InstititutionenFactory        $entityFactory Entity factory service instance
      * @param ListEntriesHelper   $listHelper    ListEntriesHelper service instance
+     * @param FeatureActivationHelper $featureActivationHelper FeatureActivationHelper service instance
      */
-    public function __construct(TranslatorInterface $translator, InstititutionenFactory $entityFactory, ListEntriesHelper $listHelper)
+    public function __construct(TranslatorInterface $translator, InstititutionenFactory $entityFactory, ListEntriesHelper $listHelper, FeatureActivationHelper $featureActivationHelper)
     {
         $this->setTranslator($translator);
         $this->entityFactory = $entityFactory;
         $this->listHelper = $listHelper;
+        $this->featureActivationHelper = $featureActivationHelper;
     }
 
     /**
@@ -71,6 +79,9 @@ abstract class AbstractInstitutionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $this->addEntityFields($builder, $options);
+        if ($this->featureActivationHelper->isEnabled(FeatureActivationHelper::CATEGORIES, 'institution')) {
+            $this->addCategoriesField($builder, $options);
+        }
         $this->addModerationFields($builder, $options);
         $this->addReturnControlField($builder, $options);
         $this->addSubmitButtons($builder, $options);
@@ -141,6 +152,28 @@ abstract class AbstractInstitutionType extends AbstractType
                 'class' => '',
                 'title' => $this->__('Enter the description of the institution')
             ],'required' => false
+        ]);
+    }
+
+    /**
+     * Adds a categories field.
+     *
+     * @param FormBuilderInterface $builder The form builder
+     * @param array                $options The options
+     */
+    public function addCategoriesField(FormBuilderInterface $builder, array $options)
+    {
+        $builder->add('categories', 'Zikula\CategoriesModule\Form\Type\CategoriesType', [
+            'label' => $this->__('Categories') . ':',
+            'empty_data' => [],
+            'attr' => [
+                'class' => 'category-selector'
+            ],
+            'required' => false,
+            'multiple' => true,
+            'module' => 'PggoInstititutionenModule',
+            'entity' => 'InstitutionEntity',
+            'entityCategoryClass' => 'Pggo\InstititutionenModule\Entity\InstitutionCategoryEntity'
         ]);
     }
 

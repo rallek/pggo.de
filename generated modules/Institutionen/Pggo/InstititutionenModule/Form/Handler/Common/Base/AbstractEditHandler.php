@@ -30,6 +30,7 @@ use Zikula\PageLockModule\Api\LockingApi;
 use Zikula\PermissionsModule\Api\PermissionApi;
 use Zikula\UsersModule\Api\CurrentUserApi;
 use Pggo\InstititutionenModule\Entity\Factory\InstititutionenFactory;
+use Pggo\InstititutionenModule\Helper\FeatureActivationHelper;
 use Pggo\InstititutionenModule\Helper\ControllerHelper;
 use Pggo\InstititutionenModule\Helper\HookHelper;
 use Pggo\InstititutionenModule\Helper\ModelHelper;
@@ -212,6 +213,11 @@ abstract class AbstractEditHandler
     protected $workflowHelper;
 
     /**
+     * @var FeatureActivationHelper
+     */
+    protected $featureActivationHelper;
+
+    /**
      * Reference to optional locking api.
      *
      * @var LockingApi
@@ -249,6 +255,7 @@ abstract class AbstractEditHandler
      * @param SelectionHelper      $selectionHelper  SelectionHelper service instance
      * @param WorkflowHelper       $workflowHelper   WorkflowHelper service instance
      * @param HookHelper           $hookHelper       HookHelper service instance
+     * @param FeatureActivationHelper $featureActivationHelper FeatureActivationHelper service instance
      */
     public function __construct(
         ZikulaHttpKernelInterface $kernel,
@@ -264,7 +271,8 @@ abstract class AbstractEditHandler
         ModelHelper $modelHelper,
         SelectionHelper $selectionHelper,
         WorkflowHelper $workflowHelper,
-        HookHelper $hookHelper)
+        HookHelper $hookHelper,
+        FeatureActivationHelper $featureActivationHelper)
     {
         $this->kernel = $kernel;
         $this->setTranslator($translator);
@@ -280,6 +288,7 @@ abstract class AbstractEditHandler
         $this->selectionHelper = $selectionHelper;
         $this->workflowHelper = $workflowHelper;
         $this->hookHelper = $hookHelper;
+        $this->featureActivationHelper = $featureActivationHelper;
     }
 
     /**

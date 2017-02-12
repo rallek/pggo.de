@@ -14,6 +14,7 @@ namespace Pggo\InstititutionenModule\ContentType\Base;
 
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
+use Pggo\InstititutionenModule\Helper\FeatureActivationHelper;
 
 /**
  * Generic item list content plugin base class.
@@ -63,6 +64,34 @@ abstract class AbstractItemList extends \Content_AbstractContentType implements 
      * @var string
      */
     protected $filter;
+    
+    /**
+     * List of object types allowing categorisation.
+     *
+     * @var array
+     */
+    protected $categorisableObjectTypes;
+    
+    /**
+     * List of category registries for different trees.
+     *
+     * @var array
+     */
+    protected $catRegistries;
+    
+    /**
+     * List of category properties for different trees.
+     *
+     * @var array
+     */
+    protected $catProperties;
+    
+    /**
+     * List of category ids with sub arrays for each registry.
+     *
+     * @var array
+     */
+    protected $catIds;
     
     /**
      * ItemList constructor.
@@ -149,6 +178,55 @@ abstract class AbstractItemList extends \Content_AbstractContentType implements 
         $this->template = $data['template'];
         $this->customTemplate = $data['customTemplate'];
         $this->filter = $data['filter'];
+        $featureActivationHelper = $this->container->get('pggo_instititutionen_module.feature_activation_helper');
+        if ($featureActivationHelper->isEnabled(FeatureActivationHelper::CATEGORIES, $this->objectType)) {
+            $this->categorisableObjectTypes = ['institution'];
+            $categoryHelper = $this->container->get('pggo_instititutionen_module.category_helper');
+    
+            // fetch category properties
+            $this->catRegistries = [];
+            $this->catProperties = [];
+            if (in_array($this->objectType, $this->categorisableObjectTypes)) {
+                $selectionHelper = $this->container->get('pggo_instititutionen_module.selection_helper');
+                $idFields = $selectionHelper->getIdFields($this->objectType);
+                $this->catRegistries = $categoryHelper->getAllPropertiesWithMainCat($this->objectType, $idFields[0]);
+                $this->catProperties = $categoryHelper->getAllProperties($this->objectType);
+            }
+    
+            if (!isset($data['catIds'])) {
+                $primaryRegistry = $categoryHelper->getPrimaryProperty($this->objectType);
+                $data['catIds'] = [$primaryRegistry => []];
+                // backwards compatibility
+                if (isset($data['catId'])) {
+                    $data['catIds'][$primaryRegistry][] = $data['catId'];
+                    unset($data['catId']);
+                }
+            } elseif (!is_array($data['catIds'])) {
+                $data['catIds'] = explode(',', $data['catIds']);
+            }
+    
+            foreach ($this->catRegistries as $registryId => $registryCid) {
+                $propName = '';
+                foreach ($this->catProperties as $propertyName => $propertyId) {
+                    if ($propertyId == $registryId) {
+                        $propName = $propertyName;
+                        break;
+                    }
+                }
+                if (isset($data['catids' . $propName])) {
+                    $data['catIds'][$propName] = $data['catids' . $propName];
+                }
+                if (!is_array($data['catIds'][$propName])) {
+                    if ($data['catIds'][$propName]) {
+                        $data['catIds'][$propName] = [$data['catIds'][$propName]];
+                    } else {
+                        $data['catIds'][$propName] = [];
+                    }
+                }
+            }
+    
+            $this->catIds = $data['catIds'];
+        }
     }
     
     /**
@@ -166,14 +244,30 @@ abstract class AbstractItemList extends \Content_AbstractContentType implements 
         $orderBy = $this->getSortParam($repository);
         $qb = $repository->genericBaseQuery($where, $orderBy);
     
+        $featureActivationHelper = $this->container->get('pggo_instititutionen_module.feature_activation_helper');
+        if ($featureActivationHelper->isEnabled(FeatureActivationHelper::CATEGORIES, $this->objectType)) {
+            // apply category filters
+            if (in_array($this->objectType, $this->categorisableObjectTypes)) {
+                if (is_array($this->catIds) && count($this->catIds) > 0) {
+                    $categoryHelper = $this->container->get('pggo_instititutionen_module.category_helper');
+                    $qb = $categoryHelper->buildFilterClauses($qb, $this->objectType, $this->catIds);
+                }
+            }
+        }
+    
         // get objects from database
         $currentPage = 1;
         $resultsPerPage = isset($this->amount) ? $this->amount : 1;
         $query = $repository->getSelectWherePaginatedQuery($qb, $currentPage, $resultsPerPage);
         list($entities, $objectCount) = $repository->retrieveCollectionResult($query, $orderBy, true);
     
+        if ($featureActivationHelper->isEnabled(FeatureActivationHelper::CATEGORIES, $this->objectType)) {
+            $entities = $categoryHelper->filterEntitiesByPermission($entities);
+        }
+    
         $data = [
             'objectType' => $this->objectType,
+            'catids' => $this->catIds,
             'sorting' => $this->sorting,
             'amount' => $this->amount,
             'template' => $this->template,
@@ -186,6 +280,11 @@ abstract class AbstractItemList extends \Content_AbstractContentType implements 
             'objectType' => $this->objectType,
             'items' => $entities
         ];
+    
+        if ($featureActivationHelper->isEnabled(FeatureActivationHelper::CATEGORIES, $this->objectType)) {
+            $templateParameters['registries'] = $this->catRegistries;
+            $templateParameters['properties'] = $this->catProperties;
+        }
     
         $imageHelper = $this->container->get('pggo_instititutionen_module.image_helper');
         $templateParameters = array_merge($templateParameters, $repository->getAdditionalTemplateParameters($imageHelper, 'contentType'));
@@ -296,6 +395,42 @@ abstract class AbstractItemList extends \Content_AbstractContentType implements 
     
         // ensure our custom plugins are loaded
         array_push($this->view->plugins_dir, 'modules/Pggo/InstititutionenModule/Resources/views/plugins');
+    
+        $featureActivationHelper = $this->container->get('pggo_instititutionen_module.feature_activation_helper');
+        if ($featureActivationHelper->isEnabled(FeatureActivationHelper::CATEGORIES, $this->objectType)) {
+            // assign category data
+            $this->view->assign('registries', $this->catRegistries)
+                       ->assign('properties', $this->catProperties);
+    
+            // assign categories lists for simulating category selectors
+            $translator = $this->container->get('translator.default');
+            $locale = $this->container->get('request_stack')->getCurrentRequest()->getLocale();
+            $categories = [];
+            $categoryApi = $this->container->get('zikula_categories_module.api.category');
+            foreach ($this->catRegistries as $registryId => $registryCid) {
+                $propName = '';
+                foreach ($this->catProperties as $propertyName => $propertyId) {
+                    if ($propertyId == $registryId) {
+                        $propName = $propertyName;
+                        break;
+                    }
+                }
+    
+                //$mainCategory = $categoryApi->getCategoryById($registryCid);
+                $cats = $categoryApi->getSubCategories($registryCid, true, true, false, true, false, null, '', null, 'sort_value');
+                $catsForDropdown = [
+                    ['value' => '', 'text' => $translator->__('All')]
+                ];
+                foreach ($cats as $cat) {
+                    $catName = isset($cat['display_name'][$locale]) ? $cat['display_name'][$locale] : $cat['name'];
+                    $catsForDropdown[] = ['value' => $cat['id'], 'text' => $catName];
+                }
+                $categories[$propName] = $catsForDropdown;
+            }
+    
+            $this->view->assign('categories', $categories)
+                       ->assign('categoryHelper', $this->container->get('pggo_instititutionen_module.category_helper'));
+        }
     }
     
     /**

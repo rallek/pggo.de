@@ -25,6 +25,7 @@ use Zikula\Component\SortableColumns\SortableColumns;
 use Zikula\Core\RouteUrl;
 use Zikula\ExtensionsModule\Api\VariableApi;
 use Pggo\InstititutionenModule\Entity\Factory\InstititutionenFactory;
+use Pggo\InstititutionenModule\Helper\FeatureActivationHelper;
 use Pggo\InstititutionenModule\Helper\ImageHelper;
 use Pggo\InstititutionenModule\Helper\ModelHelper;
 use Pggo\InstititutionenModule\Helper\SelectionHelper;
@@ -82,6 +83,11 @@ abstract class AbstractControllerHelper
     protected $imageHelper;
 
     /**
+     * @var FeatureActivationHelper
+     */
+    protected $featureActivationHelper;
+
+    /**
      * ControllerHelper constructor.
      *
      * @param TranslatorInterface $translator      Translator service instance
@@ -94,6 +100,7 @@ abstract class AbstractControllerHelper
      * @param ModelHelper         $modelHelper     ModelHelper service instance
      * @param SelectionHelper     $selectionHelper SelectionHelper service instance
      * @param ImageHelper         $imageHelper     ImageHelper service instance
+     * @param FeatureActivationHelper $featureActivationHelper FeatureActivationHelper service instance
      */
     public function __construct(
         TranslatorInterface $translator,
@@ -106,6 +113,8 @@ abstract class AbstractControllerHelper
         ModelHelper $modelHelper,
         SelectionHelper $selectionHelper,
         ImageHelper $imageHelper
+        ,
+        FeatureActivationHelper $featureActivationHelper
         )
     {
         $this->setTranslator($translator);
@@ -118,6 +127,7 @@ abstract class AbstractControllerHelper
         $this->modelHelper = $modelHelper;
         $this->selectionHelper = $selectionHelper;
         $this->imageHelper = $imageHelper;
+        $this->featureActivationHelper = $featureActivationHelper;
     }
 
     /**
@@ -405,6 +415,7 @@ abstract class AbstractControllerHelper
         $templateParameters['showAllEntries'] = $templateParameters['all'];
         $templateParameters['showOwnEntries'] = $templateParameters['own'];
     
+        $templateParameters['featureActivationHelper'] = $this->featureActivationHelper;
         $templateParameters['canBeCreated'] = $this->modelHelper->canBeCreated($objectType);
     
         return $templateParameters;
@@ -440,6 +451,7 @@ abstract class AbstractControllerHelper
     
         $additionalParameters = $repository->getAdditionalTemplateParameters($this->imageHelper, 'controllerAction', $contextArgs);
         $templateParameters = array_merge($templateParameters, $additionalParameters);
+        $templateParameters['featureActivationHelper'] = $this->featureActivationHelper;
     
         return $templateParameters;
     }
@@ -464,6 +476,7 @@ abstract class AbstractControllerHelper
     
         $additionalParameters = $repository->getAdditionalTemplateParameters($this->imageHelper, 'controllerAction', $contextArgs);
         $templateParameters = array_merge($templateParameters, $additionalParameters);
+        $templateParameters['featureActivationHelper'] = $this->featureActivationHelper;
     
         return $templateParameters;
     }

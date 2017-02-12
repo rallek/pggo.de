@@ -16,6 +16,7 @@ use Doctrine\DBAL\Connection;
 use RuntimeException;
 use Zikula\Core\AbstractExtensionInstaller;
 use Zikula_Workflow_Util;
+use Zikula\CategoriesModule\Entity\CategoryRegistryEntity;
 
 /**
  * Installer base class.
@@ -81,8 +82,38 @@ abstract class AbstractInstititutionenModuleInstaller extends AbstractExtensionI
         $this->setVar('thumbnailWidthInstitutionImageEdit', '240');
         $this->setVar('thumbnailHeightInstitutionImageEdit', '180');
     
+        $categoryRegistryIdsPerEntity = [];
+    
+        // add default entry for category registry (property named Main)
+        $categoryHelper = new \Pggo\InstititutionenModule\Helper\CategoryHelper(
+            $this->container->get('translator.default'),
+            $this->container->get('session'),
+            $this->container->get('request_stack'),
+            $logger,
+            $this->container->get('zikula_users_module.current_user'),
+            $this->container->get('zikula_categories_module.api.category_registry'),
+            $this->container->get('zikula_categories_module.api.category_permission')
+        );
+        $categoryGlobal = $this->container->get('zikula_categories_module.api.category')->getCategoryByPath('/__SYSTEM__/Modules/Global');
+    
+        $registry = new CategoryRegistryEntity();
+        $registry->setModname('PggoInstititutionenModule');
+        $registry->setEntityname('InstitutionEntity');
+        $registry->setProperty($categoryHelper->getPrimaryProperty('Institution'));
+        $registry->setCategory_Id($categoryGlobal['id']);
+    
+        try {
+            $entityManager = $this->container->get('doctrine.orm.default_entity_manager');
+            $entityManager->persist($registry);
+            $entityManager->flush();
+        } catch (\Exception $e) {
+            $this->addFlash('error', $this->__f('Error! Could not create a category registry for the %entity% entity.', ['%entity%' => 'institution']));
+            $logger->error('{app}: User {user} could not create a category registry for {entities} during installation. Error details: {errorMessage}.', ['app' => 'PggoInstititutionenModule', 'user' => $userName, 'entities' => 'institutions', 'errorMessage' => $e->getMessage()]);
+        }
+        $categoryRegistryIdsPerEntity['institution'] = $registry->getId();
+    
         // create the default data
-        $this->createDefaultData();
+        $this->createDefaultData($categoryRegistryIdsPerEntity);
     
         // install subscriber hooks
         $this->hookApi->installSubscriberHooks($this->bundle->getMetaData());
@@ -138,6 +169,9 @@ abstract class AbstractInstititutionenModuleInstaller extends AbstractExtensionI
             
             // rename existing permission rules
             $this->renamePermissionsFor14();
+            
+            // rename existing category registries
+            $this->renameCategoryRegistriesFor14();
             
             // rename all tables
             $this->renameTablesFor14();
@@ -202,6 +236,23 @@ abstract class AbstractInstititutionenModuleInstaller extends AbstractExtensionI
             UPDATE $dbName.group_perms
             SET component = CONCAT('PggoInstititutionenModule', SUBSTRING(component, $componentLength))
             WHERE component LIKE 'Instititutionen%';
+        ");
+    }
+    
+    /**
+     * Renames all category registries stored for this app.
+     */
+    protected function renameCategoryRegistriesFor14()
+    {
+        $conn = $this->getConnection();
+        $dbName = $this->getDbName();
+    
+        $componentLength = strlen('Instititutionen') + 1;
+    
+        $conn->executeQuery("
+            UPDATE $dbName.categories_registry
+            SET modname = CONCAT('PggoInstititutionenModule', SUBSTRING(modname, $componentLength))
+            WHERE modname LIKE 'Instititutionen%';
         ");
     }
     
@@ -369,6 +420,12 @@ abstract class AbstractInstititutionenModuleInstaller extends AbstractExtensionI
     
         // remove all module vars
         $this->delVars();
+        // remove category registry entries
+        $categoryRegistryApi = $this->container->get('zikula_categories_module.api.category_registry');
+        // assume that not more than five registries exist
+        for ($i = 1; $i <= 5; $i++) {
+            $categoryRegistryApi->deleteRegistry('PggoInstititutionenModule');
+        }
     
         // remove all thumbnails
         $manager = $this->container->get('systemplugin.imagine.manager');
@@ -393,6 +450,7 @@ abstract class AbstractInstititutionenModuleInstaller extends AbstractExtensionI
         $classNames = [];
         $classNames[] = 'Pggo\InstititutionenModule\Entity\PictureEntity';
         $classNames[] = 'Pggo\InstititutionenModule\Entity\InstitutionEntity';
+        $classNames[] = 'Pggo\InstititutionenModule\Entity\InstitutionCategoryEntity';
     
         return $classNames;
     }
@@ -400,9 +458,11 @@ abstract class AbstractInstititutionenModuleInstaller extends AbstractExtensionI
     /**
      * Create the default data for PggoInstititutionenModule.
      *
+     * @param array $categoryRegistryIdsPerEntity List of category registry ids
+     *
      * @return void
      */
-    protected function createDefaultData()
+    protected function createDefaultData($categoryRegistryIdsPerEntity)
     {
         $entityManager = $this->container->get('doctrine.orm.default_entity_manager');
         $logger = $this->container->get('logger');

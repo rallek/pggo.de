@@ -7,6 +7,14 @@
     {{ form_errors(quickNavForm) }}
     <fieldset>
         <h3>{{ __('Quick navigation') }}</h3>
+        {% set categoriesEnabled = featureActivationHelper.isEnabled(constant('Pggo\\InstititutionenModule\\Helper\\FeatureActivationHelper::CATEGORIES'), 'institution') %}
+        {% if (categoryFilter is defined and categoryFilter != true) or not categoriesEnabled %}
+            <div class="hidden">
+        {% endif %}
+            {{ form_row(quickNavForm.categories) }}
+        {% if (categoryFilter is defined and categoryFilter != true) or not categoriesEnabled %}
+            </div>
+        {% endif %}
         {% if workflowStateFilter is defined and workflowStateFilter != true %}
             <div class="hidden">
         {% endif %}

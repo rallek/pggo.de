@@ -1,6 +1,6 @@
 {
     "name": "pggo/instititutionen-module",
-    "version": "0.1.1",
+    "version": "0.2.0",
     "description": "A module to deliver standardized layouts for institutions, building and teams",
     "type": "zikula-module",
     "license": "LGPL-3.0+",
@@ -29,6 +29,11 @@
             "capabilities": {
                 "user": {"route": "pggoinstititutionenmodule_institution_index"},
                 "admin": {"route": "pggoinstititutionenmodule_institution_adminindex"},
+                "categorizable": {
+                    "entities": [
+                        "Pggo\\InstititutionenModule\\Entity\\InstitutionEntity"
+                    ]
+                },
                 "hook_subscriber": {"class": "Pggo\\InstititutionenModule\\Container\\HookContainer"}
             },
             "securityschema": {

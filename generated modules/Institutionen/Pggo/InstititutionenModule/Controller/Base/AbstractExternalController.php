@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Zikula\Core\Controller\AbstractController;
 use Zikula\Core\Response\PlainResponse;
+use Pggo\InstititutionenModule\Helper\FeatureActivationHelper;
 
 /**
  * Controller for external calls base class.
@@ -76,6 +77,8 @@ abstract class AbstractExternalController extends AbstractController
         $contextArgs = ['controller' => $objectType, 'action' => 'display'];
         $additionalParameters = $repository->getAdditionalTemplateParameters($this->get('pggo_instititutionen_module.image_helper'), 'controllerAction', $contextArgs);
         $templateParameters = array_merge($templateParameters, $additionalParameters);
+        
+        $templateParameters['featureActivationHelper'] = $this->get('pggo_instititutionen_module.feature_activation_helper');
         
         return $this->render('@PggoInstititutionenModule/External/' . ucfirst($objectType) . '/display.html.twig', $templateParameters);
     }
@@ -186,6 +189,13 @@ abstract class AbstractExternalController extends AbstractController
             list($entities, $objectCount) = $repository->selectWherePaginated($where, $sortParam, $currentPage, $resultsPerPage);
         }
         
+        if (in_array($objectType, ['institution'])) {
+            $featureActivationHelper = $this->get('pggo_instititutionen_module.feature_activation_helper');
+            if ($featureActivationHelper->isEnabled(FeatureActivationHelper::CATEGORIES, $objectType)) {
+                $entities = $this->get('pggo_instititutionen_module.category_helper')->filterEntitiesByPermission($entities);
+            }
+        }
+        
         foreach ($entities as $k => $entity) {
             $entity->initWorkflow();
         }
@@ -195,6 +205,8 @@ abstract class AbstractExternalController extends AbstractController
         
         $imageHelper = $this->get('pggo_instititutionen_module.image_helper');
         $templateParameters = array_merge($templateParameters, $repository->getAdditionalTemplateParameters($imageHelper, 'controllerAction', ['action' => 'display']));
+        
+        $templateParameters['featureActivationHelper'] = $this->get('pggo_instititutionen_module.feature_activation_helper');
         
         $templateParameters['pager'] = [
             'numitems' => $objectCount,

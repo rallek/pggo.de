@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Zikula\Common\Translator\TranslatorInterface;
 use Zikula\Common\Translator\TranslatorTrait;
+use Pggo\InstititutionenModule\Helper\FeatureActivationHelper;
 use Pggo\InstititutionenModule\Helper\ListEntriesHelper;
 
 /**
@@ -38,17 +39,24 @@ abstract class AbstractPictureQuickNavType extends AbstractType
     protected $listHelper;
 
     /**
+     * @var FeatureActivationHelper
+     */
+    protected $featureActivationHelper;
+
+    /**
      * PictureQuickNavType constructor.
      *
      * @param TranslatorInterface $translator   Translator service instance
     * @param RequestStack        $requestStack RequestStack service instance
      * @param ListEntriesHelper   $listHelper   ListEntriesHelper service instance
+     * @param FeatureActivationHelper $featureActivationHelper FeatureActivationHelper service instance
      */
-    public function __construct(TranslatorInterface $translator, RequestStack $requestStack, ListEntriesHelper $listHelper)
+    public function __construct(TranslatorInterface $translator, RequestStack $requestStack, ListEntriesHelper $listHelper, FeatureActivationHelper $featureActivationHelper)
     {
         $this->setTranslator($translator);
         $this->request = $requestStack->getCurrentRequest();
         $this->listHelper = $listHelper;
+        $this->featureActivationHelper = $featureActivationHelper;
     }
 
     /**

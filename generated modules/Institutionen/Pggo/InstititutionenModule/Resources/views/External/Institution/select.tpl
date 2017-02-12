@@ -2,6 +2,31 @@
 {assign var='baseID' value='institution'}
 <div class="row">
     <div class="col-sm-8">
+
+        {if $properties ne null && is_array($properties)}
+            {gt text='All' assign='lblDefault'}
+            {nocache}
+            {foreach key='propertyName' item='propertyId' from=$properties}
+                <div class="form-group">
+                    {assign var='hasMultiSelection' value=$categoryHelper->hasMultipleSelection('institution', $propertyName)}
+                    {gt text='Category' assign='categoryLabel'}
+                    {assign var='categorySelectorId' value='catid'}
+                    {assign var='categorySelectorName' value='catid'}
+                    {assign var='categorySelectorSize' value='1'}
+                    {if $hasMultiSelection eq true}
+                        {gt text='Categories' assign='categoryLabel'}
+                        {assign var='categorySelectorName' value='catids'}
+                        {assign var='categorySelectorId' value='catids__'}
+                        {assign var='categorySelectorSize' value='8'}
+                    {/if}
+                    <label for="{$baseID}_{$categorySelectorId}{$propertyName}" class="col-sm-3 control-label">{$categoryLabel}:</label>
+                    <div class="col-sm-9">
+                        {selector_category name="`$baseID`_`$categorySelectorName``$propertyName`" field='id' selectedValue=$catIds.$propertyName categoryRegistryModule='PggoInstititutionenModule' categoryRegistryTable=$objectType categoryRegistryProperty=$propertyName defaultText=$lblDefault editLink=false multipleSize=$categorySelectorSize cssClass='form-control'}
+                    </div>
+                </div>
+            {/foreach}
+            {/nocache}
+        {/if}
         <div class="form-group">
             <label for="{$baseID}Id" class="col-sm-3 control-label">{gt text='Institution'}:</label>
             <div class="col-sm-9">

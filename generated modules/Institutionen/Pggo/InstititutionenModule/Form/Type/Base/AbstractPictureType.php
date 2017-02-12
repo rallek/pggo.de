@@ -23,6 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Zikula\Common\Translator\TranslatorInterface;
 use Zikula\Common\Translator\TranslatorTrait;
 use Pggo\InstititutionenModule\Entity\Factory\InstititutionenFactory;
+use Pggo\InstititutionenModule\Helper\FeatureActivationHelper;
 use Pggo\InstititutionenModule\Helper\ListEntriesHelper;
 
 /**
@@ -43,17 +44,24 @@ abstract class AbstractPictureType extends AbstractType
     protected $listHelper;
 
     /**
+     * @var FeatureActivationHelper
+     */
+    protected $featureActivationHelper;
+
+    /**
      * PictureType constructor.
      *
      * @param TranslatorInterface $translator    Translator service instance
      * @param InstititutionenFactory        $entityFactory Entity factory service instance
      * @param ListEntriesHelper   $listHelper    ListEntriesHelper service instance
+     * @param FeatureActivationHelper $featureActivationHelper FeatureActivationHelper service instance
      */
-    public function __construct(TranslatorInterface $translator, InstititutionenFactory $entityFactory, ListEntriesHelper $listHelper)
+    public function __construct(TranslatorInterface $translator, InstititutionenFactory $entityFactory, ListEntriesHelper $listHelper, FeatureActivationHelper $featureActivationHelper)
     {
         $this->setTranslator($translator);
         $this->entityFactory = $entityFactory;
         $this->listHelper = $listHelper;
+        $this->featureActivationHelper = $featureActivationHelper;
     }
 
     /**

@@ -16,6 +16,9 @@
         {{ form_errors(finderForm) }}
         <fieldset>
             <legend>{{ __('Search and select institution') }}</legend>
+            {% if featureActivationHelper.isEnabled(constant('Pggo\\InstititutionenModule\\Helper\\FeatureActivationHelper::CATEGORIES'), 'institution') %}
+                {{ form_row(finderForm.categories) }}
+            {% endif %}
             {{ form_row(finderForm.onlyImages) }}
             <div id="imageFieldRow">
                 {{ form_row(finderForm.imageField) }}

@@ -130,6 +130,14 @@ abstract class AbstractInstitutionEntity extends EntityAccess
     
     
     /**
+     * @ORM\OneToMany(targetEntity="\Pggo\InstititutionenModule\Entity\InstitutionCategoryEntity", 
+     *                mappedBy="entity", cascade={"all"}, 
+     *                orphanRemoval=true)
+     * @var \Pggo\InstititutionenModule\Entity\InstitutionCategoryEntity
+     */
+    protected $categories = null;
+    
+    /**
      * Bidirectional - One institution [institution] has many pictures [pictures] (INVERSE SIDE).
      *
      * @ORM\OneToMany(targetEntity="Pggo\InstititutionenModule\Entity\PictureEntity", mappedBy="institution")
@@ -152,6 +160,7 @@ abstract class AbstractInstitutionEntity extends EntityAccess
     {
         $this->initWorkflow();
         $this->pictures = new ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
     
     /**
@@ -375,6 +384,59 @@ abstract class AbstractInstitutionEntity extends EntityAccess
         $this->description = isset($description) ? $description : '';
     }
     
+    /**
+     * Returns the categories.
+     *
+     * @return ArrayCollection[]
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+    
+    
+    /**
+     * Sets the categories.
+     *
+     * @param ArrayCollection $categories
+     *
+     * @return void
+     */
+    public function setCategories(ArrayCollection $categories)
+    {
+        foreach ($this->categories as $category) {
+            if (false === $key = $this->collectionContains($categories, $category)) {
+                $this->categories->removeElement($category);
+            } else {
+                $categories->remove($key);
+            }
+        }
+        foreach ($categories as $category) {
+            $this->categories->add($category);
+        }
+    }
+    
+    /**
+     * Checks if a collection contains an element based only on two criteria (categoryRegistryId, category).
+     *
+     * @param ArrayCollection $collection
+     * @param \Pggo\InstititutionenModule\Entity\InstitutionCategoryEntity $element
+     *
+     * @return bool|int
+     */
+    private function collectionContains(ArrayCollection $collection, \Pggo\InstititutionenModule\Entity\InstitutionCategoryEntity $element)
+    {
+        foreach ($collection as $key => $category) {
+            /** @var \Pggo\InstititutionenModule\Entity\InstitutionCategoryEntity $category */
+            if ($category->getCategoryRegistryId() == $element->getCategoryRegistryId()
+                && $category->getCategory() == $element->getCategory()
+            ) {
+                return $key;
+            }
+        }
+    
+        return false;
+    }
     
     /**
      * Returns the pictures.
@@ -609,5 +671,14 @@ abstract class AbstractInstitutionEntity extends EntityAccess
         $this->setUpdatedBy(null);
         $this->setUpdatedDate(null);
     
+    
+        // clone categories
+        $categories = $this->categories;
+        $this->categories = new ArrayCollection();
+        foreach ($categories as $c) {
+            $newCat = clone $c;
+            $this->categories->add($newCat);
+            $newCat->setEntity($this);
+        }
     }
 }

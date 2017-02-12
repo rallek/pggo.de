@@ -121,6 +121,15 @@ class AbstractItemSelector extends Zikula_Form_Plugin_TextInput implements Conta
             return false;
         }
 
+        $categorisableObjectTypes = ['institution'];
+        $catIds = [];
+        if (in_array($this->objectType, $categorisableObjectTypes)) {
+            // fetch selected categories to reselect them in the output
+            // the actual filtering is done inside the repository class
+            $categoryHelper = $this->container->get('pggo_instititutionen_module.category_helper');
+            $catIds = $categoryHelper->retrieveCategoriesFromRequest($this->objectType);
+        }
+
         $this->selectedItemId = $this->text;
 
         $repository = $this->container->get('pggo_instititutionen_module.entity_factory')->getRepository($this->objectType);
@@ -140,6 +149,15 @@ class AbstractItemSelector extends Zikula_Form_Plugin_TextInput implements Conta
              ->assign('sort', $sort)
              ->assign('sortdir', $sdir)
              ->assign('selectedId', $this->selectedItemId);
+
+        // assign category properties
+        $properties = null;
+        if (in_array($this->objectType, $categorisableObjectTypes)) {
+            $properties = $categoryHelper->getAllProperties($this->objectType);
+        }
+        $view->assign('properties', $properties)
+             ->assign('catIds', $catIds)
+             ->assign('categoryHelper', $categoryHelper);
 
         return $view->fetch('External/' . ucfirst($this->objectType) . '/select.tpl');
     }

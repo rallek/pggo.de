@@ -45,6 +45,14 @@
     {#
         <p class="pggoinstititutionenmodule-external-description">
             {% if institution.description is not empty %}{{ institution.description }}<br />{% endif %}
+            {% if featureActivationHelper.isEnabled(constant('Pggo\\InstititutionenModule\\Helper\\FeatureActivationHelper::CATEGORIES'), 'institution') %}
+                <dl class="category-list">
+                {% for propName, catMapping in institution.categories %}
+                    <dt>{{ propName }}</dt>
+                    <dd>{{ catMapping.category.display_name[lang] }}</dd>
+                {% endfor %}
+                </dl>
+            {% endif %}
         </p>
     #}
 {% endif %}

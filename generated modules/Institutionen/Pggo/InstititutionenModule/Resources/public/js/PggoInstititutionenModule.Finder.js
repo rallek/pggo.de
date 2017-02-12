@@ -262,7 +262,7 @@ pggoInstititutionenModule.itemSelector.updatePreview = function ()
     selectedElement = items[0];
     if (pggoInstititutionenModule.itemSelector.selectedId > 0) {
         for (var i = 0; i < items.length; ++i) {
-            if (items[i].id === pggoInstititutionenModule.itemSelector.selectedId) {
+            if (items[i].id == pggoInstititutionenModule.itemSelector.selectedId) {
                 selectedElement = items[i];
                 break;
             }

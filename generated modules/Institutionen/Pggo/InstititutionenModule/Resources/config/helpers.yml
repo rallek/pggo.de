@@ -1,5 +1,16 @@
 services:
     # Helper classes
+    pggo_instititutionen_module.category_helper:
+        class: Pggo\InstititutionenModule\Helper\CategoryHelper
+        arguments:
+            - "@translator.default"
+            - "@session"
+            - "@request_stack"
+            - "@logger"
+            - "@zikula_users_module.current_user"
+            - "@zikula_categories_module.api.category_registry"
+            - "@zikula_categories_module.api.category_permission"
+    
     pggo_instititutionen_module.controller_helper:
         class: Pggo\InstititutionenModule\Helper\ControllerHelper
         arguments:
@@ -13,6 +24,10 @@ services:
             - "@pggo_instititutionen_module.model_helper"
             - "@pggo_instititutionen_module.selection_helper"
             - "@pggo_instititutionen_module.image_helper"
+            - "@pggo_instititutionen_module.feature_activation_helper"
+    
+    pggo_instititutionen_module.feature_activation_helper:
+        class: Pggo\InstititutionenModule\Helper\FeatureActivationHelper
     
     pggo_instititutionen_module.hook_helper:
         class: Pggo\InstititutionenModule\Helper\HookHelper

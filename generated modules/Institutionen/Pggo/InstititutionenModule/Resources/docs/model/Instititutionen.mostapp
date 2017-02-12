@@ -4,7 +4,7 @@ application "Instititutionen" {
     author "Ralf Koester"
     email "ralf@familie-koester.de"
     url "http://k62.de"
-    version "0.1.1"
+    version "0.2.0"
     prefix "instit"
     generatorSettings {
         settingsContainer "Settings"
@@ -53,7 +53,7 @@ application "Instititutionen" {
                 editAction "Edit"
             }
         },
-        entity "institution" leading {
+        entity "institution" leading categorisable categorisableMultiSelection {
             nameMultiple "institutions"
             displayPattern "#name#"
             fields {

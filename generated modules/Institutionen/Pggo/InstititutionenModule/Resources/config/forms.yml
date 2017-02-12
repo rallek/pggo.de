@@ -7,6 +7,7 @@ services:
             - "@translator.default"
             - "@request_stack"
             - "@pggo_instititutionen_module.listentries_helper"
+            - "@pggo_instititutionen_module.feature_activation_helper"
         tags:
             - { name: form.type }
     
@@ -15,6 +16,7 @@ services:
         arguments:
             - "@translator.default"
             - "@pggo_instititutionen_module.listentries_helper"
+            - "@pggo_instititutionen_module.feature_activation_helper"
         tags:
             - { name: form.type }
     
@@ -35,6 +37,7 @@ services:
             - "@pggo_instititutionen_module.selection_helper"
             - "@pggo_instititutionen_module.workflow_helper"
             - "@pggo_instititutionen_module.hook_helper"
+            - "@pggo_instititutionen_module.feature_activation_helper"
         calls:
             - [setLockingApi, ["@?zikula_pagelock_module.api.locking"]]
         tags:
@@ -46,6 +49,7 @@ services:
             - "@translator.default"
             - "@pggo_instititutionen_module.entity_factory"
             - "@pggo_instititutionen_module.listentries_helper"
+            - "@pggo_instititutionen_module.feature_activation_helper"
         tags:
             - { name: form.type }
     
@@ -66,6 +70,7 @@ services:
             - "@pggo_instititutionen_module.selection_helper"
             - "@pggo_instititutionen_module.workflow_helper"
             - "@pggo_instititutionen_module.hook_helper"
+            - "@pggo_instititutionen_module.feature_activation_helper"
         calls:
             - [setLockingApi, ["@?zikula_pagelock_module.api.locking"]]
         tags:
@@ -77,6 +82,7 @@ services:
             - "@translator.default"
             - "@pggo_instititutionen_module.entity_factory"
             - "@pggo_instititutionen_module.listentries_helper"
+            - "@pggo_instititutionen_module.feature_activation_helper"
         tags:
             - { name: form.type }
     
@@ -84,6 +90,7 @@ services:
         class: Pggo\InstititutionenModule\Form\Type\Finder\PictureFinderType
         arguments:
             - "@translator.default"
+            - "@pggo_instititutionen_module.feature_activation_helper"
         tags:
             - { name: form.type }
     
@@ -91,6 +98,7 @@ services:
         class: Pggo\InstititutionenModule\Form\Type\Finder\InstitutionFinderType
         arguments:
             - "@translator.default"
+            - "@pggo_instititutionen_module.feature_activation_helper"
         tags:
             - { name: form.type }
     

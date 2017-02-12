@@ -27,6 +27,9 @@
     {{ form_row(form.description) }}
 </fieldset>
 
+{% if featureActivationHelper.isEnabled(constant('Pggo\\InstititutionenModule\\Helper\\FeatureActivationHelper::CATEGORIES'), 'institution') %}
+    {{ include('@PggoInstititutionenModule/Helper/includeCategoriesEdit.html.twig', { obj: institution }) }}
+{% endif %}
 {% if mode != 'create' %}
     {{ include('@PggoInstititutionenModule/Helper/includeStandardFieldsEdit.html.twig', { obj: institution }) }}
 {% endif %}

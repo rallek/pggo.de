@@ -17,6 +17,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Zikula\Common\Translator\TranslatorInterface;
 use Zikula\Common\Translator\TranslatorTrait;
+use Pggo\InstititutionenModule\Helper\FeatureActivationHelper;
 
 /**
  * Institution finder form type base class.
@@ -26,13 +27,20 @@ abstract class AbstractInstitutionFinderType extends AbstractType
     use TranslatorTrait;
 
     /**
+     * @var FeatureActivationHelper
+     */
+    protected $featureActivationHelper;
+
+    /**
      * InstitutionFinderType constructor.
      *
      * @param TranslatorInterface $translator Translator service instance
+     * @param FeatureActivationHelper $featureActivationHelper FeatureActivationHelper service instance
      */
-    public function __construct(TranslatorInterface $translator)
+    public function __construct(TranslatorInterface $translator, FeatureActivationHelper $featureActivationHelper)
     {
         $this->setTranslator($translator);
+        $this->featureActivationHelper = $featureActivationHelper;
     }
 
     /**
@@ -60,6 +68,9 @@ abstract class AbstractInstitutionFinderType extends AbstractType
             ])
         ;
 
+        if ($this->featureActivationHelper->isEnabled(FeatureActivationHelper::CATEGORIES, $options['objectType'])) {
+            $this->addCategoriesField($builder, $options);
+        }
         $this->addImageFields($builder, $options);
         $this->addPasteAsField($builder, $options);
         $this->addSortingFields($builder, $options);
@@ -83,6 +94,30 @@ abstract class AbstractInstitutionFinderType extends AbstractType
                 ]
             ])
         ;
+    }
+
+    /**
+     * Adds a categories field.
+     *
+     * @param FormBuilderInterface $builder The form builder
+     * @param array                $options The options
+     */
+    public function addCategoriesField(FormBuilderInterface $builder, array $options)
+    {
+        $builder->add('categories', 'Zikula\CategoriesModule\Form\Type\CategoriesType', [
+            'label' => $this->__('Categories') . ':',
+            'empty_data' => [],
+            'attr' => [
+                'class' => 'category-selector',
+                'title' => $this->__('This is an optional filter.')
+            ],
+            'help' => $this->__('This is an optional filter.'),
+            'required' => false,
+            'multiple' => true,
+            'module' => 'PggoInstititutionenModule',
+            'entity' => ucfirst($options['objectType']) . 'Entity',
+            'entityCategoryClass' => 'Pggo\InstititutionenModule\Entity\\' . ucfirst($options['objectType']) . 'CategoryEntity'
+        ]);
     }
 
     /**

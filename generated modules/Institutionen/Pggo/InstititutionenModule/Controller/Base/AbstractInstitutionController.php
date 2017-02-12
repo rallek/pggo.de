@@ -25,6 +25,7 @@ use Zikula\Component\SortableColumns\SortableColumns;
 use Zikula\Core\Controller\AbstractController;
 use Zikula\Core\RouteUrl;
 use Pggo\InstititutionenModule\Entity\InstitutionEntity;
+use Pggo\InstititutionenModule\Helper\FeatureActivationHelper;
 
 /**
  * Institution controller base class.
@@ -154,6 +155,11 @@ abstract class AbstractInstitutionController extends AbstractController
         
         $templateParameters = $controllerHelper->processViewActionParameters($objectType, $sortableColumns, $templateParameters, true);
         
+        $featureActivationHelper = $this->get('pggo_instititutionen_module.feature_activation_helper');
+        if ($featureActivationHelper->isEnabled(FeatureActivationHelper::CATEGORIES, $objectType)) {
+            $templateParameters['items'] = $this->get('pggo_instititutionen_module.category_helper')->filterEntitiesByPermission($templateParameters['items']);
+        }
+        
         foreach ($templateParameters['items'] as $k => $entity) {
             $entity->initWorkflow();
         }
@@ -219,6 +225,13 @@ abstract class AbstractInstitutionController extends AbstractController
             'routeArea' => $isAdmin ? 'admin' : '',
             $objectType => $institution
         ];
+        
+        $featureActivationHelper = $this->get('pggo_instititutionen_module.feature_activation_helper');
+        if ($featureActivationHelper->isEnabled(FeatureActivationHelper::CATEGORIES, $objectType)) {
+            if (!$this->get('pggo_instititutionen_module.category_helper')->hasPermission($institution)) {
+                throw new AccessDeniedException();
+            }
+        }
         
         $controllerHelper = $this->get('pggo_instititutionen_module.controller_helper');
         $templateParameters = $controllerHelper->processDisplayActionParameters($objectType, $templateParameters, true);

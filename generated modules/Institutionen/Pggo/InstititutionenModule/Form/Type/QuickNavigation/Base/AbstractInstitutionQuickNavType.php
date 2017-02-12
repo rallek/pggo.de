@@ -16,6 +16,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Zikula\Common\Translator\TranslatorInterface;
 use Zikula\Common\Translator\TranslatorTrait;
+use Pggo\InstititutionenModule\Helper\FeatureActivationHelper;
 use Pggo\InstititutionenModule\Helper\ListEntriesHelper;
 
 /**
@@ -31,15 +32,22 @@ abstract class AbstractInstitutionQuickNavType extends AbstractType
     protected $listHelper;
 
     /**
+     * @var FeatureActivationHelper
+     */
+    protected $featureActivationHelper;
+
+    /**
      * InstitutionQuickNavType constructor.
      *
      * @param TranslatorInterface $translator   Translator service instance
      * @param ListEntriesHelper   $listHelper   ListEntriesHelper service instance
+     * @param FeatureActivationHelper $featureActivationHelper FeatureActivationHelper service instance
      */
-    public function __construct(TranslatorInterface $translator, ListEntriesHelper $listHelper)
+    public function __construct(TranslatorInterface $translator, ListEntriesHelper $listHelper, FeatureActivationHelper $featureActivationHelper)
     {
         $this->setTranslator($translator);
         $this->listHelper = $listHelper;
+        $this->featureActivationHelper = $featureActivationHelper;
     }
 
     /**
@@ -64,6 +72,9 @@ abstract class AbstractInstitutionQuickNavType extends AbstractType
             ->add('tpl', 'Symfony\Component\Form\Extension\Core\Type\HiddenType')
         ;
 
+        if ($this->featureActivationHelper->isEnabled(FeatureActivationHelper::CATEGORIES, 'institution')) {
+            $this->addCategoriesField($builder, $options);
+        }
         $this->addListFields($builder, $options);
         $this->addSearchField($builder, $options);
         $this->addSortingFields($builder, $options);
@@ -73,6 +84,32 @@ abstract class AbstractInstitutionQuickNavType extends AbstractType
             'attr' => [
                 'class' => 'btn btn-default btn-sm'
             ]
+        ]);
+    }
+
+    /**
+     * Adds a categories field.
+     *
+     * @param FormBuilderInterface $builder The form builder
+     * @param array                $options The options
+     */
+    public function addCategoriesField(FormBuilderInterface $builder, array $options)
+    {
+        $objectType = 'institution';
+    
+        $builder->add('categories', 'Zikula\CategoriesModule\Form\Type\CategoriesType', [
+            'label' => $this->__('Categories'),
+            'empty_data' => [],
+            'attr' => [
+                'class' => 'input-sm category-selector',
+                'title' => $this->__('This is an optional filter.')
+            ],
+            'help' => $this->__('This is an optional filter.'),
+            'required' => false,
+            'multiple' => true,
+            'module' => 'PggoInstititutionenModule',
+            'entity' => ucfirst($objectType) . 'Entity',
+            'entityCategoryClass' => 'Pggo\InstititutionenModule\Entity\\' . ucfirst($objectType) . 'CategoryEntity'
         ]);
     }
 

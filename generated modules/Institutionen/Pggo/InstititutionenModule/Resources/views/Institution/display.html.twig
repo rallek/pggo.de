@@ -50,6 +50,9 @@
         {% endif %}
         
     </dl>
+    {% if featureActivationHelper.isEnabled(constant('Pggo\\InstititutionenModule\\Helper\\FeatureActivationHelper::CATEGORIES'), 'institution') %}
+        {{ include('@PggoInstititutionenModule/Helper/includeCategoriesDisplay.html.twig', { obj: institution }) }}
+    {% endif %}
     {{ include('@PggoInstititutionenModule/Helper/includeStandardFieldsDisplay.html.twig', { obj: institution }) }}
 
     {% if not isQuickView %}
@@ -77,9 +80,8 @@
         ) }}
     {% endif %}
     
-    {% set permLevel = 'ACCESS_ADD' %}
-    {% set mayManage = hasPermission('PggoInstititutionenModule:Picture:', picture.id ~ '::', permLevel) %}
-    {% if mayManage or (currentUser|default and picture.createdBy|default and picture.createdBy.getUid() == currentUser.uid) %}
+    {% set mayManage = hasPermission('PggoInstititutionenModule:Picture:', '::', 'ACCESS_ADD') %}
+    {% if mayManage or (currentUser|default and institution.createdBy|default and institution.createdBy.getUid() == currentUser.uid) %}
         <p class="managelink">
             {% set createTitle = __('Create picture') %}
             <a href="{{ path('pggoinstititutionenmodule_picture_' ~ routeArea ~ 'edit', { institution: institution.id }) }}" title="{{ createTitle|e('html_attr') }}" class="fa fa-plus">{{ createTitle }}</a>

@@ -23,6 +23,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Zikula\Component\FilterUtil\FilterUtil;
 use Zikula\Component\FilterUtil\Config as FilterConfig;
 use Zikula\Component\FilterUtil\PluginManager as FilterPluginManager;
+use Zikula\Core\FilterUtil\CategoryPlugin as CategoryFilter;
 use Psr\Log\LoggerInterface;
 use ServiceUtil;
 use Zikula\Common\Translator\TranslatorInterface;
@@ -217,6 +218,8 @@ abstract class AbstractInstitutionRepository extends EntityRepository
         }
     
         $parameters = [];
+        $categoryHelper = ServiceUtil::get('pggo_instititutionen_module.category_helper');
+        $parameters['catIdList'] = $categoryHelper->retrieveCategoriesFromRequest('institution', 'GET');
         $parameters['workflowState'] = $this->getRequest()->query->get('workflowState', '');
         $parameters['q'] = $this->getRequest()->query->get('q', '');
         
@@ -600,7 +603,21 @@ abstract class AbstractInstitutionRepository extends EntityRepository
     
         $parameters = $this->getViewQuickNavParameters('', []);
         foreach ($parameters as $k => $v) {
-            if (in_array($k, ['q', 'searchterm'])) {
+            if ($k == 'catId') {
+                // single category filter
+                if ($v > 0) {
+                    $qb->andWhere('tblCategories.category = :category')
+                       ->setParameter('category', $v);
+                }
+            } elseif ($k == 'catIdList') {
+                // multi category filter
+                /* old
+                $qb->andWhere('tblCategories.category IN (:categories)')
+                   ->setParameter('categories', $v);
+                 */
+                $categoryHelper = ServiceUtil::get('pggo_instititutionen_module.category_helper');
+                $qb = $categoryHelper->buildFilterClauses($qb, 'institution', $v);
+            } elseif (in_array($k, ['q', 'searchterm'])) {
                 // quick search
                 if (!empty($v)) {
                     $qb = $this->addSearchFilter($qb, $v);
@@ -891,6 +908,14 @@ abstract class AbstractInstitutionRepository extends EntityRepository
                 []
             );
     
+            // add category plugins dynamically for all existing registry properties
+            // we need to create one category plugin instance for each one
+            $categoryHelper = ServiceUtil::get('pggo_instititutionen_module.category_helper');
+            $categoryProperties = $categoryHelper->getAllProperties('institution');
+            foreach ($categoryProperties as $propertyName => $registryId) {
+                $config['plugins'][] = new CategoryFilter('PggoInstititutionenModule', $propertyName, 'categories' . ucfirst($propertyName));
+            }
+    
             // Request object to obtain the filter string (only needed if the filter is set via GET or it reads values from GET).
             // We do this not per default (for now) to prevent problems with explicite filters set by blocks or content types.
             // TODO readd automatic request processing (basically replacing applyDefaultFilters() and addCommonViewFilters()).
@@ -993,6 +1018,8 @@ abstract class AbstractInstitutionRepository extends EntityRepository
     {
         $selection = ', tblPictures';
     
+        $selection = ', tblCategories';
+    
         return $selection;
     }
     
@@ -1006,6 +1033,8 @@ abstract class AbstractInstitutionRepository extends EntityRepository
     protected function addJoinsToFrom(QueryBuilder $qb)
     {
         $qb->leftJoin('tbl.pictures', 'tblPictures');
+    
+        $qb->leftJoin('tbl.categories', 'tblCategories');
     
         return $qb;
     }

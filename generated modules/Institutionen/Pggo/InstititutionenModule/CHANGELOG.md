@@ -1,3 +1,3 @@
 # CHANGELOG
 
-Changes in PggoInstititutionenModule 0.1.1
+Changes in PggoInstititutionenModule 0.2.0

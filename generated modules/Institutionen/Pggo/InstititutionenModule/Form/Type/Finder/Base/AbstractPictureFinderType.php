@@ -17,6 +17,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Zikula\Common\Translator\TranslatorInterface;
 use Zikula\Common\Translator\TranslatorTrait;
+use Pggo\InstititutionenModule\Helper\FeatureActivationHelper;
 
 /**
  * Picture finder form type base class.
@@ -26,13 +27,20 @@ abstract class AbstractPictureFinderType extends AbstractType
     use TranslatorTrait;
 
     /**
+     * @var FeatureActivationHelper
+     */
+    protected $featureActivationHelper;
+
+    /**
      * PictureFinderType constructor.
      *
      * @param TranslatorInterface $translator Translator service instance
+     * @param FeatureActivationHelper $featureActivationHelper FeatureActivationHelper service instance
      */
-    public function __construct(TranslatorInterface $translator)
+    public function __construct(TranslatorInterface $translator, FeatureActivationHelper $featureActivationHelper)
     {
         $this->setTranslator($translator);
+        $this->featureActivationHelper = $featureActivationHelper;
     }
 
     /**

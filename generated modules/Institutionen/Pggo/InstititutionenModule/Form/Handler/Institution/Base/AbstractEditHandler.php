@@ -17,6 +17,7 @@ use Pggo\InstititutionenModule\Form\Handler\Common\EditHandler;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use RuntimeException;
+use Pggo\InstititutionenModule\Helper\FeatureActivationHelper;
 
 /**
  * This handler class handles the page events of editing forms.

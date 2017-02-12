@@ -1,4 +1,4 @@
-# pggo\Instititutionen 0.1.1
+# pggo\Instititutionen 0.2.0
 
 A module to deliver standardized layouts for institutions, building and teams
 
