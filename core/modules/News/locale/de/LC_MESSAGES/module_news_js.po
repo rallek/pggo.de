@@ -1,0 +1,130 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: News\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-02-13 21:33+0100\n"
+"PO-Revision-Date: 2017-02-13 21:34+0100\n"
+"Last-Translator: Ralf Köster <ralf@familie-koester.de>\n"
+"Language-Team: Carsten Volmer <carsten@zikula.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.11\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: javascript/news.js:122
+msgid ""
+"Picture/file operations not supported in 'Quick edit' mode. You must click "
+"the 'Save full edit' button to complete these operations."
+msgstr ""
+"Bild/Datei Bearbeitungen sind im \"Schnellbearbeitungsmodus\" nicht möglich. "
+"Der \"Alle Änderungen speichern\" Button muss hierfür ausgewählt werden"
+
+#: javascript/news.js:236 javascript/news.js:237
+msgid "Saving quick draft..."
+msgstr "Der Entwurf wird per Ajax gespeichert..."
+
+#: javascript/news.js:256
+msgid "Save quick draft"
+msgstr "Speichern per Ajax"
+
+#: javascript/news.js:257
+msgid "Save quick draft failed"
+msgstr "Das Speichern per Ajax des Entwurfs ist leider fehlgeschlagen"
+
+#: javascript/news.js:264 javascript/news.js:290
+msgid "Update quick draft"
+msgstr "Entwurf per Ajax aktualisieren"
+
+#: javascript/news.js:281
+msgid ""
+"Picture/file operations not supported in 'Quick draft' mode. You must click "
+"the 'Save full draft' button to complete these operations."
+msgstr ""
+"Bild/Datei Bearbeitungen sind im \"Schnellentwurfsmodus\" nicht möglich. Der "
+"\"Alle Änderungen speichern\" Button muss hierfür ausgewählt werden."
+
+#: javascript/news.js:320 javascript/news.js:332 javascript/news.js:356
+msgid "Schedule"
+msgstr "Planen"
+
+#: javascript/news.js:330
+msgid "Publish"
+msgstr "veröffentlichen"
+
+#: javascript/news.js:349 javascript/news.js:364 javascript/news.js:383
+#: javascript/news.js:392 javascript/news.js:406 javascript/news.js:415
+msgid "Show"
+msgstr "anzeigen"
+
+#: javascript/news.js:353 javascript/news.js:367 javascript/news.js:380
+#: javascript/news.js:395 javascript/news.js:418
+msgid "Hide"
+msgstr "verbergen"
+
+#: javascript/news.js:474
+msgid "Author updated"
+msgstr "Autor aktualisiert"
+
+#: javascript/news_admin.js:40
+msgid "delete"
+msgstr "löschen"
+
+#: javascript/news_admin.js:41
+msgid "archive"
+msgstr "archivieren"
+
+#: javascript/news_admin.js:42
+msgid "publish"
+msgstr "veröffentlichen"
+
+#: javascript/news_admin.js:43
+msgid "reject"
+msgstr "zurückziehen"
+
+#: javascript/news_admin.js:44
+msgid "change categories for"
+msgstr "Kategorien ändern für"
+
+#: javascript/news_admin.js:47
+msgid "You cannot undo this operation!"
+msgstr "Diese Aktion kann nicht rückgängig gemacht werden!"
+
+#: javascript/news_admin.js:65
+#, php-format
+msgid "Are you sure you want to %s the following article"
+msgid_plural "Are you sure you want to %s the following articles"
+msgstr[0] "Beitrag %s. Soll wirklich fortgefahren werden"
+msgstr[1] "Beiträge %s. Soll wirklich fortgefahren werden"
+
+#: javascript/news_admin.js:70
+msgid "Confirm Bulk Action"
+msgstr "Massenänderung bestätigen"
+
+#: javascript/news_admin.js:87
+#, php-format
+msgid "Please select at least one article to %s."
+msgstr "Bitte mindestens einen Beitrag zum %s auswählen."
+
+#: javascript/news_admin.js:88
+msgid "Bulk action error"
+msgstr "Fehler bei der Massenänderung"
+
+#: selbst hinzugefuegt:1
+msgid "of"
+msgstr "von"
+
+#: selbst hinzugefuegt:1
+msgid "Previous (Left arrow key)"
+msgstr "Zurück (Pfeiltaste links)"
+
+#: selbst hinzugefuegt:1
+msgid "Next (Right arrow key)"
+msgstr "Nächste (Pfeiltaste rechts)"
