@@ -59,6 +59,9 @@ msgstr "Alle außer freigegebene"
 msgid "All except archived"
 msgstr "Alle außer Archivierte"
 
+msgid "All except deferred"
+msgstr "Alle außer zurückgestellte"
+
 msgid "All items with a date in July 2016."
 msgstr "Alle Elemente mit einem Datum im Juli 2016."
 
@@ -157,6 +160,10 @@ msgstr "Inhalt"
 msgid "Content has been approved and is available online."
 msgstr "Inhalt wurde geprüft und ist online verfügbar."
 
+msgid ""
+"Content has not been submitted yet or has been waiting, but was rejected."
+msgstr "Inhalt wurde nicht übermittelt oder freigegeben, er wurde abgelehnt."
+
 msgid "Content has reached the end and became archived."
 msgstr "Inhalt ist abgelaufen und wurde archiviert."
 
@@ -201,6 +208,15 @@ msgstr "Datum"
 
 msgid "Default"
 msgstr "Standard"
+
+msgid "Defer"
+msgstr "Zurückstellen"
+
+msgid "Defer content for later submission."
+msgstr "Inhalt zur späteren Veröffentlichung aufschieben"
+
+msgid "Deferred"
+msgstr "Zurückgestellt"
 
 msgid "Delete"
 msgstr "Löschen"
@@ -261,6 +277,9 @@ msgstr "Erledigt! Element aktualisiert."
 
 msgid "Done! Module configuration updated."
 msgstr "Erledigt! Modul Konfiguration aktualisiert."
+
+msgid "Down load Backend"
+msgstr "Download Backend"
 
 msgid "Download"
 msgstr "Download"
@@ -479,6 +498,9 @@ msgstr "KB"
 msgid "Last update"
 msgstr "Letzte Aktualisierung"
 
+msgid "Link own files on account page"
+msgstr "Verknüpfen von eigenen Dateien auf dem Benutzerkonto"
+
 msgid "Link to the file"
 msgstr "Link zur Datei"
 
@@ -643,6 +665,9 @@ msgstr "Suche nach"
 msgid "Search user"
 msgstr "Benutzer suchen"
 
+msgid "Send private message to %userName%"
+msgstr "Schicke eine private Nachricht an %userName%"
+
 msgid "Settings"
 msgstr "Einstellungen"
 
@@ -663,6 +688,9 @@ msgstr "Zeigt alle Einträge außer den Freigegebenen"
 
 msgid "Shows all items except these which are archived"
 msgstr "Zeigt alle Elemente außer den Archivierten"
+
+msgid "Shows all items except these which are deferred"
+msgstr "Zeigt alle Elemente außer den zurückgestellten"
 
 msgid ""
 "So in our example we can reference Persons with \"tbl\" and addresses with "
@@ -771,6 +799,9 @@ msgstr ""
 
 msgid "The house number of any address is lower than 100"
 msgstr "Die Hausnummer von jeder beliebigen Adresse ist niedriger als 100"
+
+msgid "The link own files on account page option."
+msgstr "Option Verknüpfen von eigenen Dateien auf dem Benutzerkonto"
 
 msgid ""
 "The main table, that is the entity being the primary subject of the query, "
@@ -897,6 +928,10 @@ msgid ""
 msgstr ""
 "Beim Filtern nach Datum können Sie bequeme Erweiterungen und sogar Zeiträume "
 "benutzen."
+
+msgid "Whether to add a link to files of the current user on his account page"
+msgstr ""
+"Ob Sie die Dateien des aktuellen Benutzers auf seinem Benutzerkonto verlinken"
 
 msgid "With description"
 msgstr "Mit Beschreibung"
