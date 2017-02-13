@@ -1,0 +1,58 @@
+{# purpose of this template: files display view #}
+{% set baseTemplate = app.request.query.getBoolean('raw', false) ? 'raw' : (routeArea == 'admin' ? 'adminBase' : 'base') %}
+{% extends 'PggoMediaAttachModule::' ~ baseTemplate ~ '.html.twig' %}
+{% block pageTitle %}{{ file.getTitleFromDisplayPattern()|default(__('File')) }}{% endblock %}
+{% block title %}
+    {% set templateTitle = file.getTitleFromDisplayPattern()|default(__('File')) %}
+    {{ templateTitle|notifyFilters('pggomediaattachmodule.filter_hooks.files.filter') }}
+    {% set itemActions = knp_menu_get('PggoMediaAttachModule:ItemActionsMenu:menu', [], { entity: file, area: routeArea, context: 'display' }) %}
+    <div class="dropdown">
+        <a id="itemActions{{ file.id }}DropDownToggle" role="button" data-toggle="dropdown" data-target="#" href="javascript:void(0);" class="hidden dropdown-toggle"><i class="fa fa-tasks"></i> {{ __('Actions') }} <span class="caret"></span></a>
+        {{ knp_menu_render(itemActions, { template: 'ZikulaMenuModule:Override:actions.html.twig' }) }}
+    </div>
+{% endblock %}
+{% block admin_page_icon 'eye' %}
+{% block content %}
+    {% set isQuickView = app.request.query.getBoolean('raw', false) %}
+    <div class="pggomediaattachmodule-file pggomediaattachmodule-display">
+
+
+    <dl>
+        {% if file.title is not empty %}
+            <dt>{{ __('Title') }}</dt>
+            <dd>{{ file.title }}</dd>
+        {% endif %}
+        {% if file.description is not empty %}
+            <dt>{{ __('Description') }}</dt>
+            <dd>{{ file.description|safeHtml }}</dd>
+        {% endif %}
+        {% if file.fileName is not empty %}
+            <dt>{{ __('File name') }}</dt>
+            <dd>{% if file.fileNameMeta|default %}
+            <a href="{{ file.fileNameUrl }}" title="{{ file.getTitleFromDisplayPattern()|e('html_attr') }}"{% if file.fileNameMeta.isImage %} class="image-link"{% endif %}>
+            {% if file.fileNameMeta.isImage %}
+                {% set thumbOptions = attribute(thumbRuntimeOptions, 'fileFileName') %}
+                <img src="{{ file.fileName.getPathname()|imagine_filter('zkroot', thumbOptions) }}" alt="{{ file.getTitleFromDisplayPattern()|e('html_attr') }}" width="{{ thumbOptions.thumbnail.size[0] }}" height="{{ thumbOptions.thumbnail.size[1] }}" class="img-thumbnail" />
+            {% else %}
+                {{ __('Download') }} ({{ file.fileNameMeta.size|pggomediaattachmodule_fileSize(file.fileName.getPathname(), false, false) }})
+            {% endif %}
+            </a>
+            {% endif %}
+            </dd>
+        {% endif %}
+        
+    </dl>
+    {{ include('@PggoMediaAttachModule/Helper/includeStandardFieldsDisplay.html.twig', { obj: file }) }}
+
+    {% if not isQuickView %}
+        {# include display hooks #}
+        {{ block('display_hooks') }}
+    {% endif %}
+</div>
+{% endblock %}
+{% block display_hooks %}
+    {% set hooks = notifyDisplayHooks(eventName='pggomediaattachmodule.ui_hooks.files.display_view', id=file.id, urlObject=currentUrlObject) %}
+    {% for providerArea, hook in hooks if providerArea != 'provider.scribite.ui_hooks.editor' %}
+        {{ hook }}
+    {% endfor %}
+{% endblock %}
