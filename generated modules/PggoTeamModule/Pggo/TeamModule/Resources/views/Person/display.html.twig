@@ -29,7 +29,7 @@
         {% if person.image is not empty %}
             <dt>{{ __('Image') }}</dt>
             <dd>{% if person.image is not empty and person.imageMeta|default %}
-                        <a href="{{ person.imageUrl }}" title="{{ person.getTitleFromDisplayPattern()|e('html_attr') }}"{% if person.imageMeta.isImage %} class="lightbox"{% endif %}>
+                        <a href="{{ person.imageUrl }}" title="{{ person.getTitleFromDisplayPattern()|e('html_attr') }}"{% if person.imageMeta.isImage %} class="image-link"{% endif %}>
             {% if person.imageMeta.isImage %}
                 {% set thumbOptions = attribute(thumbRuntimeOptions, 'personImage') %}
                 <img src="{{ person.image.getPathname()|imagine_filter('zkroot', thumbOptions) }}" alt="{{ person.getTitleFromDisplayPattern()|e('html_attr') }}" width="{{ thumbOptions.thumbnail.size[0] }}" height="{{ thumbOptions.thumbnail.size[1] }}" class="img-thumbnail" />

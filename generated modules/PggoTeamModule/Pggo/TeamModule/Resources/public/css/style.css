@@ -2,6 +2,13 @@
 div#z-maincontent.z-module-team table tbody tr td {
     vertical-align: top;
 }
+.table-responsive > .fixed-columns {
+    position: absolute;
+    display: inline-block;
+    width: auto;
+    border-right: 1px solid #ddd;
+    background-color: #fff;
+}
 
 /* display pages */
 .pggoteammodule-display div.col-sm-3 h3 {
@@ -14,6 +21,8 @@ div#z-maincontent.z-module-team table tbody tr td {
 .pggoteammodule-display div.col-sm-3 p.managelink {
     margin-left: 18px;
 }
+
+
 /* validation */
 div.form-group input:required, div.form-group textarea:required, div.form-group select:required {
     /*border: 1px solid #00a8e6;*/

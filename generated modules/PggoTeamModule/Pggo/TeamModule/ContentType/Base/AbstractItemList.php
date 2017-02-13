@@ -394,7 +394,7 @@ abstract class AbstractItemList extends \Content_AbstractContentType implements 
         $this->view->toplevelmodule = 'PggoTeamModule';
     
         // ensure our custom plugins are loaded
-        array_push($this->view->plugins_dir, 'modules/Pggo/TeamModule/Resources/views//plugins');
+        array_push($this->view->plugins_dir, 'modules/Pggo/TeamModule/Resources/views/plugins');
     
         $featureActivationHelper = $this->container->get('pggo_team_module.feature_activation_helper');
         if ($featureActivationHelper->isEnabled(FeatureActivationHelper::CATEGORIES, $this->objectType)) {
@@ -431,6 +431,8 @@ abstract class AbstractItemList extends \Content_AbstractContentType implements 
             $this->view->assign('categories', $categories)
                        ->assign('categoryHelper', $this->container->get('pggo_team_module.category_helper'));
         }
+        $this->view->assign('featureActivationHelper', $featureActivationHelper)
+                   ->assign('objectType', $this->objectType);
     }
     
     /**

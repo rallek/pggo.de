@@ -19,6 +19,7 @@
                 {% if routeArea == 'admin' %}
                     <col id="cSelect" />
                 {% endif %}
+                <col id="cItemActions" />
                 <col id="cLastName" />
                 <col id="cFirstName" />
                 <col id="cImage" />
@@ -26,15 +27,15 @@
                 <col id="cShortDescription" />
                 <col id="cFunctionRole" />
                 <col id="cEmailAddress" />
-                <col id="cItemActions" />
             </colgroup>
             <thead>
             <tr>
                 {% if routeArea == 'admin' %}
-                    <th id="hSelect" scope="col" class="text-center">
+                    <th id="hSelect" scope="col" class="fixed-column text-center z-w02">
                         <input type="checkbox" class="pggoteam-mass-toggle" />
                     </th>
                 {% endif %}
+                <th id="hItemActions" scope="col" class="fixed-column text-right z-order-unsorted">{{ __('Actions') }}</th>
                 <th id="hLastName" scope="col" class="text-left">
                     <a href="{{ sort.lastName.url }}" title="{{ __f('Sort by %s', {'%s': 'last name'}) }}" class="{{ sort.lastName.class }}">{{ __('Last name') }}</a>
                 </th>
@@ -56,7 +57,6 @@
                 <th id="hEmailAddress" scope="col" class="text-center">
                     <a href="{{ sort.emailAddress.url }}" title="{{ __f('Sort by %s', {'%s': 'email address'}) }}" class="{{ sort.emailAddress.class }}">{{ __('Email address') }}</a>
                 </th>
-                <th id="hItemActions" scope="col" class="text-right z-order-unsorted">{{ __('Actions') }}</th>
             </tr>
             </thead>
             <tbody>
@@ -64,10 +64,17 @@
         {% for person in items %}
             <tr>
                 {% if routeArea == 'admin' %}
-                    <td headers="hSelect" class="text-center">
+                    <td headers="hSelect" class="fixed-column text-center">
                         <input type="checkbox" name="items[]" value="{{ person.id }}" class="pggoteam-toggle-checkbox" />
                     </td>
                 {% endif %}
+                <td id="itemActions{{ person.id }}" headers="hItemActions" class="fixed-column actions nowrap z-w02">
+                    {% set itemActions = knp_menu_get('PggoTeamModule:ItemActionsMenu:menu', [], { entity: person, area: routeArea, context: 'view' }) %}
+                    <div class="dropdown">
+                        <a id="itemActions{{ person.id }}DropDownToggle" role="button" data-toggle="dropdown" data-target="#" href="javascript:void(0);" class="hidden dropdown-toggle"><i class="fa fa-tasks"></i> <span class="caret"></span></a>
+                        {{ knp_menu_render(itemActions, { template: 'ZikulaMenuModule:Override:actions.html.twig' }) }}
+                    </div>
+                </td>
                 <td headers="hLastName" class="text-left">
                     {{ person.lastName }}
                 </td>
@@ -76,7 +83,7 @@
                 </td>
                 <td headers="hImage" class="text-left">
                     {% if person.image is not empty and person.imageMeta|default %}
-                                <a href="{{ person.imageUrl }}" title="{{ person.getTitleFromDisplayPattern()|e('html_attr') }}"{% if person.imageMeta.isImage %} class="lightbox"{% endif %}>
+                                <a href="{{ person.imageUrl }}" title="{{ person.getTitleFromDisplayPattern()|e('html_attr') }}"{% if person.imageMeta.isImage %} class="image-link"{% endif %}>
                     {% if person.imageMeta.isImage %}
                         {% set thumbOptions = attribute(thumbRuntimeOptions, 'personImage') %}
                         <img src="{{ person.image.getPathname()|imagine_filter('zkroot', thumbOptions) }}" alt="{{ person.getTitleFromDisplayPattern()|e('html_attr') }}" width="{{ thumbOptions.thumbnail.size[0] }}" height="{{ thumbOptions.thumbnail.size[1] }}" class="img-thumbnail" />
@@ -99,13 +106,6 @@
                     {% if person.emailAddress is not empty %}
                     <a href="mailto:{{ person.emailAddress|protectMail }}" title="{{ __('Send an email') }}" class="fa fa-envelope"></a>
                     {% else %}&nbsp;{% endif %}
-                </td>
-                <td id="itemActions{{ person.id }}" headers="hItemActions" class="actions text-right nowrap z-w02">
-                    {% set itemActions = knp_menu_get('PggoTeamModule:ItemActionsMenu:menu', [], { entity: person, area: routeArea, context: 'view' }) %}
-                    <div class="dropdown">
-                        <a id="itemActions{{ person.id }}DropDownToggle" role="button" data-toggle="dropdown" data-target="#" href="javascript:void(0);" class="hidden dropdown-toggle"><i class="fa fa-tasks"></i> <span class="caret"></span></a>
-                        {{ knp_menu_render(itemActions, { template: 'ZikulaMenuModule:Override:actions.html.twig' }) }}
-                    </div>
                 </td>
             </tr>
         {% else %}

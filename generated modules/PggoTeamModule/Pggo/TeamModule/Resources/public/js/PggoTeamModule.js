@@ -66,6 +66,31 @@ function pggoTeamInitMassToggle()
 }
 
 /**
+ * Initialises fixed table columns.
+ */
+function pggoTeamInitFixedColumns()
+{
+    var originalTable, fixedColumnsTable;
+
+    jQuery('.table.fixed-columns').remove();
+    jQuery('.table').each(function() {
+        originalTable = jQuery(this);
+        if (originalTable.find('.fixed-column').length > 0) {
+            fixedColumnsTable = originalTable.clone().insertBefore(originalTable).addClass('fixed-columns');
+            originalTable.find('.dropdown').addClass('hidden');
+            fixedColumnsTable.find('.dropdown').removeClass('hidden');
+            fixedColumnsTable.css('left', originalTable.parent().offset().left);
+
+            fixedColumnsTable.find('th, td').not('.fixed-column').remove();
+
+            fixedColumnsTable.find('tr').each(function (i, elem) {
+                jQuery(this).height(originalTable.find('tr:eq(' + i + ')').height());
+            });
+        }
+    });
+}
+
+/**
  * Creates a dropdown menu for the item actions.
  */
 function pggoTeamInitItemActions(context)
@@ -77,7 +102,7 @@ function pggoTeamInitItemActions(context)
     containerSelector = '';
     if (context == 'view') {
         containerSelector = '.pggoteammodule-view';
-        listClasses = 'list-unstyled dropdown-menu dropdown-menu-right';
+        listClasses = 'list-unstyled dropdown-menu';
     } else if (context == 'display') {
         containerSelector = 'h2, h3';
         listClasses = 'list-unstyled dropdown-menu';
@@ -100,6 +125,34 @@ function pggoTeamInitItemActions(context)
     containers.find('.dropdown-toggle').removeClass('hidden').dropdown();
 }
 
+/**
+ * Initialises image viewing behaviour.
+ */
+function pggoTeamInitImageViewer()
+{
+    jQuery('a.image-link').magnificPopup({
+        type: 'image',
+        closeOnContentClick: true,
+        image: {
+            titleSrc: 'title',
+            verticalFit: true
+        },
+        gallery: {
+            enabled: true,
+            navigateByImgClick: true,
+            arrowMarkup: '<button title="%title%" type="button" class="mfp-arrow mfp-arrow-%dir%"></button>',
+            tPrev: Translator.__('Previous (Left arrow key)'),
+            tNext: Translator.__('Next (Right arrow key)'),
+            tCounter: '<span class="mfp-counter">%curr% ' + Translator.__('of') + ' %total%</span>'
+        },
+        zoom: {
+            enabled: true,
+            duration: 300,
+            easing: 'ease-in-out'
+        }
+    });
+}
+
 jQuery(document).ready(function() {
     var isViewPage;
     var isDisplayPage;
@@ -107,11 +160,14 @@ jQuery(document).ready(function() {
     isViewPage = jQuery('.pggoteammodule-view').length > 0;
     isDisplayPage = jQuery('.pggoteammodule-display').length > 0;
 
-    jQuery('a.lightbox').lightbox();
+    pggoTeamInitImageViewer();
 
     if (isViewPage) {
         pggoTeamInitQuickNavigation();
         pggoTeamInitMassToggle();
+        jQuery(window).resize(pggoTeamInitFixedColumns);
+        pggoTeamInitFixedColumns();
+        window.setTimeout(pggoTeamInitFixedColumns, 1000);
         pggoTeamInitItemActions('view');
     } else if (isDisplayPage) {
         pggoTeamInitItemActions('display');

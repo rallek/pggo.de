@@ -37,7 +37,7 @@ abstract class AbstractAjaxController extends AbstractController
      */ 
     public function getCommonUsersListAction(Request $request)
     {
-        if (!$this->hasPermission($this->name . '::Ajax', '::', ACCESS_EDIT)) {
+        if (!$this->hasPermission('PggoTeamModule::Ajax', '::', ACCESS_EDIT)) {
             return true;
         }
         

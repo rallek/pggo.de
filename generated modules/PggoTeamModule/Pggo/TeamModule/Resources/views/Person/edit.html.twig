@@ -6,7 +6,7 @@
     {{ parent() }}
     {{ pageAddAsset('javascript', zasset('@PggoTeamModule:js/PggoTeamModule.Validation.js', 98)) }}
     {{ pageAddAsset('javascript', zasset('@PggoTeamModule:js/PggoTeamModule.EditFunctions.js', 99)) }}
-    {{ pageAddAsset('javascript', app.request.basePath ~ '/vendor/twitter/typeahead.js/dist/typeahead.bundle.min.js') }}
+    {{ pageAddAsset('javascript', asset('typeahead/typeahead.bundle.min.js')) }}
 {% endblock %}
 
 {% block title mode == 'create' ? __('Create person') : __('Edit person') %}

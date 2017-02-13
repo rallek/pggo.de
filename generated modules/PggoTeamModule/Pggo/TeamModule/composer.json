@@ -22,14 +22,13 @@
     },
     "extra": {
         "zikula": {
-            "core-compatibility": ">=1.4.5",
+            "core-compatibility": ">=1.4.6 <3.0",
             "class": "Pggo\\TeamModule\\PggoTeamModule",
             "displayname": "Team",
             "url": "team",
             "capabilities": {
                 "user": {"route": "pggoteammodule_person_index"},
                 "admin": {"route": "pggoteammodule_person_adminindex"},
-                "searchable": {"class": "Pggo\\TeamModule\\Helper\\SearchHelper"},
                 "categorizable": {
                     "entities": [
                         "Pggo\\TeamModule\\Entity\\PersonEntity"
