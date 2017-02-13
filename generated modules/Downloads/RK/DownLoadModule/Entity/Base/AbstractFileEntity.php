@@ -134,7 +134,7 @@ abstract class AbstractFileEntity extends EntityAccess
      * @ORM\Column(type="date")
      * @Assert\NotBlank()
      * @Assert\Date()
-     * @Assert\Expression("value > this.startDate")
+     * @Assert\Expression("value > this.getStartDate()")
      * @var date $endDate
      */
     protected $endDate;

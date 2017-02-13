@@ -1,4 +1,4 @@
-# r k\DownLoad 0.3.1
+# r k\DownLoad 0.4.0
 
 A simple way to share some downloads. Categories are available
 

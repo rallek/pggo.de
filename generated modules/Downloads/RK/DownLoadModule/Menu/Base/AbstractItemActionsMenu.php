@@ -85,16 +85,19 @@ class AbstractItemActionsMenu implements ContainerAwareInterface
                 $menu[$this->__('Details')]->setLinkAttribute('title', str_replace('"', '', $entity->getTitleFromDisplayPattern()));
             }
             if ($permissionApi->hasPermission($component, $instance, ACCESS_EDIT)) {
-                $menu->addChild($this->__('Edit'), [
-                    'route' => $routePrefix . $routeArea . 'edit',
-                    'routeParameters' => ['id' => $entity['id']]
-                ])->setAttribute('icon', 'fa fa-pencil-square-o');
-                $menu[$this->__('Edit')]->setLinkAttribute('title', $this->__('Edit this file'));
-                $menu->addChild($this->__('Reuse'), [
-                    'route' => $routePrefix . $routeArea . 'edit',
-                    'routeParameters' => ['astemplate' => $entity['id']]
-                ])->setAttribute('icon', 'fa fa-files-o');
-                $menu[$this->__('Reuse')]->setLinkAttribute('title', $this->__('Reuse for new file'));
+                // only allow editing for the owner or people with higher permissions
+                if ($isOwner || $permissionApi->hasPermission($component, $instance, ACCESS_ADD)) {
+                    $menu->addChild($this->__('Edit'), [
+                        'route' => $routePrefix . $routeArea . 'edit',
+                        'routeParameters' => ['id' => $entity['id']]
+                    ])->setAttribute('icon', 'fa fa-pencil-square-o');
+                    $menu[$this->__('Edit')]->setLinkAttribute('title', $this->__('Edit this file'));
+                    $menu->addChild($this->__('Reuse'), [
+                        'route' => $routePrefix . $routeArea . 'edit',
+                        'routeParameters' => ['astemplate' => $entity['id']]
+                    ])->setAttribute('icon', 'fa fa-files-o');
+                    $menu[$this->__('Reuse')]->setLinkAttribute('title', $this->__('Reuse for new file'));
+                }
             }
             if ($permissionApi->hasPermission($component, $instance, ACCESS_DELETE)) {
                 $menu->addChild($this->__('Delete'), [

@@ -672,6 +672,12 @@ abstract class AbstractFileRepository extends EntityRepository
         if (!in_array('workflowState', array_keys($parameters)) || empty($parameters['workflowState'])) {
             // per default we show approved files only
             $onlineStates = ['approved'];
+            
+            $showOnlyOwnEntries = $this->getRequest()->query->getInt('own', 0);
+            if ($showOnlyOwnEntries == 1) {
+                // allow the owner to see his deferred files
+                $onlineStates[] = 'deferred';
+            }
             $qb->andWhere('tbl.workflowState IN (:onlineStates)')
                ->setParameter('onlineStates', $onlineStates);
         }

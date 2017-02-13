@@ -79,6 +79,25 @@ abstract class AbstractEditHandler extends EditHandler
 
 
     /**
+     * Initialise existing entity for editing.
+     *
+     * @return EntityAccess Desired entity instance or null
+     */
+    protected function initEntityForEditing()
+    {
+        $entity = parent::initEntityForEditing();
+    
+        // only allow editing for the owner or people with higher permissions
+        $currentUserId = $this->currentUserApi->isLoggedIn() ? $this->currentUserApi->get('uid') : 1;
+        $isOwner = null !== $entity->getCreatedBy() && $currentUserId == $entity->getCreatedBy()->getUid();
+        if (!$isOwner && !$this->permissionApi->hasPermission($this->permissionComponent, $this->createCompositeIdentifier() . '::', ACCESS_ADD)) {
+            throw new AccessDeniedException();
+        }
+    
+        return $entity;
+    }
+
+    /**
      * Get list of allowed redirect codes.
      *
      * @return array list of possible redirect codes
@@ -184,6 +203,7 @@ abstract class AbstractEditHandler extends EditHandler
     
         $message = '';
         switch ($args['commandName']) {
+            case 'defer':
             case 'submit':
                 if ($this->templateParameters['mode'] == 'create') {
                     $message = $this->__('Done! File created.');

@@ -181,6 +181,13 @@ abstract class AbstractListEntriesHelper
     {
         $states = [];
         $states[] = [
+            'value'   => 'deferred',
+            'text'    => $this->__('Deferred'),
+            'title'   => $this->__('Content has not been submitted yet or has been waiting, but was rejected.'),
+            'image'   => '',
+            'default' => false
+        ];
+        $states[] = [
             'value'   => 'approved',
             'text'    => $this->__('Approved'),
             'title'   => $this->__('Content has been approved and is available online.'),
@@ -191,6 +198,13 @@ abstract class AbstractListEntriesHelper
             'value'   => 'archived',
             'text'    => $this->__('Archived'),
             'title'   => $this->__('Content has reached the end and became archived.'),
+            'image'   => '',
+            'default' => false
+        ];
+        $states[] = [
+            'value'   => '!deferred',
+            'text'    => $this->__('All except deferred'),
+            'title'   => $this->__('Shows all items except these which are deferred'),
             'image'   => '',
             'default' => false
         ];
