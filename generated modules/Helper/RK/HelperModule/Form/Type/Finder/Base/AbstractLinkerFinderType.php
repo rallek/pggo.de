@@ -124,11 +124,13 @@ abstract class AbstractLinkerFinderType extends AbstractType
             'label' => $this->__('Paste as') . ':',
             'empty_data' => 1,
             'choices' => [
-                $this->__('Link to the linker') => 1,
-                $this->__('ID of linker') => 2,
-                $this->__('Link to the image') => 6,
+                $this->__('Relative link to the linker') => 1,
+                $this->__('Absolute url to the linker') => 2,
+                $this->__('ID of linker') => 3,
+                $this->__('Relative link to the image') => 6,
                 $this->__('Image') => 7,
-                $this->__('Image with link to the linker') => 8
+                $this->__('Image with relative link to the linker') => 8,
+                $this->__('Image with absolute url to the linker') => 9
             ],
             'choices_as_values' => true,
             'multiple' => false,

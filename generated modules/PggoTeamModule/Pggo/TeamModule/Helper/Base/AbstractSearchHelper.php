@@ -214,7 +214,7 @@ abstract class AbstractSearchHelper implements SearchableInterface
                 }
     
                 $description = !empty($descriptionField) ? $entity[$descriptionField] : '';
-                $created = isset($entity['createdBy']) ? $entity['createdBy'] : null;
+                $created = isset($entity['createdDate']) ? $entity['createdDate'] : null;
     
                 $urlArgs['_locale'] = (null !== $languageField && !empty($entity[$languageField])) ? $entity[$languageField] : $this->request->getLocale();
     

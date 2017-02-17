@@ -165,7 +165,7 @@ abstract class AbstractCarouselItemEntity extends EntityAccess
      * @Assert\NotBlank()
      * @Assert\Date()
      * @Assert\GreaterThan("now")
-     * @Assert\Expression("value > this.itemStartDate")
+     * @Assert\Expression("value > this.getItemStartDate()")
      * @var date $intemEndDate
      */
     protected $intemEndDate;

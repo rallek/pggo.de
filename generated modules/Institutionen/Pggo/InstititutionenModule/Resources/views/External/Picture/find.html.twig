@@ -43,12 +43,13 @@
                                             {{ picture.getTitleFromDisplayPattern() }}
                                         {% endif %}
                                     </a>
+                                    <input type="hidden" id="path{{ itemId }}" value="{{ path('pggoinstititutionenmodule_picture_display', { 'id': picture.id }) }}" />
                                     <input type="hidden" id="url{{ itemId }}" value="{{ url('pggoinstititutionenmodule_picture_display', { 'id': picture.id }) }}" />
                                     <input type="hidden" id="title{{ itemId }}" value="{{ picture.getTitleFromDisplayPattern()|e('html_attr') }}" />
                                     <input type="hidden" id="desc{{ itemId }}" value="{% set description %}{% if picture.description is not empty %}{{ picture.description }}{% endif %}
                                     {% endset %}{{ description|striptags|e('html_attr') }}" />
                                     {% if onlyImages %}
-                                        <input type="hidden" id="imageUrl{{ itemId }}" value="/{{ attribute(picture, imageField).getPathname() }}" />
+                                        <input type="hidden" id="imagePath{{ itemId }}" value="/{{ attribute(picture, imageField).getPathname() }}" />
                                     {% endif %}
                                 {% if not onlyImages %}
                                     </li>

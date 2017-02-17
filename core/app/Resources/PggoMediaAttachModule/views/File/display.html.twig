@@ -5,29 +5,20 @@
 {% block title %}
     {% set templateTitle = file.getTitleFromDisplayPattern()|default(__('File')) %}
     {{ templateTitle|notifyFilters('pggomediaattachmodule.filter_hooks.files.filter') }}
-    {% set itemActions = knp_menu_get('PggoMediaAttachModule:ItemActionsMenu:menu', [], { entity: file, area: routeArea, context: 'display' }) %}
-    <div class="dropdown">
-        <a id="itemActions{{ file.id }}DropDownToggle" role="button" data-toggle="dropdown" data-target="#" href="javascript:void(0);" class="hidden dropdown-toggle"><i class="fa fa-tasks"></i> {{ __('Actions') }} <span class="caret"></span></a>
-        {{ knp_menu_render(itemActions, { template: 'ZikulaMenuModule:Override:actions.html.twig' }) }}
-    </div>
+
+
 {% endblock %}
-{% block admin_page_icon 'eye' %}
+
 {% block content %}
     {% set isQuickView = app.request.query.getBoolean('raw', false) %}
     <div class="pggomediaattachmodule-file pggomediaattachmodule-display">
 
 
     <dl>
-        {% if file.title is not empty %}
-            <dt>{{ __('Title') }}</dt>
-            <dd>{{ file.title }}</dd>
-        {% endif %}
-        {% if file.description is not empty %}
-            <dt>{{ __('Description') }}</dt>
-            <dd>{{ file.description|safeHtml }}</dd>
-        {% endif %}
+
+
         {% if file.fileName is not empty %}
-            <dt>{{ __('File name') }}</dt>
+           
             <dd>{% if file.fileNameMeta|default %}
             <a href="{{ file.fileNameUrl }}" title="{{ file.getTitleFromDisplayPattern()|e('html_attr') }}"{% if file.fileNameMeta.isImage %} class="image-link"{% endif %}>
             {% if file.fileNameMeta.isImage %}
@@ -42,7 +33,10 @@
         {% endif %}
         
     </dl>
-    {{ include('@PggoMediaAttachModule/Helper/includeStandardFieldsDisplay.html.twig', { obj: file }) }}
+	
+
+	
+
 
     {% if not isQuickView %}
         {# include display hooks #}

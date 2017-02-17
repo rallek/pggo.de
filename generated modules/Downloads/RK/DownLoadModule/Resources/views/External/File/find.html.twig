@@ -31,6 +31,7 @@
                                     <a href="#" data-itemid="{{ itemId }}">
                                         {{ file.getTitleFromDisplayPattern() }}
                                     </a>
+                                    <input type="hidden" id="path{{ itemId }}" value="{{ path('rkdownloadmodule_file_display', { 'id': file.id }) }}" />
                                     <input type="hidden" id="url{{ itemId }}" value="{{ url('rkdownloadmodule_file_display', { 'id': file.id }) }}" />
                                     <input type="hidden" id="title{{ itemId }}" value="{{ file.getTitleFromDisplayPattern()|e('html_attr') }}" />
                                     <input type="hidden" id="desc{{ itemId }}" value="{% set description %}{% if file.myDescription is not empty %}{{ file.myDescription }}{% endif %}

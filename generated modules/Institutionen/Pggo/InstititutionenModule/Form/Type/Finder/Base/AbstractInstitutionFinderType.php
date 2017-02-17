@@ -151,11 +151,13 @@ abstract class AbstractInstitutionFinderType extends AbstractType
             'label' => $this->__('Paste as') . ':',
             'empty_data' => 1,
             'choices' => [
-                $this->__('Link to the institution') => 1,
-                $this->__('ID of institution') => 2,
-                $this->__('Link to the image') => 6,
+                $this->__('Relative link to the institution') => 1,
+                $this->__('Absolute url to the institution') => 2,
+                $this->__('ID of institution') => 3,
+                $this->__('Relative link to the image') => 6,
                 $this->__('Image') => 7,
-                $this->__('Image with link to the institution') => 8
+                $this->__('Image with relative link to the institution') => 8,
+                $this->__('Image with absolute url to the institution') => 9
             ],
             'choices_as_values' => true,
             'multiple' => false,

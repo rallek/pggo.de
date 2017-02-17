@@ -124,11 +124,13 @@ abstract class AbstractCarouselItemFinderType extends AbstractType
             'label' => $this->__('Paste as') . ':',
             'empty_data' => 1,
             'choices' => [
-                $this->__('Link to the carousel item') => 1,
-                $this->__('ID of carousel item') => 2,
-                $this->__('Link to the image') => 6,
+                $this->__('Relative link to the carousel item') => 1,
+                $this->__('Absolute url to the carousel item') => 2,
+                $this->__('ID of carousel item') => 3,
+                $this->__('Relative link to the image') => 6,
                 $this->__('Image') => 7,
-                $this->__('Image with link to the carousel item') => 8
+                $this->__('Image with relative link to the carousel item') => 8,
+                $this->__('Image with absolute url to the carousel item') => 9
             ],
             'choices_as_values' => true,
             'multiple' => false,

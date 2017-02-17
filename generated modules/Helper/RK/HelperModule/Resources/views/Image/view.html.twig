@@ -30,11 +30,11 @@
             <thead>
             <tr>
                 {% if routeArea == 'admin' %}
-                    <th id="hSelect" scope="col" class="fixed-column text-center z-w02">
+                    <th id="hSelect" scope="col" class="{% if items|length > 0 %}fixed-column {% endif %}text-center z-w02">
                         <input type="checkbox" class="rkhelper-mass-toggle" />
                     </th>
                 {% endif %}
-                <th id="hItemActions" scope="col" class="fixed-column text-right z-order-unsorted">{{ __('Actions') }}</th>
+                <th id="hItemActions" scope="col" class="{% if items|length > 0 %}fixed-column {% endif %}text-right z-order-unsorted">{{ __('Actions') }}</th>
                 <th id="hImageTitle" scope="col" class="text-left">
                     <a href="{{ sort.imageTitle.url }}" title="{{ __f('Sort by %s', {'%s': 'image title'}) }}" class="{{ sort.imageTitle.class }}">{{ __('Image title') }}</a>
                 </th>

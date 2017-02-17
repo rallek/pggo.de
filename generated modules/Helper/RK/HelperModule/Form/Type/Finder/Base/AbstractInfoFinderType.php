@@ -104,8 +104,9 @@ abstract class AbstractInfoFinderType extends AbstractType
             'label' => $this->__('Paste as') . ':',
             'empty_data' => 1,
             'choices' => [
-                $this->__('Link to the info') => 1,
-                $this->__('ID of info') => 2
+                $this->__('Relative link to the info') => 1,
+                $this->__('Absolute url to the info') => 2,
+                $this->__('ID of info') => 3
             ],
             'choices_as_values' => true,
             'multiple' => false,

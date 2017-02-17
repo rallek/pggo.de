@@ -80,18 +80,23 @@ function pggoMediaAttachGetPasteSnippet(mode, itemId)
     var pasteMode;
 
     quoteFinder = new RegExp('"', 'g');
+    itemPath = jQuery('#path' + itemId).val().replace(quoteFinder, '');
     itemUrl = jQuery('#url' + itemId).val().replace(quoteFinder, '');
     itemTitle = jQuery('#title' + itemId).val().replace(quoteFinder, '').trim();
     itemDescription = jQuery('#desc' + itemId).val().replace(quoteFinder, '').trim();
     pasteMode = jQuery("[id$='pasteAs']").first().val();
 
     // item ID
-    if (pasteMode === '2') {
+    if (pasteMode === '3') {
         return '' + itemId;
     }
 
-    // link to detail page
+    // relative link to detail page
     if (pasteMode === '1') {
+        return mode === 'url' ? itemPath : '<a href="' + itemPath + '" title="' + itemDescription + '">' + itemTitle + '</a>';
+    }
+    // absolute url to detail page
+    if (pasteMode === '2') {
         return mode === 'url' ? itemUrl : '<a href="' + itemUrl + '" title="' + itemDescription + '">' + itemTitle + '</a>';
     }
 

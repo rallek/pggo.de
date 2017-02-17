@@ -45,12 +45,13 @@
                                             {{ linker.getTitleFromDisplayPattern() }}
                                         {% endif %}
                                     </a>
+                                    <input type="hidden" id="path{{ itemId }}" value="{{ path('rkhelpermodule_linker_display', { 'id': linker.id }) }}" />
                                     <input type="hidden" id="url{{ itemId }}" value="{{ url('rkhelpermodule_linker_display', { 'id': linker.id }) }}" />
                                     <input type="hidden" id="title{{ itemId }}" value="{{ linker.getTitleFromDisplayPattern()|e('html_attr') }}" />
                                     <input type="hidden" id="desc{{ itemId }}" value="{% set description %}{% if linker.linkerText is not empty %}{{ linker.linkerText }}{% endif %}
                                     {% endset %}{{ description|striptags|e('html_attr') }}" />
                                     {% if onlyImages %}
-                                        <input type="hidden" id="imageUrl{{ itemId }}" value="/{{ attribute(linker, imageField).getPathname() }}" />
+                                        <input type="hidden" id="imagePath{{ itemId }}" value="/{{ attribute(linker, imageField).getPathname() }}" />
                                     {% endif %}
                                 {% if not onlyImages %}
                                     </li>

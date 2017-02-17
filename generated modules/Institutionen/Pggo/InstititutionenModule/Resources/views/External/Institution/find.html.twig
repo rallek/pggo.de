@@ -46,12 +46,13 @@
                                             {{ institution.getTitleFromDisplayPattern() }}
                                         {% endif %}
                                     </a>
+                                    <input type="hidden" id="path{{ itemId }}" value="{{ path('pggoinstititutionenmodule_institution_display', { 'id': institution.id }) }}" />
                                     <input type="hidden" id="url{{ itemId }}" value="{{ url('pggoinstititutionenmodule_institution_display', { 'id': institution.id }) }}" />
                                     <input type="hidden" id="title{{ itemId }}" value="{{ institution.getTitleFromDisplayPattern()|e('html_attr') }}" />
                                     <input type="hidden" id="desc{{ itemId }}" value="{% set description %}{% if institution.description is not empty %}{{ institution.description }}{% endif %}
                                     {% endset %}{{ description|striptags|e('html_attr') }}" />
                                     {% if onlyImages %}
-                                        <input type="hidden" id="imageUrl{{ itemId }}" value="/{{ attribute(institution, imageField).getPathname() }}" />
+                                        <input type="hidden" id="imagePath{{ itemId }}" value="/{{ attribute(institution, imageField).getPathname() }}" />
                                     {% endif %}
                                 {% if not onlyImages %}
                                     </li>

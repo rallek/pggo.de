@@ -104,8 +104,9 @@ abstract class AbstractCarouselFinderType extends AbstractType
             'label' => $this->__('Paste as') . ':',
             'empty_data' => 1,
             'choices' => [
-                $this->__('Link to the carousel') => 1,
-                $this->__('ID of carousel') => 2
+                $this->__('Relative link to the carousel') => 1,
+                $this->__('Absolute url to the carousel') => 2,
+                $this->__('ID of carousel') => 3
             ],
             'choices_as_values' => true,
             'multiple' => false,

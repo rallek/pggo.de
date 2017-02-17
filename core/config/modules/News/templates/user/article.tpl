@@ -43,8 +43,40 @@
 {/if}
 {/foreach}
 </div>
+{pageaddvar name='javascript' value='web/magnific-popup/jquery.magnific-popup.min.js'}
+
+{pageaddvar name='stylesheet' value='web/magnific-popup/magnific-popup.css'}
 {if $modvars.News.enableajaxedit}
 <div id="news-quickedit-hooks">
 {notifydisplayhooks eventname='news.ui_hooks.articles.form_edit' id=$info.sid}
 </div>
 {/if}
+
+
+<script type="text/javascript">
+(function($) {
+    $(document).ready(function() { 
+        $('.image-link').magnificPopup({
+        type: 'image',
+        closeOnContentClick: true,
+        image: {
+            titleSrc: 'title',
+            verticalFit: true
+        },
+        gallery: {
+            enabled: true,
+            navigateByImgClick: true,
+            arrowMarkup: '<button title="%title%" type="button" class="mfp-arrow mfp-arrow-%dir%"></button>',
+            tPrev: Translator.__('Previous (Left arrow key)'),
+            tNext: Translator.__('Next (Right arrow key)'),
+            tCounter: '<span class="mfp-counter">%curr% ' + Translator.__('of') + ' %total%</span>'
+        },
+        zoom: {
+            enabled: true,
+            duration: 300,
+            easing: 'ease-in-out'
+        }
+    });
+     });
+})(jQuery)
+</script>

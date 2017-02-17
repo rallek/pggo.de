@@ -5,7 +5,7 @@
 			<div class="row bottom-space">
 			<div class="col-xs-12">
 			<div class="col-xs-12 white-space">
-				<div class="col-md-6 col-sm-6 col-xs-4 no-padding">
+<!-- 				<div class="col-md-6 col-sm-6 col-xs-4 no-padding">
 					{if $modvars.News.picupload_enabled AND $pictures gt 0}
 						{if $modvars.ZConfig.shorturls}
 							<a href="{modurl modname='News' type='user' func='display' sid=$sid from=$from urltitle=$urltitle}"><img class="top-space" src="{$modvars.News.picupload_uploaddir}/pic_sid{$sid}-0-norm.jpg" width="100%" alt="{gt text='Picture %1$s for %2$s' tag1='0' tag2=$title}" /></a>
@@ -13,9 +13,9 @@
 							<a href="{modurl modname='News' type='user' func='display' sid=$sid}"><img src="{$modvars.News.picupload_uploaddir}/pic_sid{$sid}-0-norm.jpg" width="100%" alt="{gt text='Picture %1$s for %2$s' tag1='0' tag2=$title}" /></a>
 						{/if}
 					{/if}
-				</div>
+				</div> -->
 
-				<div class="col-md-6 col-sm-6 col-xs-8 ">
+				<!-- <div class="col-md-6 col-sm-6 col-xs-8 "> -->
 					{if $readperm}<h2 class="hidden-xs hidden-sm"><a href="{modurl modname='News' type='user' func='display' sid=$sid}">{/if}
 					{$title|safehtml}{if $titlewrapped}{$titlewraptxt|safehtml}{/if}
 					{if $readperm}</a></h2>{/if}
@@ -65,7 +65,7 @@
 						
 					</div>
 					{/if}
-				</div>
+				<!-- </div> -->
 			</div>
 			</div>
 			</div>

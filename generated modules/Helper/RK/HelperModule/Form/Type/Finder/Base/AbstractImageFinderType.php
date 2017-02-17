@@ -124,11 +124,13 @@ abstract class AbstractImageFinderType extends AbstractType
             'label' => $this->__('Paste as') . ':',
             'empty_data' => 1,
             'choices' => [
-                $this->__('Link to the image') => 1,
-                $this->__('ID of image') => 2,
-                $this->__('Link to the image') => 6,
+                $this->__('Relative link to the image') => 1,
+                $this->__('Absolute url to the image') => 2,
+                $this->__('ID of image') => 3,
+                $this->__('Relative link to the image') => 6,
                 $this->__('Image') => 7,
-                $this->__('Image with link to the image') => 8
+                $this->__('Image with relative link to the image') => 8,
+                $this->__('Image with absolute url to the image') => 9
             ],
             'choices_as_values' => true,
             'multiple' => false,

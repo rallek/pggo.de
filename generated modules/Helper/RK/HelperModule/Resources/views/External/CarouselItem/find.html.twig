@@ -45,12 +45,13 @@
                                             {{ carouselItem.getTitleFromDisplayPattern() }}
                                         {% endif %}
                                     </a>
+                                    <input type="hidden" id="path{{ itemId }}" value="{{ path('rkhelpermodule_carouselitem_display', { 'id': carouselItem.id }) }}" />
                                     <input type="hidden" id="url{{ itemId }}" value="{{ url('rkhelpermodule_carouselitem_display', { 'id': carouselItem.id }) }}" />
                                     <input type="hidden" id="title{{ itemId }}" value="{{ carouselItem.getTitleFromDisplayPattern()|e('html_attr') }}" />
                                     <input type="hidden" id="desc{{ itemId }}" value="{% set description %}{% if carouselItem.itemName is not empty %}{{ carouselItem.itemName }}{% endif %}
                                     {% endset %}{{ description|striptags|e('html_attr') }}" />
                                     {% if onlyImages %}
-                                        <input type="hidden" id="imageUrl{{ itemId }}" value="/{{ attribute(carouselItem, imageField).getPathname() }}" />
+                                        <input type="hidden" id="imagePath{{ itemId }}" value="/{{ attribute(carouselItem, imageField).getPathname() }}" />
                                     {% endif %}
                                 {% if not onlyImages %}
                                     </li>
