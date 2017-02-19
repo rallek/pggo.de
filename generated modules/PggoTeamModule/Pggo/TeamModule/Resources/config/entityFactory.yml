@@ -1,6 +1,0 @@
-services:
-    # Entity factory class
-    pggo_team_module.entity_factory:
-        class: Pggo\TeamModule\Entity\Factory\TeamFactory
-        arguments:
-            - "@doctrine.orm.default_entity_manager"

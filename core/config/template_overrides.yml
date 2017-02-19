@@ -5,3 +5,4 @@ modules/News/templates/user/article.tpl: config/modules/News/templates/user/arti
 modules/News/templates/user/articlecontent.tpl: config/modules/News/templates/user/articlecontent.tpl
 modules/News/templates/block/storiesext/row2.tpl: config/modules/News/templates/block/storiesext/row2.tpl
 modules/News/templates/block/storiesext/main2.tpl: config/modules/News/templates/block/storiesext/main2.tpl
+modules/News/templates/block/storiesext/row.tpl: config/modules/News/templates/block/storiesext/row.tpl

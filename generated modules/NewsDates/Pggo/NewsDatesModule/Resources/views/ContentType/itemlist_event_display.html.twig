@@ -1,6 +1,0 @@
-{# Purpose of this template: Display events within an external context #}
-{% for event in items %}
-    <h3>{{ event.getTitleFromDisplayPattern() }}</h3>
-    <p><a href="{{ path('pggonewsdatesmodule_event_display', { 'id': event.id, 'slug': event.slug }) }}">{{ __('Read more') }}</a>
-    </p>
-{% endfor %}

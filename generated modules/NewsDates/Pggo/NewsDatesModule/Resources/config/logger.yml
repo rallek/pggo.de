@@ -1,6 +1,0 @@
-services:
-    # Log processor
-    pggo_newsdates_module.log.processor:
-        class: Monolog\Processor\PsrLogMessageProcessor
-        tags:
-            - { name: monolog.processor }

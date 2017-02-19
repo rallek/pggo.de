@@ -1,6 +1,0 @@
-{# Purpose of this template: Display articles within an external context #}
-{% for article in items %}
-    <h3>{{ article.getTitleFromDisplayPattern() }}</h3>
-    <p><a href="{{ path('pggonewsdatesmodule_article_display', { 'id': article.id, 'slug': article.slug }) }}">{{ __('Read more') }}</a>
-    </p>
-{% endfor %}

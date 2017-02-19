@@ -1,5 +1,0 @@
-pggonewsdatesmodule:
-    # define routing support for these controllers
-    resource: "@PggoNewsDatesModule/Controller"
-    # enable support for defining routes by annotations
-    type: annotation
