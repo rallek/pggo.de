@@ -36,7 +36,7 @@ cd $zielpfad
 write-host "Die Generierung dauert immer ein wenig, weil das komplette Eclipse hochgefahren wird."
 write-host "Bei mir dauert das pro Modul immer so etwa zwei Minuten."
 write-host ""
-write-host "Gönnt euch eine kurze Pause und steht einmal auf und hohlt euch eine Tasse Kaffee." -foregroundcolor red -backgroundcolor yellow
+write-host "Gönnt euch eine kurze Pause und steht einmal auf und holt euch eine Tasse Kaffee." -foregroundcolor red -backgroundcolor yellow
 write-host "Beim Kaffeetrinken denkt gerne einmal darüber nach, was Axel uns da tolles zur Verfügung stellt!" -foregroundcolor red -backgroundcolor yellow
 write-host ""
 write-host ""
@@ -51,7 +51,10 @@ write-host "Generiere gleich: " $module[$i] "(" $j "von" $module.Length ")"
 write-host "mit" $pfad
 write-host "in " $zpfad
 write-host "(Vendor ist abhängig vom Modul)"
+write-host ""
 write-host "das dauert jetzt ein Minütchen..."
+write-host "Kaffee schon getrunken? ggf. nachschenken :-)"
+write-host ""
 java -jar $generator $pfad $zielordner
 write-host "Fertig, "  -nonewline; write-host $module[$i] -foregroundcolor blue -backgroundcolor white  -nonewline; write-host " generiert"
 write-host ""
